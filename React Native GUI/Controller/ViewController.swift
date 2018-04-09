@@ -20,12 +20,6 @@ class ViewController: NSViewController {
     @IBOutlet weak var rnFolderPath: NSTextField!
     @IBOutlet weak var dropView: DropView!
     
-    
-    @IBAction func test(_ sender: Any) {
-        let aplsc = NSAppleScript.init(source: "tell application \"Terminal\" to do script \"cd ~/Desktop\nreact-native\"")
-        aplsc?.executeAndReturnError(nil)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
