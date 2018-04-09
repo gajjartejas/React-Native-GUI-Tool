@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		962A337920713639009D7D46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962A337820713639009D7D46 /* AppDelegate.swift */; };
-		962A337B20713639009D7D46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962A337A20713639009D7D46 /* ViewController.swift */; };
+		962A337B20713639009D7D46 /* RunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962A337A20713639009D7D46 /* RunViewController.swift */; };
 		962A337D20713639009D7D46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 962A337C20713639009D7D46 /* Assets.xcassets */; };
 		962A338C20713660009D7D46 /* DropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962A338B20713660009D7D46 /* DropView.swift */; };
 		962A339120713690009D7D46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 962A338F2071368F009D7D46 /* Main.storyboard */; };
@@ -18,7 +18,7 @@
 /* Begin PBXFileReference section */
 		962A337520713639009D7D46 /* React Native GUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "React Native GUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		962A337820713639009D7D46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		962A337A20713639009D7D46 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		962A337A20713639009D7D46 /* RunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunViewController.swift; sourceTree = "<group>"; };
 		962A337C20713639009D7D46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		962A338120713639009D7D46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		962A338220713639009D7D46 /* React_Native_GUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = React_Native_GUI.entitlements; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		96BDAD9D2079239B0074CD1D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				962A337A20713639009D7D46 /* ViewController.swift */,
+				962A337A20713639009D7D46 /* RunViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -172,7 +172,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				962A337B20713639009D7D46 /* ViewController.swift in Sources */,
+				962A337B20713639009D7D46 /* RunViewController.swift in Sources */,
 				962A337920713639009D7D46 /* AppDelegate.swift in Sources */,
 				962A338C20713660009D7D46 /* DropView.swift in Sources */,
 				965628B7207896B0004049BE /* AppExtensions.swift in Sources */,

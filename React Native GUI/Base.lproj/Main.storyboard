@@ -733,7 +733,7 @@
         <!--Run-->
         <scene sceneID="c2j-pX-IAG">
             <objects>
-                <viewController title="Run" id="5W3-Z0-yxx" customClass="ViewController" customModule="React_Native_GUI" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Run" id="5W3-Z0-yxx" customClass="RunViewController" customModule="React_Native_GUI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="N7R-Jn-ipg">
                         <rect key="frame" x="0.0" y="0.0" width="345" height="309"/>
                         <autoresizingMask key="autoresizingMask"/>

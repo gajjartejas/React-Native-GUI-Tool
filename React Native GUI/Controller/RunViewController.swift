@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class RunViewController: NSViewController {
     
     var folderPath: String?
     var indexJSAndroidPath: String?
