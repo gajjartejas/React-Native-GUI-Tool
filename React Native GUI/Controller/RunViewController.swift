@@ -31,14 +31,17 @@ class RunViewController: NSViewController {
             
             self.rnFolderPath.stringValue = folderPath
             
+            //Shared class which store info across all tab
+            Project.shared.projectDir = folderPath
+            
             self.validateIndexJSFile()
         }
         
         dropView.leftClick {
             let openPanel = NSOpenPanel();
-            openPanel.title = "Select a folder to watch for videos"
-            openPanel.message = "Videos you drop in the folder you select will be converted to animated gifs"
-            openPanel.showsResizeIndicator=true
+            openPanel.title = "Select a react antive project folder"
+            openPanel.message = "Select a react antive project folder"
+            openPanel.showsResizeIndicator = true
             openPanel.canChooseDirectories = true
             openPanel.canChooseFiles = false
             openPanel.allowsMultipleSelection = false
@@ -52,11 +55,12 @@ class RunViewController: NSViewController {
                 if(result.rawValue == NSApplication.ModalResponse.OK.rawValue){
                     let folderPath = openPanel.url!.path
                     
-                    print("filePath",folderPath)
-                    
                     self.folderPath = folderPath
                     
                     self.rnFolderPath.stringValue = folderPath
+                    
+                    //Shared class which store info across all tab
+                    Project.shared.projectDir = folderPath
                     
                     self.validateIndexJSFile()
                     
@@ -106,7 +110,7 @@ class RunViewController: NSViewController {
             return
         }
         
-        let aplsc = NSAppleScript.init(source: "tell application \"Terminal\" to do script \"cd \(folderPath)\nreact-native run-ios\"")
+        let aplsc = NSAppleScript.init(source: "tell application \"Terminal\" to do script \"cd \'\(folderPath)\'\nreact-native run-ios\"")
         
         aplsc?.executeAndReturnError(nil)
     }
@@ -117,7 +121,18 @@ class RunViewController: NSViewController {
             return
         }
         
-        let aplsc = NSAppleScript.init(source: "tell application \"Terminal\" to do script \"cd \(folderPath)\nreact-native run-android\"")
+        let aplsc = NSAppleScript.init(source: "tell application \"Terminal\" to do script \"cd \'\(folderPath)\'\nreact-native run-android\"")
+        
+        aplsc?.executeAndReturnError(nil)
+    }
+    
+    @IBAction func startNPMClicked(_ sender: NSButton) {
+        
+        guard let folderPath = self.folderPath else {
+            return
+        }
+        
+        let aplsc = NSAppleScript.init(source: "tell application \"Terminal\" to do script \"cd \'\(folderPath)\'\nnpm start\"")
         
         aplsc?.executeAndReturnError(nil)
     }

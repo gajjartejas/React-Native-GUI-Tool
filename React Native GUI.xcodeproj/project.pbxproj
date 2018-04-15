@@ -7,15 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		961D58C320839E54006A4D27 /* NPMInstallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961D58C120839E54006A4D27 /* NPMInstallViewController.swift */; };
+		961D58C62083A3EB006A4D27 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961D58C52083A3EB006A4D27 /* Project.swift */; };
+		961D58C82083AF0B006A4D27 /* NPMUninstallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961D58C72083AF0B006A4D27 /* NPMUninstallViewController.swift */; };
 		962A337920713639009D7D46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962A337820713639009D7D46 /* AppDelegate.swift */; };
 		962A337B20713639009D7D46 /* RunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962A337A20713639009D7D46 /* RunViewController.swift */; };
 		962A337D20713639009D7D46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 962A337C20713639009D7D46 /* Assets.xcassets */; };
 		962A338C20713660009D7D46 /* DropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962A338B20713660009D7D46 /* DropView.swift */; };
 		962A339120713690009D7D46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 962A338F2071368F009D7D46 /* Main.storyboard */; };
 		965628B7207896B0004049BE /* AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965628B6207896B0004049BE /* AppExtensions.swift */; };
+		96B3578120834A04003D4522 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B3578020834A04003D4522 /* CreateViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		961D58C120839E54006A4D27 /* NPMInstallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NPMInstallViewController.swift; sourceTree = "<group>"; };
+		961D58C52083A3EB006A4D27 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		961D58C72083AF0B006A4D27 /* NPMUninstallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NPMUninstallViewController.swift; sourceTree = "<group>"; };
 		962A337520713639009D7D46 /* React Native GUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "React Native GUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		962A337820713639009D7D46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		962A337A20713639009D7D46 /* RunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunViewController.swift; sourceTree = "<group>"; };
@@ -25,6 +32,7 @@
 		962A338B20713660009D7D46 /* DropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropView.swift; sourceTree = "<group>"; };
 		962A33902071368F009D7D46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		965628B6207896B0004049BE /* AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppExtensions.swift; sourceTree = "<group>"; };
+		96B3578020834A04003D4522 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +89,7 @@
 		96BDAD9C207923960074CD1D /* Modal */ = {
 			isa = PBXGroup;
 			children = (
+				961D58C52083A3EB006A4D27 /* Project.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -89,6 +98,9 @@
 			isa = PBXGroup;
 			children = (
 				962A337A20713639009D7D46 /* RunViewController.swift */,
+				96B3578020834A04003D4522 /* CreateViewController.swift */,
+				961D58C120839E54006A4D27 /* NPMInstallViewController.swift */,
+				961D58C72083AF0B006A4D27 /* NPMUninstallViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -172,9 +184,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				961D58C320839E54006A4D27 /* NPMInstallViewController.swift in Sources */,
+				96B3578120834A04003D4522 /* CreateViewController.swift in Sources */,
 				962A337B20713639009D7D46 /* RunViewController.swift in Sources */,
 				962A337920713639009D7D46 /* AppDelegate.swift in Sources */,
 				962A338C20713660009D7D46 /* DropView.swift in Sources */,
+				961D58C62083A3EB006A4D27 /* Project.swift in Sources */,
+				961D58C82083AF0B006A4D27 /* NPMUninstallViewController.swift in Sources */,
 				965628B7207896B0004049BE /* AppExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

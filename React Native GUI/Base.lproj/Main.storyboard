@@ -687,7 +687,7 @@
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
                     <window key="window" title="React Native - GUI" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="utilityWindow" appearanceType="aqua" titlebarAppearsTransparent="YES" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="658" y="386" width="350" height="311"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -709,8 +709,9 @@
                 <tabViewController selectedTabViewItemIndex="0" tabStyle="toolbar" id="BtU-Sn-Lq7" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem identifier="" image="run-icon" id="obh-am-3Cc"/>
+                        <tabViewItem label="Install" image="npm-icon" id="1uM-O6-7ze"/>
+                        <tabViewItem image="npm-icon" id="dQf-8T-lkp"/>
                         <tabViewItem identifier="" image="add-icon" id="ZF5-MV-fvr"/>
-                        <tabViewItem label="Config" image="config-icon" id="1uM-O6-7ze"/>
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
                     <tabView key="tabView" type="noTabsNoBorder" id="gvH-pq-BpZ">
@@ -725,8 +726,9 @@
                     <connections>
                         <outlet property="tabView" destination="gvH-pq-BpZ" id="Kn3-L8-YtQ"/>
                         <segue destination="5W3-Z0-yxx" kind="relationship" relationship="tabItems" id="SOc-sT-zdO"/>
-                        <segue destination="ifG-re-gTu" kind="relationship" relationship="tabItems" id="kb1-YK-KK3"/>
                         <segue destination="QWM-Rn-a2p" kind="relationship" relationship="tabItems" id="bRE-yb-vMo"/>
+                        <segue destination="0cZ-hJ-Fp5" kind="relationship" relationship="tabItems" id="lKU-2J-SON"/>
+                        <segue destination="ifG-re-gTu" kind="relationship" relationship="tabItems" id="kb1-YK-KK3"/>
                     </connections>
                 </tabViewController>
             </objects>
@@ -773,7 +775,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UZA-Wt-wLl">
-                                        <rect key="frame" x="186" y="19" width="135" height="45"/>
+                                        <rect key="frame" x="123" y="19" width="95" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="43" id="FeH-PG-XjX"/>
                                         </constraints>
@@ -786,7 +788,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LYF-55-ScN">
-                                        <rect key="frame" x="20" y="19" width="135" height="45"/>
+                                        <rect key="frame" x="20" y="19" width="95" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="43" id="ghB-kX-lJp"/>
                                         </constraints>
@@ -861,10 +863,24 @@
                                             <constraint firstItem="X9J-v4-JhC" firstAttribute="centerX" secondItem="LBs-Jh-cRM" secondAttribute="centerX" id="sVA-Q9-8Wk"/>
                                         </constraints>
                                     </customView>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ALB-Jo-Up9">
+                                        <rect key="frame" x="226" y="19" width="95" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="43" id="6Bk-F3-U8A"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="smallSquare" title="Start npm" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Nar-uZ-0wZ">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="systemMedium" size="13"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="startNPMClicked:" target="5W3-Z0-yxx" id="mHA-W8-cUV"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="LYF-55-ScN" firstAttribute="top" secondItem="AxJ-xc-nAp" secondAttribute="bottom" constant="20" id="8JP-FU-NZd"/>
                                     <constraint firstAttribute="width" constant="345" id="8XZ-B0-Q5Y"/>
+                                    <constraint firstItem="ALB-Jo-Up9" firstAttribute="trailing" secondItem="AxJ-xc-nAp" secondAttribute="trailing" id="9tP-2C-a3c"/>
                                     <constraint firstItem="XXj-30-duX" firstAttribute="top" secondItem="LBs-Jh-cRM" secondAttribute="bottom" constant="8" id="Bcd-qC-Efh"/>
                                     <constraint firstItem="PGP-au-JWY" firstAttribute="leading" secondItem="jNv-tX-dJh" secondAttribute="leading" constant="20" id="Bgz-gR-7uQ"/>
                                     <constraint firstAttribute="trailing" secondItem="T77-vi-yvD" secondAttribute="trailing" constant="2" id="Cwz-e6-qKX"/>
@@ -872,15 +888,17 @@
                                     <constraint firstItem="UZA-Wt-wLl" firstAttribute="top" secondItem="AxJ-xc-nAp" secondAttribute="bottom" constant="20" id="FWT-Fb-n4J"/>
                                     <constraint firstItem="T77-vi-yvD" firstAttribute="centerY" secondItem="AxJ-xc-nAp" secondAttribute="centerY" id="JJp-u9-jby"/>
                                     <constraint firstItem="AxJ-xc-nAp" firstAttribute="top" secondItem="PGP-au-JWY" secondAttribute="bottom" constant="8" id="LfA-5p-X3n"/>
+                                    <constraint firstItem="ALB-Jo-Up9" firstAttribute="leading" secondItem="UZA-Wt-wLl" secondAttribute="trailing" constant="8" id="Oay-fT-c3R"/>
+                                    <constraint firstItem="ALB-Jo-Up9" firstAttribute="top" secondItem="AxJ-xc-nAp" secondAttribute="bottom" constant="20" id="Oc1-tN-v52"/>
                                     <constraint firstItem="LBs-Jh-cRM" firstAttribute="leading" secondItem="jNv-tX-dJh" secondAttribute="leading" constant="20" id="Xle-Gf-L7g"/>
                                     <constraint firstItem="T77-vi-yvD" firstAttribute="leading" secondItem="AxJ-xc-nAp" secondAttribute="trailing" constant="8" id="YFi-jo-Hg1"/>
                                     <constraint firstAttribute="trailing" secondItem="LBs-Jh-cRM" secondAttribute="trailing" constant="20" id="b2N-h0-IVf"/>
                                     <constraint firstItem="PGP-au-JWY" firstAttribute="top" secondItem="XXj-30-duX" secondAttribute="bottom" constant="10" id="cvh-64-bv2"/>
                                     <constraint firstAttribute="trailing" secondItem="4lV-SR-6wF" secondAttribute="trailing" constant="2" id="dEs-hF-AOT"/>
-                                    <constraint firstItem="UZA-Wt-wLl" firstAttribute="trailing" secondItem="AxJ-xc-nAp" secondAttribute="trailing" id="dh6-bz-uKo"/>
                                     <constraint firstItem="YSQ-dR-vbE" firstAttribute="leading" secondItem="XXj-30-duX" secondAttribute="trailing" constant="4" id="ect-yM-pqx"/>
+                                    <constraint firstItem="UZA-Wt-wLl" firstAttribute="width" secondItem="ALB-Jo-Up9" secondAttribute="width" id="hdG-Hv-O2v"/>
                                     <constraint firstItem="4lV-SR-6wF" firstAttribute="leading" secondItem="PGP-au-JWY" secondAttribute="trailing" constant="8" id="hja-Dl-K7e"/>
-                                    <constraint firstItem="UZA-Wt-wLl" firstAttribute="leading" secondItem="LYF-55-ScN" secondAttribute="trailing" constant="31" id="jo6-c1-AHa"/>
+                                    <constraint firstItem="UZA-Wt-wLl" firstAttribute="leading" secondItem="LYF-55-ScN" secondAttribute="trailing" constant="8" id="jo6-c1-AHa"/>
                                     <constraint firstAttribute="bottom" secondItem="LYF-55-ScN" secondAttribute="bottom" constant="20" id="k9d-OJ-1vH"/>
                                     <constraint firstItem="LYF-55-ScN" firstAttribute="leading" secondItem="AxJ-xc-nAp" secondAttribute="leading" id="l9H-CZ-wzr"/>
                                     <constraint firstItem="4lV-SR-6wF" firstAttribute="centerY" secondItem="PGP-au-JWY" secondAttribute="centerY" id="o9H-vf-kiV"/>
@@ -908,12 +926,12 @@
                 </viewController>
                 <customObject id="8dR-zG-uzV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="303.5" y="911.5"/>
+            <point key="canvasLocation" x="157" y="898"/>
         </scene>
         <!--Create-->
         <scene sceneID="e43-on-8fi">
             <objects>
-                <viewController title="Create" id="ifG-re-gTu" sceneMemberID="viewController">
+                <viewController title="Create" id="ifG-re-gTu" customClass="CreateViewController" customModule="React_Native_GUI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="9f5-jG-FhI">
                         <rect key="frame" x="0.0" y="0.0" width="343" height="228"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -930,6 +948,9 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="systemMedium" size="13"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="createProjectRNIClicked:" target="ifG-re-gTu" id="EpI-Gq-Slz"/>
+                                        </connections>
                                     </button>
                                     <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="db4-lq-mKq">
                                         <rect key="frame" x="308" y="108" width="25" height="25"/>
@@ -938,7 +959,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <segue destination="L9q-WH-h1h" kind="popover" popoverAnchorView="db4-lq-mKq" popoverBehavior="t" preferredEdge="maxY" id="ie3-Qk-aEq"/>
+                                            <segue destination="L9q-WH-h1h" kind="popover" popoverAnchorView="db4-lq-mKq" popoverBehavior="semitransient" preferredEdge="maxY" id="ie3-Qk-aEq"/>
                                         </connections>
                                     </button>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="O7F-Ig-4W4">
@@ -966,6 +987,9 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="systemMedium" size="13"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="createProjectCRNAClicked:" target="ifG-re-gTu" id="OHf-HI-4zN"/>
+                                        </connections>
                                     </button>
                                     <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Nue-EL-3Cb">
                                         <rect key="frame" x="308" y="28" width="25" height="25"/>
@@ -974,7 +998,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <segue destination="scl-Rf-LhA" kind="popover" popoverAnchorView="Nue-EL-3Cb" popoverBehavior="semitransient" preferredEdge="maxX" id="REH-DT-BJV"/>
+                                            <segue destination="scl-Rf-LhA" kind="popover" popoverAnchorView="Nue-EL-3Cb" popoverBehavior="semitransient" preferredEdge="maxY" id="REH-DT-BJV"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1007,10 +1031,13 @@
                             <constraint firstAttribute="bottom" secondItem="h9P-LT-EgP" secondAttribute="bottom" id="lio-fW-D4M"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="projectName" destination="O7F-Ig-4W4" id="JTk-1B-qXd"/>
+                    </connections>
                 </viewController>
                 <customObject id="A6T-od-jeO" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="737" y="911.5"/>
+            <point key="canvasLocation" x="1625" y="847"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="8ZD-K0-lgh">
@@ -1052,20 +1079,110 @@
                 </viewController>
                 <customObject id="4rv-en-LUC" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="541" y="1283"/>
+            <point key="canvasLocation" x="1500" y="1264"/>
         </scene>
-        <!--View Controller-->
+        <!--Install Node Package-->
         <scene sceneID="u3h-hA-OgN">
             <objects>
-                <viewController id="QWM-Rn-a2p" sceneMemberID="viewController">
+                <viewController title="Install Node Package" id="QWM-Rn-a2p" customClass="NPMInstallViewController" customModule="React_Native_GUI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="DAB-oT-xyH">
-                        <rect key="frame" x="0.0" y="0.0" width="372" height="228"/>
+                        <rect key="frame" x="0.0" y="0.0" width="389" height="309"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hRq-Uz-RkM">
+                                <rect key="frame" x="18" y="272" width="353" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="In this tab you can install node package." id="Rn4-Ss-69O">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="olS-QT-Qzz">
+                                <rect key="frame" x="20" y="242" width="349" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Package Name" drawsBackground="YES" id="IcT-Bf-GTQ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3IS-dk-gbe">
+                                <rect key="frame" x="18" y="174" width="150" height="18"/>
+                                <buttonCell key="cell" type="check" title="Update packag­e.json" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="EVo-TM-iQ1">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mXI-VV-Khu">
+                                <rect key="frame" x="18" y="146" width="164" height="18"/>
+                                <buttonCell key="cell" type="check" title="Install package globally" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ZpW-0g-brM">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bKG-8M-Vlb">
+                                <rect key="frame" x="18" y="118" width="136" height="18"/>
+                                <buttonCell key="cell" type="check" title="Install from GitHub" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ifg-Zt-CMR">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rcg-um-KZ5">
+                                <rect key="frame" x="20" y="210" width="349" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Package Version (Optional)" drawsBackground="YES" id="cCx-7r-b7M">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JWD-o0-4li">
+                                <rect key="frame" x="18" y="90" width="278" height="18"/>
+                                <buttonCell key="cell" type="check" title="Restore packages defined in packag­e.json" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="3mp-zO-fr1">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="83f-0s-jgW">
+                                <rect key="frame" x="95" y="19" width="200" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="Whj-Wy-VvI"/>
+                                    <constraint firstAttribute="height" constant="43" id="f1V-7g-nO2"/>
+                                </constraints>
+                                <buttonCell key="cell" type="smallSquare" title="Install Package" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8se-Cs-nck">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="systemMedium" size="13"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="startNPMClicked:" target="5W3-Z0-yxx" id="DE9-xS-inS"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="hRq-Uz-RkM" firstAttribute="top" secondItem="DAB-oT-xyH" secondAttribute="top" constant="20" id="2Ku-qM-WHh"/>
+                            <constraint firstItem="3IS-dk-gbe" firstAttribute="top" secondItem="rcg-um-KZ5" secondAttribute="bottom" constant="20" id="BMZ-Mu-Swt"/>
+                            <constraint firstItem="bKG-8M-Vlb" firstAttribute="leading" secondItem="DAB-oT-xyH" secondAttribute="leading" constant="20" id="G2E-U7-EL9"/>
+                            <constraint firstItem="3IS-dk-gbe" firstAttribute="leading" secondItem="DAB-oT-xyH" secondAttribute="leading" constant="20" id="Ipx-2z-vhU"/>
+                            <constraint firstAttribute="trailing" secondItem="hRq-Uz-RkM" secondAttribute="trailing" constant="20" id="JgC-Eg-H3K"/>
+                            <constraint firstItem="rcg-um-KZ5" firstAttribute="leading" secondItem="DAB-oT-xyH" secondAttribute="leading" constant="20" id="MaP-ay-wL4"/>
+                            <constraint firstItem="mXI-VV-Khu" firstAttribute="leading" secondItem="DAB-oT-xyH" secondAttribute="leading" constant="20" id="Qdi-GW-3OV"/>
+                            <constraint firstItem="bKG-8M-Vlb" firstAttribute="top" secondItem="mXI-VV-Khu" secondAttribute="bottom" constant="14" id="aKM-rc-q9b"/>
+                            <constraint firstItem="rcg-um-KZ5" firstAttribute="top" secondItem="olS-QT-Qzz" secondAttribute="bottom" constant="10" id="dSQ-u5-lGx"/>
+                            <constraint firstItem="olS-QT-Qzz" firstAttribute="leading" secondItem="DAB-oT-xyH" secondAttribute="leading" constant="20" id="e0K-yQ-tEf"/>
+                            <constraint firstItem="JWD-o0-4li" firstAttribute="top" secondItem="bKG-8M-Vlb" secondAttribute="bottom" constant="14" id="f6z-G9-CPr"/>
+                            <constraint firstAttribute="trailing" secondItem="rcg-um-KZ5" secondAttribute="trailing" constant="20" id="guo-Ku-7kw"/>
+                            <constraint firstItem="83f-0s-jgW" firstAttribute="centerX" secondItem="DAB-oT-xyH" secondAttribute="centerX" id="hMC-EO-HhO"/>
+                            <constraint firstAttribute="bottom" secondItem="83f-0s-jgW" secondAttribute="bottom" constant="20" id="jGg-lD-SQY"/>
+                            <constraint firstItem="mXI-VV-Khu" firstAttribute="top" secondItem="3IS-dk-gbe" secondAttribute="bottom" constant="14" id="mkD-Zd-bh7"/>
+                            <constraint firstAttribute="trailing" secondItem="olS-QT-Qzz" secondAttribute="trailing" constant="20" id="seT-Dp-FvD"/>
+                            <constraint firstItem="JWD-o0-4li" firstAttribute="leading" secondItem="DAB-oT-xyH" secondAttribute="leading" constant="20" id="vIf-RD-bbY"/>
+                            <constraint firstItem="hRq-Uz-RkM" firstAttribute="leading" secondItem="DAB-oT-xyH" secondAttribute="leading" constant="20" id="xsV-Yn-9Xw"/>
+                            <constraint firstItem="olS-QT-Qzz" firstAttribute="top" secondItem="hRq-Uz-RkM" secondAttribute="bottom" constant="8" id="yQQ-LA-h3d"/>
+                            <constraint firstItem="83f-0s-jgW" firstAttribute="top" secondItem="JWD-o0-4li" secondAttribute="bottom" constant="29" id="yTw-da-xqc"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="H9K-8E-0pw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1164" y="911"/>
+            <point key="canvasLocation" x="561" y="898"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="0Kp-7z-Nxq">
@@ -1107,14 +1224,106 @@
                 </viewController>
                 <customObject id="Ygs-3e-xD6" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="897" y="1266"/>
+            <point key="canvasLocation" x="1849" y="1247"/>
+        </scene>
+        <!--Uninstall-->
+        <scene sceneID="lBV-2S-JcV">
+            <objects>
+                <viewController title="Uninstall" id="0cZ-hJ-Fp5" customClass="NPMInstallViewController" customModule="React_Native_GUI" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="UGm-l8-HmD">
+                        <rect key="frame" x="0.0" y="0.0" width="389" height="277"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="t9L-1d-1cx">
+                                <rect key="frame" x="18" y="240" width="353" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="In this tab you can install node package." id="kAw-g8-pRO">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NZr-dc-Kne">
+                                <rect key="frame" x="20" y="210" width="349" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Package Name" drawsBackground="YES" id="RdW-sN-p5i">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xEo-jg-LTU">
+                                <rect key="frame" x="18" y="174" width="150" height="18"/>
+                                <buttonCell key="cell" type="check" title="Update packag­e.json" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="snp-Bk-aa6">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fnh-rk-l9w">
+                                <rect key="frame" x="18" y="146" width="164" height="18"/>
+                                <buttonCell key="cell" type="check" title="Install package globally" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="nEv-cc-Nkt">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lY5-4A-ud6">
+                                <rect key="frame" x="18" y="118" width="261" height="18"/>
+                                <buttonCell key="cell" type="check" title="Remove extraneous (unused) packages" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="uHc-D4-P4P">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OgE-N6-Hlt">
+                                <rect key="frame" x="18" y="90" width="184" height="18"/>
+                                <buttonCell key="cell" type="check" title="Clear from the NPM Cache" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="hVX-Gx-kho">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GoC-UT-p89">
+                                <rect key="frame" x="95" y="19" width="200" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="IjX-k9-9nu"/>
+                                    <constraint firstAttribute="height" constant="43" id="JRH-bL-30Y"/>
+                                </constraints>
+                                <buttonCell key="cell" type="smallSquare" title="Uninstall Package" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="U2w-tN-Pkd">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="systemMedium" size="13"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="startNPMClicked:" target="5W3-Z0-yxx" id="yHH-Ex-gQ6"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="xEo-jg-LTU" firstAttribute="leading" secondItem="UGm-l8-HmD" secondAttribute="leading" constant="20" id="6up-VZ-HW1"/>
+                            <constraint firstItem="fnh-rk-l9w" firstAttribute="top" secondItem="xEo-jg-LTU" secondAttribute="bottom" constant="14" id="6zE-eN-C2s"/>
+                            <constraint firstItem="NZr-dc-Kne" firstAttribute="leading" secondItem="UGm-l8-HmD" secondAttribute="leading" constant="20" id="8BR-pv-jKH"/>
+                            <constraint firstItem="OgE-N6-Hlt" firstAttribute="leading" secondItem="UGm-l8-HmD" secondAttribute="leading" constant="20" id="Ddx-HZ-0h3"/>
+                            <constraint firstItem="t9L-1d-1cx" firstAttribute="top" secondItem="UGm-l8-HmD" secondAttribute="top" constant="20" id="JE7-fB-avK"/>
+                            <constraint firstItem="fnh-rk-l9w" firstAttribute="leading" secondItem="UGm-l8-HmD" secondAttribute="leading" constant="20" id="MpH-20-b51"/>
+                            <constraint firstItem="t9L-1d-1cx" firstAttribute="leading" secondItem="UGm-l8-HmD" secondAttribute="leading" constant="20" id="SRT-MQ-iec"/>
+                            <constraint firstItem="NZr-dc-Kne" firstAttribute="top" secondItem="t9L-1d-1cx" secondAttribute="bottom" constant="8" id="ToJ-WN-5UX"/>
+                            <constraint firstItem="xEo-jg-LTU" firstAttribute="top" secondItem="NZr-dc-Kne" secondAttribute="bottom" constant="20" id="aEU-YU-ezo"/>
+                            <constraint firstItem="lY5-4A-ud6" firstAttribute="top" secondItem="fnh-rk-l9w" secondAttribute="bottom" constant="14" id="cFf-et-B2D"/>
+                            <constraint firstAttribute="bottom" secondItem="GoC-UT-p89" secondAttribute="bottom" constant="20" id="ceI-gA-s7I"/>
+                            <constraint firstItem="OgE-N6-Hlt" firstAttribute="top" secondItem="lY5-4A-ud6" secondAttribute="bottom" constant="14" id="e7F-7u-mdX"/>
+                            <constraint firstItem="GoC-UT-p89" firstAttribute="top" secondItem="OgE-N6-Hlt" secondAttribute="bottom" constant="29" id="ejk-mU-zXq"/>
+                            <constraint firstAttribute="trailing" secondItem="t9L-1d-1cx" secondAttribute="trailing" constant="20" id="fw1-c0-Ib1"/>
+                            <constraint firstAttribute="trailing" secondItem="NZr-dc-Kne" secondAttribute="trailing" constant="20" id="s3G-ia-1Dh"/>
+                            <constraint firstItem="GoC-UT-p89" firstAttribute="centerX" secondItem="UGm-l8-HmD" secondAttribute="centerX" id="uNZ-TU-srB"/>
+                            <constraint firstItem="lY5-4A-ud6" firstAttribute="leading" secondItem="UGm-l8-HmD" secondAttribute="leading" constant="20" id="vIY-me-l9u"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="R24-jk-3cB" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1031" y="898"/>
         </scene>
     </scenes>
     <resources>
         <image name="NSFollowLinkFreestandingTemplate" width="14" height="14"/>
         <image name="add-icon" width="50" height="50"/>
-        <image name="config-icon" width="50" height="50"/>
         <image name="drag-drop" width="512" height="512"/>
+        <image name="npm-icon" width="50" height="50"/>
         <image name="run-icon" width="50" height="50"/>
     </resources>
 </document>
