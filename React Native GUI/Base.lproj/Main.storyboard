@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
@@ -1037,7 +1038,7 @@
                 </viewController>
                 <customObject id="A6T-od-jeO" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1625" y="847"/>
+            <point key="canvasLocation" x="1624.5" y="847"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="8ZD-K0-lgh">
@@ -1111,20 +1112,29 @@
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="updatePackageCheckBoxTapped:" target="QWM-Rn-a2p" id="62O-Oo-wEK"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mXI-VV-Khu">
                                 <rect key="frame" x="18" y="146" width="164" height="18"/>
-                                <buttonCell key="cell" type="check" title="Install package globally" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ZpW-0g-brM">
+                                <buttonCell key="cell" type="check" title="Install package globally" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ZpW-0g-brM">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="installPackageGloballyCheckBoxTapped:" target="QWM-Rn-a2p" id="bEG-oQ-8lj"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bKG-8M-Vlb">
                                 <rect key="frame" x="18" y="118" width="136" height="18"/>
-                                <buttonCell key="cell" type="check" title="Install from GitHub" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ifg-Zt-CMR">
+                                <buttonCell key="cell" type="check" title="Install from GitHub" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ifg-Zt-CMR">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="installFromGithubCheckBoxTapped:" target="QWM-Rn-a2p" id="W6D-Zj-rbc"/>
+                                </connections>
                             </button>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rcg-um-KZ5">
                                 <rect key="frame" x="20" y="210" width="349" height="22"/>
@@ -1136,15 +1146,18 @@
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JWD-o0-4li">
                                 <rect key="frame" x="18" y="90" width="278" height="18"/>
-                                <buttonCell key="cell" type="check" title="Restore packages defined in packag­e.json" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="3mp-zO-fr1">
+                                <buttonCell key="cell" type="check" title="Restore packages defined in packag­e.json" bezelStyle="regularSquare" imagePosition="left" inset="2" id="3mp-zO-fr1">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="restorePackageCheckBoxTapped:" target="QWM-Rn-a2p" id="NrB-HS-G7X"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="83f-0s-jgW">
                                 <rect key="frame" x="95" y="19" width="200" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="Whj-Wy-VvI"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="Whj-Wy-VvI"/>
                                     <constraint firstAttribute="height" constant="43" id="f1V-7g-nO2"/>
                                 </constraints>
                                 <buttonCell key="cell" type="smallSquare" title="Install Package" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8se-Cs-nck">
@@ -1152,7 +1165,7 @@
                                     <font key="font" metaFont="systemMedium" size="13"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="startNPMClicked:" target="5W3-Z0-yxx" id="DE9-xS-inS"/>
+                                    <action selector="installPackageClicked:" target="QWM-Rn-a2p" id="J0j-S4-Umm"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1164,13 +1177,16 @@
                             <constraint firstAttribute="trailing" secondItem="hRq-Uz-RkM" secondAttribute="trailing" constant="20" id="JgC-Eg-H3K"/>
                             <constraint firstItem="rcg-um-KZ5" firstAttribute="leading" secondItem="DAB-oT-xyH" secondAttribute="leading" constant="20" id="MaP-ay-wL4"/>
                             <constraint firstItem="mXI-VV-Khu" firstAttribute="leading" secondItem="DAB-oT-xyH" secondAttribute="leading" constant="20" id="Qdi-GW-3OV"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mXI-VV-Khu" secondAttribute="trailing" constant="20" symbolic="YES" id="T4V-0b-Sb2"/>
                             <constraint firstItem="bKG-8M-Vlb" firstAttribute="top" secondItem="mXI-VV-Khu" secondAttribute="bottom" constant="14" id="aKM-rc-q9b"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bKG-8M-Vlb" secondAttribute="trailing" constant="20" symbolic="YES" id="ah0-gL-SvW"/>
                             <constraint firstItem="rcg-um-KZ5" firstAttribute="top" secondItem="olS-QT-Qzz" secondAttribute="bottom" constant="10" id="dSQ-u5-lGx"/>
                             <constraint firstItem="olS-QT-Qzz" firstAttribute="leading" secondItem="DAB-oT-xyH" secondAttribute="leading" constant="20" id="e0K-yQ-tEf"/>
                             <constraint firstItem="JWD-o0-4li" firstAttribute="top" secondItem="bKG-8M-Vlb" secondAttribute="bottom" constant="14" id="f6z-G9-CPr"/>
                             <constraint firstAttribute="trailing" secondItem="rcg-um-KZ5" secondAttribute="trailing" constant="20" id="guo-Ku-7kw"/>
                             <constraint firstItem="83f-0s-jgW" firstAttribute="centerX" secondItem="DAB-oT-xyH" secondAttribute="centerX" id="hMC-EO-HhO"/>
                             <constraint firstAttribute="bottom" secondItem="83f-0s-jgW" secondAttribute="bottom" constant="20" id="jGg-lD-SQY"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3IS-dk-gbe" secondAttribute="trailing" constant="20" symbolic="YES" id="m1z-un-SX2"/>
                             <constraint firstItem="mXI-VV-Khu" firstAttribute="top" secondItem="3IS-dk-gbe" secondAttribute="bottom" constant="14" id="mkD-Zd-bh7"/>
                             <constraint firstAttribute="trailing" secondItem="olS-QT-Qzz" secondAttribute="trailing" constant="20" id="seT-Dp-FvD"/>
                             <constraint firstItem="JWD-o0-4li" firstAttribute="leading" secondItem="DAB-oT-xyH" secondAttribute="leading" constant="20" id="vIf-RD-bbY"/>
@@ -1179,6 +1195,15 @@
                             <constraint firstItem="83f-0s-jgW" firstAttribute="top" secondItem="JWD-o0-4li" secondAttribute="bottom" constant="29" id="yTw-da-xqc"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="installFromGithubCheckBox" destination="bKG-8M-Vlb" id="At9-Sf-h7E"/>
+                        <outlet property="installPackageButton" destination="83f-0s-jgW" id="1A7-Qf-5Tk"/>
+                        <outlet property="installPackageGloballyCheckBox" destination="mXI-VV-Khu" id="1AU-gF-Zwi"/>
+                        <outlet property="packageNameTextField" destination="olS-QT-Qzz" id="WYM-AV-qhd"/>
+                        <outlet property="packageVersionTextField" destination="rcg-um-KZ5" id="rgS-i7-ecD"/>
+                        <outlet property="restorePackageCheckBox" destination="JWD-o0-4li" id="6UG-8m-hI1"/>
+                        <outlet property="updatePackageCheckBox" destination="3IS-dk-gbe" id="6cs-AX-VLC"/>
+                    </connections>
                 </viewController>
                 <customObject id="H9K-8E-0pw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1229,14 +1254,14 @@
         <!--Uninstall-->
         <scene sceneID="lBV-2S-JcV">
             <objects>
-                <viewController title="Uninstall" id="0cZ-hJ-Fp5" customClass="NPMInstallViewController" customModule="React_Native_GUI" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Uninstall" id="0cZ-hJ-Fp5" customClass="NPMUninstallViewController" customModule="React_Native_GUI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="UGm-l8-HmD">
                         <rect key="frame" x="0.0" y="0.0" width="389" height="277"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="t9L-1d-1cx">
                                 <rect key="frame" x="18" y="240" width="353" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="In this tab you can install node package." id="kAw-g8-pRO">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="In this tab you can remove node package." id="kAw-g8-pRO">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1251,37 +1276,49 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xEo-jg-LTU">
-                                <rect key="frame" x="18" y="174" width="150" height="18"/>
-                                <buttonCell key="cell" type="check" title="Update packag­e.json" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="snp-Bk-aa6">
+                                <rect key="frame" x="18" y="174" width="265" height="18"/>
+                                <buttonCell key="cell" type="check" title="Uninstall and remove from packag­e.json" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="snp-Bk-aa6">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="removePackageCheckBoxTapped:" target="0cZ-hJ-Fp5" id="EFY-oi-qiv"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fnh-rk-l9w">
-                                <rect key="frame" x="18" y="146" width="164" height="18"/>
-                                <buttonCell key="cell" type="check" title="Install package globally" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="nEv-cc-Nkt">
+                                <rect key="frame" x="18" y="146" width="172" height="18"/>
+                                <buttonCell key="cell" type="check" title="Uninstall Global Package" bezelStyle="regularSquare" imagePosition="left" inset="2" id="nEv-cc-Nkt">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="removePackageGloballyCheckBoxTapped:" target="0cZ-hJ-Fp5" id="QvA-eB-PEe"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lY5-4A-ud6">
                                 <rect key="frame" x="18" y="118" width="261" height="18"/>
-                                <buttonCell key="cell" type="check" title="Remove extraneous (unused) packages" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="uHc-D4-P4P">
+                                <buttonCell key="cell" type="check" title="Remove extraneous (unused) packages" bezelStyle="regularSquare" imagePosition="left" inset="2" id="uHc-D4-P4P">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="removeExtraneousPackagesCheckBoxTapped:" target="0cZ-hJ-Fp5" id="5S9-8k-n9g"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OgE-N6-Hlt">
-                                <rect key="frame" x="18" y="90" width="184" height="18"/>
-                                <buttonCell key="cell" type="check" title="Clear from the NPM Cache" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="hVX-Gx-kho">
+                                <rect key="frame" x="18" y="90" width="237" height="18"/>
+                                <buttonCell key="cell" type="check" title="Clear from the NPM Cache(--force)" bezelStyle="regularSquare" imagePosition="left" inset="2" id="hVX-Gx-kho">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="clearNPMCacheCheckBoxTapped:" target="0cZ-hJ-Fp5" id="8Gy-g5-BEk"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GoC-UT-p89">
                                 <rect key="frame" x="95" y="19" width="200" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="IjX-k9-9nu"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="IjX-k9-9nu"/>
                                     <constraint firstAttribute="height" constant="43" id="JRH-bL-30Y"/>
                                 </constraints>
                                 <buttonCell key="cell" type="smallSquare" title="Uninstall Package" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="U2w-tN-Pkd">
@@ -1289,7 +1326,7 @@
                                     <font key="font" metaFont="systemMedium" size="13"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="startNPMClicked:" target="5W3-Z0-yxx" id="yHH-Ex-gQ6"/>
+                                    <action selector="uninstallPackageTapped:" target="0cZ-hJ-Fp5" id="94j-IJ-XRw"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1313,6 +1350,14 @@
                             <constraint firstItem="lY5-4A-ud6" firstAttribute="leading" secondItem="UGm-l8-HmD" secondAttribute="leading" constant="20" id="vIY-me-l9u"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="clearNPMCacheCheckBox" destination="OgE-N6-Hlt" id="2a8-Iv-4U0"/>
+                        <outlet property="packageNameTextField" destination="NZr-dc-Kne" id="HN5-eC-6Hx"/>
+                        <outlet property="removeExtraneousPackagesCheckBox" destination="lY5-4A-ud6" id="3eW-Zf-fmi"/>
+                        <outlet property="removePackageCheckBox" destination="xEo-jg-LTU" id="2oi-RV-LeI"/>
+                        <outlet property="removePackageGloballyCheckBox" destination="fnh-rk-l9w" id="ywi-eB-9uf"/>
+                        <outlet property="uninstallPackageButton" destination="GoC-UT-p89" id="L2N-kq-VCX"/>
+                    </connections>
                 </viewController>
                 <customObject id="R24-jk-3cB" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

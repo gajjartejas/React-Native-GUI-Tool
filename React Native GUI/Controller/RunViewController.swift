@@ -107,6 +107,7 @@ class RunViewController: NSViewController {
     @IBAction func runiOSClicked(_ sender: Any) {
         
         guard let folderPath = self.folderPath else {
+            NSAlert.showAlert(title: "Please select react native folder.", message: nil, style: .warning)
             return
         }
         
@@ -118,6 +119,7 @@ class RunViewController: NSViewController {
     @IBAction func runAndroidClicked(_ sender: Any) {
         
         guard let folderPath = self.folderPath else {
+            NSAlert.showAlert(title: "Please select react native folder.", message: nil, style: .warning)
             return
         }
         
@@ -129,6 +131,7 @@ class RunViewController: NSViewController {
     @IBAction func startNPMClicked(_ sender: NSButton) {
         
         guard let folderPath = self.folderPath else {
+            NSAlert.showAlert(title: "Please select react native folder.", message: nil, style: .warning)
             return
         }
         

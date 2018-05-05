@@ -28,7 +28,12 @@ class DropView: NSView {
         self.wantsLayer = true
         self.layer?.backgroundColor = NSColor.white.cgColor
         
-        registerForDraggedTypes([NSPasteboard.PasteboardType.URL, NSPasteboard.PasteboardType.fileURL])
+        if #available(OSX 10.13, *) {
+            registerForDraggedTypes([NSPasteboard.PasteboardType.URL, NSPasteboard.PasteboardType.fileURL])
+        } else {
+            // Fallback on earlier versions
+            registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: kUTTypeFileURL as String)])
+        }
     }
     
     override func draw(_ dirtyRect: NSRect) {
