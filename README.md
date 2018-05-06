@@ -1,5 +1,4 @@
 # React-Native-GUI-Tool
-<img src="/Images/Screenshot1.png?raw=tru" width="300" align="right">
 
 A Simple GUI tool for react-native cli. Directly drag and drop react-native project.
 
@@ -10,7 +9,19 @@ Download the latest binary in [React-Native-GUI-Tool Releases](https://github.co
 ## Features 
 - Drag and drop support.
 - Run iOS and Android Project.
+- Install npm package.
+- Uninstall npm package.
+- Create react-native project
 - More features will be added. Please tell me!
+
+## Screenshots
+Run             |  Install
+:-------------------------:|:-------------------------:
+![](/Images/Screenshot1.png?raw=tru)  |  ![](/Images/Screenshot1.png?raw=tru)
+
+Uninstall             |  Create
+:-------------------------:|:-------------------------:
+![](/Images/Screenshot3.png?raw=tru)  |  ![](/Images/Screenshot4.png?raw=tru)
 
 
 ## License
