@@ -17,7 +17,7 @@ Download the latest binary in [React-Native-GUI-Tool Releases](https://github.co
 ## Screenshots
 Run             |  Install
 :-------------------------:|:-------------------------:
-![](/Images/Screenshot1.png?raw=tru)  |  ![](/Images/Screenshot1.png?raw=tru)
+![](/Images/Screenshot1.png?raw=tru)  |  ![](/Images/Screenshot2.png?raw=tru)
 
 Uninstall             |  Create
 :-------------------------:|:-------------------------:
