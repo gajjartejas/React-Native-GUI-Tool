@@ -14,6 +14,13 @@ Download the latest binary in [React-Native-GUI-Tool Releases](https://github.co
 - Create react-native project
 - More features will be added. Please tell me!
 
+## To-Do
+- Create project with specific version of react-native Like ` react-native init ProjectName --version react-native@0.55.4`
+- Build command for iOS and Android
+- Integrate ADB Command like `adb connect 192.168.31.237:5555`, `adb devices`, `adb -s 192.168.31.237:5555 reverse tcp:8081 tcp:8081`
+- yarn command support
+- Automated pod creation support
+
 ## Screenshots
 Run             |  Install
 :-------------------------:|:-------------------------:
