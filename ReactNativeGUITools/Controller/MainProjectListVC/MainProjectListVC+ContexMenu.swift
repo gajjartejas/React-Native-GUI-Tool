@@ -20,7 +20,7 @@ extension MainProjectListVC {
 
         menu.addItem(NSMenuItem.separator())
         menu.addItem(withTitle: "Rename", action: #selector(renameAction(_:)), keyEquivalent: "")
-        menu.addItem(withTitle: "Delete", action: #selector(renameAction(_:)), keyEquivalent: "")
+        menu.addItem(withTitle: "Remove", action: #selector(removeAction(_:)), keyEquivalent: "")
         menu.addItem(NSMenuItem.separator())
 
         let scriptSubMenu = NSMenu()
@@ -126,10 +126,11 @@ extension MainProjectListVC {
     @objc func aabToApk(_ sender: Any?) {}
     @objc func customActions(_ sender: Any?) {}
 
-    @objc func deleteAction(_ sender: Any?) {
+    @objc func removeAction(_ sender: Any?) {
         if projectListTableView.clickedRow != -1 {
-            // projects.remove(at: projectListTableView.clickedRow)
-            projectListTableView.reloadData()
+            projectInfoCollection.remove(at: projectListTableView.clickedRow)
+            let indexSets = IndexSet(integer: projectListTableView.clickedRow)
+            projectListTableView.removeRows(at: indexSets, withAnimation: .slideDown)
         }
     }
 

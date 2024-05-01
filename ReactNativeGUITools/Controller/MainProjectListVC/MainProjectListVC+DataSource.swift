@@ -9,6 +9,6 @@ import Cocoa
 
 extension MainProjectListVC: NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return projects.count
+        return self.projectInfoCollection.projectInfos.count
     }
 }

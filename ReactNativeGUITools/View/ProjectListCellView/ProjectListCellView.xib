@@ -13,7 +13,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="3" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p2e-bk-rmX">
-                    <rect key="frame" x="80" y="61" width="84" height="35"/>
+                    <rect key="frame" x="60" y="61" width="84" height="35"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RHf-2J-Uus">
                             <rect key="frame" x="-2" y="19" width="88" height="16"/>
@@ -42,30 +42,30 @@
                     </customSpacing>
                 </stackView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bvg-wO-yLs">
-                    <rect key="frame" x="16" y="51" width="48" height="54"/>
+                    <rect key="frame" x="8" y="51" width="48" height="54"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="48" id="CPd-8J-xbv"/>
                         <constraint firstAttribute="height" constant="48" id="aqJ-kV-5xs"/>
                     </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="figure.walk.circle.fill" catalog="system" id="1ou-x4-xkQ"/>
                 </imageView>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="ol0-lJ-ga0" customClass="StyledButton" customModule="ReactNativeGUITools" customModuleProvider="target">
-                    <rect key="frame" x="431" y="63" width="50" height="30"/>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="ol0-lJ-ga0">
+                    <rect key="frame" x="434" y="65" width="45" height="26"/>
                     <subviews>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hgD-tN-v6U">
-                            <rect key="frame" x="4" y="7" width="42" height="16"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" title="0.72.5" id="ihl-N7-M4Q">
-                                <font key="font" usesAppearanceFont="YES"/>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="di3-ng-vST">
+                            <rect key="frame" x="6" y="6" width="33" height="14"/>
+                            <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="dHY-b3-Whk">
+                                <font key="font" metaFont="system" size="11"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="X0q-h5-MRr"/>
-                        <constraint firstItem="hgD-tN-v6U" firstAttribute="leading" secondItem="ol0-lJ-ga0" secondAttribute="leading" constant="6" id="Y8i-sL-yel"/>
-                        <constraint firstAttribute="trailing" secondItem="hgD-tN-v6U" secondAttribute="trailing" constant="6" id="ekQ-31-T4d"/>
-                        <constraint firstItem="hgD-tN-v6U" firstAttribute="centerY" secondItem="ol0-lJ-ga0" secondAttribute="centerY" id="z6c-yW-Chd"/>
+                        <constraint firstAttribute="bottom" secondItem="di3-ng-vST" secondAttribute="bottom" constant="6" id="OpX-AI-mCW"/>
+                        <constraint firstItem="di3-ng-vST" firstAttribute="top" secondItem="ol0-lJ-ga0" secondAttribute="top" constant="6" id="RFK-ot-XUg"/>
+                        <constraint firstItem="di3-ng-vST" firstAttribute="leading" secondItem="ol0-lJ-ga0" secondAttribute="leading" constant="8" id="duc-SY-Gha"/>
+                        <constraint firstAttribute="trailing" secondItem="di3-ng-vST" secondAttribute="trailing" constant="8" id="iJI-18-thj"/>
                     </constraints>
                 </customView>
             </subviews>
@@ -73,16 +73,17 @@
                 <constraint firstItem="ol0-lJ-ga0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="p2e-bk-rmX" secondAttribute="trailing" constant="8" id="24C-Ep-Zs0"/>
                 <constraint firstItem="bvg-wO-yLs" firstAttribute="centerY" secondItem="RBN-WR-v0h" secondAttribute="centerY" id="2RA-sW-ap7"/>
                 <constraint firstItem="p2e-bk-rmX" firstAttribute="centerY" secondItem="RBN-WR-v0h" secondAttribute="centerY" id="I7v-t8-JBu"/>
-                <constraint firstAttribute="trailing" secondItem="ol0-lJ-ga0" secondAttribute="trailing" constant="6" id="MUB-WZ-jtP"/>
+                <constraint firstAttribute="trailing" secondItem="ol0-lJ-ga0" secondAttribute="trailing" constant="8" id="MUB-WZ-jtP"/>
                 <constraint firstItem="ol0-lJ-ga0" firstAttribute="centerY" secondItem="RBN-WR-v0h" secondAttribute="centerY" id="PJQ-Yk-iLp"/>
-                <constraint firstItem="bvg-wO-yLs" firstAttribute="leading" secondItem="RBN-WR-v0h" secondAttribute="leading" constant="16" id="bsE-xT-2HG"/>
-                <constraint firstItem="p2e-bk-rmX" firstAttribute="leading" secondItem="bvg-wO-yLs" secondAttribute="trailing" constant="16" id="oNg-hJ-iwd"/>
+                <constraint firstItem="bvg-wO-yLs" firstAttribute="leading" secondItem="RBN-WR-v0h" secondAttribute="leading" constant="8" id="bsE-xT-2HG"/>
+                <constraint firstItem="p2e-bk-rmX" firstAttribute="leading" secondItem="bvg-wO-yLs" secondAttribute="trailing" constant="4" id="oNg-hJ-iwd"/>
             </constraints>
             <connections>
                 <outlet property="projectLogo" destination="bvg-wO-yLs" id="IlX-sh-vfI"/>
                 <outlet property="projectNameLable" destination="RHf-2J-Uus" id="5fr-dz-MdS"/>
                 <outlet property="projectPathLable" destination="swl-Ew-hdy" id="dES-QS-5La"/>
-                <outlet property="projectVersion" destination="hgD-tN-v6U" id="Az1-SR-ODf"/>
+                <outlet property="projectVersion" destination="di3-ng-vST" id="J1E-Tz-iHi"/>
+                <outlet property="projectVersionLable" destination="ol0-lJ-ga0" id="OjY-iS-rTG"/>
             </connections>
             <point key="canvasLocation" x="-624.5" y="67"/>
         </tableCellView>

@@ -7,16 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		960B0A2B2BDCD04000494CA2 /* DropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960B0A2A2BDCD04000494CA2 /* DropView.swift */; };
 		960F596B2BD967D600E08DEA /* NSPasteboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F596A2BD967D600E08DEA /* NSPasteboardItem.swift */; };
 		960F596D2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F596C2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift */; };
 		965EF8442BA36378000ADFDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965EF8432BA36378000ADFDA /* AppDelegate.swift */; };
 		965EF8462BA36378000ADFDA /* MainProjectListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965EF8452BA36378000ADFDA /* MainProjectListVC.swift */; };
 		965EF8482BA3637A000ADFDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 965EF8472BA3637A000ADFDA /* Assets.xcassets */; };
 		965EF84B2BA3637A000ADFDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 965EF8492BA3637A000ADFDA /* Main.storyboard */; };
+		967450742BDCDD3A0047D7C1 /* NSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967450732BDCDD3A0047D7C1 /* NSView.swift */; };
+		967450762BDCE8A70047D7C1 /* ProjectListDropLableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967450752BDCE8A70047D7C1 /* ProjectListDropLableView.swift */; };
 		9675F5BD2BCC49A1008FF0F4 /* ProjectInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9675F5BC2BCC49A1008FF0F4 /* ProjectInfo.swift */; };
 		968C6CAF2BCC14CE00F8C5A1 /* ProjectListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968C6CAE2BCC14CE00F8C5A1 /* ProjectListCellView.swift */; };
 		968C6CB12BCC14E800F8C5A1 /* ProjectListCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 968C6CB02BCC14E800F8C5A1 /* ProjectListCellView.xib */; };
 		968C6CB52BCC16CC00F8C5A1 /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968C6CB42BCC16CC00F8C5A1 /* NSImage.swift */; };
+		96AB0B422BE296DF006613F7 /* MainProjectListVC+SearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AB0B412BE296DE006613F7 /* MainProjectListVC+SearchDelegate.swift */; };
 		96C0A4932BC441B50069FB7F /* PasteboardWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0A4922BC441B50069FB7F /* PasteboardWriter.swift */; };
 		96D181442BADEC7200380905 /* MenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D181432BADEC7200380905 /* MenuNode.swift */; };
 		96D181472BADF13900380905 /* ToolsOutlineCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D181462BADF13900380905 /* ToolsOutlineCellView.swift */; };
@@ -36,7 +40,6 @@
 		96EB35B72BD80A5B00BC04BF /* SystemInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F10FE02BD17A9D00ED5968 /* SystemInfoVC.swift */; };
 		96EB35B92BD81AE600BC04BF /* ToolsOutlineVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EB35B82BD81AE600BC04BF /* ToolsOutlineVC+Delegate.swift */; };
 		96EB35BB2BD81B4200BC04BF /* ToolsOutlineVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EB35BA2BD81B4200BC04BF /* ToolsOutlineVC+DataSource.swift */; };
-		96EB35BD2BD81D6C00BC04BF /* StyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EB35BC2BD81D6C00BC04BF /* StyledButton.swift */; };
 		96EB35BF2BD81E2B00BC04BF /* MainProjectListVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EB35BE2BD81E2B00BC04BF /* MainProjectListVC+DataSource.swift */; };
 		96EB35C12BD81E6F00BC04BF /* MainProjectListVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EB35C02BD81E6F00BC04BF /* MainProjectListVC+Delegate.swift */; };
 		96EB35C32BD8211D00BC04BF /* MainProjectListVC+DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EB35C22BD8211D00BC04BF /* MainProjectListVC+DragDrop.swift */; };
@@ -46,6 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		960B0A2A2BDCD04000494CA2 /* DropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropView.swift; sourceTree = "<group>"; };
 		960F596A2BD967D600E08DEA /* NSPasteboardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPasteboardItem.swift; sourceTree = "<group>"; };
 		960F596C2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainProjectListVC+ContexMenu.swift"; sourceTree = "<group>"; };
 		965EF8402BA36378000ADFDA /* ReactNativeGUITools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactNativeGUITools.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,10 +58,13 @@
 		965EF8472BA3637A000ADFDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		965EF84A2BA3637A000ADFDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		965EF84C2BA3637A000ADFDA /* ReactNativeGUITools.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReactNativeGUITools.entitlements; sourceTree = "<group>"; };
+		967450732BDCDD3A0047D7C1 /* NSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSView.swift; sourceTree = "<group>"; };
+		967450752BDCE8A70047D7C1 /* ProjectListDropLableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListDropLableView.swift; sourceTree = "<group>"; };
 		9675F5BC2BCC49A1008FF0F4 /* ProjectInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfo.swift; sourceTree = "<group>"; };
 		968C6CAE2BCC14CE00F8C5A1 /* ProjectListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListCellView.swift; sourceTree = "<group>"; };
 		968C6CB02BCC14E800F8C5A1 /* ProjectListCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectListCellView.xib; sourceTree = "<group>"; };
 		968C6CB42BCC16CC00F8C5A1 /* NSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
+		96AB0B412BE296DE006613F7 /* MainProjectListVC+SearchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainProjectListVC+SearchDelegate.swift"; sourceTree = "<group>"; };
 		96C0A4922BC441B50069FB7F /* PasteboardWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardWriter.swift; sourceTree = "<group>"; };
 		96D181432BADEC7200380905 /* MenuNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuNode.swift; sourceTree = "<group>"; };
 		96D181462BADF13900380905 /* ToolsOutlineCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsOutlineCellView.swift; sourceTree = "<group>"; };
@@ -66,7 +73,6 @@
 		96D1814D2BADF4EE00380905 /* NibInstantiatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibInstantiatable.swift; sourceTree = "<group>"; };
 		96EB35B82BD81AE600BC04BF /* ToolsOutlineVC+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolsOutlineVC+Delegate.swift"; sourceTree = "<group>"; };
 		96EB35BA2BD81B4200BC04BF /* ToolsOutlineVC+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolsOutlineVC+DataSource.swift"; sourceTree = "<group>"; };
-		96EB35BC2BD81D6C00BC04BF /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
 		96EB35BE2BD81E2B00BC04BF /* MainProjectListVC+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainProjectListVC+DataSource.swift"; sourceTree = "<group>"; };
 		96EB35C02BD81E6F00BC04BF /* MainProjectListVC+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainProjectListVC+Delegate.swift"; sourceTree = "<group>"; };
 		96EB35C22BD8211D00BC04BF /* MainProjectListVC+DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainProjectListVC+DragDrop.swift"; sourceTree = "<group>"; };
@@ -134,7 +140,8 @@
 			children = (
 				968C6CAD2BCC149100F8C5A1 /* ProjectListCellView */,
 				96D181452BADF07900380905 /* ToolsOutlineCellView */,
-				96EB35BC2BD81D6C00BC04BF /* StyledButton.swift */,
+				960B0A2A2BDCD04000494CA2 /* DropView.swift */,
+				967450752BDCE8A70047D7C1 /* ProjectListDropLableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -175,6 +182,7 @@
 			children = (
 				968C6CB42BCC16CC00F8C5A1 /* NSImage.swift */,
 				960F596A2BD967D600E08DEA /* NSPasteboardItem.swift */,
+				967450732BDCDD3A0047D7C1 /* NSView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -214,6 +222,7 @@
 				96EB35C02BD81E6F00BC04BF /* MainProjectListVC+Delegate.swift */,
 				96EB35C22BD8211D00BC04BF /* MainProjectListVC+DragDrop.swift */,
 				960F596C2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift */,
+				96AB0B412BE296DE006613F7 /* MainProjectListVC+SearchDelegate.swift */,
 			);
 			path = MainProjectListVC;
 			sourceTree = "<group>";
@@ -408,6 +417,7 @@
 				96EB35B42BD80A4E00BC04BF /* GenerateBuildVC.swift in Sources */,
 				96EB35AE2BD809CA00BC04BF /* FCMNotificationVC.swift in Sources */,
 				96D1814B2BADF3A800380905 /* ToolsOutlineVC.swift in Sources */,
+				967450742BDCDD3A0047D7C1 /* NSView.swift in Sources */,
 				96EB35C52BD8260100BC04BF /* ToolsOutlineVC+Fixtures.swift in Sources */,
 				96EB35B22BD80A4700BC04BF /* ScrcpyVC.swift in Sources */,
 				96EB35AF2BD809CE00BC04BF /* KeytoolVC.swift in Sources */,
@@ -418,7 +428,6 @@
 				96F10FDE2BD17A7400ED5968 /* ProjectInfoVC.swift in Sources */,
 				96EB35AD2BD809C600BC04BF /* lAPToolVC.swift in Sources */,
 				96EB35BB2BD81B4200BC04BF /* ToolsOutlineVC+DataSource.swift in Sources */,
-				96EB35BD2BD81D6C00BC04BF /* StyledButton.swift in Sources */,
 				968C6CB52BCC16CC00F8C5A1 /* NSImage.swift in Sources */,
 				960F596B2BD967D600E08DEA /* NSPasteboardItem.swift in Sources */,
 				96D181472BADF13900380905 /* ToolsOutlineCellView.swift in Sources */,
@@ -426,16 +435,19 @@
 				96EB35B52BD80A5200BC04BF /* YarnVC.swift in Sources */,
 				96D1814E2BADF4EE00380905 /* NibInstantiatable.swift in Sources */,
 				96EB35B92BD81AE600BC04BF /* ToolsOutlineVC+Delegate.swift in Sources */,
+				967450762BDCE8A70047D7C1 /* ProjectListDropLableView.swift in Sources */,
 				965EF8442BA36378000ADFDA /* AppDelegate.swift in Sources */,
 				96EB35C12BD81E6F00BC04BF /* MainProjectListVC+Delegate.swift in Sources */,
 				96EB35C32BD8211D00BC04BF /* MainProjectListVC+DragDrop.swift in Sources */,
 				96EB35B12BD809D500BC04BF /* ApktoolVC.swift in Sources */,
 				96F71CF52BD2D7490003D728 /* ProjectTabViewController.swift in Sources */,
+				960B0A2B2BDCD04000494CA2 /* DropView.swift in Sources */,
 				96EB35B02BD809D100BC04BF /* BundletoolVC.swift in Sources */,
 				960F596D2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift in Sources */,
 				96EB35B62BD80A5600BC04BF /* NpmVC.swift in Sources */,
 				9675F5BD2BCC49A1008FF0F4 /* ProjectInfo.swift in Sources */,
 				96EB35B72BD80A5B00BC04BF /* SystemInfoVC.swift in Sources */,
+				96AB0B422BE296DF006613F7 /* MainProjectListVC+SearchDelegate.swift in Sources */,
 				96EB35BF2BD81E2B00BC04BF /* MainProjectListVC+DataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,4 +16,11 @@ extension NSPasteboardItem {
             format: nil)
         return plist as? Int
     }
+
+    func url(forType type: NSPasteboard.PasteboardType) -> String? {
+        guard let data = data(forType: type) else { return nil }
+        guard let stringURL = String(data: data, encoding: .utf8) else { return nil }
+        guard let url = URL(string: stringURL) else { return nil }
+        return url.relativePath
+    }
 }

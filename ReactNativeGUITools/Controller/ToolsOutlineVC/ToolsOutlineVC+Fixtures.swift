@@ -32,7 +32,6 @@ extension ToolsOutlineVC {
     }
 
     struct NotificationNames {
-        // A notification when the tree controller's selection changes. SplitViewController uses this.
         static let selectionChanged = "selectionChangedNotification"
     }
 }
