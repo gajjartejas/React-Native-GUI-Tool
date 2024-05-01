@@ -17,12 +17,12 @@ class ProjectListPasteboardWriter: NSObject, NSPasteboardWriting {
     }
 
     func writableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
-        return [.string, .tableViewIndex]
+        return [.fileURL, .tableViewIndex]
     }
 
     func pasteboardPropertyList(forType type: NSPasteboard.PasteboardType) -> Any? {
         switch type {
-        case .string:
+        case .fileURL:
             return project
         case .tableViewIndex:
             return index

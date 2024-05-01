@@ -10,12 +10,15 @@ import Cocoa
 extension MainProjectListVC: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard
-            let cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: String(describing: ProjectListCellView.self)), owner: self) as? ProjectListCellView
+            let cellView = tableView.makeView(
+                withIdentifier: NSUserInterfaceItemIdentifier(
+                    rawValue: String(describing: ProjectListCellView.self)),
+                owner: self) as? ProjectListCellView
         else {
             return nil
         }
 
-        cellView.configureUI(withNode: projects[row])
+        cellView.configureUI(withNode: projectInfoCollection.projectInfos[row])
 
         return cellView
     }
@@ -27,7 +30,7 @@ extension MainProjectListVC: NSTableViewDelegate {
     func tableView(
         _ tableView: NSTableView,
         pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-        return ProjectListPasteboardWriter(project: projects[row].name, at: row)
+        return ProjectListPasteboardWriter(project: projectInfoCollection.projectInfos[row].name ?? "-", at: row)
     }
 
     func tableView(
@@ -51,12 +54,12 @@ extension MainProjectListVC: NSTableViewDelegate {
         acceptDrop info: NSDraggingInfo,
         row: Int,
         dropOperation: NSTableView.DropOperation) -> Bool {
+        if searching { return false }
         guard let items = info.draggingPasteboard.pasteboardItems else { return false }
 
         let oldIndexes = items.compactMap { $0.integer(forType: .tableViewIndex) }
         if !oldIndexes.isEmpty {
-            projects.move(fromOffsets: IndexSet(oldIndexes), toOffset: row)
-
+            projectInfoCollection.move(fromOffsets: IndexSet(oldIndexes), toOffset: row)
             // The ol' Stack Overflow copy-paste. Reordering rows can get pretty hairy if
             // you allow multiple selection. https://stackoverflow.com/a/26855499/7471873
 
@@ -79,9 +82,10 @@ extension MainProjectListVC: NSTableViewDelegate {
         }
 
         let newProjects = items.compactMap { item in
-            ProjectInfo(name: "Test", path: item.string(forType: .fileURL) ?? "-", versionString: "1.0.3")
+            ProjectInfo(id: UUID().uuidString, path: item.url(forType: .fileURL)!)
         }
-        projects.insert(contentsOf: newProjects, at: row)
+
+        projectInfoCollection.insert(contentsOf: newProjects, at: row)
         tableView.insertRows(at: IndexSet(row ... row + newProjects.count - 1),
                              withAnimation: .slideDown)
         return true
@@ -92,12 +96,10 @@ extension MainProjectListVC: NSTableViewDelegate {
         draggingSession session: NSDraggingSession,
         endedAt screenPoint: NSPoint,
         operation: NSDragOperation) {
-        // Handle items dragged to Trash
         if operation == .delete, let items = session.draggingPasteboard.pasteboardItems {
             let indexes = items.compactMap { $0.integer(forType: .tableViewIndex) }
-
             for index in indexes.reversed() {
-                projects.remove(at: index)
+                projectInfoCollection.remove(at: index)
             }
             tableView.removeRows(at: IndexSet(indexes), withAnimation: .slideUp)
         }

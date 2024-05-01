@@ -768,19 +768,64 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="cTD-8F-1Yi" customClass="DropView" customModule="ReactNativeGUITools" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="518" height="314"/>
+                                <subviews>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="5ms-r6-la7" customClass="ProjectListDropLableView" customModule="ReactNativeGUITools" customModuleProvider="target">
+                                        <rect key="frame" x="58" y="68" width="403" height="179"/>
+                                        <subviews>
+                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K6B-Xl-H2g">
+                                                <rect key="frame" x="174" y="96" width="55" height="51"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="51" id="LOn-RH-64l"/>
+                                                    <constraint firstAttribute="width" constant="55" id="qFF-Og-Ruu"/>
+                                                </constraints>
+                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="drag-drop" id="lza-G0-nor"/>
+                                                <color key="contentTintColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
+                                            </imageView>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OaR-uh-fR8">
+                                                <rect key="frame" x="30" y="32" width="343" height="48"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Click here or Drag and drop your react native project directory here" id="b82-oG-0lg">
+                                                    <font key="font" metaFont="systemMedium" size="13"/>
+                                                    <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="OaR-uh-fR8" secondAttribute="trailing" constant="32" id="BgC-pB-j1C"/>
+                                            <constraint firstItem="OaR-uh-fR8" firstAttribute="leading" secondItem="5ms-r6-la7" secondAttribute="leading" constant="32" id="MNf-tv-N9Z"/>
+                                            <constraint firstItem="K6B-Xl-H2g" firstAttribute="centerX" secondItem="5ms-r6-la7" secondAttribute="centerX" id="NfG-Pu-nDJ"/>
+                                            <constraint firstItem="K6B-Xl-H2g" firstAttribute="top" secondItem="5ms-r6-la7" secondAttribute="top" constant="32" id="S5a-y4-gRT"/>
+                                            <constraint firstAttribute="bottom" secondItem="OaR-uh-fR8" secondAttribute="bottom" constant="32" id="cGw-tu-cWh"/>
+                                            <constraint firstItem="OaR-uh-fR8" firstAttribute="top" secondItem="K6B-Xl-H2g" secondAttribute="bottom" constant="16" id="jzC-Mr-st6"/>
+                                        </constraints>
+                                    </customView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="5ms-r6-la7" firstAttribute="centerY" secondItem="cTD-8F-1Yi" secondAttribute="centerY" id="MDP-fe-NRX"/>
+                                    <constraint firstItem="5ms-r6-la7" firstAttribute="centerX" secondItem="cTD-8F-1Yi" secondAttribute="centerX" id="S5d-27-usE"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="cTD-8F-1Yi" secondAttribute="bottom" id="61V-tk-0O9"/>
                             <constraint firstAttribute="bottom" secondItem="Zx3-y3-Fjt" secondAttribute="bottom" id="97C-Zv-QFX"/>
                             <constraint firstAttribute="trailing" secondItem="rRM-EE-iXm" secondAttribute="trailing" id="RXn-H5-SOz"/>
                             <constraint firstItem="rRM-EE-iXm" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="WC8-Cg-kaf"/>
+                            <constraint firstAttribute="trailing" secondItem="cTD-8F-1Yi" secondAttribute="trailing" id="XD5-Uw-rUO"/>
                             <constraint firstAttribute="trailing" secondItem="Zx3-y3-Fjt" secondAttribute="trailing" id="Xw9-a7-uH0"/>
                             <constraint firstItem="rRM-EE-iXm" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="bv6-L3-KRa"/>
                             <constraint firstItem="Zx3-y3-Fjt" firstAttribute="top" secondItem="rRM-EE-iXm" secondAttribute="bottom" id="cwM-pI-Dp0"/>
+                            <constraint firstItem="cTD-8F-1Yi" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="d8q-Gb-Lj4"/>
+                            <constraint firstItem="cTD-8F-1Yi" firstAttribute="top" secondItem="rRM-EE-iXm" secondAttribute="bottom" id="p6b-VI-JU3"/>
                             <constraint firstItem="Zx3-y3-Fjt" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="tCt-9v-gH9"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dropView" destination="cTD-8F-1Yi" id="7JX-oN-dnF"/>
                         <outlet property="projectListTableView" destination="vaA-eD-uX4" id="vAL-a9-IjQ"/>
+                        <outlet property="projectSearchTextField" destination="jWy-Za-2p7" id="9mu-qS-nRj"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1284,4 +1329,7 @@
             <point key="canvasLocation" x="1447" y="3228"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="drag-drop" width="256" height="256"/>
+    </resources>
 </document>
