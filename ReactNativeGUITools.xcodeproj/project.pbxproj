@@ -20,6 +20,8 @@
 		968C6CAF2BCC14CE00F8C5A1 /* ProjectListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968C6CAE2BCC14CE00F8C5A1 /* ProjectListCellView.swift */; };
 		968C6CB12BCC14E800F8C5A1 /* ProjectListCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 968C6CB02BCC14E800F8C5A1 /* ProjectListCellView.xib */; };
 		968C6CB52BCC16CC00F8C5A1 /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968C6CB42BCC16CC00F8C5A1 /* NSImage.swift */; };
+		96A93FC82BE3FBBF0033DFD1 /* MainProjectListWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A93FC72BE3FBBF0033DFD1 /* MainProjectListWC.swift */; };
+		96A93FCB2BE3FD610033DFD1 /* ToolsOutlineWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A93FC92BE3FD610033DFD1 /* ToolsOutlineWC.swift */; };
 		96AB0B422BE296DF006613F7 /* MainProjectListVC+SearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AB0B412BE296DE006613F7 /* MainProjectListVC+SearchDelegate.swift */; };
 		96C0A4932BC441B50069FB7F /* PasteboardWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0A4922BC441B50069FB7F /* PasteboardWriter.swift */; };
 		96D181442BADEC7200380905 /* MenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D181432BADEC7200380905 /* MenuNode.swift */; };
@@ -64,6 +66,8 @@
 		968C6CAE2BCC14CE00F8C5A1 /* ProjectListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListCellView.swift; sourceTree = "<group>"; };
 		968C6CB02BCC14E800F8C5A1 /* ProjectListCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectListCellView.xib; sourceTree = "<group>"; };
 		968C6CB42BCC16CC00F8C5A1 /* NSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
+		96A93FC72BE3FBBF0033DFD1 /* MainProjectListWC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProjectListWC.swift; sourceTree = "<group>"; };
+		96A93FC92BE3FD610033DFD1 /* ToolsOutlineWC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsOutlineWC.swift; sourceTree = "<group>"; };
 		96AB0B412BE296DE006613F7 /* MainProjectListVC+SearchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainProjectListVC+SearchDelegate.swift"; sourceTree = "<group>"; };
 		96C0A4922BC441B50069FB7F /* PasteboardWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardWriter.swift; sourceTree = "<group>"; };
 		96D181432BADEC7200380905 /* MenuNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuNode.swift; sourceTree = "<group>"; };
@@ -164,6 +168,8 @@
 				96F10FDC2BD17A4D00ED5968 /* ProjectInfoVC */,
 				96F10FDB2BD178FF00ED5968 /* ToolsOutlineVC */,
 				96F10FDA2BD1785100ED5968 /* MainProjectListVC */,
+				96A93FC72BE3FBBF0033DFD1 /* MainProjectListWC.swift */,
+				96A93FC92BE3FD610033DFD1 /* ToolsOutlineWC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -436,6 +442,7 @@
 				96D1814E2BADF4EE00380905 /* NibInstantiatable.swift in Sources */,
 				96EB35B92BD81AE600BC04BF /* ToolsOutlineVC+Delegate.swift in Sources */,
 				967450762BDCE8A70047D7C1 /* ProjectListDropLableView.swift in Sources */,
+				96A93FCB2BE3FD610033DFD1 /* ToolsOutlineWC.swift in Sources */,
 				965EF8442BA36378000ADFDA /* AppDelegate.swift in Sources */,
 				96EB35C12BD81E6F00BC04BF /* MainProjectListVC+Delegate.swift in Sources */,
 				96EB35C32BD8211D00BC04BF /* MainProjectListVC+DragDrop.swift in Sources */,
@@ -446,6 +453,7 @@
 				960F596D2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift in Sources */,
 				96EB35B62BD80A5600BC04BF /* NpmVC.swift in Sources */,
 				9675F5BD2BCC49A1008FF0F4 /* ProjectInfo.swift in Sources */,
+				96A93FC82BE3FBBF0033DFD1 /* MainProjectListWC.swift in Sources */,
 				96EB35B72BD80A5B00BC04BF /* SystemInfoVC.swift in Sources */,
 				96AB0B422BE296DF006613F7 /* MainProjectListVC+SearchDelegate.swift in Sources */,
 				96EB35BF2BD81E2B00BC04BF /* MainProjectListVC+DataSource.swift in Sources */,

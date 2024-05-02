@@ -98,8 +98,15 @@ extension MainProjectListVC {
     // MARK: - Actions
 
     @objc func openAction(_ sender: Any?) {
+        if projectListTableView.clickedRow == -1 {
+            return
+        }
+        let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        let controller: NSWindowController = storyboard.instantiateController(withIdentifier: "ProjectInfoWindowController") as! NSWindowController
+        guard let controller = storyboard.instantiateController(withIdentifier: "ToolsOutlineWC") as? ToolsOutlineWC else {
+            return
+        }
+        controller.projectInfo = projectInfo
         controller.showWindow(self)
     }
 

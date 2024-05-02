@@ -684,7 +684,7 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="MainProjectListWC" id="B8D-0N-5wS" customClass="MainProjectListWC" customModule="ReactNativeGUITools" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -836,7 +836,7 @@
         <scene sceneID="Y3o-72-AMF">
             <objects>
                 <customObject id="Iel-Uh-akt" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <windowController storyboardIdentifier="ProjectInfoWindowController" id="mIW-mG-K0d" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="ToolsOutlineWC" id="mIW-mG-K0d" customClass="ToolsOutlineWC" customModule="ReactNativeGUITools" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" toolbarStyle="expanded" id="0x2-9d-F1W">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -870,7 +870,7 @@
                     </connections>
                 </windowController>
             </objects>
-            <point key="canvasLocation" x="-194" y="1893"/>
+            <point key="canvasLocation" x="-194.5" y="1893"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="H76-6u-AYR">

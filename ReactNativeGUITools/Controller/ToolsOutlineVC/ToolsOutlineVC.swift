@@ -10,6 +10,8 @@ import Cocoa
 class ToolsOutlineVC: NSViewController {
     // MARK: - Properties
 
+    @IBOutlet weak var contentOutlet: NSWindow!
+
     @IBOutlet var outlineView: NSOutlineView!
     var outlineNodes = [MenuNode]()
 
@@ -43,6 +45,7 @@ class ToolsOutlineVC: NSViewController {
     // MARK: - Helpers
 
     private func initializeOutlineView() {
+
         outlineView.register(ToolsOutlineCellView.nib(inBundle: .main),
                              forIdentifier: NSUserInterfaceItemIdentifier(rawValue: String(describing: ToolsOutlineCellView.self)))
         outlineView.delegate = self
