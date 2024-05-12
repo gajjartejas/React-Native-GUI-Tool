@@ -31,6 +31,6 @@ extension NibInstantiatable {
             return objs_.lastObject as! Self
         }
 
-        assert(false, "nib error")
+        fatalError("Unable to instantiate object from nib")
     }
 }

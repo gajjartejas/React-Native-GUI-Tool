@@ -22,15 +22,20 @@ class MainProjectListVC: NSViewController {
         return pureString.count > 0
     }
 
+    var contextMenu: NSMenu!
+
     // MARK: - Lifecycle
+
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         initializeProjectListTableView()
 
-        let menu = initializeContexMenu()
-        projectListTableView.menu = menu
+        contextMenu = initializeContexMenu(row: nil)
+        contextMenu?.delegate = self
+        projectListTableView.menu = contextMenu
 
         initializeDropHandler()
 
@@ -41,6 +46,8 @@ class MainProjectListVC: NSViewController {
         }
         checkForEmptyData()
     }
+
+    // MARK: - Actions
 
     // MARK: - Helpers
 
@@ -63,6 +70,7 @@ class MainProjectListVC: NSViewController {
         projectListTableView.tableColumns[0].resizingMask = .autoresizingMask
         projectListTableView.sizeLastColumnToFit()
         projectListTableView.style = .inset
+        projectListTableView.doubleAction = #selector(openAction)
     }
 
     private func initializeDropHandler() {
