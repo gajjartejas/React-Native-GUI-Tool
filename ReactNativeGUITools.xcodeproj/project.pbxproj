@@ -74,6 +74,7 @@
 		96A93FC92BE3FD610033DFD1 /* ToolsOutlineWC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsOutlineWC.swift; sourceTree = "<group>"; };
 		96AB0B412BE296DE006613F7 /* MainProjectListVC+SearchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainProjectListVC+SearchDelegate.swift"; sourceTree = "<group>"; };
 		96BC50B52BEA83B8001002EB /* NSAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAlert.swift; sourceTree = "<group>"; };
+		96C02A362BF0F6C6004F170E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		96C0A4922BC441B50069FB7F /* PasteboardWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardWriter.swift; sourceTree = "<group>"; };
 		96D181432BADEC7200380905 /* MenuNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuNode.swift; sourceTree = "<group>"; };
 		96D181462BADF13900380905 /* ToolsOutlineCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsOutlineCellView.swift; sourceTree = "<group>"; };
@@ -132,6 +133,7 @@
 		965EF8422BA36378000ADFDA /* ReactNativeGUITools */ = {
 			isa = PBXGroup;
 			children = (
+				96C02A362BF0F6C6004F170E /* Info.plist */,
 				968C6CB22BCC16AF00F8C5A1 /* Extensions */,
 				96D1814C2BADF4C700380905 /* Utils */,
 				96B7C45D2BA71ED100197448 /* Modal */,
@@ -385,7 +387,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1520;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					965EF83F2BA36378000ADFDA = {
 						CreatedOnToolsVersion = 15.2;
@@ -520,6 +522,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -583,6 +586,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -614,9 +618,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 4S9TBMCASP;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ReactNativeGUITools/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSAppleEventsUsageDescription = "By enabling this feature, the application will utilize Apple Events for inter-process communication. This functionality is essential for seamless integration with other applications and services. Note that in order to enable this feature, the application may require the installation of additional dependencies, such as node.js. Rest assured, this usage is solely for enhancing the functionality and interoperability of the application, ensuring a smoother user experience.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
@@ -625,7 +632,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tejas.rnguitools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -643,9 +651,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 4S9TBMCASP;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ReactNativeGUITools/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSAppleEventsUsageDescription = "By enabling this feature, the application will utilize Apple Events for inter-process communication. This functionality is essential for seamless integration with other applications and services. Note that in order to enable this feature, the application may require the installation of additional dependencies, such as node.js. Rest assured, this usage is solely for enhancing the functionality and interoperability of the application, ensuring a smoother user experience.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
@@ -654,7 +665,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tejas.rnguitools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
