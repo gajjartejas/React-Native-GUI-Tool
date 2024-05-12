@@ -623,6 +623,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReactNativeGUITools/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RnGuiTools;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSAppleEventsUsageDescription = "By enabling this feature, the application will utilize Apple Events for inter-process communication. This functionality is essential for seamless integration with other applications and services. Note that in order to enable this feature, the application may require the installation of additional dependencies, such as node.js. Rest assured, this usage is solely for enhancing the functionality and interoperability of the application, ensuring a smoother user experience.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -633,7 +634,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tejas.rnguitools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -656,6 +657,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReactNativeGUITools/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RnGuiTools;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSAppleEventsUsageDescription = "By enabling this feature, the application will utilize Apple Events for inter-process communication. This functionality is essential for seamless integration with other applications and services. Note that in order to enable this feature, the application may require the installation of additional dependencies, such as node.js. Rest assured, this usage is solely for enhancing the functionality and interoperability of the application, ensuring a smoother user experience.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -666,7 +668,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tejas.rnguitools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
