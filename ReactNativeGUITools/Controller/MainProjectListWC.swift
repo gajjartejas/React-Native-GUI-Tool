@@ -8,13 +8,11 @@
 import Cocoa
 
 class MainProjectListWC: NSWindowController {
-
     override func windowDidLoad() {
         super.windowDidLoad()
-    
-        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-        
-        self.window?.title = "React Native GUI Tools"
-    }
 
+        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+
+        window?.title = "React Native GUI Tools"
+    }
 }

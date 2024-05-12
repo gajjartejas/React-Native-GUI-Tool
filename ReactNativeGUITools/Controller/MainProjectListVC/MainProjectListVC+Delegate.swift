@@ -18,8 +18,8 @@ extension MainProjectListVC: NSTableViewDelegate {
             return nil
         }
 
-        cellView.configureUI(withNode: projectInfoCollection.projectInfos[row])
-
+        cellView.configureUI(withNode: projectInfoCollection.projectInfos[row], atRow: row)
+        cellView.delegate = self
         return cellView
     }
 
@@ -104,4 +104,20 @@ extension MainProjectListVC: NSTableViewDelegate {
             tableView.removeRows(at: IndexSet(indexes), withAnimation: .slideUp)
         }
     }
+    
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        print(notification)
+        print(notification)
+//            let selectedRow = projectListTableView.selectedRow
+//            if selectedRow != -1 {
+//                if let view = projectListTableView.view(atColumn: 0, row: selectedRow, makeIfNecessary: false) as? NSTableCellView {
+//                    if let v = view as? ProjectListCellView {
+//                        v.projectNameLable.becomeFirstResponder()
+//                    }
+//                    
+//                }
+//            }
+        }
+    
+    
 }

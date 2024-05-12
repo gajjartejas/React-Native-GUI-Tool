@@ -10,6 +10,7 @@
 		960B0A2B2BDCD04000494CA2 /* DropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960B0A2A2BDCD04000494CA2 /* DropView.swift */; };
 		960F596B2BD967D600E08DEA /* NSPasteboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F596A2BD967D600E08DEA /* NSPasteboardItem.swift */; };
 		960F596D2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F596C2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift */; };
+		964A8FF22BEFC67700ED5F1A /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A8FF12BEFC67700ED5F1A /* URLSession.swift */; };
 		965EF8442BA36378000ADFDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965EF8432BA36378000ADFDA /* AppDelegate.swift */; };
 		965EF8462BA36378000ADFDA /* MainProjectListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965EF8452BA36378000ADFDA /* MainProjectListVC.swift */; };
 		965EF8482BA3637A000ADFDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 965EF8472BA3637A000ADFDA /* Assets.xcassets */; };
@@ -23,12 +24,14 @@
 		96A93FC82BE3FBBF0033DFD1 /* MainProjectListWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A93FC72BE3FBBF0033DFD1 /* MainProjectListWC.swift */; };
 		96A93FCB2BE3FD610033DFD1 /* ToolsOutlineWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A93FC92BE3FD610033DFD1 /* ToolsOutlineWC.swift */; };
 		96AB0B422BE296DF006613F7 /* MainProjectListVC+SearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AB0B412BE296DE006613F7 /* MainProjectListVC+SearchDelegate.swift */; };
+		96BC50B62BEA83B8001002EB /* NSAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BC50B52BEA83B8001002EB /* NSAlert.swift */; };
 		96C0A4932BC441B50069FB7F /* PasteboardWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0A4922BC441B50069FB7F /* PasteboardWriter.swift */; };
 		96D181442BADEC7200380905 /* MenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D181432BADEC7200380905 /* MenuNode.swift */; };
 		96D181472BADF13900380905 /* ToolsOutlineCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D181462BADF13900380905 /* ToolsOutlineCellView.swift */; };
 		96D181492BADF16F00380905 /* ToolsOutlineCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96D181482BADF16F00380905 /* ToolsOutlineCellView.xib */; };
 		96D1814B2BADF3A800380905 /* ToolsOutlineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D1814A2BADF3A800380905 /* ToolsOutlineVC.swift */; };
 		96D1814E2BADF4EE00380905 /* NibInstantiatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D1814D2BADF4EE00380905 /* NibInstantiatable.swift */; };
+		96E34ED22BE6A420000B56C0 /* MainProjectListVC+CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E34ED12BE6A420000B56C0 /* MainProjectListVC+CellDelegate.swift */; };
 		96EB35AD2BD809C600BC04BF /* lAPToolVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F10FF42BD17CD600ED5968 /* lAPToolVC.swift */; };
 		96EB35AE2BD809CA00BC04BF /* FCMNotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F10FF22BD17C8F00ED5968 /* FCMNotificationVC.swift */; };
 		96EB35AF2BD809CE00BC04BF /* KeytoolVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F10FF02BD17C5E00ED5968 /* KeytoolVC.swift */; };
@@ -54,6 +57,7 @@
 		960B0A2A2BDCD04000494CA2 /* DropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropView.swift; sourceTree = "<group>"; };
 		960F596A2BD967D600E08DEA /* NSPasteboardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPasteboardItem.swift; sourceTree = "<group>"; };
 		960F596C2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainProjectListVC+ContexMenu.swift"; sourceTree = "<group>"; };
+		964A8FF12BEFC67700ED5F1A /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		965EF8402BA36378000ADFDA /* ReactNativeGUITools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactNativeGUITools.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		965EF8432BA36378000ADFDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		965EF8452BA36378000ADFDA /* MainProjectListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProjectListVC.swift; sourceTree = "<group>"; };
@@ -69,12 +73,14 @@
 		96A93FC72BE3FBBF0033DFD1 /* MainProjectListWC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProjectListWC.swift; sourceTree = "<group>"; };
 		96A93FC92BE3FD610033DFD1 /* ToolsOutlineWC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsOutlineWC.swift; sourceTree = "<group>"; };
 		96AB0B412BE296DE006613F7 /* MainProjectListVC+SearchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainProjectListVC+SearchDelegate.swift"; sourceTree = "<group>"; };
+		96BC50B52BEA83B8001002EB /* NSAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAlert.swift; sourceTree = "<group>"; };
 		96C0A4922BC441B50069FB7F /* PasteboardWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardWriter.swift; sourceTree = "<group>"; };
 		96D181432BADEC7200380905 /* MenuNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuNode.swift; sourceTree = "<group>"; };
 		96D181462BADF13900380905 /* ToolsOutlineCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsOutlineCellView.swift; sourceTree = "<group>"; };
 		96D181482BADF16F00380905 /* ToolsOutlineCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToolsOutlineCellView.xib; sourceTree = "<group>"; };
 		96D1814A2BADF3A800380905 /* ToolsOutlineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsOutlineVC.swift; sourceTree = "<group>"; };
 		96D1814D2BADF4EE00380905 /* NibInstantiatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibInstantiatable.swift; sourceTree = "<group>"; };
+		96E34ED12BE6A420000B56C0 /* MainProjectListVC+CellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainProjectListVC+CellDelegate.swift"; sourceTree = "<group>"; };
 		96EB35B82BD81AE600BC04BF /* ToolsOutlineVC+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolsOutlineVC+Delegate.swift"; sourceTree = "<group>"; };
 		96EB35BA2BD81B4200BC04BF /* ToolsOutlineVC+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolsOutlineVC+DataSource.swift"; sourceTree = "<group>"; };
 		96EB35BE2BD81E2B00BC04BF /* MainProjectListVC+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainProjectListVC+DataSource.swift"; sourceTree = "<group>"; };
@@ -189,6 +195,8 @@
 				968C6CB42BCC16CC00F8C5A1 /* NSImage.swift */,
 				960F596A2BD967D600E08DEA /* NSPasteboardItem.swift */,
 				967450732BDCDD3A0047D7C1 /* NSView.swift */,
+				96BC50B52BEA83B8001002EB /* NSAlert.swift */,
+				964A8FF12BEFC67700ED5F1A /* URLSession.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -229,6 +237,7 @@
 				96EB35C22BD8211D00BC04BF /* MainProjectListVC+DragDrop.swift */,
 				960F596C2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift */,
 				96AB0B412BE296DE006613F7 /* MainProjectListVC+SearchDelegate.swift */,
+				96E34ED12BE6A420000B56C0 /* MainProjectListVC+CellDelegate.swift */,
 			);
 			path = MainProjectListVC;
 			sourceTree = "<group>";
@@ -422,6 +431,7 @@
 			files = (
 				96EB35B42BD80A4E00BC04BF /* GenerateBuildVC.swift in Sources */,
 				96EB35AE2BD809CA00BC04BF /* FCMNotificationVC.swift in Sources */,
+				964A8FF22BEFC67700ED5F1A /* URLSession.swift in Sources */,
 				96D1814B2BADF3A800380905 /* ToolsOutlineVC.swift in Sources */,
 				967450742BDCDD3A0047D7C1 /* NSView.swift in Sources */,
 				96EB35C52BD8260100BC04BF /* ToolsOutlineVC+Fixtures.swift in Sources */,
@@ -432,6 +442,7 @@
 				96D181442BADEC7200380905 /* MenuNode.swift in Sources */,
 				96EB35B32BD80A4B00BC04BF /* AdbVC.swift in Sources */,
 				96F10FDE2BD17A7400ED5968 /* ProjectInfoVC.swift in Sources */,
+				96E34ED22BE6A420000B56C0 /* MainProjectListVC+CellDelegate.swift in Sources */,
 				96EB35AD2BD809C600BC04BF /* lAPToolVC.swift in Sources */,
 				96EB35BB2BD81B4200BC04BF /* ToolsOutlineVC+DataSource.swift in Sources */,
 				968C6CB52BCC16CC00F8C5A1 /* NSImage.swift in Sources */,
@@ -451,6 +462,7 @@
 				960B0A2B2BDCD04000494CA2 /* DropView.swift in Sources */,
 				96EB35B02BD809D100BC04BF /* BundletoolVC.swift in Sources */,
 				960F596D2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift in Sources */,
+				96BC50B62BEA83B8001002EB /* NSAlert.swift in Sources */,
 				96EB35B62BD80A5600BC04BF /* NpmVC.swift in Sources */,
 				9675F5BD2BCC49A1008FF0F4 /* ProjectInfo.swift in Sources */,
 				96A93FC82BE3FBBF0033DFD1 /* MainProjectListWC.swift in Sources */,
@@ -605,6 +617,7 @@
 				DEVELOPMENT_TEAM = 4S9TBMCASP;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSAppleEventsUsageDescription = "By enabling this feature, the application will utilize Apple Events for inter-process communication. This functionality is essential for seamless integration with other applications and services. Note that in order to enable this feature, the application may require the installation of additional dependencies, such as node.js. Rest assured, this usage is solely for enhancing the functionality and interoperability of the application, ensuring a smoother user experience.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -633,6 +646,7 @@
 				DEVELOPMENT_TEAM = 4S9TBMCASP;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSAppleEventsUsageDescription = "By enabling this feature, the application will utilize Apple Events for inter-process communication. This functionality is essential for seamless integration with other applications and services. Note that in order to enable this feature, the application may require the installation of additional dependencies, such as node.js. Rest assured, this usage is solely for enhancing the functionality and interoperability of the application, ensuring a smoother user experience.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;

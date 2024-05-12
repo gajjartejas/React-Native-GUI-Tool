@@ -12,14 +12,49 @@ class ProjectInfo: Codable {
     var path: String
     var name: String?
     var versionString: String?
+    var scripts: [(name: String, value: String)]?
 
     init(id: String, path: String) {
         self.id = id
         self.path = path
 
-        let (name, versionString) = readPackageJSON(atPath: path)
+        let (name, versionString, scripts) = readPackageJSON(atPath: path)
         self.name = name
         self.versionString = versionString
+        self.scripts = scripts
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case id, path, name, versionString, scripts
+    }
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        path = try container.decode(String.self, forKey: .path)
+        name = try container.decodeIfPresent(String.self, forKey: .name)
+        versionString = try container.decodeIfPresent(String.self, forKey: .versionString)
+        // Decode scripts array manually
+        if let scriptsArray = try container.decodeIfPresent([String: String].self, forKey: .scripts) {
+            scripts = scriptsArray.map { ($0.key, $0.value) }
+        } else {
+            scripts = nil
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(path, forKey: .path)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(versionString, forKey: .versionString)
+        // Encode scripts array manually
+        if let scripts = scripts {
+            let scriptsArray = scripts.reduce(into: [String: String]()) { result, script in
+                result[script.name] = script.value
+            }
+            try container.encode(scriptsArray, forKey: .scripts)
+        }
     }
 }
 
@@ -59,30 +94,37 @@ extension ProjectInfo {
     }
 }
 
-func readPackageJSON(atPath path: String) -> (name: String?, version: String?) {
+func readPackageJSON(atPath path: String) -> (name: String?, version: String?, scriptsArray: [(name: String, value: String)]?) {
     let packageJSONPath = URL(fileURLWithPath: path).appendingPathComponent("package.json")
 
     do {
+        var name: String?
+        var reactNativeVersion: String?
+        var scriptsArray: [(name: String, value: String)]?
+
         let data = try Data(contentsOf: packageJSONPath)
         let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
 
         guard let jsonDict = jsonObject as? [String: Any] else {
             print("Invalid JSON format")
-            return (nil, nil)
+            return (nil, nil, nil)
         }
+        name = jsonDict["name"] as? String
 
-        let name = jsonDict["name"] as? String
-
-        guard let dependencies = jsonDict["dependencies"] as? [String: String] else {
+        if let dependencies = jsonDict["dependencies"] as? [String: String] {
             print("Error: Could not find dependencies in package.json")
-            return (nil, nil)
+            reactNativeVersion = dependencies["react-native"]
         }
-        let reactNativeVersion = dependencies["react-native"]
 
-        return (name, reactNativeVersion)
+        // Read script
+        if let scriptsDict = jsonDict["scripts"] as? [String: String] {
+            scriptsArray = scriptsDict.map { (name: $0.key, value: $0.value) }
+        }
+
+        return (name, reactNativeVersion, scriptsArray)
     } catch {
         print("Error reading package.json: \(error.localizedDescription)")
-        return (nil, nil)
+        return (nil, nil, nil)
     }
 }
 
@@ -94,13 +136,12 @@ class ProjectInfoCollection {
             onChangeProjectInfo?()
         }
     }
-    
+
     open var projectInfos: [ProjectInfo] {
         didSet {
             onChangeProjectInfo?()
         }
     }
-
 
     init() {
         projectInfos = ProjectInfo.readProjectInfos() ?? []
@@ -154,10 +195,20 @@ class ProjectInfoCollection {
         projectInfosAll.insert(contentsOf: newElements, at: i)
         _ = ProjectInfo.writeProjectInfos(projectInfosAll)
     }
-    
+
     func append(contentsOf newElements: [ProjectInfo]) {
         projectInfos.append(contentsOf: newElements)
         projectInfosAll.append(contentsOf: newElements)
         _ = ProjectInfo.writeProjectInfos(projectInfosAll)
+    }
+
+    func update(with projectInfo: ProjectInfo) {
+        if let index = projectInfosAll.firstIndex(where: { $0.id == projectInfo.id }) {
+            projectInfosAll[index] = projectInfo
+            if let indexInFiltered = projectInfos.firstIndex(where: { $0.id == projectInfo.id }) {
+                projectInfos[indexInFiltered] = projectInfo
+            }
+            _ = ProjectInfo.writeProjectInfos(projectInfosAll)
+        }
     }
 }
