@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		960B0A2B2BDCD04000494CA2 /* DropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960B0A2A2BDCD04000494CA2 /* DropView.swift */; };
+		960BC8842BF3D84800914023 /* NSBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960BC8832BF3D84800914023 /* NSBezierPath.swift */; };
 		960F596B2BD967D600E08DEA /* NSPasteboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F596A2BD967D600E08DEA /* NSPasteboardItem.swift */; };
 		960F596D2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F596C2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift */; };
 		964A8FF22BEFC67700ED5F1A /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A8FF12BEFC67700ED5F1A /* URLSession.swift */; };
@@ -55,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		960B0A2A2BDCD04000494CA2 /* DropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropView.swift; sourceTree = "<group>"; };
+		960BC8832BF3D84800914023 /* NSBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSBezierPath.swift; sourceTree = "<group>"; };
 		960F596A2BD967D600E08DEA /* NSPasteboardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPasteboardItem.swift; sourceTree = "<group>"; };
 		960F596C2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainProjectListVC+ContexMenu.swift"; sourceTree = "<group>"; };
 		964A8FF12BEFC67700ED5F1A /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				967450732BDCDD3A0047D7C1 /* NSView.swift */,
 				96BC50B52BEA83B8001002EB /* NSAlert.swift */,
 				964A8FF12BEFC67700ED5F1A /* URLSession.swift */,
+				960BC8832BF3D84800914023 /* NSBezierPath.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				96EB35AD2BD809C600BC04BF /* lAPToolVC.swift in Sources */,
 				96EB35BB2BD81B4200BC04BF /* ToolsOutlineVC+DataSource.swift in Sources */,
 				968C6CB52BCC16CC00F8C5A1 /* NSImage.swift in Sources */,
+				960BC8842BF3D84800914023 /* NSBezierPath.swift in Sources */,
 				960F596B2BD967D600E08DEA /* NSPasteboardItem.swift in Sources */,
 				96D181472BADF13900380905 /* ToolsOutlineCellView.swift in Sources */,
 				968C6CAF2BCC14CE00F8C5A1 /* ProjectListCellView.swift in Sources */,
@@ -633,7 +637,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tejas.rnguitools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -667,7 +671,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tejas.rnguitools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
