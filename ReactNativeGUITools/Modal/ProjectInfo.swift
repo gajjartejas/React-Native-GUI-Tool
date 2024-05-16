@@ -128,6 +128,26 @@ func readPackageJSON(atPath path: String) -> (name: String?, version: String?, s
     }
 }
 
+func findXcodeProjectFile(atPath path: String) -> String? {
+    let fileManager = FileManager.default
+    do {
+        let contents = try fileManager.contentsOfDirectory(atPath: path)
+        for item in contents {
+            if item.hasSuffix(".xcworkspace") {
+                return item
+            }
+        }
+        for item in contents {
+            if item.hasSuffix(".xcodeproj") {
+                return item
+            }
+        }
+    } catch {
+        print("Error reading directory: \(error)")
+    }
+    return nil
+}
+
 class ProjectInfoCollection {
     var onChangeProjectInfo: (() -> Void)?
 

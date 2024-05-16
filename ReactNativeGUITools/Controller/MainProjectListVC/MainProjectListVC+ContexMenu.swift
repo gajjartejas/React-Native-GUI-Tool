@@ -520,7 +520,8 @@ func openAndroidStudio(atPath path: String) {
 }
 
 func openInXcode(atPath path: String) {
-    let projectPath = path + "/ios/OpenHardwareMonClient.xcworkspace"
+    guard let xcodeProjectName = findXcodeProjectFile(atPath: path + "/ios") else { return }
+    let projectPath = path + "/ios/\(xcodeProjectName)"
     let url = URL(fileURLWithPath: projectPath)
 
     guard let appURL = FileManager.default.urls(
