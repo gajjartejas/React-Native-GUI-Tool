@@ -7,12 +7,15 @@
 
 import Cocoa
 
-class MainProjectListWC: NSWindowController {
+class MainProjectListWC: NSWindowController, NSWindowDelegate {
     override func windowDidLoad() {
         super.windowDidLoad()
-
-        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-
         window?.title = "React Native GUI Tools"
+        window?.delegate = self
+    }
+
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
+        NSApplication.shared.hide(self)
+        return false
     }
 }
