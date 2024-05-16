@@ -10,7 +10,7 @@ import Cocoa
 class MainProjectListWC: NSWindowController, NSWindowDelegate {
     override func windowDidLoad() {
         super.windowDidLoad()
-        window?.title = "React Native GUI Tools"
+        window?.title = "RnGuiTools"
         window?.delegate = self
     }
 
