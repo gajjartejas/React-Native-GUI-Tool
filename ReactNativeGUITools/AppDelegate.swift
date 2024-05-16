@@ -20,4 +20,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
         return true
     }
+    
+    func applicationDidBecomeActive(_ notification: Notification) {
+        NSApplication.shared.unhide(self)
+    }
 }
