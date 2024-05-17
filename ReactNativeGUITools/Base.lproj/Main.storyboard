@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22689"/>
         <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -687,8 +688,7 @@
                 <windowController storyboardIdentifier="MainProjectListWC" id="B8D-0N-5wS" customClass="MainProjectListWC" customModule="ReactNativeGUITools" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="783" height="500"/>
+                        <rect key="contentRect" x="628" y="322" width="600" height="500"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <value key="minSize" type="size" width="500" height="500"/>
                         <connections>
@@ -701,21 +701,21 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-195" y="734"/>
+            <point key="canvasLocation" x="-161.5" y="734"/>
         </scene>
         <!--Main Project ListVC-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController storyboardIdentifier="MainProjectListVC" id="XfG-lQ-9wD" customClass="MainProjectListVC" customModule="ReactNativeGUITools" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="518" height="364"/>
+                        <rect key="frame" x="0.0" y="0.0" width="601" height="364"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="rRM-EE-iXm">
-                                <rect key="frame" x="0.0" y="314" width="518" height="50"/>
+                                <rect key="frame" x="0.0" y="314" width="601" height="50"/>
                                 <subviews>
                                     <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWy-Za-2p7">
-                                        <rect key="frame" x="20" y="14" width="478" height="22"/>
+                                        <rect key="frame" x="20" y="14" width="561" height="22"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="g0f-YH-4IY">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -731,19 +731,19 @@
                                 </constraints>
                             </customView>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="25" horizontalPageScroll="10" verticalLineScroll="25" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zx3-y3-Fjt">
-                                <rect key="frame" x="0.0" y="0.0" width="518" height="314"/>
+                                <rect key="frame" x="0.0" y="0.0" width="601" height="314"/>
                                 <clipView key="contentView" id="otW-zd-7Zx">
-                                    <rect key="frame" x="1" y="1" width="516" height="312"/>
+                                    <rect key="frame" x="1" y="1" width="599" height="312"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="vaA-eD-uX4">
-                                            <rect key="frame" x="0.0" y="0.0" width="516" height="312"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="599" height="312"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="0.0" height="8"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="AutomaticTableColumnIdentifier.0" width="169" minWidth="40" maxWidth="1000" id="vXV-bV-XSK">
+                                                <tableColumn identifier="AutomaticTableColumnIdentifier.0" width="562" minWidth="40" maxWidth="2000" id="vXV-bV-XSK">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -769,10 +769,10 @@
                                 </scroller>
                             </scrollView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="cTD-8F-1Yi" customClass="DropView" customModule="ReactNativeGUITools" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="518" height="314"/>
+                                <rect key="frame" x="0.0" y="0.0" width="601" height="314"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="5ms-r6-la7" customClass="ProjectListDropLableView" customModule="ReactNativeGUITools" customModuleProvider="target">
-                                        <rect key="frame" x="58" y="68" width="403" height="179"/>
+                                        <rect key="frame" x="99" y="68" width="403" height="179"/>
                                         <subviews>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K6B-Xl-H2g">
                                                 <rect key="frame" x="174" y="96" width="55" height="51"/>
@@ -793,8 +793,8 @@
                                             </textField>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="OaR-uh-fR8" secondAttribute="trailing" constant="32" id="BgC-pB-j1C"/>
-                                            <constraint firstItem="OaR-uh-fR8" firstAttribute="leading" secondItem="5ms-r6-la7" secondAttribute="leading" constant="32" id="MNf-tv-N9Z"/>
+                                            <constraint firstAttribute="trailing" secondItem="OaR-uh-fR8" secondAttribute="trailing" priority="750" constant="32" id="BgC-pB-j1C"/>
+                                            <constraint firstItem="OaR-uh-fR8" firstAttribute="leading" secondItem="5ms-r6-la7" secondAttribute="leading" priority="750" constant="32" id="MNf-tv-N9Z"/>
                                             <constraint firstItem="K6B-Xl-H2g" firstAttribute="centerX" secondItem="5ms-r6-la7" secondAttribute="centerX" id="NfG-Pu-nDJ"/>
                                             <constraint firstItem="K6B-Xl-H2g" firstAttribute="top" secondItem="5ms-r6-la7" secondAttribute="top" constant="32" id="S5a-y4-gRT"/>
                                             <constraint firstAttribute="bottom" secondItem="OaR-uh-fR8" secondAttribute="bottom" constant="32" id="cGw-tu-cWh"/>
@@ -804,7 +804,9 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="5ms-r6-la7" firstAttribute="centerY" secondItem="cTD-8F-1Yi" secondAttribute="centerY" id="MDP-fe-NRX"/>
+                                    <constraint firstItem="5ms-r6-la7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cTD-8F-1Yi" secondAttribute="leading" constant="16" id="NDN-p4-2Rs"/>
                                     <constraint firstItem="5ms-r6-la7" firstAttribute="centerX" secondItem="cTD-8F-1Yi" secondAttribute="centerX" id="S5d-27-usE"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5ms-r6-la7" secondAttribute="trailing" constant="16" id="Tnq-4P-FT4"/>
                                 </constraints>
                             </customView>
                         </subviews>
@@ -830,7 +832,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-195" y="1357"/>
+            <point key="canvasLocation" x="-161.5" y="1369"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="Y3o-72-AMF">
@@ -839,11 +841,11 @@
                 <windowController storyboardIdentifier="ToolsOutlineWC" id="mIW-mG-K0d" customClass="ToolsOutlineWC" customModule="ReactNativeGUITools" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" toolbarStyle="expanded" id="0x2-9d-F1W">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="201" y="313" width="663" height="270"/>
+                        <rect key="contentRect" x="201" y="313" width="700" height="300"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
+                        <value key="minSize" type="size" width="700" height="300"/>
                         <view key="contentView" id="7SU-yg-MKx">
-                            <rect key="frame" x="0.0" y="0.0" width="663" height="270"/>
+                            <rect key="frame" x="0.0" y="0.0" width="700" height="300"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </view>
                         <toolbar key="toolbar" implicitIdentifier="09D11707-F4A3-4FD5-970E-AC5832E91C2B" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="TIZ-Gx-RjL">
@@ -870,7 +872,7 @@
                     </connections>
                 </windowController>
             </objects>
-            <point key="canvasLocation" x="-194.5" y="1893"/>
+            <point key="canvasLocation" x="-162" y="1888"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="H76-6u-AYR">

@@ -162,6 +162,7 @@ extension MainProjectListVC {
             return
         }
         controller.projectInfo = projectInfo
+        controller.location = self.view.window?.frame
         controller.showWindow(self)
     }
 
