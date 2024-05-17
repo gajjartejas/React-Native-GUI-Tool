@@ -10,7 +10,15 @@ import Cocoa
 class ToolsOutlineWC: NSWindowController {
     var projectInfo: ProjectInfo? {
         didSet {
-            self.window?.title = projectInfo?.name ?? "-"
+            window?.title = projectInfo?.name ?? "-"
+        }
+    }
+
+    var location: NSRect? {
+        didSet {
+            if let origin = location?.origin {
+                self.window?.setFrameOrigin(origin)
+            }
         }
     }
 
