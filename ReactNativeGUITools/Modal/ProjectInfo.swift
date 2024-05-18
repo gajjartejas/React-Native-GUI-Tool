@@ -286,4 +286,7 @@ class ProjectInfoCollection {
             _ = ProjectInfo.writeProjectInfos(projectInfosAll)
         }
     }
+
+    func refresh() {
+    }
 }

@@ -172,6 +172,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         guard let controller = storyboard.instantiateController(withIdentifier: "ToolsOutlineWC") as? ToolsOutlineWC else {
             return
@@ -186,6 +190,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         NSWorkspace.shared.selectFile(projectInfo.path, inFileViewerRootedAtPath: "")
     }
 
@@ -194,6 +202,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         openTerminal(at: projectInfo.path)
     }
 
@@ -224,6 +236,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let script = "cd \(projectInfo.path) && npm run \(sender.title)"
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
@@ -233,6 +249,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         openAndroidStudio(atPath: projectInfo.path)
     }
 
@@ -241,6 +261,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         openInXcode(atPath: projectInfo.path)
     }
 
@@ -250,6 +274,10 @@ extension MainProjectListVC {
         }
         let foldersToRemove = ["/ios/build", "/ios/Pods"]
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         foldersToRemove.forEach { item in
             moveFolderToTrash(atPath: projectInfo.path + item)
         }
@@ -261,6 +289,10 @@ extension MainProjectListVC {
         }
         let foldersToRemove = ["/ios/build"]
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         foldersToRemove.forEach { item in
             moveFolderToTrash(atPath: projectInfo.path + item)
         }
@@ -272,6 +304,10 @@ extension MainProjectListVC {
         }
         let foldersToRemove = ["/ios/Pods"]
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         foldersToRemove.forEach { item in
             moveFolderToTrash(atPath: projectInfo.path + item)
         }
@@ -283,6 +319,10 @@ extension MainProjectListVC {
         }
         let foldersToRemove = ["/android/build", "/android/app/build", "/android/app/release"]
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         foldersToRemove.forEach { item in
             moveFolderToTrash(atPath: projectInfo.path + item)
         }
@@ -294,6 +334,10 @@ extension MainProjectListVC {
         }
         let foldersToRemove = ["/android/build"]
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         foldersToRemove.forEach { item in
             moveFolderToTrash(atPath: projectInfo.path + item)
         }
@@ -305,6 +349,10 @@ extension MainProjectListVC {
         }
         let foldersToRemove = ["/android/app/build"]
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         foldersToRemove.forEach { item in
             moveFolderToTrash(atPath: projectInfo.path + item)
         }
@@ -316,6 +364,10 @@ extension MainProjectListVC {
         }
         let foldersToRemove = ["/android/app/release"]
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         foldersToRemove.forEach { item in
             moveFolderToTrash(atPath: projectInfo.path + item)
         }
@@ -327,6 +379,10 @@ extension MainProjectListVC {
         }
         let foldersToRemove = ["/ios/build", "/ios/Pods", "/android/build", "/android/app/build", "/android/app/release"]
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         foldersToRemove.forEach { item in
             moveFolderToTrash(atPath: projectInfo.path + item)
         }
@@ -338,6 +394,10 @@ extension MainProjectListVC {
         }
         let foldersToRemove = ["/node_modules"]
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         foldersToRemove.forEach { item in
             moveFolderToTrash(atPath: projectInfo.path + item)
         }
@@ -348,6 +408,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let script = "cd \(projectInfo.path) && npm start"
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
@@ -357,6 +421,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let script = "cd \(projectInfo.path) && npm install"
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
@@ -366,6 +434,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let script = "cd \(projectInfo.path) && start -- --reset-cache"
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
@@ -375,6 +447,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let script = "cd \(projectInfo.path) && npm restart"
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
@@ -384,6 +460,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let script = "cd \(projectInfo.path) && npm stop"
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
@@ -393,6 +473,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let script = "cd \(projectInfo.path) && npm cache clean"
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
@@ -402,6 +486,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let script = "cd \(projectInfo.path) && npm cache verify"
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
@@ -411,6 +499,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let script = "cd \(projectInfo.path) && watchman watch-del-all"
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
@@ -420,6 +512,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let script = "cd \(projectInfo.path) && watchman shutdown-server"
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
@@ -429,6 +525,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let script = "cd \(projectInfo.path) && watchman watch ."
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
@@ -493,6 +593,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let script = "cd \(projectInfo.path)/ios && pod install"
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
@@ -502,6 +606,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let script = "cd \(projectInfo.path)/ios && pod update"
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
@@ -511,6 +619,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let script = "cd \(projectInfo.path)/ios && pod outdated"
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
@@ -520,6 +632,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let script = "cd \(projectInfo.path)/ios && pod deintegrate"
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
@@ -529,6 +645,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let script = "cd \(projectInfo.path)/ios && pod env"
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
@@ -538,6 +658,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let script = "cd \(projectInfo.path)/ios && pod cache list"
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
@@ -547,6 +671,10 @@ extension MainProjectListVC {
             return
         }
         let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
         let script = "cd \(projectInfo.path)/ios && pod cache clean --all"
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
