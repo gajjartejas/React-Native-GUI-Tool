@@ -105,12 +105,13 @@ extension MainProjectListVC {
         cleanMenu.addItem(cleanNodeModulesMenuItem)
 
         let npmSubMenu = NSMenu()
-        npmSubMenu.addItem(withTitle: "start", action: #selector(npmStart(_:)), keyEquivalent: "") // npm start
-        npmSubMenu.addItem(withTitle: "start -- --reset-cache", action: #selector(npmStartResetCache(_:)), keyEquivalent: "") // npm start -- --reset-cache
-        npmSubMenu.addItem(withTitle: "restart", action: #selector(npmRestart(_:)), keyEquivalent: "") // npm restart
-        npmSubMenu.addItem(withTitle: "stop", action: #selector(npmStop(_:)), keyEquivalent: "") // npm stop
-        npmSubMenu.addItem(withTitle: "clean cache", action: #selector(npmCacheClean(_:)), keyEquivalent: "") // npm cache clean
-        npmSubMenu.addItem(withTitle: "cache verify", action: #selector(npmCacheVerify(_:)), keyEquivalent: "") // npm cache verify
+        npmSubMenu.addItem(withTitle: "start", action: #selector(npmStart(_:)), keyEquivalent: "")
+        npmSubMenu.addItem(withTitle: "start -- --reset-cache", action: #selector(npmStartResetCache(_:)), keyEquivalent: "")
+        npmSubMenu.addItem(withTitle: "restart", action: #selector(npmRestart(_:)), keyEquivalent: "")
+        npmSubMenu.addItem(withTitle: "stop", action: #selector(npmStop(_:)), keyEquivalent: "")
+        npmSubMenu.addItem(withTitle: "clean cache", action: #selector(npmCacheClean(_:)), keyEquivalent: "")
+        npmSubMenu.addItem(withTitle: "cache verify", action: #selector(npmCacheVerify(_:)), keyEquivalent: "")
+        npmSubMenu.addItem(withTitle: "install", action: #selector(npmInstall(_:)), keyEquivalent: "")
 
         let npmMenuItem = NSMenuItem()
         npmMenuItem.title = "NPM"
@@ -119,9 +120,9 @@ extension MainProjectListVC {
 
         // Watch menu
         let watchMenu = NSMenu()
-        watchMenu.addItem(withTitle: "watchman watch-del-all", action: #selector(watchmanWatchDelAll(_:)), keyEquivalent: "") // watchman watch-del-all
-        watchMenu.addItem(withTitle: "watchman shutdown-server", action: #selector(watchmanShutdownServer(_:)), keyEquivalent: "") // watchman shutdown-server
-        watchMenu.addItem(withTitle: "watchman watch", action: #selector(watchmanWatch(_:)), keyEquivalent: "") // watchman watch <path>
+        watchMenu.addItem(withTitle: "watch-del-all", action: #selector(watchmanWatchDelAll(_:)), keyEquivalent: "")
+        watchMenu.addItem(withTitle: "shutdown-server", action: #selector(watchmanShutdownServer(_:)), keyEquivalent: "")
+        watchMenu.addItem(withTitle: "watch", action: #selector(watchmanWatch(_:)), keyEquivalent: "")
         let watchmanMenuItem = NSMenuItem()
         watchmanMenuItem.title = "Watchman"
         watchmanMenuItem.submenu = watchMenu
@@ -139,9 +140,23 @@ extension MainProjectListVC {
         metroMenuItem.submenu = metroSubMenu
         menu.addItem(metroMenuItem)
 
+        // Pod
+        let podSubMenu = NSMenu()
+        podSubMenu.addItem(withTitle: "install", action: #selector(podInstall(_:)), keyEquivalent: "")
+        podSubMenu.addItem(withTitle: "update", action: #selector(podUpdate(_:)), keyEquivalent: "")
+        podSubMenu.addItem(withTitle: "outdated", action: #selector(podOutdated(_:)), keyEquivalent: "")
+        podSubMenu.addItem(withTitle: "deintegrate", action: #selector(podDeintegrate(_:)), keyEquivalent: "")
+        podSubMenu.addItem(withTitle: "env", action: #selector(podEnv(_:)), keyEquivalent: "")
+        podSubMenu.addItem(withTitle: "cache list", action: #selector(podCacheList(_:)), keyEquivalent: "")
+        podSubMenu.addItem(withTitle: "cache clean all", action: #selector(podCacheCleanAll(_:)), keyEquivalent: "")
+        let podMenuItem = NSMenuItem()
+        podMenuItem.title = "Pod"
+        podMenuItem.submenu = podSubMenu
+        menu.addItem(podMenuItem)
+
         // Custom Options
         let customSubMenu = NSMenu()
-        customSubMenu.addItem(withTitle: "Edit...", action: #selector(exportAPK(_:)), keyEquivalent: "")
+        customSubMenu.addItem(withTitle: "Edit...", action: #selector(customActionsEdit(_:)), keyEquivalent: "")
         let customActionMenuItem = NSMenuItem()
         customActionMenuItem.title = "Custom Action"
         customActionMenuItem.submenu = customSubMenu
@@ -162,7 +177,7 @@ extension MainProjectListVC {
             return
         }
         controller.projectInfo = projectInfo
-        controller.location = self.view.window?.frame
+        controller.location = view.window?.frame
         controller.showWindow(self)
     }
 
@@ -190,6 +205,14 @@ extension MainProjectListVC {
                     v.projectNameLable.becomeFirstResponder()
                 }
             }
+        }
+    }
+
+    @objc func removeAction(_ sender: Any?) {
+        if projectListTableView.clickedRow != -1 {
+            projectInfoCollection.remove(at: projectListTableView.clickedRow)
+            let indexSets = IndexSet(integer: projectListTableView.clickedRow)
+            projectListTableView.removeRows(at: indexSets, withAnimation: .slideDown)
         }
     }
 
@@ -329,6 +352,15 @@ extension MainProjectListVC {
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
+    @objc func npmInstall(_ sender: Any?) {
+        if projectListTableView.clickedRow == -1 {
+            return
+        }
+        let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let script = "cd \(projectInfo.path) && npm install"
+        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+    }
+
     @objc func npmStartResetCache(_ sender: Any?) {
         if projectListTableView.clickedRow == -1 {
             return
@@ -456,23 +488,70 @@ extension MainProjectListVC {
         NSWorkspace.shared.open(URL(string: url)!)
     }
 
-    @objc func exportAPK(_ sender: Any?) {}
-    @objc func aabToApk(_ sender: Any?) {}
-    @objc func customActions(_ sender: Any?) {}
-    @objc func runNpmInstall(_ sender: Any?) {}
-    @objc func runPodInstall(_ sender: Any?) {}
-    @objc func runYarnInstall(_ sender: Any?) {}
-
-    @objc func removeAction(_ sender: Any?) {
-        if projectListTableView.clickedRow != -1 {
-            projectInfoCollection.remove(at: projectListTableView.clickedRow)
-            let indexSets = IndexSet(integer: projectListTableView.clickedRow)
-            projectListTableView.removeRows(at: indexSets, withAnimation: .slideDown)
+    @objc func podInstall(_ sender: Any?) {
+        if projectListTableView.clickedRow == -1 {
+            return
         }
+        let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let script = "cd \(projectInfo.path)/ios && pod install"
+        openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
-    @objc func editAction(_ sender: Any?) {
+    @objc func podUpdate(_ sender: Any?) {
+        if projectListTableView.clickedRow == -1 {
+            return
+        }
+        let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let script = "cd \(projectInfo.path)/ios && pod update"
+        openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
+
+    @objc func podOutdated(_ sender: Any?) {
+        if projectListTableView.clickedRow == -1 {
+            return
+        }
+        let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let script = "cd \(projectInfo.path)/ios && pod outdated"
+        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+    }
+
+    @objc func podDeintegrate(_ sender: Any?) {
+        if projectListTableView.clickedRow == -1 {
+            return
+        }
+        let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let script = "cd \(projectInfo.path)/ios && pod deintegrate"
+        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+    }
+
+    @objc func podEnv(_ sender: Any?) {
+        if projectListTableView.clickedRow == -1 {
+            return
+        }
+        let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let script = "cd \(projectInfo.path)/ios && pod env"
+        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+    }
+
+    @objc func podCacheList(_ sender: Any?) {
+        if projectListTableView.clickedRow == -1 {
+            return
+        }
+        let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let script = "cd \(projectInfo.path)/ios && pod cache list"
+        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+    }
+
+    @objc func podCacheCleanAll(_ sender: Any?) {
+        if projectListTableView.clickedRow == -1 {
+            return
+        }
+        let projectInfo = projectInfoCollection.projectInfos[projectListTableView.clickedRow]
+        let script = "cd \(projectInfo.path)/ios && pod cache clean --all"
+        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+    }
+
+    @objc func customActionsEdit(_ sender: Any?) {}
 }
 
 func openTerminal(at path: String) {
