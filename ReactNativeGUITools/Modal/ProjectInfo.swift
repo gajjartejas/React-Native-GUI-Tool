@@ -238,7 +238,7 @@ class ProjectInfoCollection {
     }
 
     func searchBy(_ searchString: String) {
-        projectInfos = projectInfos.filter { project in
+        projectInfos = projectInfosAll.filter { project in
             if let name = project.name, let versionString = project.versionString {
                 let pureString = searchString.trimmingCharacters(in: .whitespacesAndNewlines)
                 if pureString.count < 1 {
