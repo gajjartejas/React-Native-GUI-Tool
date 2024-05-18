@@ -12,6 +12,7 @@
 		960F596B2BD967D600E08DEA /* NSPasteboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F596A2BD967D600E08DEA /* NSPasteboardItem.swift */; };
 		960F596D2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F596C2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift */; };
 		964A8FF22BEFC67700ED5F1A /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A8FF12BEFC67700ED5F1A /* URLSession.swift */; };
+		9656A40C2BF8D24A000DD137 /* MainProjectListVC+MoreContexMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9656A40B2BF8D24A000DD137 /* MainProjectListVC+MoreContexMenu.swift */; };
 		965EF8442BA36378000ADFDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965EF8432BA36378000ADFDA /* AppDelegate.swift */; };
 		965EF8462BA36378000ADFDA /* MainProjectListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965EF8452BA36378000ADFDA /* MainProjectListVC.swift */; };
 		965EF8482BA3637A000ADFDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 965EF8472BA3637A000ADFDA /* Assets.xcassets */; };
@@ -61,6 +62,7 @@
 		960F596A2BD967D600E08DEA /* NSPasteboardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPasteboardItem.swift; sourceTree = "<group>"; };
 		960F596C2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainProjectListVC+ContexMenu.swift"; sourceTree = "<group>"; };
 		964A8FF12BEFC67700ED5F1A /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
+		9656A40B2BF8D24A000DD137 /* MainProjectListVC+MoreContexMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainProjectListVC+MoreContexMenu.swift"; sourceTree = "<group>"; };
 		965EF8402BA36378000ADFDA /* ReactNativeGUITools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactNativeGUITools.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		965EF8432BA36378000ADFDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		965EF8452BA36378000ADFDA /* MainProjectListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProjectListVC.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				960F596C2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift */,
 				96AB0B412BE296DE006613F7 /* MainProjectListVC+SearchDelegate.swift */,
 				96E34ED12BE6A420000B56C0 /* MainProjectListVC+CellDelegate.swift */,
+				9656A40B2BF8D24A000DD137 /* MainProjectListVC+MoreContexMenu.swift */,
 			);
 			path = MainProjectListVC;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				967450762BDCE8A70047D7C1 /* ProjectListDropLableView.swift in Sources */,
 				96A93FCB2BE3FD610033DFD1 /* ToolsOutlineWC.swift in Sources */,
 				965EF8442BA36378000ADFDA /* AppDelegate.swift in Sources */,
+				9656A40C2BF8D24A000DD137 /* MainProjectListVC+MoreContexMenu.swift in Sources */,
 				96EB35C12BD81E6F00BC04BF /* MainProjectListVC+Delegate.swift in Sources */,
 				96EB35C32BD8211D00BC04BF /* MainProjectListVC+DragDrop.swift in Sources */,
 				96EB35B12BD809D500BC04BF /* ApktoolVC.swift in Sources */,
