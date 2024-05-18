@@ -715,19 +715,35 @@
                                 <rect key="frame" x="0.0" y="314" width="601" height="50"/>
                                 <subviews>
                                     <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWy-Za-2p7">
-                                        <rect key="frame" x="20" y="14" width="561" height="22"/>
+                                        <rect key="frame" x="20" y="14" width="531" height="22"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="g0f-YH-4IY">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
                                     </searchField>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="g7Y-yj-Oj9">
+                                        <rect key="frame" x="559" y="12" width="20" height="26"/>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSActionTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="88P-RY-5ex">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="BPr-zM-iwa"/>
+                                            <constraint firstAttribute="height" constant="20" id="BX2-aU-8zw"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="onPressMoreButton:" target="XfG-lQ-9wD" id="h5g-FP-bg3"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="g7Y-yj-Oj9" secondAttribute="trailing" constant="22" id="3Jt-DZ-zsV"/>
+                                    <constraint firstItem="g7Y-yj-Oj9" firstAttribute="leading" secondItem="jWy-Za-2p7" secondAttribute="trailing" constant="8" id="MPO-u7-t0M"/>
                                     <constraint firstItem="jWy-Za-2p7" firstAttribute="centerY" secondItem="rRM-EE-iXm" secondAttribute="centerY" id="akK-hT-maJ"/>
                                     <constraint firstAttribute="height" constant="50" id="nNm-fk-yhW"/>
-                                    <constraint firstItem="jWy-Za-2p7" firstAttribute="leading" secondItem="rRM-EE-iXm" secondAttribute="leading" constant="20" symbolic="YES" id="tNH-C5-t3v"/>
-                                    <constraint firstAttribute="trailing" secondItem="jWy-Za-2p7" secondAttribute="trailing" constant="20" symbolic="YES" id="yLC-S4-iQC"/>
+                                    <constraint firstItem="jWy-Za-2p7" firstAttribute="leading" secondItem="rRM-EE-iXm" secondAttribute="leading" constant="20" id="tNH-C5-t3v"/>
+                                    <constraint firstItem="g7Y-yj-Oj9" firstAttribute="centerY" secondItem="jWy-Za-2p7" secondAttribute="centerY" id="w3r-vW-htd"/>
                                 </constraints>
                             </customView>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="25" horizontalPageScroll="10" verticalLineScroll="25" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zx3-y3-Fjt">
@@ -826,6 +842,7 @@
                     </view>
                     <connections>
                         <outlet property="dropView" destination="cTD-8F-1Yi" id="7JX-oN-dnF"/>
+                        <outlet property="moreButton" destination="g7Y-yj-Oj9" id="iab-88-oEH"/>
                         <outlet property="projectListTableView" destination="vaA-eD-uX4" id="vAL-a9-IjQ"/>
                         <outlet property="projectSearchTextField" destination="jWy-Za-2p7" id="9mu-qS-nRj"/>
                     </connections>
@@ -1332,6 +1349,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="NSActionTemplate" width="19" height="19"/>
         <image name="drag-drop" width="256" height="256"/>
     </resources>
 </document>

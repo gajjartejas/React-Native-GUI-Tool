@@ -13,6 +13,7 @@ class MainProjectListVC: NSViewController {
     @IBOutlet var projectListTableView: NSTableView!
     @IBOutlet var dropView: DropView!
     @IBOutlet var projectSearchTextField: NSSearchField!
+    @IBOutlet var moreButton: NSButton!
 
     var projectInfoCollection = ProjectInfoCollection()
 
@@ -26,17 +27,19 @@ class MainProjectListVC: NSViewController {
 
     // MARK: - Lifecycle
 
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         initializeProjectListTableView()
 
+        //tableview context menu
         contextMenu = initializeContexMenu(row: nil)
         contextMenu?.delegate = self
         projectListTableView.menu = contextMenu
 
+        //more contex menu
+        moreButton.menu = initializeMoreContexMenu()
+        
         initializeDropHandler()
 
         projectSearchTextField.delegate = self
@@ -48,6 +51,11 @@ class MainProjectListVC: NSViewController {
     }
 
     // MARK: - Actions
+
+    @IBAction func onPressMoreButton(_ sender: NSButton) {
+        let location = NSPoint(x: 0, y: sender.bounds.height + 4)
+        sender.menu?.popUp(positioning: nil, at: location, in: sender)
+    }
 
     // MARK: - Helpers
 
