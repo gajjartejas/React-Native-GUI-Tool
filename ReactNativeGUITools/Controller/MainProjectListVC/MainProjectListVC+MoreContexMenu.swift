@@ -48,16 +48,16 @@ extension MainProjectListVC {
             sender.state = sender.state == .on ? .off : .on
             view.window?.level = sender.state == .on ? .floating : .normal
         case "Sort by Name":
-            self.projectInfoCollection.sorted(by: .name)
+            projectInfoCollection.sorted(by: .name)
             projectListTableView.reloadData()
         case "Sort by Path":
-            self.projectInfoCollection.sorted(by: .path)
+            projectInfoCollection.sorted(by: .path)
             projectListTableView.reloadData()
         case "Sort by Version":
-            self.projectInfoCollection.sorted(by: .versionString)
+            projectInfoCollection.sorted(by: .versionString)
             projectListTableView.reloadData()
         case "Refresh":
-            print("Refresh selected")
+            projectListTableView.reloadData()
         default:
             break
         }

@@ -16,7 +16,7 @@ class ProjectListCellView: NSTableCellView, NibInstantiatable {
     @IBOutlet var projectPathLable: NSTextField!
     @IBOutlet var projectVersion: NSTextField!
     @IBOutlet var projectVersionLable: NSView!
-    
+
     var index: Int?
     weak var delegate: ProjectListCellViewDelegate?
 
@@ -51,8 +51,27 @@ class ProjectListCellView: NSTableCellView, NibInstantiatable {
         projectVersionLable.cornerRadius = 4.0
         projectVersionLable.backgroundColor = .init(named: "control-1")
         projectLogoView.cornerRadius = 26.0
-        projectLogoView.backgroundColor = NSColor.color(for: project.name)
-        projectLogoLable.stringValue = getShortenedString(from: project.name)
+
+        if !FileManager.default.fileExists(atPath: project.path) {
+            projectLogoView.backgroundColor = .red
+            projectLogoLable.stringValue = "?"
+        } else {
+            projectLogoView.backgroundColor = NSColor.color(for: project.name)
+            projectLogoLable.stringValue = getShortenedString(from: project.name).uppercased()
+        }
+
+        if !FileManager.default.fileExists(atPath: project.path) {
+            projectNameLable.textColor = .red
+        } else {
+            projectNameLable.textColor = .labelColor
+        }
+
+        if !FileManager.default.fileExists(atPath: project.path) {
+            projectPathLable.textColor = .red
+        } else {
+            projectPathLable.textColor = .disabledControlTextColor
+        }
+
         index = row
     }
 }

@@ -32,14 +32,14 @@ class MainProjectListVC: NSViewController {
 
         initializeProjectListTableView()
 
-        //tableview context menu
+        // tableview context menu
         contextMenu = initializeContexMenu(row: nil)
         contextMenu?.delegate = self
         projectListTableView.menu = contextMenu
 
-        //more contex menu
+        // more contex menu
         moreButton.menu = initializeMoreContexMenu()
-        
+
         initializeDropHandler()
 
         projectSearchTextField.delegate = self
@@ -48,6 +48,11 @@ class MainProjectListVC: NSViewController {
             checkForEmptyData()
         }
         checkForEmptyData()
+        NotificationCenter.default.addObserver(self, selector: #selector(viewDidBecomeActive), name: NSApplication.didBecomeActiveNotification, object: nil)
+    }
+
+    @objc func viewDidBecomeActive() {
+        projectListTableView.reloadData()
     }
 
     // MARK: - Actions

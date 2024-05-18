@@ -32,7 +32,7 @@
                             <textFieldCell key="cell" lineBreakMode="clipping" title="Project Path" id="1hJ-kQ-sHA">
                                 <font key="font" metaFont="systemLight" size="13"/>
                                 <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="underPageBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
                     </subviews>
@@ -125,7 +125,7 @@
             <connections>
                 <outlet property="projectLogoLable" destination="6AC-mK-gWF" id="Fyc-zo-UXi"/>
                 <outlet property="projectLogoView" destination="Om9-nJ-CtY" id="Diq-Yd-Ese"/>
-                <outlet property="projectNameLable" destination="RHf-2J-Uus" id="5fr-dz-MdS"/>
+                <outlet property="projectNameLable" destination="RHf-2J-Uus" id="9Lo-Lx-iJc"/>
                 <outlet property="projectPathLable" destination="swl-Ew-hdy" id="dES-QS-5La"/>
                 <outlet property="projectVersion" destination="di3-ng-vST" id="J1E-Tz-iHi"/>
                 <outlet property="projectVersionLable" destination="ol0-lJ-ga0" id="OjY-iS-rTG"/>
