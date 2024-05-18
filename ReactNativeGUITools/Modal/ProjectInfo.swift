@@ -5,8 +5,8 @@
 //  Created by Tejas on 14/04/24.
 //
 
-import Foundation
 import AppKit
+import Foundation
 
 class ProjectInfo: Codable {
     var id: String
@@ -181,12 +181,35 @@ func color(for projectName: String) -> NSColor {
 }
 
 class ProjectInfoCollection {
+    enum SortKey {
+        case name
+        case path
+        case versionString
+    }
+
     var onChangeProjectInfo: (() -> Void)?
 
     open var projectInfosAll: [ProjectInfo] {
         didSet {
             onChangeProjectInfo?()
         }
+    }
+
+    func sorted(by key: SortKey) {
+        projectInfos = projectInfos.sorted { proj1, proj2 -> Bool in
+            switch key {
+            case .name:
+                return (proj1.name ?? "") < (proj2.name ?? "")
+            case .path:
+                return proj1.path < proj2.path
+            case .versionString:
+                return (proj1.versionString ?? "")
+                    .replacingOccurrences(of: "^", with: "")
+                    .compare((proj2.versionString ?? "")
+                        .replacingOccurrences(of: "^", with: ""), options: .numeric) == .orderedDescending
+            }
+        }
+        _ = ProjectInfo.writeProjectInfos(projectInfos)
     }
 
     open var projectInfos: [ProjectInfo] {
