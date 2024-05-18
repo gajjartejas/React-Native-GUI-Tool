@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AppKit
 
 class ProjectInfo: Codable {
     var id: String
@@ -146,6 +147,37 @@ func findXcodeProjectFile(atPath path: String) -> String? {
         print("Error reading directory: \(error)")
     }
     return nil
+}
+
+func getShortenedString(from input: String?) -> String {
+    guard let input = input else { return "-" }
+    guard !input.isEmpty else { return "" }
+
+    let delimiters = CharacterSet(charactersIn: " -_")
+    let words = input.components(separatedBy: delimiters).filter { !$0.isEmpty }
+
+    if words.count == 1 {
+        return String(words[0].prefix(1))
+    }
+
+    var result = ""
+    if let firstWord = words.first {
+        result += String(firstWord.prefix(1))
+    }
+    if words.count > 1, let secondWord = words.dropFirst().first {
+        result += String(secondWord.prefix(1))
+    }
+
+    return result
+}
+
+func color(for projectName: String) -> NSColor {
+    let hash = projectName.hash
+    let red = CGFloat((hash & 0xFF0000) >> 16) / 255.0
+    let green = CGFloat((hash & 0x00FF00) >> 8) / 255.0
+    let blue = CGFloat(hash & 0x0000FF) / 255.0
+
+    return NSColor(red: red, green: green, blue: blue, alpha: 1.0)
 }
 
 class ProjectInfoCollection {
