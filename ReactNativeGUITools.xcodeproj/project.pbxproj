@@ -51,6 +51,7 @@
 		96EB35C32BD8211D00BC04BF /* MainProjectListVC+DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EB35C22BD8211D00BC04BF /* MainProjectListVC+DragDrop.swift */; };
 		96EB35C52BD8260100BC04BF /* ToolsOutlineVC+Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EB35C42BD8260100BC04BF /* ToolsOutlineVC+Fixtures.swift */; };
 		96F10FDE2BD17A7400ED5968 /* ProjectInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F10FDD2BD17A7400ED5968 /* ProjectInfoVC.swift */; };
+		96F3D61D2BF8978E0079141F /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F3D61C2BF8978E0079141F /* NSColor.swift */; };
 		96F71CF52BD2D7490003D728 /* ProjectTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F71CF42BD2D7490003D728 /* ProjectTabViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +103,7 @@
 		96F10FF02BD17C5E00ED5968 /* KeytoolVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeytoolVC.swift; sourceTree = "<group>"; };
 		96F10FF22BD17C8F00ED5968 /* FCMNotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMNotificationVC.swift; sourceTree = "<group>"; };
 		96F10FF42BD17CD600ED5968 /* lAPToolVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lAPToolVC.swift; sourceTree = "<group>"; };
+		96F3D61C2BF8978E0079141F /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
 		96F71CF42BD2D7490003D728 /* ProjectTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTabViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -202,6 +204,7 @@
 				96BC50B52BEA83B8001002EB /* NSAlert.swift */,
 				964A8FF12BEFC67700ED5F1A /* URLSession.swift */,
 				960BC8832BF3D84800914023 /* NSBezierPath.swift */,
+				96F3D61C2BF8978E0079141F /* NSColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -438,6 +441,7 @@
 				96EB35AE2BD809CA00BC04BF /* FCMNotificationVC.swift in Sources */,
 				964A8FF22BEFC67700ED5F1A /* URLSession.swift in Sources */,
 				96D1814B2BADF3A800380905 /* ToolsOutlineVC.swift in Sources */,
+				96F3D61D2BF8978E0079141F /* NSColor.swift in Sources */,
 				967450742BDCDD3A0047D7C1 /* NSView.swift in Sources */,
 				96EB35C52BD8260100BC04BF /* ToolsOutlineVC+Fixtures.swift in Sources */,
 				96EB35B22BD80A4700BC04BF /* ScrcpyVC.swift in Sources */,

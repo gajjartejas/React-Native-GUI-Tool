@@ -10,12 +10,13 @@ import Cocoa
 class ProjectListCellView: NSTableCellView, NibInstantiatable {
     // MARK: - Properties
 
-    @IBOutlet var projectLogo: NSImageView!
+    @IBOutlet var projectLogoView: NSView!
+    @IBOutlet var projectLogoLable: NSTextField!
     @IBOutlet var projectNameLable: NSTextField!
     @IBOutlet var projectPathLable: NSTextField!
     @IBOutlet var projectVersion: NSTextField!
     @IBOutlet var projectVersionLable: NSView!
-
+    
     var index: Int?
     weak var delegate: ProjectListCellViewDelegate?
 
@@ -49,7 +50,9 @@ class ProjectListCellView: NSTableCellView, NibInstantiatable {
         projectVersion.stringValue = project.versionString ?? "-"
         projectVersionLable.cornerRadius = 4.0
         projectVersionLable.backgroundColor = .init(named: "control-1")
-        projectLogo.cornerRadius = 26.0
+        projectLogoView.cornerRadius = 26.0
+        projectLogoView.backgroundColor = NSColor.color(for: project.name)
+        projectLogoLable.stringValue = getShortenedString(from: project.name)
         index = row
     }
 }
