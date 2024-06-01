@@ -204,3 +204,23 @@ func color(for projectName: String) -> NSColor {
 
     return NSColor(red: red, green: green, blue: blue, alpha: 1.0)
 }
+
+func convertToRelativePaths(from absolutePaths: String) -> String? {
+    let paths = absolutePaths.split(separator: "\n").map { String($0) }
+    var relativePaths: [String] = []
+
+    guard let homeDirectory = FileManager.default.homeDirectoryForCurrentUser.path.components(separatedBy: "/").last else {
+        return nil
+    }
+
+    for path in paths {
+        if let range = path.range(of: homeDirectory) {
+            let relativePath = "~" + path[range.upperBound...]
+            relativePaths.append(String(relativePath))
+        } else {
+            relativePaths.append(path)
+        }
+    }
+
+    return relativePaths.joined(separator: "\\")
+}
