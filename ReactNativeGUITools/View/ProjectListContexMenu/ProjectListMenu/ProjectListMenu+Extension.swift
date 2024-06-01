@@ -56,6 +56,14 @@ extension ProjectListMenu {
         openTerminal(at: projectInfo.path)
     }
 
+    @objc func copyPathAction(_ sender: NSMenuItem) {
+        guard let clickedRow = clickedRow else { return }
+        let projectInfo = projectInfoCollection.projectInfos[clickedRow]
+        let pasteboard = NSPasteboard.general
+        pasteboard.declareTypes([.string], owner: nil)
+        pasteboard.setString(projectInfo.path, forType: .string)
+    }
+
     @objc func renameAction(_ sender: NSMenuItem) {
         guard let row = clickedRow else { return }
         delegate?.projectListMenu(didSelectRenameMenuItem: sender, at: row)
