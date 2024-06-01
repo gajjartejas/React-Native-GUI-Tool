@@ -8,6 +8,7 @@
 import Cocoa
 
 class ToolsOutlineWC: NSWindowController {
+    var fromRow: Int?
     var projectInfo: ProjectInfo? {
         didSet {
             window?.title = projectInfo?.name ?? "-"
@@ -24,7 +25,18 @@ class ToolsOutlineWC: NSWindowController {
 
     override func windowDidLoad() {
         super.windowDidLoad()
+        window?.delegate = self
+        track()
+    }
 
-        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    deinit {
+        self.remove()
+    }
+}
+
+extension ToolsOutlineWC: NSWindowDelegate {
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
+        untrack()
+        return true
     }
 }

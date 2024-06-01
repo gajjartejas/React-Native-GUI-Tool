@@ -12,7 +12,7 @@ class ToolsOutlineVC: NSViewController {
 
     @IBOutlet var contentOutlet: NSWindow!
     @IBOutlet var outlineView: NSOutlineView!
-    
+
     var outlineNodes = [MenuNode]()
 
     // MARK: - Lifecycle

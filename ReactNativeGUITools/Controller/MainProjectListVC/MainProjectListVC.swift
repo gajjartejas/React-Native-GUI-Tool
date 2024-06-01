@@ -15,15 +15,13 @@ class MainProjectListVC: NSViewController {
     @IBOutlet var projectSearchTextField: NSSearchField!
     @IBOutlet var moreButton: NSButton!
 
-    var projectInfoCollection = ProjectInfoCollection()
+    let projectListMenu = ProjectListMenu()
 
     var searching: Bool {
         let searchString = projectSearchTextField.stringValue
         let pureString = searchString.trimmingCharacters(in: .whitespacesAndNewlines)
         return pureString.count > 0
     }
-
-    var contextMenu: NSMenu!
 
     // MARK: - Lifecycle
 
@@ -32,10 +30,8 @@ class MainProjectListVC: NSViewController {
 
         initializeProjectListTableView()
 
-        // tableview context menu
-        contextMenu = initializeContexMenu(row: nil)
-        contextMenu?.delegate = self
-        projectListTableView.menu = contextMenu
+        projectListTableView.menu = projectListMenu.createMenuFrom(from: ProjectInfoCollection.shared, row: nil)
+        projectListMenu.delegate = self
 
         // more contex menu
         moreButton.menu = initializeMoreContexMenu()
@@ -44,11 +40,42 @@ class MainProjectListVC: NSViewController {
 
         projectSearchTextField.delegate = self
 
-        projectInfoCollection.onChangeProjectInfo = { [self] in
-            checkForEmptyData()
-        }
         checkForEmptyData()
         NotificationCenter.default.addObserver(self, selector: #selector(viewDidBecomeActive), name: NSApplication.didBecomeActiveNotification, object: nil)
+
+        setupRightClickMonitor()
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(checkForEmptyData),
+                                               name: ProjectInfoCollection.NotificationNames.projectInfoDidChange,
+                                               object: nil)
+    }
+
+    var rightClickMonitor: Any?
+
+    deinit {
+        if let rightClickMonitor = rightClickMonitor {
+            NSEvent.removeMonitor(rightClickMonitor)
+        }
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    func setupRightClickMonitor() {
+        rightClickMonitor = NSEvent.addLocalMonitorForEvents(matching: .rightMouseDown) { [weak self] event in
+            self?.handleRightClick(event: event)
+            return event
+        }
+    }
+
+    func handleRightClick(event: NSEvent) {
+        let pointInWindow = event.locationInWindow
+        let pointInTable = projectListTableView.convert(pointInWindow, from: nil)
+        let clickedRow = projectListTableView.row(at: pointInTable)
+        if clickedRow != -1 {
+            projectListMenu.setClickedRow(clickedRow)
+        } else {
+            projectListMenu.setClickedRow(nil)
+        }
     }
 
     @objc func viewDidBecomeActive() {
@@ -64,12 +91,13 @@ class MainProjectListVC: NSViewController {
 
     // MARK: - Helpers
 
-    func checkForEmptyData() {
-        if projectInfoCollection.projectInfosAll.isEmpty && !searching {
+    @objc func checkForEmptyData() {
+        if ProjectInfoCollection.shared.projectInfosAll.isEmpty && !searching {
             dropView.isHidden = false
         } else {
             dropView.isHidden = true
         }
+        projectListTableView.reloadData()
     }
 
     private func initializeProjectListTableView() {
@@ -86,10 +114,28 @@ class MainProjectListVC: NSViewController {
         projectListTableView.doubleAction = #selector(openAction)
     }
 
+    @objc func openAction(_ sender: Any?) {
+        if projectListTableView.clickedRow == -1 {
+            return
+        }
+        let projectInfo = ProjectInfoCollection.shared.projectInfos[projectListTableView.clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        guard let controller = storyboard.instantiateController(withIdentifier: "ToolsOutlineWC") as? ToolsOutlineWC else {
+            return
+        }
+        controller.projectInfo = projectInfo
+        controller.location = view.window?.frame
+        controller.showWindow(self)
+    }
+
     private func initializeDropHandler() {
         dropView.dragging { folderPath in
             let newProject = ProjectInfo(id: UUID().uuidString, path: folderPath)
-            self.projectInfoCollection.append(newProject)
+            ProjectInfoCollection.shared.append(newProject)
             self.projectListTableView.reloadData()
         }
 
@@ -109,7 +155,7 @@ class MainProjectListVC: NSViewController {
                         let newProject = ProjectInfo(id: UUID().uuidString, path: folderPath)
                         return newProject
                     }
-                    self.projectInfoCollection.append(contentsOf: newProjects)
+                    ProjectInfoCollection.shared.append(contentsOf: newProjects)
                     self.projectListTableView.reloadData()
                 }
             }
