@@ -7,15 +7,24 @@
 
 import Cocoa
 
-class MainProjectListWC: NSWindowController, NSWindowDelegate {
+class MainProjectListWC: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
         window?.title = "RnGuiTools"
         window?.delegate = self
+        track()
     }
 
+    deinit {
+        self.remove()
+    }
+}
+
+extension MainProjectListWC: NSWindowDelegate {
     func windowShouldClose(_ sender: NSWindow) -> Bool {
-        NSApplication.shared.hide(self)
+        // NSApplication.shared.hide(self)
+        window?.orderOut(nil)
+        untrack()
         return false
     }
 }

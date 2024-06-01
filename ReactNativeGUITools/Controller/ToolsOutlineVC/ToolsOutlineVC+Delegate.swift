@@ -41,8 +41,6 @@ extension ToolsOutlineVC: NSOutlineViewDelegate {
             return
         }
 
-        print("Selected Title: \(node.title)")
-
         NotificationCenter.default.post(
             name: Notification.Name(ToolsOutlineVC.NotificationNames.selectionChanged),
             object: nil,

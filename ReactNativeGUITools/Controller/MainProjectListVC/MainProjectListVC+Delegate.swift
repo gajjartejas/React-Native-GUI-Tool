@@ -18,7 +18,7 @@ extension MainProjectListVC: NSTableViewDelegate {
             return nil
         }
 
-        cellView.configureUI(withNode: projectInfoCollection.projectInfos[row], atRow: row)
+        cellView.configureUI(withNode: ProjectInfoCollection.shared.projectInfos[row], atRow: row)
         cellView.delegate = self
         return cellView
     }
@@ -30,7 +30,7 @@ extension MainProjectListVC: NSTableViewDelegate {
     func tableView(
         _ tableView: NSTableView,
         pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-        return ProjectListPasteboardWriter(project: projectInfoCollection.projectInfos[row].name ?? "-", at: row)
+        return ProjectListPasteboardWriter(project: ProjectInfoCollection.shared.projectInfos[row].name ?? "-", at: row)
     }
 
     func tableView(
@@ -59,7 +59,7 @@ extension MainProjectListVC: NSTableViewDelegate {
 
         let oldIndexes = items.compactMap { $0.integer(forType: .tableViewIndex) }
         if !oldIndexes.isEmpty {
-            projectInfoCollection.move(fromOffsets: IndexSet(oldIndexes), toOffset: row)
+            ProjectInfoCollection.shared.move(fromOffsets: IndexSet(oldIndexes), toOffset: row)
             // The ol' Stack Overflow copy-paste. Reordering rows can get pretty hairy if
             // you allow multiple selection. https://stackoverflow.com/a/26855499/7471873
 
@@ -85,7 +85,7 @@ extension MainProjectListVC: NSTableViewDelegate {
             ProjectInfo(id: UUID().uuidString, path: item.url(forType: .fileURL)!)
         }
 
-        projectInfoCollection.insert(contentsOf: newProjects, at: row)
+        ProjectInfoCollection.shared.insert(contentsOf: newProjects, at: row)
         tableView.insertRows(at: IndexSet(row ... row + newProjects.count - 1),
                              withAnimation: .slideDown)
         return true
@@ -99,25 +99,9 @@ extension MainProjectListVC: NSTableViewDelegate {
         if operation == .delete, let items = session.draggingPasteboard.pasteboardItems {
             let indexes = items.compactMap { $0.integer(forType: .tableViewIndex) }
             for index in indexes.reversed() {
-                projectInfoCollection.remove(at: index)
+                ProjectInfoCollection.shared.remove(at: index)
             }
             tableView.removeRows(at: IndexSet(indexes), withAnimation: .slideUp)
         }
     }
-    
-    func tableViewSelectionDidChange(_ notification: Notification) {
-        print(notification)
-        print(notification)
-//            let selectedRow = projectListTableView.selectedRow
-//            if selectedRow != -1 {
-//                if let view = projectListTableView.view(atColumn: 0, row: selectedRow, makeIfNecessary: false) as? NSTableCellView {
-//                    if let v = view as? ProjectListCellView {
-//                        v.projectNameLable.becomeFirstResponder()
-//                    }
-//                    
-//                }
-//            }
-        }
-    
-    
 }
