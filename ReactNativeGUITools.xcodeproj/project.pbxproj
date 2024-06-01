@@ -62,6 +62,8 @@
 		96FCDF9B2C0AF01500A2AFBA /* ProjectInfo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCDF9A2C0AF01500A2AFBA /* ProjectInfo+Extension.swift */; };
 		96FCDF9E2C0AF07400A2AFBA /* ProjectInfoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCDF9D2C0AF07400A2AFBA /* ProjectInfoCollection.swift */; };
 		96FCDFA02C0AF49700A2AFBA /* PromptAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCDF9F2C0AF49700A2AFBA /* PromptAlertView.swift */; };
+		96FCDFA32C0B3CC700A2AFBA /* ProjectListMenu+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCDFA22C0B3CC700A2AFBA /* ProjectListMenu+Extension.swift */; };
+		96FCDFA62C0B3EB200A2AFBA /* ProjectListStatusBarMenu+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCDFA52C0B3EB200A2AFBA /* ProjectListStatusBarMenu+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,6 +125,8 @@
 		96FCDF9A2C0AF01500A2AFBA /* ProjectInfo+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectInfo+Extension.swift"; sourceTree = "<group>"; };
 		96FCDF9D2C0AF07400A2AFBA /* ProjectInfoCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoCollection.swift; sourceTree = "<group>"; };
 		96FCDF9F2C0AF49700A2AFBA /* PromptAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptAlertView.swift; sourceTree = "<group>"; };
+		96FCDFA22C0B3CC700A2AFBA /* ProjectListMenu+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectListMenu+Extension.swift"; sourceTree = "<group>"; };
+		96FCDFA52C0B3EB200A2AFBA /* ProjectListStatusBarMenu+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectListStatusBarMenu+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,8 +238,8 @@
 		96AFFF182BFA088B002D3828 /* ProjectListContexMenu */ = {
 			isa = PBXGroup;
 			children = (
-				96AFFF192BFA08A9002D3828 /* ProjectListStatusBarMenu.swift */,
-				96F3972E2BFE62CE00AD7FC4 /* ProjectListMenu.swift */,
+				96FCDFA42C0B3E9700A2AFBA /* ProjectListStatusBarMenu */,
+				96FCDFA12C0B3CB500A2AFBA /* ProjectListMenu */,
 			);
 			path = ProjectListContexMenu;
 			sourceTree = "<group>";
@@ -416,6 +420,24 @@
 			path = ProjectInfoCollection;
 			sourceTree = "<group>";
 		};
+		96FCDFA12C0B3CB500A2AFBA /* ProjectListMenu */ = {
+			isa = PBXGroup;
+			children = (
+				96F3972E2BFE62CE00AD7FC4 /* ProjectListMenu.swift */,
+				96FCDFA22C0B3CC700A2AFBA /* ProjectListMenu+Extension.swift */,
+			);
+			path = ProjectListMenu;
+			sourceTree = "<group>";
+		};
+		96FCDFA42C0B3E9700A2AFBA /* ProjectListStatusBarMenu */ = {
+			isa = PBXGroup;
+			children = (
+				96AFFF192BFA08A9002D3828 /* ProjectListStatusBarMenu.swift */,
+				96FCDFA52C0B3EB200A2AFBA /* ProjectListStatusBarMenu+Extension.swift */,
+			);
+			path = ProjectListStatusBarMenu;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -506,6 +528,7 @@
 				96F10FDE2BD17A7400ED5968 /* ProjectInfoVC.swift in Sources */,
 				962075742C06404500AB61AB /* NSWindowController.swift in Sources */,
 				96E34ED22BE6A420000B56C0 /* MainProjectListVC+CellDelegate.swift in Sources */,
+				96FCDFA32C0B3CC700A2AFBA /* ProjectListMenu+Extension.swift in Sources */,
 				96EB35AD2BD809C600BC04BF /* lAPToolVC.swift in Sources */,
 				96EB35BB2BD81B4200BC04BF /* ToolsOutlineVC+DataSource.swift in Sources */,
 				96FCDFA02C0AF49700A2AFBA /* PromptAlertView.swift in Sources */,
@@ -527,6 +550,7 @@
 				96EB35C32BD8211D00BC04BF /* MainProjectListVC+DragDrop.swift in Sources */,
 				96EB35B12BD809D500BC04BF /* ApktoolVC.swift in Sources */,
 				96F71CF52BD2D7490003D728 /* ProjectTabViewController.swift in Sources */,
+				96FCDFA62C0B3EB200A2AFBA /* ProjectListStatusBarMenu+Extension.swift in Sources */,
 				960B0A2B2BDCD04000494CA2 /* DropView.swift in Sources */,
 				96EB35B02BD809D100BC04BF /* BundletoolVC.swift in Sources */,
 				960F596D2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift in Sources */,
