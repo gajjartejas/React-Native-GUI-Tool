@@ -46,12 +46,12 @@ class ProjectInfoCollection {
                         .replacingOccurrences(of: "^", with: ""), options: .numeric) == .orderedDescending
             }
         }
-        _ = ProjectInfo.writeProjectInfos(projectInfos)
+        _ = ProjectInfo.writeArrayToStorage(projectInfos)
     }
 
     private init() {
-        projectInfos = ProjectInfo.readProjectInfos() ?? []
-        projectInfosAll = ProjectInfo.readProjectInfos() ?? []
+        projectInfos = ProjectInfo.readArrayFromStorage() ?? []
+        projectInfosAll = ProjectInfo.readArrayFromStorage() ?? []
     }
 
     func remove(at index: Int) {
@@ -59,13 +59,13 @@ class ProjectInfoCollection {
         projectInfosAll = projectInfosAll.filter({ item in
             item.id != removedItem.id
         })
-        _ = ProjectInfo.writeProjectInfos(projectInfosAll)
+        _ = ProjectInfo.writeArrayToStorage(projectInfosAll)
     }
 
     func append(_ projectInfo: ProjectInfo) {
         projectInfosAll.append(projectInfo)
         projectInfos.append(projectInfo)
-        _ = ProjectInfo.writeProjectInfos(projectInfosAll)
+        _ = ProjectInfo.writeArrayToStorage(projectInfosAll)
     }
 
     func searchBy(_ searchString: String) {
@@ -86,26 +86,26 @@ class ProjectInfoCollection {
     }
 
     func clearSearch() {
-        projectInfos = ProjectInfo.readProjectInfos() ?? []
-        projectInfosAll = ProjectInfo.readProjectInfos() ?? []
+        projectInfos = ProjectInfo.readArrayFromStorage() ?? []
+        projectInfosAll = ProjectInfo.readArrayFromStorage() ?? []
     }
 
     func move(fromOffsets source: IndexSet, toOffset destination: Int) {
         projectInfos.move(fromOffsets: source, toOffset: destination)
         projectInfosAll.move(fromOffsets: source, toOffset: destination)
-        _ = ProjectInfo.writeProjectInfos(projectInfosAll)
+        _ = ProjectInfo.writeArrayToStorage(projectInfosAll)
     }
 
     func insert(contentsOf newElements: [ProjectInfo], at i: Int) {
         projectInfos.insert(contentsOf: newElements, at: i)
         projectInfosAll.insert(contentsOf: newElements, at: i)
-        _ = ProjectInfo.writeProjectInfos(projectInfosAll)
+        _ = ProjectInfo.writeArrayToStorage(projectInfosAll)
     }
 
     func append(contentsOf newElements: [ProjectInfo]) {
         projectInfos.append(contentsOf: newElements)
         projectInfosAll.append(contentsOf: newElements)
-        _ = ProjectInfo.writeProjectInfos(projectInfosAll)
+        _ = ProjectInfo.writeArrayToStorage(projectInfosAll)
     }
 
     func update(with projectInfo: ProjectInfo) {
@@ -114,7 +114,7 @@ class ProjectInfoCollection {
             if let indexInFiltered = projectInfos.firstIndex(where: { $0.id == projectInfo.id }) {
                 projectInfos[indexInFiltered] = projectInfo
             }
-            _ = ProjectInfo.writeProjectInfos(projectInfosAll)
+            _ = ProjectInfo.writeArrayToStorage(projectInfosAll)
         }
     }
 }

@@ -9,8 +9,12 @@
 /* Begin PBXBuildFile section */
 		960B0A2B2BDCD04000494CA2 /* DropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960B0A2A2BDCD04000494CA2 /* DropView.swift */; };
 		960BC8842BF3D84800914023 /* NSBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960BC8832BF3D84800914023 /* NSBezierPath.swift */; };
+		960F35ED2C14469500989279 /* MainSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F35EC2C14469500989279 /* MainSettings.swift */; };
+		960F35EF2C147D4100989279 /* PlistStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F35EE2C147D4100989279 /* PlistStorable.swift */; };
+		960F35F12C148A8D00989279 /* MainSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F35F02C148A8D00989279 /* MainSettingsManager.swift */; };
 		960F596B2BD967D600E08DEA /* NSPasteboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F596A2BD967D600E08DEA /* NSPasteboardItem.swift */; };
 		960F596D2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F596C2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift */; };
+		961F2F0B2C0C94DA0071068A /* MainSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F2F0A2C0C94DA0071068A /* MainSettingsVC.swift */; };
 		962075742C06404500AB61AB /* NSWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962075732C06404500AB61AB /* NSWindowController.swift */; };
 		963CAEEC2BFCF95C007F7572 /* NSMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963CAEEB2BFCF95C007F7572 /* NSMenu.swift */; };
 		964A8FF22BEFC67700ED5F1A /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A8FF12BEFC67700ED5F1A /* URLSession.swift */; };
@@ -59,18 +63,22 @@
 		96F3D61D2BF8978E0079141F /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F3D61C2BF8978E0079141F /* NSColor.swift */; };
 		96F71CF52BD2D7490003D728 /* ProjectTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F71CF42BD2D7490003D728 /* ProjectTabViewController.swift */; };
 		96F9445E2C01E19A0053B5DC /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9445D2C01E19A0053B5DC /* AppUtils.swift */; };
-		96FCDF9B2C0AF01500A2AFBA /* ProjectInfo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCDF9A2C0AF01500A2AFBA /* ProjectInfo+Extension.swift */; };
 		96FCDF9E2C0AF07400A2AFBA /* ProjectInfoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCDF9D2C0AF07400A2AFBA /* ProjectInfoCollection.swift */; };
 		96FCDFA02C0AF49700A2AFBA /* PromptAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCDF9F2C0AF49700A2AFBA /* PromptAlertView.swift */; };
 		96FCDFA32C0B3CC700A2AFBA /* ProjectListMenu+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCDFA22C0B3CC700A2AFBA /* ProjectListMenu+Extension.swift */; };
 		96FCDFA62C0B3EB200A2AFBA /* ProjectListStatusBarMenu+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCDFA52C0B3EB200A2AFBA /* ProjectListStatusBarMenu+Extension.swift */; };
+		96FCDFA82C0B5F3200A2AFBA /* MainSettingsWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCDFA72C0B5F3200A2AFBA /* MainSettingsWC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		960B0A2A2BDCD04000494CA2 /* DropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropView.swift; sourceTree = "<group>"; };
 		960BC8832BF3D84800914023 /* NSBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSBezierPath.swift; sourceTree = "<group>"; };
+		960F35EC2C14469500989279 /* MainSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettings.swift; sourceTree = "<group>"; };
+		960F35EE2C147D4100989279 /* PlistStorable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistStorable.swift; sourceTree = "<group>"; };
+		960F35F02C148A8D00989279 /* MainSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsManager.swift; sourceTree = "<group>"; };
 		960F596A2BD967D600E08DEA /* NSPasteboardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPasteboardItem.swift; sourceTree = "<group>"; };
 		960F596C2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainProjectListVC+ContexMenu.swift"; sourceTree = "<group>"; };
+		961F2F0A2C0C94DA0071068A /* MainSettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsVC.swift; sourceTree = "<group>"; };
 		962075732C06404500AB61AB /* NSWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSWindowController.swift; sourceTree = "<group>"; };
 		963CAEEB2BFCF95C007F7572 /* NSMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMenu.swift; sourceTree = "<group>"; };
 		964A8FF12BEFC67700ED5F1A /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
@@ -122,11 +130,11 @@
 		96F3D61C2BF8978E0079141F /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
 		96F71CF42BD2D7490003D728 /* ProjectTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTabViewController.swift; sourceTree = "<group>"; };
 		96F9445D2C01E19A0053B5DC /* AppUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
-		96FCDF9A2C0AF01500A2AFBA /* ProjectInfo+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectInfo+Extension.swift"; sourceTree = "<group>"; };
 		96FCDF9D2C0AF07400A2AFBA /* ProjectInfoCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoCollection.swift; sourceTree = "<group>"; };
 		96FCDF9F2C0AF49700A2AFBA /* PromptAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptAlertView.swift; sourceTree = "<group>"; };
 		96FCDFA22C0B3CC700A2AFBA /* ProjectListMenu+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectListMenu+Extension.swift"; sourceTree = "<group>"; };
 		96FCDFA52C0B3EB200A2AFBA /* ProjectListStatusBarMenu+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectListStatusBarMenu+Extension.swift"; sourceTree = "<group>"; };
+		96FCDFA72C0B5F3200A2AFBA /* MainSettingsWC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsWC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +148,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		960F35EB2C14468000989279 /* MainSettings */ = {
+			isa = PBXGroup;
+			children = (
+				960F35EC2C14469500989279 /* MainSettings.swift */,
+				960F35F02C148A8D00989279 /* MainSettingsManager.swift */,
+			);
+			path = MainSettings;
+			sourceTree = "<group>";
+		};
+		961F2F092C0C94370071068A /* MainSettingsVC */ = {
+			isa = PBXGroup;
+			children = (
+				961F2F0A2C0C94DA0071068A /* MainSettingsVC.swift */,
+			);
+			path = MainSettingsVC;
+			sourceTree = "<group>";
+		};
 		965EF8372BA36378000ADFDA = {
 			isa = PBXGroup;
 			children = (
@@ -204,8 +229,10 @@
 				96F10FDC2BD17A4D00ED5968 /* ProjectInfoVC */,
 				96F10FDB2BD178FF00ED5968 /* ToolsOutlineVC */,
 				96F10FDA2BD1785100ED5968 /* MainProjectListVC */,
+				961F2F092C0C94370071068A /* MainSettingsVC */,
 				96A93FC72BE3FBBF0033DFD1 /* MainProjectListWC.swift */,
 				96A93FC92BE3FD610033DFD1 /* ToolsOutlineWC.swift */,
+				96FCDFA72C0B5F3200A2AFBA /* MainSettingsWC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -231,6 +258,7 @@
 				96F3D61C2BF8978E0079141F /* NSColor.swift */,
 				963CAEEB2BFCF95C007F7572 /* NSMenu.swift */,
 				962075732C06404500AB61AB /* NSWindowController.swift */,
+				960F35EE2C147D4100989279 /* PlistStorable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -247,6 +275,7 @@
 		96B7C45D2BA71ED100197448 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
+				960F35EB2C14468000989279 /* MainSettings */,
 				96FCDF9C2C0AF05500A2AFBA /* ProjectInfoCollection */,
 				96FCDF992C0AEFAD00A2AFBA /* ProjectInfo */,
 				96D181432BADEC7200380905 /* MenuNode.swift */,
@@ -407,7 +436,6 @@
 			isa = PBXGroup;
 			children = (
 				9675F5BC2BCC49A1008FF0F4 /* ProjectInfo.swift */,
-				96FCDF9A2C0AF01500A2AFBA /* ProjectInfo+Extension.swift */,
 			);
 			path = ProjectInfo;
 			sourceTree = "<group>";
@@ -521,9 +549,11 @@
 				96EB35B22BD80A4700BC04BF /* ScrcpyVC.swift in Sources */,
 				96EB35AF2BD809CE00BC04BF /* KeytoolVC.swift in Sources */,
 				96F3972F2BFE62CE00AD7FC4 /* ProjectListMenu.swift in Sources */,
+				960F35EF2C147D4100989279 /* PlistStorable.swift in Sources */,
 				965EF8462BA36378000ADFDA /* MainProjectListVC.swift in Sources */,
 				96C0A4932BC441B50069FB7F /* PasteboardWriter.swift in Sources */,
 				96D181442BADEC7200380905 /* MenuNode.swift in Sources */,
+				961F2F0B2C0C94DA0071068A /* MainSettingsVC.swift in Sources */,
 				96EB35B32BD80A4B00BC04BF /* AdbVC.swift in Sources */,
 				96F10FDE2BD17A7400ED5968 /* ProjectInfoVC.swift in Sources */,
 				962075742C06404500AB61AB /* NSWindowController.swift in Sources */,
@@ -532,12 +562,12 @@
 				96EB35AD2BD809C600BC04BF /* lAPToolVC.swift in Sources */,
 				96EB35BB2BD81B4200BC04BF /* ToolsOutlineVC+DataSource.swift in Sources */,
 				96FCDFA02C0AF49700A2AFBA /* PromptAlertView.swift in Sources */,
-				96FCDF9B2C0AF01500A2AFBA /* ProjectInfo+Extension.swift in Sources */,
 				968C6CB52BCC16CC00F8C5A1 /* NSImage.swift in Sources */,
 				960BC8842BF3D84800914023 /* NSBezierPath.swift in Sources */,
 				960F596B2BD967D600E08DEA /* NSPasteboardItem.swift in Sources */,
 				96D181472BADF13900380905 /* ToolsOutlineCellView.swift in Sources */,
 				968C6CAF2BCC14CE00F8C5A1 /* ProjectListCellView.swift in Sources */,
+				960F35F12C148A8D00989279 /* MainSettingsManager.swift in Sources */,
 				96EB35B52BD80A5200BC04BF /* YarnVC.swift in Sources */,
 				96AFFF1A2BFA08A9002D3828 /* ProjectListStatusBarMenu.swift in Sources */,
 				96D1814E2BADF4EE00380905 /* NibInstantiatable.swift in Sources */,
@@ -552,6 +582,7 @@
 				96F71CF52BD2D7490003D728 /* ProjectTabViewController.swift in Sources */,
 				96FCDFA62C0B3EB200A2AFBA /* ProjectListStatusBarMenu+Extension.swift in Sources */,
 				960B0A2B2BDCD04000494CA2 /* DropView.swift in Sources */,
+				960F35ED2C14469500989279 /* MainSettings.swift in Sources */,
 				96EB35B02BD809D100BC04BF /* BundletoolVC.swift in Sources */,
 				960F596D2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift in Sources */,
 				96BC50B62BEA83B8001002EB /* NSAlert.swift in Sources */,
@@ -563,6 +594,7 @@
 				96EB35B72BD80A5B00BC04BF /* SystemInfoVC.swift in Sources */,
 				96AB0B422BE296DF006613F7 /* MainProjectListVC+SearchDelegate.swift in Sources */,
 				96EB35BF2BD81E2B00BC04BF /* MainProjectListVC+DataSource.swift in Sources */,
+				96FCDFA82C0B5F3200A2AFBA /* MainSettingsWC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

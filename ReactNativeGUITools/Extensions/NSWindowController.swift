@@ -37,3 +37,17 @@ extension NSWindowController {
         return allControllers.filter { $0.window?.isVisible == true }
     }
 }
+
+extension NSWindowController {
+    func centerWindow(relativeTo parentFrame: NSRect) {
+        guard let window = window else { return }
+
+        let windowSize = window.frame.size
+
+        let centeredX = parentFrame.origin.x + (parentFrame.size.width - windowSize.width) / 2
+        let centeredY = parentFrame.origin.y + (parentFrame.size.height - windowSize.height) / 2
+
+        let centeredOrigin = CGPoint(x: centeredX, y: centeredY)
+        window.setFrameOrigin(centeredOrigin)
+    }
+}

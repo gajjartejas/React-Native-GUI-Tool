@@ -17,8 +17,8 @@ class ToolsOutlineWC: NSWindowController {
 
     var location: NSRect? {
         didSet {
-            if let origin = location?.origin {
-                self.window?.setFrameOrigin(origin)
+            if let location = location {
+                self.centerWindow(relativeTo: location)
             }
         }
     }
