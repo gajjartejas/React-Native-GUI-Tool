@@ -43,4 +43,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         return true
     }
+
+    @IBAction func openSettings(_ sender: Any) {
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        guard let controller = storyboard.instantiateController(withIdentifier: "MainSettingsWC") as? MainSettingsWC else {
+            return
+        }
+        let allWC = NSWindowController.getAllControllers()
+        if let mainWindow = allWC.first?.window {
+            controller.location = mainWindow.frame
+            controller.showWindow(mainWindow)
+        }
+    }
 }

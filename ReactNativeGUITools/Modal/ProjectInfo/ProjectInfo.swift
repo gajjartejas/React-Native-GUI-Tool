@@ -8,7 +8,11 @@
 import AppKit
 import Foundation
 
-class ProjectInfo: Codable {
+class ProjectInfo: Codable, PlistStorable {
+    static var plistFileName: String {
+        return "ReactNativeGUITools/browser.plist"
+    }
+
     open var id: String
     open var path: String
     open var name: String?

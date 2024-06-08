@@ -24,7 +24,11 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Settings…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <action selector="openSettings:" target="Ady-hI-5gd" id="Z9o-G2-Ybb"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -680,7 +684,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-224" y="368"/>
+            <point key="canvasLocation" x="-199" y="369"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -702,6 +706,281 @@
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-161.5" y="734"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="ssy-lW-3Un">
+            <objects>
+                <windowController storyboardIdentifier="MainSettingsWC" id="EYO-e3-gVF" customClass="MainSettingsWC" customModule="ReactNativeGUITools" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" frameAutosaveName="" animationBehavior="default" toolbarStyle="preference" id="dKx-le-DaM">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="294" y="313" width="480" height="332"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
+                        <view key="contentView" id="ldO-7h-fzL">
+                            <rect key="frame" x="0.0" y="0.0" width="480" height="332"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </view>
+                        <toolbar key="toolbar" implicitIdentifier="B6C85C3E-E562-493E-9952-58DDAE92CFD5" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="wei-1u-Rca">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="B8CC9E85-BAE0-4610-A0C9-5781BF560C85" explicitItemIdentifier="General" label="General" paletteLabel="General" tag="-1" image="gearshape" catalog="system" selectable="YES" id="Rsg-zq-M7a">
+                                    <size key="minSize" width="32" height="32"/>
+                                    <size key="maxSize" width="32" height="32"/>
+                                    <connections>
+                                        <action selector="toolBarAction:" target="EYO-e3-gVF" id="uEX-w1-UGm"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="5F7BBF5B-4A94-40C0-9C88-D6CA2F4B3BB0" explicitItemIdentifier="Locations" label="Locations" paletteLabel="Locations" tag="-1" image="opticaldiscdrive" catalog="system" title="Locations" selectable="YES" id="LoX-h1-Fvo">
+                                    <size key="minSize" width="32" height="32"/>
+                                    <size key="maxSize" width="32" height="32"/>
+                                    <connections>
+                                        <action selector="toolBarAction:" target="EYO-e3-gVF" id="E2V-Uo-Ra2"/>
+                                    </connections>
+                                </toolbarItem>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="Rsg-zq-M7a"/>
+                                <toolbarItem reference="LoX-h1-Fvo"/>
+                            </defaultToolbarItems>
+                        </toolbar>
+                        <connections>
+                            <outlet property="delegate" destination="EYO-e3-gVF" id="GPT-Go-JbA"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <outlet property="toolBar" destination="wei-1u-Rca" id="2pY-mB-Uop"/>
+                        <segue destination="QE3-wn-fbw" kind="relationship" relationship="window.shadowedContentViewController" id="G7R-67-rwn"/>
+                    </connections>
+                </windowController>
+                <customObject id="QyY-aG-NgV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="369" y="189"/>
+        </scene>
+        <!--Main SettingsVC-->
+        <scene sceneID="Ix8-uL-8LG">
+            <objects>
+                <viewController storyboardIdentifier="MainSettingsVC" id="QE3-wn-fbw" customClass="MainSettingsVC" customModule="ReactNativeGUITools" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="lkY-rJ-8gq">
+                        <rect key="frame" x="0.0" y="0.0" width="684" height="344"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="EL1-0e-1pY">
+                                <rect key="frame" x="0.0" y="0.0" width="684" height="344"/>
+                                <font key="font" metaFont="system"/>
+                                <tabViewItems>
+                                    <tabViewItem label="General" identifier="General" id="RnG-TW-QW0" userLabel="General">
+                                        <view key="view" id="rPg-zh-Hhb">
+                                            <rect key="frame" x="0.0" y="0.0" width="684" height="344"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Locations" identifier="Locations" id="05g-y3-30C" userLabel="Locations">
+                                        <view key="view" id="4st-DS-hrh">
+                                            <rect key="frame" x="0.0" y="0.0" width="684" height="344"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2Jy-6f-27r">
+                                                    <rect key="frame" x="41" y="275" width="111" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Code Editor Path:" id="iPi-wB-fbl">
+                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aH3-s0-T9E">
+                                                    <rect key="frame" x="180" y="250" width="276" height="14"/>
+                                                    <subviews>
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c2C-RC-OdV">
+                                                            <rect key="frame" x="-2" y="0.0" width="265" height="14"/>
+                                                            <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" title="/Users/john/Library/Developer/Xcode/DerivedData" id="qE4-c3-lxs">
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                                <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="Hko-ak-o10">
+                                                            <rect key="frame" x="263" y="0.0" width="13" height="13"/>
+                                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrowshape.forward.circle.fill" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="DH1-Cn-mr2">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="codeEditorShowInFinder:" target="QE3-wn-fbw" id="oHu-me-mvY"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
+                                                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W3F-va-xlW">
+                                                    <rect key="frame" x="177" y="269" width="431" height="25"/>
+                                                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="BSZ-XL-mqj">
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="menu"/>
+                                                        <menu key="menu" id="noy-Fx-gqI"/>
+                                                    </popUpButtonCell>
+                                                    <connections>
+                                                        <action selector="codeEditorPopUpButtonSelectionChanged:" target="QE3-wn-fbw" id="prw-Qt-yhm"/>
+                                                    </connections>
+                                                </popUpButton>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kHR-PU-Odm">
+                                                    <rect key="frame" x="75" y="212" width="77" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Xcode Path:" id="wbh-r1-Uh4">
+                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1LF-32-dFl">
+                                                    <rect key="frame" x="180" y="187" width="276" height="14"/>
+                                                    <subviews>
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SRy-GL-Mjy">
+                                                            <rect key="frame" x="-2" y="0.0" width="265" height="14"/>
+                                                            <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" title="/Users/john/Library/Developer/Xcode/DerivedData" id="aFC-dz-J7z">
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                                <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="KLr-Bb-RAm">
+                                                            <rect key="frame" x="263" y="0.0" width="13" height="13"/>
+                                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrowshape.forward.circle.fill" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="SPr-bz-Eqf">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="xcodeShowInFinder:" target="QE3-wn-fbw" id="PON-2u-n7X"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
+                                                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5q8-rI-FgG">
+                                                    <rect key="frame" x="177" y="206" width="431" height="25"/>
+                                                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Ctd-4W-HPK">
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="menu"/>
+                                                        <menu key="menu" id="cDX-4T-zrd"/>
+                                                    </popUpButtonCell>
+                                                    <connections>
+                                                        <action selector="xcodePopUpButtonSelectionChanged:" target="QE3-wn-fbw" id="Aqw-jc-Sas"/>
+                                                    </connections>
+                                                </popUpButton>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="axa-iK-5Ks">
+                                                    <rect key="frame" x="23" y="149" width="129" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Android Studio Path:" id="Go4-GV-kHM">
+                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vdr-Lm-mOp">
+                                                    <rect key="frame" x="180" y="124" width="276" height="14"/>
+                                                    <subviews>
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gT7-gt-mh4">
+                                                            <rect key="frame" x="-2" y="0.0" width="265" height="14"/>
+                                                            <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" title="/Users/john/Library/Developer/Xcode/DerivedData" id="At4-8Q-AlA">
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                                <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="eVN-6O-GKj">
+                                                            <rect key="frame" x="263" y="0.0" width="13" height="13"/>
+                                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrowshape.forward.circle.fill" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="WE4-Gf-Bbo">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="androidStudioShowInFinder:" target="QE3-wn-fbw" id="V7e-Kv-6VZ"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
+                                                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c0j-Rz-ieN">
+                                                    <rect key="frame" x="177" y="143" width="431" height="25"/>
+                                                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="NHL-xM-zU1">
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="menu"/>
+                                                        <menu key="menu" id="VM1-Ol-5eo"/>
+                                                    </popUpButtonCell>
+                                                    <connections>
+                                                        <action selector="androidStudioPopUpButtonSelectionChanged:" target="QE3-wn-fbw" id="pv0-NM-XTD"/>
+                                                    </connections>
+                                                </popUpButton>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Vdr-Lm-mOp" firstAttribute="top" secondItem="c0j-Rz-ieN" secondAttribute="bottom" constant="9" id="04X-xi-2TW"/>
+                                                <constraint firstItem="c0j-Rz-ieN" firstAttribute="centerY" secondItem="axa-iK-5Ks" secondAttribute="centerY" id="1U1-Pm-OSr"/>
+                                                <constraint firstItem="c0j-Rz-ieN" firstAttribute="top" secondItem="1LF-32-dFl" secondAttribute="bottom" constant="20" id="4Hi-0M-6ng"/>
+                                                <constraint firstItem="axa-iK-5Ks" firstAttribute="trailing" secondItem="4st-DS-hrh" secondAttribute="leading" constant="150" id="5QY-7J-oy9"/>
+                                                <constraint firstItem="5q8-rI-FgG" firstAttribute="top" secondItem="aH3-s0-T9E" secondAttribute="bottom" constant="20" id="6k8-o8-03d"/>
+                                                <constraint firstItem="aH3-s0-T9E" firstAttribute="leading" secondItem="2Jy-6f-27r" secondAttribute="trailing" constant="30" id="7ix-Su-1hb"/>
+                                                <constraint firstItem="W3F-va-xlW" firstAttribute="centerY" secondItem="2Jy-6f-27r" secondAttribute="centerY" id="7sR-y4-pdA"/>
+                                                <constraint firstAttribute="trailing" secondItem="5q8-rI-FgG" secondAttribute="trailing" priority="999" constant="80" id="AKx-SW-xX0"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="aH3-s0-T9E" secondAttribute="trailing" constant="80" id="Avx-uP-Z1Z"/>
+                                                <constraint firstItem="5q8-rI-FgG" firstAttribute="centerY" secondItem="kHR-PU-Odm" secondAttribute="centerY" id="Cee-0Z-JPE"/>
+                                                <constraint firstItem="Vdr-Lm-mOp" firstAttribute="leading" secondItem="axa-iK-5Ks" secondAttribute="trailing" constant="30" id="KPN-bH-A02"/>
+                                                <constraint firstAttribute="trailing" secondItem="c0j-Rz-ieN" secondAttribute="trailing" priority="999" constant="80" id="NMw-l5-zoc"/>
+                                                <constraint firstItem="axa-iK-5Ks" firstAttribute="leading" secondItem="4st-DS-hrh" secondAttribute="leading" priority="250" constant="16" id="Roq-F9-SUx"/>
+                                                <constraint firstItem="1LF-32-dFl" firstAttribute="top" secondItem="5q8-rI-FgG" secondAttribute="bottom" constant="9" id="Xkh-xZ-BiX"/>
+                                                <constraint firstItem="W3F-va-xlW" firstAttribute="top" secondItem="4st-DS-hrh" secondAttribute="top" constant="51" id="d4o-8q-DgK"/>
+                                                <constraint firstAttribute="trailing" secondItem="W3F-va-xlW" secondAttribute="trailing" priority="999" constant="80" id="hSN-w7-v2O"/>
+                                                <constraint firstItem="W3F-va-xlW" firstAttribute="leading" secondItem="2Jy-6f-27r" secondAttribute="trailing" constant="30" id="hhj-ew-Bg8"/>
+                                                <constraint firstItem="aH3-s0-T9E" firstAttribute="top" secondItem="W3F-va-xlW" secondAttribute="bottom" constant="9" id="hiZ-Xd-gUL"/>
+                                                <constraint firstItem="5q8-rI-FgG" firstAttribute="leading" secondItem="kHR-PU-Odm" secondAttribute="trailing" constant="30" id="m0S-m7-zPt"/>
+                                                <constraint firstItem="c0j-Rz-ieN" firstAttribute="leading" secondItem="axa-iK-5Ks" secondAttribute="trailing" constant="30" id="m8y-IH-GHv"/>
+                                                <constraint firstItem="kHR-PU-Odm" firstAttribute="leading" secondItem="4st-DS-hrh" secondAttribute="leading" priority="250" constant="16" id="s54-6s-TRR"/>
+                                                <constraint firstItem="2Jy-6f-27r" firstAttribute="trailing" secondItem="4st-DS-hrh" secondAttribute="leading" constant="150" id="t4g-gt-xuz"/>
+                                                <constraint firstItem="1LF-32-dFl" firstAttribute="leading" secondItem="kHR-PU-Odm" secondAttribute="trailing" constant="30" id="tJk-Ob-Jcb"/>
+                                                <constraint firstItem="kHR-PU-Odm" firstAttribute="trailing" secondItem="4st-DS-hrh" secondAttribute="leading" constant="150" id="wUK-wN-vWd"/>
+                                                <constraint firstItem="2Jy-6f-27r" firstAttribute="leading" secondItem="4st-DS-hrh" secondAttribute="leading" priority="250" constant="16" id="xeX-8e-lCl"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                </tabViewItems>
+                            </tabView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="EL1-0e-1pY" secondAttribute="trailing" id="91w-WD-5TA"/>
+                            <constraint firstAttribute="bottom" secondItem="EL1-0e-1pY" secondAttribute="bottom" id="HZI-f9-JYH"/>
+                            <constraint firstItem="EL1-0e-1pY" firstAttribute="leading" secondItem="lkY-rJ-8gq" secondAttribute="leading" id="ZrZ-qR-izd"/>
+                            <constraint firstItem="EL1-0e-1pY" firstAttribute="top" secondItem="lkY-rJ-8gq" secondAttribute="top" id="krX-2I-NHd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="androidStudioPathLabel" destination="gT7-gt-mh4" id="thL-ht-HXe"/>
+                        <outlet property="androidStudioPopupMenu" destination="c0j-Rz-ieN" id="8Nr-2E-J7f"/>
+                        <outlet property="codeEditorPathLabel" destination="c2C-RC-OdV" id="GNg-r5-q4y"/>
+                        <outlet property="codeEditorPathPopupMenu" destination="W3F-va-xlW" id="3Rl-7B-A7Z"/>
+                        <outlet property="tabView" destination="EL1-0e-1pY" id="569-VZ-qiQ"/>
+                        <outlet property="xcodePathLabel" destination="SRy-GL-Mjy" id="9ug-Ci-RAB"/>
+                        <outlet property="xcodePathPopupMenu" destination="5q8-rI-FgG" id="BXG-72-zVE"/>
+                    </connections>
+                </viewController>
+                <customObject id="x4b-6q-SVr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1040" y="183"/>
         </scene>
         <!--Main Project ListVC-->
         <scene sceneID="hIz-AP-VOD">
@@ -1350,6 +1629,9 @@
     </scenes>
     <resources>
         <image name="NSActionTemplate" width="19" height="19"/>
+        <image name="arrowshape.forward.circle.fill" catalog="system" width="15" height="15"/>
         <image name="drag-drop" width="256" height="256"/>
+        <image name="gearshape" catalog="system" width="16" height="16"/>
+        <image name="opticaldiscdrive" catalog="system" width="19" height="13"/>
     </resources>
 </document>

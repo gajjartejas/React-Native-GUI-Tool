@@ -90,7 +90,7 @@
                         </customView>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="xpH-dM-caa">
                             <rect key="frame" x="68" y="2" width="16" height="22"/>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="magnifyingglass.circle.fill" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="Jwx-xQ-zcj">
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrowshape.forward.circle.fill" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="Jwx-xQ-zcj">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -134,6 +134,6 @@
         </tableCellView>
     </objects>
     <resources>
-        <image name="magnifyingglass.circle.fill" catalog="system" width="15" height="15"/>
+        <image name="arrowshape.forward.circle.fill" catalog="system" width="15" height="15"/>
     </resources>
 </document>
