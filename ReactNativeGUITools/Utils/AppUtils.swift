@@ -37,7 +37,6 @@ func launchApplication(at filePath: String, using defaultApp: PathVersion) {
         config.arguments = [filePath]
     } else {
         config.arguments = [url.absoluteString]
-   
     }
 
     NSWorkspace.shared.open([url], withApplicationAt: defaultAppURL, configuration: config) { app, error in
@@ -54,14 +53,26 @@ func launchApplication(at filePath: String, using defaultApp: PathVersion) {
 
 func openInTerminal(atPath path: String, terminalScript: String) {
     let AppleScriptSrc = """
-        tell app "Terminal"
-            activate
-            if number of windows > 0
-                do script "\(terminalScript)" in tab 1 of window 1
+    tell application "Terminal"
+        activate
+        if (count of windows) > 0 then
+            -- Check if the frontmost tab is busy
+            if busy of front window's selected tab then
+                -- Open a new tab and run the command
+                tell front window
+                    set newTab to do script "\(terminalScript)"
+                    set selected tab to newTab
+                end tell
             else
-                do script "\(terminalScript)"
+                -- Run the command in the existing tab
+                do script "\(terminalScript)" in front window's selected tab
             end if
-        end tell
+        else
+            -- Open a new window and run the command
+            do script "\(terminalScript)"
+        end if
+    end tell
+
     """
 
     if let AppleScript = NSAppleScript(source: AppleScriptSrc) {
