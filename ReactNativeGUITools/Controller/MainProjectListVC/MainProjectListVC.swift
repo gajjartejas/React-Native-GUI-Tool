@@ -89,6 +89,16 @@ class MainProjectListVC: NSViewController {
         sender.menu?.popUp(positioning: nil, at: location, in: sender)
     }
 
+    @IBAction func onPressGithubLinkButton(_ sender: Any) {
+        let url = "https://github.com/gajjartejas/React-Native-GUI-Tool"
+        NSWorkspace.shared.open(URL(string: url)!)
+    }
+    
+    @IBAction func onPressGithubDonateLinkButton(_ sender: Any) {
+        let url = "https://github.com/sponsors/gajjartejas"
+        NSWorkspace.shared.open(URL(string: url)!)
+    }
+    
     // MARK: - Helpers
 
     @objc func checkForEmptyData() {
