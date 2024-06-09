@@ -85,6 +85,17 @@ extension ProjectListMenu {
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
+    @objc func openInCodeEditorAction(_ sender: NSMenuItem) {
+        guard let clickedRow = clickedRow else { return }
+        let projectInfo = projectInfoCollection.projectInfos[clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
+        guard let defaultCodeEditor = MainSettingsManager.shared.mainSettings.defaultCodeEditor else { return }
+        launchApplication(at: projectInfo.path, using: defaultCodeEditor)
+    }
+
     @objc func openInAndroidStudioAction(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
         let projectInfo = projectInfoCollection.projectInfos[clickedRow]
@@ -92,7 +103,8 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        openAndroidStudio(atPath: projectInfo.path)
+        guard let defaultAndroidStudio = MainSettingsManager.shared.mainSettings.defaultAndroidStudio else { return }
+        launchApplication(at: projectInfo.path + "/android", using: defaultAndroidStudio)
     }
 
     @objc func openInXcodeAction(_ sender: NSMenuItem) {
@@ -102,7 +114,10 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        openInXcode(atPath: projectInfo.path)
+        guard let defaultXcode = MainSettingsManager.shared.mainSettings.defaultXcodePath else { return }
+        let path = projectInfo.path + "/ios"
+        guard let xcodeProjectName = findXcodeProjectFile(atPath: path) else { return }
+        launchApplication(at: path + "/\(xcodeProjectName)", using: defaultXcode)
     }
 
     @objc func cleaniOSAllFolders(_ sender: NSMenuItem) {

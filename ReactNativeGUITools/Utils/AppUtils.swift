@@ -22,15 +22,9 @@ func openTerminal(at path: String) {
     }
 }
 
-func openAndroidStudio(atPath path: String) {
-    let projectPath = path + "/android"
-    let url = URL(fileURLWithPath: projectPath)
-    let path = path + "/android"
-
-    guard let appURL = FileManager.default.urls(
-        for: .applicationDirectory,
-        in: .localDomainMask
-    ).first?.appendingPathComponent("Android Studio.app") else { return }
+func launchApplication(at filePath: String, using defaultApp: PathVersion) {
+    let url = URL(fileURLWithPath: filePath)
+    let defaultAppURL = URL(fileURLWithPath: defaultApp.path)
 
     // launch configuration
     let config = NSWorkspace.OpenConfiguration()
@@ -38,46 +32,22 @@ func openAndroidStudio(atPath path: String) {
     config.createsNewApplicationInstance = false
     config.allowsRunningApplicationSubstitution = true
     config.activates = true
-    config.arguments = [path]
 
-    NSWorkspace.shared.open([url], withApplicationAt: appURL, configuration: config) { app, error in
-        if let error = error {
-            print("unable to launch Preview.app: \(error.localizedDescription)")
-            return
-        }
-
-        if let app = app {
-            print("launched Preview.app with pid \(app.processIdentifier)")
-        }
+    if defaultApp.bundleId == .webStorm || defaultApp.bundleId == .androidStudio {
+        config.arguments = [filePath]
+    } else {
+        config.arguments = [url.absoluteString]
+   
     }
-}
 
-func openInXcode(atPath path: String) {
-    guard let xcodeProjectName = findXcodeProjectFile(atPath: path + "/ios") else { return }
-    let projectPath = path + "/ios/\(xcodeProjectName)"
-    let url = URL(fileURLWithPath: projectPath)
-
-    guard let appURL = FileManager.default.urls(
-        for: .applicationDirectory,
-        in: .localDomainMask
-    ).first?.appendingPathComponent("Xcode.app") else { return }
-
-    // launch configuration
-    let config = NSWorkspace.OpenConfiguration()
-    config.addsToRecentItems = true
-    config.createsNewApplicationInstance = false
-    config.allowsRunningApplicationSubstitution = true
-    config.activates = true
-    config.arguments = [url.absoluteString]
-
-    NSWorkspace.shared.open([url], withApplicationAt: appURL, configuration: config) { app, error in
+    NSWorkspace.shared.open([url], withApplicationAt: defaultAppURL, configuration: config) { app, error in
         if let error = error {
-            print("unable to launch Preview.app: \(error.localizedDescription)")
+            print("unable to launch app: \(error.localizedDescription)")
             return
         }
 
         if let app = app {
-            print("launched Preview.app with pid \(app.processIdentifier)")
+            print("launched app \(app.processIdentifier)")
         }
     }
 }

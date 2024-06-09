@@ -15,9 +15,9 @@ protocol ProjectListMenuDelegate: AnyObject {
 }
 
 class ProjectListMenu: NSObject {
-    var projectInfoCollection: ProjectInfoCollection!
+    let projectInfoCollection = ProjectInfoCollection.shared
     var clickedRow: Int?
-
+    let mainSettingsManager = MainSettingsManager.shared
     weak var delegate: ProjectListMenuDelegate?
 
     func setClickedRow(_ row: Int?) {
@@ -45,8 +45,8 @@ class ProjectListMenu: NSObject {
         menu.insertItem(scriptMenuItem, at: 10)
     }
 
-    func createMenuFrom(from projectInfoCollection: ProjectInfoCollection, row: Int?) -> NSMenu {
-        self.projectInfoCollection = projectInfoCollection
+    func createMenuFrom(row: Int?) -> NSMenu {
+         
         clickedRow = row
 
         let menu = NSMenu()
@@ -54,6 +54,7 @@ class ProjectListMenu: NSObject {
         menu.addItem(withTitle: "Open", action: #selector(openAction(_:)), keyEquivalent: "")
         menu.addItem(withTitle: "Show in Finder", action: #selector(showInFinderAction(_:)), keyEquivalent: "")
         menu.addItem(withTitle: "Open in Terminal", action: #selector(openInTerminalAction(_:)), keyEquivalent: "")
+        menu.addItem(withTitle: "Open in Code Editor", action: #selector(openInCodeEditorAction(_:)), keyEquivalent: "")
         menu.addItem(withTitle: "Open in Android Studio", action: #selector(openInAndroidStudioAction(_:)), keyEquivalent: "")
         menu.addItem(withTitle: "Open in Xcode", action: #selector(openInXcodeAction(_:)), keyEquivalent: "")
 

@@ -30,7 +30,7 @@ class MainProjectListVC: NSViewController {
 
         initializeProjectListTableView()
 
-        projectListTableView.menu = projectListMenu.createMenuFrom(from: ProjectInfoCollection.shared, row: nil)
+        projectListTableView.menu = projectListMenu.createMenuFrom(row: nil)
         projectListMenu.delegate = self
 
         // more contex menu
