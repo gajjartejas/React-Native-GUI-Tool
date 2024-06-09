@@ -85,9 +85,23 @@ extension MainProjectListVC: NSTableViewDelegate {
             ProjectInfo(id: UUID().uuidString, path: item.url(forType: .fileURL)!)
         }
 
-        ProjectInfoCollection.shared.insert(contentsOf: newProjects, at: row)
-        tableView.insertRows(at: IndexSet(row ... row + newProjects.count - 1),
-                             withAnimation: .slideDown)
+        for newProject in newProjects {
+            if ProjectInfoCollection.shared.findByPath(project: newProject) {
+                showConfirmAlert(
+                    message: "Duplicate Project",
+                    informativeText: "A project with the same path already exists. Do you want to add it again?",
+                    confirmAction: {
+                        ProjectInfoCollection.shared.insert(contentsOf: [newProject], at: row)
+                        tableView.insertRows(at: IndexSet(integer: row), withAnimation: .slideDown)
+                    },
+                    cancelAction: {}
+                )
+                return true
+            } else {
+                ProjectInfoCollection.shared.insert(contentsOf: newProjects, at: row)
+                tableView.insertRows(at: IndexSet(integer: row), withAnimation: .slideDown)
+            }
+        }
         return true
     }
 
@@ -103,5 +117,18 @@ extension MainProjectListVC: NSTableViewDelegate {
             }
             tableView.removeRows(at: IndexSet(indexes), withAnimation: .slideUp)
         }
+    }
+}
+
+extension MainProjectListVC {
+    func showConfirmAlert(message: String, informativeText: String, confirmAction: @escaping () -> Void, cancelAction: @escaping () -> Void) {
+        _ = ConfirmAlertView(
+            message: message,
+            informativeText: informativeText,
+            confirmButtonTitle: "OK",
+            cancelButtonTitle: "Cancel",
+            confirmAction: confirmAction,
+            cancelAction: cancelAction
+        )
     }
 }

@@ -117,4 +117,10 @@ class ProjectInfoCollection {
             _ = ProjectInfo.writeArrayToStorage(projectInfosAll)
         }
     }
+
+    func findByPath(project: ProjectInfo) -> Bool {
+        return projectInfos.contains { item in
+            item.path == project.path
+        }
+    }
 }

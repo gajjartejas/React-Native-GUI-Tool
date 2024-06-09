@@ -33,6 +33,10 @@ class ProjectInfo: Codable, PlistStorable {
         case id, path, name, versionString, scripts
     }
 
+    static func ==(lhs: ProjectInfo, rhs: ProjectInfo) -> Bool {
+         return lhs.path == rhs.path
+     }
+    
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
