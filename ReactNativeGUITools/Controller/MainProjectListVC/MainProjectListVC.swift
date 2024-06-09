@@ -97,7 +97,7 @@ class MainProjectListVC: NSViewController {
         } else {
             dropView.isHidden = true
         }
-        projectListTableView.reloadData()
+//        projectListTableView.reloadData()
     }
 
     private func initializeProjectListTableView() {

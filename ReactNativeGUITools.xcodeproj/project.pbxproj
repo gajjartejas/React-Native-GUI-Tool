@@ -14,6 +14,7 @@
 		960F35F12C148A8D00989279 /* MainSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F35F02C148A8D00989279 /* MainSettingsManager.swift */; };
 		960F596B2BD967D600E08DEA /* NSPasteboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F596A2BD967D600E08DEA /* NSPasteboardItem.swift */; };
 		960F596D2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F596C2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift */; };
+		96139BCD2C1599710012A026 /* ConfirmAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96139BCC2C1599710012A026 /* ConfirmAlertView.swift */; };
 		961F2F0B2C0C94DA0071068A /* MainSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F2F0A2C0C94DA0071068A /* MainSettingsVC.swift */; };
 		962075742C06404500AB61AB /* NSWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962075732C06404500AB61AB /* NSWindowController.swift */; };
 		963CAEEC2BFCF95C007F7572 /* NSMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963CAEEB2BFCF95C007F7572 /* NSMenu.swift */; };
@@ -78,6 +79,7 @@
 		960F35F02C148A8D00989279 /* MainSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsManager.swift; sourceTree = "<group>"; };
 		960F596A2BD967D600E08DEA /* NSPasteboardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPasteboardItem.swift; sourceTree = "<group>"; };
 		960F596C2BD9755400E08DEA /* MainProjectListVC+ContexMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainProjectListVC+ContexMenu.swift"; sourceTree = "<group>"; };
+		96139BCC2C1599710012A026 /* ConfirmAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmAlertView.swift; sourceTree = "<group>"; };
 		961F2F0A2C0C94DA0071068A /* MainSettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsVC.swift; sourceTree = "<group>"; };
 		962075732C06404500AB61AB /* NSWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSWindowController.swift; sourceTree = "<group>"; };
 		963CAEEB2BFCF95C007F7572 /* NSMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMenu.swift; sourceTree = "<group>"; };
@@ -157,6 +159,15 @@
 			path = MainSettings;
 			sourceTree = "<group>";
 		};
+		96139BCE2C159A090012A026 /* AlertView */ = {
+			isa = PBXGroup;
+			children = (
+				96FCDF9F2C0AF49700A2AFBA /* PromptAlertView.swift */,
+				96139BCC2C1599710012A026 /* ConfirmAlertView.swift */,
+			);
+			path = AlertView;
+			sourceTree = "<group>";
+		};
 		961F2F092C0C94370071068A /* MainSettingsVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,12 +212,12 @@
 		96633F692BA59F9D00B668FC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				96139BCE2C159A090012A026 /* AlertView */,
 				96AFFF182BFA088B002D3828 /* ProjectListContexMenu */,
 				968C6CAD2BCC149100F8C5A1 /* ProjectListCellView */,
 				96D181452BADF07900380905 /* ToolsOutlineCellView */,
 				960B0A2A2BDCD04000494CA2 /* DropView.swift */,
 				967450752BDCE8A70047D7C1 /* ProjectListDropLableView.swift */,
-				96FCDF9F2C0AF49700A2AFBA /* PromptAlertView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -578,6 +589,7 @@
 				9656A40C2BF8D24A000DD137 /* MainProjectListVC+MoreContexMenu.swift in Sources */,
 				96EB35C12BD81E6F00BC04BF /* MainProjectListVC+Delegate.swift in Sources */,
 				96EB35C32BD8211D00BC04BF /* MainProjectListVC+DragDrop.swift in Sources */,
+				96139BCD2C1599710012A026 /* ConfirmAlertView.swift in Sources */,
 				96EB35B12BD809D500BC04BF /* ApktoolVC.swift in Sources */,
 				96F71CF52BD2D7490003D728 /* ProjectTabViewController.swift in Sources */,
 				96FCDFA62C0B3EB200A2AFBA /* ProjectListStatusBarMenu+Extension.swift in Sources */,
