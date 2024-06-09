@@ -987,11 +987,11 @@
             <objects>
                 <viewController storyboardIdentifier="MainProjectListVC" id="XfG-lQ-9wD" customClass="MainProjectListVC" customModule="ReactNativeGUITools" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="601" height="364"/>
+                        <rect key="frame" x="0.0" y="0.0" width="601" height="483"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="rRM-EE-iXm">
-                                <rect key="frame" x="0.0" y="314" width="601" height="50"/>
+                                <rect key="frame" x="0.0" y="433" width="601" height="50"/>
                                 <subviews>
                                     <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWy-Za-2p7">
                                         <rect key="frame" x="20" y="14" width="531" height="22"/>
@@ -1026,13 +1026,13 @@
                                 </constraints>
                             </customView>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="25" horizontalPageScroll="10" verticalLineScroll="25" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zx3-y3-Fjt">
-                                <rect key="frame" x="0.0" y="0.0" width="601" height="314"/>
+                                <rect key="frame" x="0.0" y="40" width="601" height="393"/>
                                 <clipView key="contentView" id="otW-zd-7Zx">
-                                    <rect key="frame" x="1" y="1" width="599" height="312"/>
+                                    <rect key="frame" x="1" y="1" width="599" height="391"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="vaA-eD-uX4">
-                                            <rect key="frame" x="0.0" y="0.0" width="599" height="312"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="599" height="391"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="0.0" height="8"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1064,10 +1064,10 @@
                                 </scroller>
                             </scrollView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="cTD-8F-1Yi" customClass="DropView" customModule="ReactNativeGUITools" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="601" height="314"/>
+                                <rect key="frame" x="0.0" y="40" width="601" height="393"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="5ms-r6-la7" customClass="ProjectListDropLableView" customModule="ReactNativeGUITools" customModuleProvider="target">
-                                        <rect key="frame" x="99" y="68" width="403" height="179"/>
+                                        <rect key="frame" x="99" y="107" width="403" height="179"/>
                                         <subviews>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K6B-Xl-H2g">
                                                 <rect key="frame" x="174" y="96" width="55" height="51"/>
@@ -1104,19 +1104,54 @@
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5ms-r6-la7" secondAttribute="trailing" constant="16" id="Tnq-4P-FT4"/>
                                 </constraints>
                             </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="aCB-q9-MX0">
+                                <rect key="frame" x="0.0" y="0.0" width="601" height="40"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nyR-di-RZH">
+                                        <rect key="frame" x="12" y="3" width="97" height="32"/>
+                                        <buttonCell key="cell" type="push" title="GitHub" bezelStyle="rounded" image="github" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5By-gi-EYU">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="onPressGithubLinkButton:" target="XfG-lQ-9wD" id="kra-LK-Ksu"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dUO-qM-rjD">
+                                        <rect key="frame" x="485" y="3" width="103" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Dontate" bezelStyle="rounded" image="donate" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="t4n-QD-bN9">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="onPressGithubDonateLinkButton:" target="XfG-lQ-9wD" id="aNh-TY-iH5"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="nyR-di-RZH" firstAttribute="leading" secondItem="aCB-q9-MX0" secondAttribute="leading" constant="19" id="CJ0-b3-Spv"/>
+                                    <constraint firstItem="dUO-qM-rjD" firstAttribute="centerY" secondItem="aCB-q9-MX0" secondAttribute="centerY" id="LvM-5M-tds"/>
+                                    <constraint firstAttribute="height" constant="40" id="R2L-yk-Gzr"/>
+                                    <constraint firstItem="nyR-di-RZH" firstAttribute="centerY" secondItem="aCB-q9-MX0" secondAttribute="centerY" id="Wie-Qn-cos"/>
+                                    <constraint firstAttribute="trailing" secondItem="dUO-qM-rjD" secondAttribute="trailing" constant="20" symbolic="YES" id="lN3-Dd-KaR"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="cTD-8F-1Yi" secondAttribute="bottom" id="61V-tk-0O9"/>
-                            <constraint firstAttribute="bottom" secondItem="Zx3-y3-Fjt" secondAttribute="bottom" id="97C-Zv-QFX"/>
+                            <constraint firstItem="aCB-q9-MX0" firstAttribute="top" secondItem="cTD-8F-1Yi" secondAttribute="bottom" id="7g1-Y1-L0h"/>
                             <constraint firstAttribute="trailing" secondItem="rRM-EE-iXm" secondAttribute="trailing" id="RXn-H5-SOz"/>
                             <constraint firstItem="rRM-EE-iXm" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="WC8-Cg-kaf"/>
+                            <constraint firstItem="aCB-q9-MX0" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="WH8-nm-hLo"/>
                             <constraint firstAttribute="trailing" secondItem="cTD-8F-1Yi" secondAttribute="trailing" id="XD5-Uw-rUO"/>
                             <constraint firstAttribute="trailing" secondItem="Zx3-y3-Fjt" secondAttribute="trailing" id="Xw9-a7-uH0"/>
+                            <constraint firstAttribute="bottom" secondItem="aCB-q9-MX0" secondAttribute="bottom" id="Yhu-13-zfr"/>
                             <constraint firstItem="rRM-EE-iXm" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="bv6-L3-KRa"/>
                             <constraint firstItem="Zx3-y3-Fjt" firstAttribute="top" secondItem="rRM-EE-iXm" secondAttribute="bottom" id="cwM-pI-Dp0"/>
                             <constraint firstItem="cTD-8F-1Yi" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="d8q-Gb-Lj4"/>
+                            <constraint firstAttribute="trailing" secondItem="aCB-q9-MX0" secondAttribute="trailing" id="jgc-w9-qcA"/>
                             <constraint firstItem="cTD-8F-1Yi" firstAttribute="top" secondItem="rRM-EE-iXm" secondAttribute="bottom" id="p6b-VI-JU3"/>
                             <constraint firstItem="Zx3-y3-Fjt" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="tCt-9v-gH9"/>
+                            <constraint firstItem="aCB-q9-MX0" firstAttribute="top" secondItem="Zx3-y3-Fjt" secondAttribute="bottom" id="z9d-Nu-rOp"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1128,7 +1163,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-161.5" y="1369"/>
+            <point key="canvasLocation" x="-161.5" y="1354.5"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="Y3o-72-AMF">
@@ -1630,8 +1665,10 @@
     <resources>
         <image name="NSActionTemplate" width="19" height="19"/>
         <image name="arrowshape.forward.circle.fill" catalog="system" width="15" height="15"/>
+        <image name="donate" width="24" height="24"/>
         <image name="drag-drop" width="256" height="256"/>
         <image name="gearshape" catalog="system" width="16" height="16"/>
+        <image name="github" width="24" height="24"/>
         <image name="opticaldiscdrive" catalog="system" width="19" height="13"/>
     </resources>
 </document>
