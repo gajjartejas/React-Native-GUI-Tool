@@ -799,7 +799,7 @@
                                                         </textField>
                                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="Hko-ak-o10">
                                                             <rect key="frame" x="263" y="0.0" width="13" height="13"/>
-                                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrowshape.forward.circle.fill" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="DH1-Cn-mr2">
+                                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSFollowLinkFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="DH1-Cn-mr2">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="smallSystem"/>
                                                             </buttonCell>
@@ -849,7 +849,7 @@
                                                         </textField>
                                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="KLr-Bb-RAm">
                                                             <rect key="frame" x="263" y="0.0" width="13" height="13"/>
-                                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrowshape.forward.circle.fill" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="SPr-bz-Eqf">
+                                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSFollowLinkFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="SPr-bz-Eqf">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="smallSystem"/>
                                                             </buttonCell>
@@ -899,7 +899,7 @@
                                                         </textField>
                                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="eVN-6O-GKj">
                                                             <rect key="frame" x="263" y="0.0" width="13" height="13"/>
-                                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrowshape.forward.circle.fill" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="WE4-Gf-Bbo">
+                                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSFollowLinkFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="WE4-Gf-Bbo">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="smallSystem"/>
                                                             </buttonCell>
@@ -1108,7 +1108,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="601" height="40"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nyR-di-RZH">
-                                        <rect key="frame" x="12" y="3" width="97" height="32"/>
+                                        <rect key="frame" x="13" y="3" width="97" height="32"/>
                                         <buttonCell key="cell" type="push" title="GitHub" bezelStyle="rounded" image="github" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5By-gi-EYU">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -1118,8 +1118,8 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dUO-qM-rjD">
-                                        <rect key="frame" x="485" y="3" width="103" height="32"/>
-                                        <buttonCell key="cell" type="push" title="Dontate" bezelStyle="rounded" image="donate" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="t4n-QD-bN9">
+                                        <rect key="frame" x="483" y="3" width="105" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Sponsor" bezelStyle="rounded" image="donate" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="t4n-QD-bN9">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -1129,10 +1129,11 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="nyR-di-RZH" firstAttribute="leading" secondItem="aCB-q9-MX0" secondAttribute="leading" constant="19" id="CJ0-b3-Spv"/>
+                                    <constraint firstItem="nyR-di-RZH" firstAttribute="leading" secondItem="aCB-q9-MX0" secondAttribute="leading" constant="20" symbolic="YES" id="CJ0-b3-Spv"/>
                                     <constraint firstItem="dUO-qM-rjD" firstAttribute="centerY" secondItem="aCB-q9-MX0" secondAttribute="centerY" id="LvM-5M-tds"/>
                                     <constraint firstAttribute="height" constant="40" id="R2L-yk-Gzr"/>
                                     <constraint firstItem="nyR-di-RZH" firstAttribute="centerY" secondItem="aCB-q9-MX0" secondAttribute="centerY" id="Wie-Qn-cos"/>
+                                    <constraint firstItem="dUO-qM-rjD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nyR-di-RZH" secondAttribute="trailing" constant="4" id="X5F-eh-vuw"/>
                                     <constraint firstAttribute="trailing" secondItem="dUO-qM-rjD" secondAttribute="trailing" constant="20" symbolic="YES" id="lN3-Dd-KaR"/>
                                 </constraints>
                             </customView>
@@ -1664,7 +1665,7 @@
     </scenes>
     <resources>
         <image name="NSActionTemplate" width="19" height="19"/>
-        <image name="arrowshape.forward.circle.fill" catalog="system" width="15" height="15"/>
+        <image name="NSFollowLinkFreestandingTemplate" width="19" height="19"/>
         <image name="donate" width="24" height="24"/>
         <image name="drag-drop" width="256" height="256"/>
         <image name="gearshape" catalog="system" width="16" height="16"/>
