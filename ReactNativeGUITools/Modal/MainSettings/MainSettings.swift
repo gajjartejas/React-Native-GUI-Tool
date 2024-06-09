@@ -7,9 +7,41 @@
 
 import Foundation
 
+enum AppBundleIdentifier: String, Codable {
+    case vscode = "com.microsoft.VSCode"
+    case webStorm = "com.jetbrains.WebStorm"
+    case atom = "com.github.atom"
+    case sublimeText = "com.sublimetext.4"
+    case nova = "com.panic.Nova"
+    case xcode = "com.apple.dt.Xcode"
+    case androidStudio = "com.google.android.studio"
+}
+
+extension AppBundleIdentifier {
+    var appName: String {
+        switch self {
+        case .vscode:
+            return "Visual Studio Code"
+        case .webStorm:
+            return "WebStorm"
+        case .atom:
+            return "Atom"
+        case .sublimeText:
+            return "Sublime Text"
+        case .nova:
+            return "Nova"
+        case .xcode:
+            return "Xcode"
+        case .androidStudio:
+            return "Android Studio"
+        }
+    }
+}
+
 struct PathVersion: Codable {
     var path: String
     var version: String
+    var bundleId: AppBundleIdentifier
 
     var description: String {
         return "\(path)(\(version))"
@@ -64,8 +96,9 @@ class MainSettings: Codable, PlistStorable {
             for item in items {
                 if appNames.contains(where: { item.lowercased().contains($0.lowercased()) }) && item.hasSuffix(".app") {
                     let fullPath = "\(applicationsDirectory)/\(item)"
-                    if isApp(at: fullPath, withBundleIdentifiers: bundleIdentifiers), let version = getAppVersion(at: fullPath) {
-                        appPathsAndVersions.append(PathVersion(path: fullPath, version: version))
+                    if let bid = isApp(at: fullPath, withBundleIdentifiers: bundleIdentifiers),
+                       let version = getAppVersion(at: fullPath), let bidValue = AppBundleIdentifier(rawValue: bid) {
+                        appPathsAndVersions.append(PathVersion(path: fullPath, version: version, bundleId: bidValue))
                     }
                 }
             }
@@ -81,11 +114,13 @@ class MainSettings: Codable, PlistStorable {
         return bundle?.infoDictionary?["CFBundleShortVersionString"] as? String
     }
 
-    private func isApp(at path: String, withBundleIdentifiers bundleIdentifiers: [String]) -> Bool {
+    private func isApp(at path: String, withBundleIdentifiers bundleIdentifiers: [String]) -> String? {
         let bundle = Bundle(path: path)
         if let bundleIdentifier = bundle?.infoDictionary?["CFBundleIdentifier"] as? String {
-            return bundleIdentifiers.contains(bundleIdentifier)
+            if bundleIdentifiers.contains(bundleIdentifier) {
+                return bundleIdentifier
+            }
         }
-        return false
+        return nil
     }
 }

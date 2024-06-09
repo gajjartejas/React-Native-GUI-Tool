@@ -29,7 +29,7 @@ class ProjectListStatusBarMenu: NSObject {
         // Project List
         for (row, info) in projectInfoCollection.projectInfos.enumerated() {
             let menuItem = NSMenuItem(title: info.name ?? "-", action: nil, keyEquivalent: "")
-            menuItem.submenu = projectListMenu.createMenuFrom(from: projectInfoCollection, row: row)
+            menuItem.submenu = projectListMenu.createMenuFrom(row: row)
             menuItem.tag = row
             statusBarMenu.addItem(menuItem)
         }
@@ -71,7 +71,7 @@ class ProjectListStatusBarMenu: NSObject {
 
         for (row, info) in projectInfoCollection.projectInfos.enumerated() {
             let menuItem = NSMenuItem(title: info.name ?? "-", action: nil, keyEquivalent: "")
-            menuItem.submenu = projectListMenu.createMenuFrom(from: projectInfoCollection, row: row)
+            menuItem.submenu = projectListMenu.createMenuFrom(row: row)
             menuItem.tag = row
             statusBarMenu.addItem(menuItem)
         }
