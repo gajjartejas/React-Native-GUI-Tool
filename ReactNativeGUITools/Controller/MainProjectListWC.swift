@@ -24,7 +24,6 @@ extension MainProjectListWC: NSWindowDelegate {
     func windowShouldClose(_ sender: NSWindow) -> Bool {
         // NSApplication.shared.hide(self)
         window?.orderOut(nil)
-        untrack()
         return false
     }
 }

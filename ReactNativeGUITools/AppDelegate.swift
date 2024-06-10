@@ -45,14 +45,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func openSettings(_ sender: Any) {
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        guard let controller = storyboard.instantiateController(withIdentifier: "MainSettingsWC") as? MainSettingsWC else {
-            return
+        let allControllers = NSWindowController.getAllControllers()
+        if let foundController = allControllers.compactMap({ $0 as? MainSettingsWC }).first {
+            foundController.window?.makeKeyAndOrderFront(self)
+        } else {
+            let storyboard = NSStoryboard(name: "Main", bundle: nil)
+            guard let controller = storyboard.instantiateController(withIdentifier: "MainSettingsWC") as? MainSettingsWC else { return }
+            if let mainWindow = allControllers.first?.window {
+                controller.location = mainWindow.frame
+            }
+            // controller.showWindow(nil)
+            controller.window?.makeKeyAndOrderFront(self)
         }
-        let allWC = NSWindowController.getAllControllers()
-        if let mainWindow = allWC.first?.window {
-            controller.location = mainWindow.frame
-            controller.showWindow(mainWindow)
-        }
+        NSApp.activate(ignoringOtherApps: true)
     }
 }

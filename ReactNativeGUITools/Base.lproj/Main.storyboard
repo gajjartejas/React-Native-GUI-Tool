@@ -705,7 +705,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-161.5" y="734"/>
+            <point key="canvasLocation" x="-162" y="734"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="ssy-lW-3Un">
@@ -753,7 +753,7 @@
                 </windowController>
                 <customObject id="QyY-aG-NgV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="369" y="189"/>
+            <point key="canvasLocation" x="495" y="696"/>
         </scene>
         <!--Main SettingsVC-->
         <scene sceneID="Ix8-uL-8LG">
@@ -980,7 +980,7 @@
                 </viewController>
                 <customObject id="x4b-6q-SVr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1040" y="183"/>
+            <point key="canvasLocation" x="1166" y="690"/>
         </scene>
         <!--Main Project ListVC-->
         <scene sceneID="hIz-AP-VOD">
@@ -1171,7 +1171,7 @@
             <objects>
                 <customObject id="Iel-Uh-akt" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <windowController storyboardIdentifier="ToolsOutlineWC" id="mIW-mG-K0d" customClass="ToolsOutlineWC" customModule="ReactNativeGUITools" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" toolbarStyle="expanded" id="0x2-9d-F1W">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" toolbarStyle="expanded" id="0x2-9d-F1W">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="201" y="313" width="700" height="300"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>

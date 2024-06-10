@@ -36,7 +36,6 @@ class ToolsOutlineWC: NSWindowController {
 
 extension ToolsOutlineWC: NSWindowDelegate {
     func windowShouldClose(_ sender: NSWindow) -> Bool {
-        untrack()
         return true
     }
 }

@@ -28,16 +28,22 @@ extension ProjectListStatusBarMenu: ProjectListMenuDelegate {
     func projectListMenu(didSelectOpenMenuItem menuItem: NSMenuItem, at row: Int) {
         let projectInfo = projectInfoCollection.projectInfos[row]
         guard FileManager.default.fileExists(atPath: projectInfo.path) else { return }
-        if let foundController = NSWindowController.getAllControllers().compactMap({ $0 as? ToolsOutlineWC }).first(where: { $0.fromRow == row }) {
+
+        let allControllers = NSWindowController.getAllControllers()
+        if let foundController = allControllers.compactMap({ $0 as? ToolsOutlineWC }).first(where: { $0.fromRow == row }) {
             foundController.window?.makeKeyAndOrderFront(self)
         } else {
             let storyboard = NSStoryboard(name: "Main", bundle: nil)
             guard let controller = storyboard.instantiateController(withIdentifier: "ToolsOutlineWC") as? ToolsOutlineWC else { return }
+            if let mainWindow = allControllers.first?.window {
+                controller.location = mainWindow.frame
+            }
             controller.fromRow = row
             controller.projectInfo = projectInfo
-            controller.showWindow(nil)
+//            controller.showWindow(nil)
             controller.window?.makeKeyAndOrderFront(self)
         }
+        NSApp.activate(ignoringOtherApps: true)
     }
 
     func projectListMenu(didSelectRenameMenuItem menuItem: NSMenuItem, at row: Int) {

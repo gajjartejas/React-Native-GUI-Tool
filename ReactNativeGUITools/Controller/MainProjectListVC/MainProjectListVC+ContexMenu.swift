@@ -11,6 +11,7 @@ extension MainProjectListVC: ProjectListMenuDelegate {
     func projectListMenu(didSelectOpenMenuItem menuItem: NSMenuItem, at row: Int) {
         let projectInfo = ProjectInfoCollection.shared.projectInfos[row]
         guard FileManager.default.fileExists(atPath: projectInfo.path) else { return }
+        let allControllers = NSWindowController.getAllControllers()
         if let foundController = NSWindowController.getAllControllers().compactMap({ $0 as? ToolsOutlineWC }).first(where: { $0.fromRow == row }) {
             foundController.window?.makeKeyAndOrderFront(self)
         } else {
@@ -18,9 +19,13 @@ extension MainProjectListVC: ProjectListMenuDelegate {
             guard let controller = storyboard.instantiateController(withIdentifier: "ToolsOutlineWC") as? ToolsOutlineWC else { return }
             controller.fromRow = row
             controller.projectInfo = projectInfo
-            controller.location = view.window?.frame
-            controller.showWindow(nil)
+            if let mainWindow = allControllers.first?.window {
+                controller.location = mainWindow.frame
+            }
+            //controller.showWindow(nil)
+            controller.window?.makeKeyAndOrderFront(self)
         }
+        NSApp.activate(ignoringOtherApps: true)
     }
 
     func projectListMenu(didSelectRenameMenuItem menuItem: NSMenuItem, at row: Int) {
