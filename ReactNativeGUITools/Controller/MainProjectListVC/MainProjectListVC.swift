@@ -107,7 +107,7 @@ class MainProjectListVC: NSViewController {
         } else {
             dropView.isHidden = true
         }
-//        projectListTableView.reloadData()
+        projectListTableView.reloadData()
     }
 
     private func initializeProjectListTableView() {
@@ -148,7 +148,6 @@ class MainProjectListVC: NSViewController {
                 controller.location = mainWindow.frame
             }
             controller.window?.makeKeyAndOrderFront(self)
-            // controller.showWindow(nil)
         }
         NSApp.activate(ignoringOtherApps: true)
     }

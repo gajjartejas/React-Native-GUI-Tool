@@ -54,7 +54,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             if let mainWindow = allControllers.first?.window {
                 controller.location = mainWindow.frame
             }
-            // controller.showWindow(nil)
             controller.window?.makeKeyAndOrderFront(self)
         }
         NSApp.activate(ignoringOtherApps: true)
