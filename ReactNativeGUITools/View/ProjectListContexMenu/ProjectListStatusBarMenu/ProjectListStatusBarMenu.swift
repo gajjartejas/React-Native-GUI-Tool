@@ -22,9 +22,11 @@ class ProjectListStatusBarMenu: NSObject {
         statusBarItem.button?.image?.isTemplate = true
 
         // Open
-        let openMenuItem = NSMenuItem(title: "Show Main Window", action: #selector(showUI(_:)), keyEquivalent: "")
+        let openMenuItem = NSMenuItem(title: "Show Main Window", action: #selector(showUIAction(_:)), keyEquivalent: "")
         openMenuItem.tag = -1
         statusBarMenu.addItem(openMenuItem)
+
+        statusBarMenu.addItem(NSMenuItem.separator())
 
         // Project List
         for (row, info) in projectInfoCollection.projectInfos.enumerated() {
@@ -34,14 +36,34 @@ class ProjectListStatusBarMenu: NSObject {
             statusBarMenu.addItem(menuItem)
         }
 
-        // Open
-        let quitItem = NSMenuItem(title: "Quit", action: #selector(quitUI(_:)), keyEquivalent: "")
+        statusBarMenu.addItem(NSMenuItem.separator())
+
+        // Settings
+        let settingsItem = NSMenuItem(title: "Settings...", action: #selector(settingsAction(_:)), keyEquivalent: "")
+        settingsItem.tag = -5
+        statusBarMenu.addItem(settingsItem)
+
+        // Github
+        let githubItem = NSMenuItem(title: "Github", action: #selector(githubAction(_:)), keyEquivalent: "")
+        githubItem.tag = -4
+        statusBarMenu.addItem(githubItem)
+
+        // Sponsor
+        let sponsorItem = NSMenuItem(title: "Sponsor", action: #selector(sponsorAction(_:)), keyEquivalent: "")
+        sponsorItem.tag = -3
+        statusBarMenu.addItem(sponsorItem)
+
+        // Quit
+        let quitItem = NSMenuItem(title: "Quit", action: #selector(quitUIAction(_:)), keyEquivalent: "")
         quitItem.tag = -2
         statusBarMenu.addItem(quitItem)
 
         statusBarMenu.delegate = self
         statusBarMenu.setTargetToSelfRecursively(target: projectListMenu)
+        settingsItem.target = self
         openMenuItem.target = self
+        githubItem.target = self
+        sponsorItem.target = self
         quitItem.target = self
         statusBarItem.menu = statusBarMenu
 
@@ -53,21 +75,15 @@ class ProjectListStatusBarMenu: NSObject {
                                                object: nil)
     }
 
-    @objc func showUI(_ sender: NSMenuItem) {
-        NSApplication.shared.activate(ignoringOtherApps: true)
-
-        let allWC = NSWindowController.getAllControllers()
-        if let window = allWC.first?.window {
-            window.makeKeyAndOrderFront(self)
-        }
-    }
-
-    @objc func quitUI(_ sender: NSMenuItem) {
-        NSApplication.shared.terminate(nil)
-    }
-
     @objc func reloadMenu() {
-        statusBarMenu.removeAllItems() // Remove all existing items
+        statusBarMenu.removeAllItems()
+
+        // Open
+        let openMenuItem = NSMenuItem(title: "Show Main Window", action: #selector(showUIAction(_:)), keyEquivalent: "")
+        openMenuItem.tag = -1
+        statusBarMenu.addItem(openMenuItem)
+
+        statusBarMenu.addItem(NSMenuItem.separator())
 
         for (row, info) in projectInfoCollection.projectInfos.enumerated() {
             let menuItem = NSMenuItem(title: info.name ?? "-", action: nil, keyEquivalent: "")
@@ -76,9 +92,76 @@ class ProjectListStatusBarMenu: NSObject {
             statusBarMenu.addItem(menuItem)
         }
 
+        statusBarMenu.addItem(NSMenuItem.separator())
+
+        // Settings
+        let settingsItem = NSMenuItem(title: "Settings...", action: #selector(settingsAction(_:)), keyEquivalent: "")
+        settingsItem.tag = -5
+        statusBarMenu.addItem(settingsItem)
+
+        // Github
+        let githubItem = NSMenuItem(title: "Github", action: #selector(githubAction(_:)), keyEquivalent: "")
+        githubItem.tag = -4
+        statusBarMenu.addItem(githubItem)
+
+        // Sponsor
+        let sponsorItem = NSMenuItem(title: "Sponsor", action: #selector(sponsorAction(_:)), keyEquivalent: "")
+        sponsorItem.tag = -3
+        statusBarMenu.addItem(sponsorItem)
+
+        // Quit
+        let quitItem = NSMenuItem(title: "Quit", action: #selector(quitUIAction(_:)), keyEquivalent: "")
+        quitItem.tag = -2
+        statusBarMenu.addItem(quitItem)
+
         statusBarMenu.delegate = self
         statusBarMenu.setTargetToSelfRecursively(target: projectListMenu)
+
+        settingsItem.target = self
+        openMenuItem.target = self
+        githubItem.target = self
+        sponsorItem.target = self
+        quitItem.target = self
+
         statusBarItem.menu = statusBarMenu
+    }
+
+    @objc func showUIAction(_ sender: NSMenuItem) {
+
+        let allWC = NSWindowController.getAllControllers()
+        if let window = allWC.first?.window {
+            window.makeKeyAndOrderFront(self)
+        }
+        NSApp.activate(ignoringOtherApps: true)
+    }
+
+    @objc func quitUIAction(_ sender: NSMenuItem) {
+        NSApplication.shared.terminate(nil)
+    }
+
+    @objc func sponsorAction(_ sender: NSMenuItem) {
+        let url = "https://github.com/sponsors/gajjartejas"
+        NSWorkspace.shared.open(URL(string: url)!)
+    }
+
+    @objc func githubAction(_ sender: NSMenuItem) {
+        let url = "https://github.com/gajjartejas/React-Native-GUI-Tool"
+        NSWorkspace.shared.open(URL(string: url)!)
+    }
+
+    @objc func settingsAction(_ sender: NSMenuItem) {
+        let allControllers = NSWindowController.getAllControllers()
+        if let foundController = allControllers.compactMap({ $0 as? MainSettingsWC }).first {
+            foundController.window?.makeKeyAndOrderFront(self)
+        } else {
+            let storyboard = NSStoryboard(name: "Main", bundle: nil)
+            guard let controller = storyboard.instantiateController(withIdentifier: "MainSettingsWC") as? MainSettingsWC else { return }
+            if let mainWindow = allControllers.first?.window {
+                controller.location = mainWindow.frame
+            }
+            controller.window?.makeKeyAndOrderFront(self)
+        }
+        NSApp.activate(ignoringOtherApps: true)
     }
 
     deinit {

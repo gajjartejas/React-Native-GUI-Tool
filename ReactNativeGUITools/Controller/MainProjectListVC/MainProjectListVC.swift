@@ -93,12 +93,12 @@ class MainProjectListVC: NSViewController {
         let url = "https://github.com/gajjartejas/React-Native-GUI-Tool"
         NSWorkspace.shared.open(URL(string: url)!)
     }
-    
+
     @IBAction func onPressGithubDonateLinkButton(_ sender: Any) {
         let url = "https://github.com/sponsors/gajjartejas"
         NSWorkspace.shared.open(URL(string: url)!)
     }
-    
+
     // MARK: - Helpers
 
     @objc func checkForEmptyData() {
@@ -128,18 +128,29 @@ class MainProjectListVC: NSViewController {
         if projectListTableView.clickedRow == -1 {
             return
         }
-        let projectInfo = ProjectInfoCollection.shared.projectInfos[projectListTableView.clickedRow]
+        let row = projectListTableView.clickedRow
+        let projectInfo = ProjectInfoCollection.shared.projectInfos[row]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
         }
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        guard let controller = storyboard.instantiateController(withIdentifier: "ToolsOutlineWC") as? ToolsOutlineWC else {
-            return
+
+        guard FileManager.default.fileExists(atPath: projectInfo.path) else { return }
+        let allControllers = NSWindowController.getAllControllers()
+        if let foundController = NSWindowController.getAllControllers().compactMap({ $0 as? ToolsOutlineWC }).first(where: { $0.fromRow == row }) {
+            foundController.window?.makeKeyAndOrderFront(self)
+        } else {
+            let storyboard = NSStoryboard(name: "Main", bundle: nil)
+            guard let controller = storyboard.instantiateController(withIdentifier: "ToolsOutlineWC") as? ToolsOutlineWC else { return }
+            controller.fromRow = row
+            controller.projectInfo = projectInfo
+            if let mainWindow = allControllers.first?.window {
+                controller.location = mainWindow.frame
+            }
+            controller.window?.makeKeyAndOrderFront(self)
+            // controller.showWindow(nil)
         }
-        controller.projectInfo = projectInfo
-        controller.location = view.window?.frame
-        controller.showWindow(self)
+        NSApp.activate(ignoringOtherApps: true)
     }
 
     private func initializeDropHandler() {

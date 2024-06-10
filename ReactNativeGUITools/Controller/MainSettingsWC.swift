@@ -50,7 +50,6 @@ class MainSettingsWC: NSWindowController {
 
 extension MainSettingsWC: NSWindowDelegate {
     func windowShouldClose(_ sender: NSWindow) -> Bool {
-        untrack()
         return true
     }
 }
