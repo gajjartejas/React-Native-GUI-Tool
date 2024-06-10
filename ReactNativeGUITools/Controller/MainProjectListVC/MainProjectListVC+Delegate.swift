@@ -91,15 +91,17 @@ extension MainProjectListVC: NSTableViewDelegate {
                     message: "Duplicate Project",
                     informativeText: "A project with the same path already exists. Do you want to add it again?",
                     confirmAction: {
+                     
                         ProjectInfoCollection.shared.insert(contentsOf: [newProject], at: row)
-                        tableView.insertRows(at: IndexSet(integer: row), withAnimation: .slideDown)
+                 
                     },
                     cancelAction: {}
                 )
                 return true
             } else {
+               
                 ProjectInfoCollection.shared.insert(contentsOf: newProjects, at: row)
-                tableView.insertRows(at: IndexSet(integer: row), withAnimation: .slideDown)
+            
             }
         }
         return true

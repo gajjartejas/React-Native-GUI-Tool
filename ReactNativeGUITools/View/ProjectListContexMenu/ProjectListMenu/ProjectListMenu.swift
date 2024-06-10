@@ -26,7 +26,7 @@ class ProjectListMenu: NSObject {
 
     func refreshMenu(_ menu: NSMenu) {
         guard let row = clickedRow else { return }
-        menu.removeItem(at: 10)
+        menu.removeItem(at: 11)
         let scriptMenuItem = NSMenuItem()
         scriptMenuItem.title = "Script"
         let scripts = projectInfoCollection.projectInfos[row].scripts?.sorted(by: customSort)
@@ -42,7 +42,7 @@ class ProjectListMenu: NSObject {
             }
             scriptMenuItem.submenu = scriptMenu
         }
-        menu.insertItem(scriptMenuItem, at: 10)
+        menu.insertItem(scriptMenuItem, at: 11)
     }
 
     func createMenuFrom(row: Int?) -> NSMenu {

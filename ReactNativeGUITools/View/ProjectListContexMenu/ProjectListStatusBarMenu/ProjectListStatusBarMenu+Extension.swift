@@ -23,7 +23,9 @@ extension ProjectListStatusBarMenu: NSMenuDelegate {
 
 extension ProjectListStatusBarMenu: ProjectListMenuDelegate {
     func projectListMenuNeedsUpdate(_ menu: NSMenu) {}
-    func projectListMenu(didSelectRemoveMenuItem menuItem: NSMenuItem, at row: Int) {}
+    func projectListMenu(didSelectRemoveMenuItem menuItem: NSMenuItem, at row: Int) {
+        projectInfoCollection.remove(at: row)
+    }
 
     func projectListMenu(didSelectOpenMenuItem menuItem: NSMenuItem, at row: Int) {
         let projectInfo = projectInfoCollection.projectInfos[row]
@@ -40,7 +42,6 @@ extension ProjectListStatusBarMenu: ProjectListMenuDelegate {
             }
             controller.fromRow = row
             controller.projectInfo = projectInfo
-//            controller.showWindow(nil)
             controller.window?.makeKeyAndOrderFront(self)
         }
         NSApp.activate(ignoringOtherApps: true)
