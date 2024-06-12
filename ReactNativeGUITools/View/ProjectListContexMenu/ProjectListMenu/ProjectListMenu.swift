@@ -15,7 +15,6 @@ protocol ProjectListMenuDelegate: AnyObject {
 }
 
 class ProjectListMenu: NSObject {
-    let projectInfoCollection = ProjectInfoCollection.shared
     var clickedRow: Int?
     let mainSettingsManager = MainSettingsManager.shared
     weak var delegate: ProjectListMenuDelegate?
@@ -29,7 +28,7 @@ class ProjectListMenu: NSObject {
         menu.removeItem(at: 11)
         let scriptMenuItem = NSMenuItem()
         scriptMenuItem.title = "Script"
-        let scripts = projectInfoCollection.projectInfos[row].scripts?.sorted(by: customSort)
+        let scripts = ProjectInfoManager.shared.projectInfos[row].scripts?.sorted(by: customSort)
         if let scripts = scripts {
             let scriptMenu = NSMenu()
             for script in scripts {
@@ -46,7 +45,6 @@ class ProjectListMenu: NSObject {
     }
 
     func createMenuFrom(row: Int?) -> NSMenu {
-         
         clickedRow = row
 
         let menu = NSMenu()
@@ -65,11 +63,11 @@ class ProjectListMenu: NSObject {
         menu.addItem(withTitle: "Remove", action: #selector(removeAction(_:)), keyEquivalent: "")
 
         menu.addItem(NSMenuItem.separator())
-        
+
         let scriptMenuItem = NSMenuItem()
         scriptMenuItem.title = "Script"
         if let row = row {
-            let scripts = projectInfoCollection.projectInfos[row].scripts?.sorted(by: customSort)
+            let scripts = ProjectInfoManager.shared.projectInfos[row].scripts?.sorted(by: customSort)
 
             if let scripts = scripts {
                 let scriptMenu = NSMenu()
@@ -192,4 +190,3 @@ class ProjectListMenu: NSObject {
         return menu
     }
 }
-

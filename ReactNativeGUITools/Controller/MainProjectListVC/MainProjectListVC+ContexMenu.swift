@@ -9,7 +9,7 @@ import Cocoa
 
 extension MainProjectListVC: ProjectListMenuDelegate {
     func projectListMenu(didSelectOpenMenuItem menuItem: NSMenuItem, at row: Int) {
-        let projectInfo = ProjectInfoCollection.shared.projectInfos[row]
+        let projectInfo = ProjectInfoManager.shared.projectInfos[row]
         guard FileManager.default.fileExists(atPath: projectInfo.path) else { return }
         let allControllers = NSWindowController.getAllControllers()
         if let foundController = NSWindowController.getAllControllers().compactMap({ $0 as? ToolsOutlineWC }).first(where: { $0.fromRow == row }) {
@@ -22,7 +22,7 @@ extension MainProjectListVC: ProjectListMenuDelegate {
             if let mainWindow = allControllers.first?.window {
                 controller.location = mainWindow.frame
             }
-            //controller.showWindow(nil)
+            // controller.showWindow(nil)
             controller.window?.makeKeyAndOrderFront(self)
         }
         NSApp.activate(ignoringOtherApps: true)
@@ -37,7 +37,7 @@ extension MainProjectListVC: ProjectListMenuDelegate {
     }
 
     func projectListMenu(didSelectRemoveMenuItem menuItem: NSMenuItem, at row: Int) {
-        ProjectInfoCollection.shared.remove(at: row)
+        ProjectInfoManager.shared.remove(at: row)
         let indexSets = IndexSet(integer: row)
         projectListTableView.removeRows(at: indexSets, withAnimation: .slideDown)
     }

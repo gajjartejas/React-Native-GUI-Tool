@@ -47,7 +47,7 @@ class MainProjectListVC: NSViewController {
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(checkForEmptyData),
-                                               name: ProjectInfoCollection.NotificationNames.projectInfoDidChange,
+                                               name: ProjectInfoManager.NotificationNames.projectInfoDidChange,
                                                object: nil)
     }
 
@@ -102,7 +102,7 @@ class MainProjectListVC: NSViewController {
     // MARK: - Helpers
 
     @objc func checkForEmptyData() {
-        if ProjectInfoCollection.shared.projectInfosAll.isEmpty && !searching {
+        if ProjectInfoManager.shared.projectInfosAll.isEmpty && !searching {
             dropView.isHidden = false
         } else {
             dropView.isHidden = true
@@ -129,7 +129,7 @@ class MainProjectListVC: NSViewController {
             return
         }
         let row = projectListTableView.clickedRow
-        let projectInfo = ProjectInfoCollection.shared.projectInfos[row]
+        let projectInfo = ProjectInfoManager.shared.projectInfos[row]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -155,7 +155,7 @@ class MainProjectListVC: NSViewController {
     private func initializeDropHandler() {
         dropView.dragging { folderPath in
             let newProject = ProjectInfo(id: UUID().uuidString, path: folderPath)
-            ProjectInfoCollection.shared.append(newProject)
+            ProjectInfoManager.shared.append(newProject)
             self.projectListTableView.reloadData()
         }
 
@@ -175,7 +175,7 @@ class MainProjectListVC: NSViewController {
                         let newProject = ProjectInfo(id: UUID().uuidString, path: folderPath)
                         return newProject
                     }
-                    ProjectInfoCollection.shared.append(contentsOf: newProjects)
+                    ProjectInfoManager.shared.append(contentsOf: newProjects)
                     self.projectListTableView.reloadData()
                 }
             }

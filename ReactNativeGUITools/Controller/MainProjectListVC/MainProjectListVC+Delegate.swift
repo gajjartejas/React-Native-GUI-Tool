@@ -18,7 +18,7 @@ extension MainProjectListVC: NSTableViewDelegate {
             return nil
         }
 
-        cellView.configureUI(withNode: ProjectInfoCollection.shared.projectInfos[row], atRow: row)
+        cellView.configureUI(withNode: ProjectInfoManager.shared.projectInfos[row], atRow: row)
         cellView.delegate = self
         return cellView
     }
@@ -30,7 +30,7 @@ extension MainProjectListVC: NSTableViewDelegate {
     func tableView(
         _ tableView: NSTableView,
         pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-        return ProjectListPasteboardWriter(project: ProjectInfoCollection.shared.projectInfos[row].name ?? "-", at: row)
+        return ProjectListPasteboardWriter(project: ProjectInfoManager.shared.projectInfos[row].name ?? "-", at: row)
     }
 
     func tableView(
@@ -59,7 +59,7 @@ extension MainProjectListVC: NSTableViewDelegate {
 
         let oldIndexes = items.compactMap { $0.integer(forType: .tableViewIndex) }
         if !oldIndexes.isEmpty {
-            ProjectInfoCollection.shared.move(fromOffsets: IndexSet(oldIndexes), toOffset: row)
+            ProjectInfoManager.shared.move(fromOffsets: IndexSet(oldIndexes), toOffset: row)
             // The ol' Stack Overflow copy-paste. Reordering rows can get pretty hairy if
             // you allow multiple selection. https://stackoverflow.com/a/26855499/7471873
 
@@ -86,22 +86,18 @@ extension MainProjectListVC: NSTableViewDelegate {
         }
 
         for newProject in newProjects {
-            if ProjectInfoCollection.shared.findByPath(project: newProject) {
+            if ProjectInfoManager.shared.findByPath(project: newProject) {
                 showConfirmAlert(
                     message: "Duplicate Project",
                     informativeText: "A project with the same path already exists. Do you want to add it again?",
                     confirmAction: {
-                     
-                        ProjectInfoCollection.shared.insert(contentsOf: [newProject], at: row)
-                 
+                        ProjectInfoManager.shared.insert(contentsOf: [newProject], at: row)
                     },
                     cancelAction: {}
                 )
                 return true
             } else {
-               
-                ProjectInfoCollection.shared.insert(contentsOf: newProjects, at: row)
-            
+                ProjectInfoManager.shared.insert(contentsOf: newProjects, at: row)
             }
         }
         return true
@@ -115,7 +111,7 @@ extension MainProjectListVC: NSTableViewDelegate {
         if operation == .delete, let items = session.draggingPasteboard.pasteboardItems {
             let indexes = items.compactMap { $0.integer(forType: .tableViewIndex) }
             for index in indexes.reversed() {
-                ProjectInfoCollection.shared.remove(at: index)
+                ProjectInfoManager.shared.remove(at: index)
             }
             tableView.removeRows(at: IndexSet(indexes), withAnimation: .slideUp)
         }

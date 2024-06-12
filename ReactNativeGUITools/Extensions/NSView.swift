@@ -26,9 +26,7 @@ extension NSView {
 
         layer?.addSublayer(shapeLayer)
     }
-}
 
-extension NSView {
     var backgroundColor: NSColor? {
         get {
             guard let color = layer?.backgroundColor else { return nil }
@@ -39,9 +37,7 @@ extension NSView {
             layer?.backgroundColor = newValue?.cgColor
         }
     }
-}
 
-extension NSView {
     var cornerRadius: CGFloat? {
         get {
             return layer?.cornerRadius

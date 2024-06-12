@@ -8,14 +8,11 @@
 import Cocoa
 
 class ProjectListStatusBarMenu: NSObject {
-    var projectInfoCollection: ProjectInfoCollection!
     var statusBarItem: NSStatusItem!
     let statusBarMenu = NSMenu()
     let projectListMenu = ProjectListMenu()
 
-    func createMenu(projectInfoCollection: ProjectInfoCollection) {
-        self.projectInfoCollection = projectInfoCollection
-
+    func createMenu() {
         let statusBar = NSStatusBar.system
         statusBarItem = statusBar.statusItem(withLength: NSStatusItem.squareLength)
         statusBarItem.button?.image = .init(named: "status-bar-icon")?.tint(color: .red)
@@ -29,7 +26,7 @@ class ProjectListStatusBarMenu: NSObject {
         statusBarMenu.addItem(NSMenuItem.separator())
 
         // Project List
-        for (row, info) in projectInfoCollection.projectInfos.enumerated() {
+        for (row, info) in ProjectInfoManager.shared.projectInfos.enumerated() {
             let menuItem = NSMenuItem(title: info.name ?? "-", action: nil, keyEquivalent: "")
             menuItem.submenu = projectListMenu.createMenuFrom(row: row)
             menuItem.tag = row
@@ -71,7 +68,7 @@ class ProjectListStatusBarMenu: NSObject {
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(reloadMenu),
-                                               name: ProjectInfoCollection.NotificationNames.projectInfoDidChange,
+                                               name: ProjectInfoManager.NotificationNames.projectInfoDidChange,
                                                object: nil)
     }
 
@@ -85,7 +82,7 @@ class ProjectListStatusBarMenu: NSObject {
 
         statusBarMenu.addItem(NSMenuItem.separator())
 
-        for (row, info) in projectInfoCollection.projectInfos.enumerated() {
+        for (row, info) in ProjectInfoManager.shared.projectInfos.enumerated() {
             let menuItem = NSMenuItem(title: info.name ?? "-", action: nil, keyEquivalent: "")
             menuItem.submenu = projectListMenu.createMenuFrom(row: row)
             menuItem.tag = row
@@ -127,7 +124,6 @@ class ProjectListStatusBarMenu: NSObject {
     }
 
     @objc func showUIAction(_ sender: NSMenuItem) {
-
         let allWC = NSWindowController.getAllControllers()
         if let window = allWC.first?.window {
             window.makeKeyAndOrderFront(self)
