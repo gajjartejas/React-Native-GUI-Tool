@@ -12,7 +12,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let projectListContexMenu = ProjectListStatusBarMenu()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        projectListContexMenu.createMenu(projectInfoCollection: ProjectInfoCollection.shared)
+        projectListContexMenu.createMenu()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

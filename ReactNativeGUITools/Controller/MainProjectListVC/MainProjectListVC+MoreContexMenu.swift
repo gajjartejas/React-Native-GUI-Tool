@@ -10,53 +10,48 @@ import Cocoa
 extension MainProjectListVC {
     func initializeMoreContexMenu() -> NSMenu {
         let menu = NSMenu()
-
-        // Setup the menu items
-        let alwaysOnTopItem = NSMenuItem(title: "Always on top", action: #selector(menuItemAction(_:)), keyEquivalent: "")
-        alwaysOnTopItem.state = .off
-        alwaysOnTopItem.target = self
-        menu.addItem(alwaysOnTopItem)
-
-        menu.addItem(NSMenuItem.separator())
-
-        let sortByNameItem = NSMenuItem(title: "Sort by Name", action: #selector(menuItemAction(_:)), keyEquivalent: "")
-        sortByNameItem.target = self
-        menu.addItem(sortByNameItem)
-
-        let sortByPathItem = NSMenuItem(title: "Sort by Path", action: #selector(menuItemAction(_:)), keyEquivalent: "")
-        sortByPathItem.target = self
-        menu.addItem(sortByPathItem)
-
-        let sortByVersionItem = NSMenuItem(title: "Sort by Version", action: #selector(menuItemAction(_:)), keyEquivalent: "")
-        sortByVersionItem.target = self
-        menu.addItem(sortByVersionItem)
-
-        menu.addItem(NSMenuItem.separator())
-
-        let refreshItem = NSMenuItem(title: "Refresh", action: #selector(menuItemAction(_:)), keyEquivalent: "")
-        refreshItem.target = self
-        menu.addItem(refreshItem)
-
+        
+        let menuItems = [
+            ("Always on top", #selector(menuItemAction(_:)), "", 1),
+            ("Sort by Name", #selector(menuItemAction(_:)), "", 2),
+            ("Sort by Path", #selector(menuItemAction(_:)), "", 3),
+            ("Sort by Version", #selector(menuItemAction(_:)), "", 4),
+            ("Refresh", #selector(menuItemAction(_:)), "", 5)
+        ]
+        
+        for (index, item) in menuItems.enumerated() {
+            if index == 1 || index == 5 {
+                menu.addItem(NSMenuItem.separator())
+            }
+            let menuItem = NSMenuItem(title: item.0, action: item.1, keyEquivalent: item.2)
+            menuItem.tag = item.3
+            if item.0 == "Always on top" {
+                menuItem.state = .off
+            }
+            menuItem.target = self
+            menu.addItem(menuItem)
+        }
+        
         return menu
     }
 
     // MARK: - Actions
 
     @objc func menuItemAction(_ sender: NSMenuItem) {
-        switch sender.title {
-        case "Always on top":
+        switch sender.tag {
+        case 1: // Always on top
             sender.state = sender.state == .on ? .off : .on
             view.window?.level = sender.state == .on ? .floating : .normal
-        case "Sort by Name":
-            ProjectInfoCollection.shared.sorted(by: .name)
+        case 2: // Sort by Name
+            ProjectInfoManager.shared.sorted(by: .name)
             projectListTableView.reloadData()
-        case "Sort by Path":
-            ProjectInfoCollection.shared.sorted(by: .path)
+        case 3: // Sort by Path
+            ProjectInfoManager.shared.sorted(by: .path)
             projectListTableView.reloadData()
-        case "Sort by Version":
-            ProjectInfoCollection.shared.sorted(by: .versionString)
+        case 4: // Sort by Version
+            ProjectInfoManager.shared.sorted(by: .versionString)
             projectListTableView.reloadData()
-        case "Refresh":
+        case 5: // Refresh
             projectListTableView.reloadData()
         default:
             break

@@ -1,5 +1,5 @@
 //
-//  ProjectInfoCollection.swift
+//  ProjectInfoManager.swift
 //  ReactNativeGUITools
 //
 //  Created by Tejas on 01/06/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ProjectInfoCollection {
+class ProjectInfoManager {
     struct NotificationNames {
         static let projectInfoDidChange = Notification.Name("projectInfoDidChange")
     }
@@ -18,7 +18,7 @@ class ProjectInfoCollection {
         case versionString
     }
 
-    static let shared = ProjectInfoCollection()
+    static let shared = ProjectInfoManager()
 
     open var projectInfosAll: [ProjectInfo] {
         didSet {
