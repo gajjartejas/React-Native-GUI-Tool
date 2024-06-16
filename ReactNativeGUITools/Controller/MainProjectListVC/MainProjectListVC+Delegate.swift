@@ -60,24 +60,6 @@ extension MainProjectListVC: NSTableViewDelegate {
         let oldIndexes = items.compactMap { $0.integer(forType: .tableViewIndex) }
         if !oldIndexes.isEmpty {
             ProjectInfoManager.shared.move(fromOffsets: IndexSet(oldIndexes), toOffset: row)
-            // The ol' Stack Overflow copy-paste. Reordering rows can get pretty hairy if
-            // you allow multiple selection. https://stackoverflow.com/a/26855499/7471873
-
-            tableView.beginUpdates()
-            var oldIndexOffset = 0
-            var newIndexOffset = 0
-
-            for oldIndex in oldIndexes {
-                if oldIndex < row {
-                    tableView.moveRow(at: oldIndex + oldIndexOffset, to: row - 1)
-                    oldIndexOffset -= 1
-                } else {
-                    tableView.moveRow(at: oldIndex, to: row + newIndexOffset)
-                    newIndexOffset += 1
-                }
-            }
-            tableView.endUpdates()
-
             return true
         }
 
@@ -89,7 +71,7 @@ extension MainProjectListVC: NSTableViewDelegate {
             if ProjectInfoManager.shared.findByPath(project: newProject) {
                 showConfirmAlert(
                     message: "Duplicate Project",
-                    informativeText: "A project with the same path already exists. Do you want to add it again?",
+                    informativeText: "A project \(newProject.name ?? "") with the same path already exists. Do you want to add it again?",
                     confirmAction: {
                         ProjectInfoManager.shared.insert(contentsOf: [newProject], at: row)
                     },
@@ -113,7 +95,6 @@ extension MainProjectListVC: NSTableViewDelegate {
             for index in indexes.reversed() {
                 ProjectInfoManager.shared.remove(at: index)
             }
-            tableView.removeRows(at: IndexSet(indexes), withAnimation: .slideUp)
         }
     }
 }
