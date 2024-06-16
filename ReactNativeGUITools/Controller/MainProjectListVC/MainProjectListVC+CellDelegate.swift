@@ -19,6 +19,6 @@ extension MainProjectListVC: ProjectListCellViewDelegate {
 
     func showInFolder(atIndex index: Int) {
         let projectInfo = ProjectInfoManager.shared.projectInfos[index]
-        NSWorkspace.shared.selectFile(projectInfo.path, inFileViewerRootedAtPath: "")
+        NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: projectInfo.path)
     }
 }
