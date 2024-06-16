@@ -10,17 +10,20 @@ import Cocoa
 extension MainProjectListVC {
     func initializeMoreContexMenu() -> NSMenu {
         let menu = NSMenu()
-        
+
         let menuItems = [
-            ("Always on top", #selector(menuItemAction(_:)), "", 1),
-            ("Sort by Name", #selector(menuItemAction(_:)), "", 2),
-            ("Sort by Path", #selector(menuItemAction(_:)), "", 3),
-            ("Sort by Version", #selector(menuItemAction(_:)), "", 4),
-            ("Refresh", #selector(menuItemAction(_:)), "", 5)
+            ("Always on top", #selector(alwaysOnTopAction(_:)), "", 1),
+            ("Sort by Name", #selector(sortByNameAction(_:)), "", 2),
+            ("Sort by Path", #selector(sortByPathAction(_:)), "", 3),
+            ("Sort by Version", #selector(sortByVersionAction(_:)), "", 4),
+            ("Settings...", #selector(settingsAction(_:)), "", 5),
+            ("Github", #selector(githubAction(_:)), "", 6),
+            ("Sponsor", #selector(sponsorAction(_:)), "", 7),
+            ("Quit", #selector(quitUIAction(_:)), "", 8),
         ]
-        
+
         for (index, item) in menuItems.enumerated() {
-            if index == 1 || index == 5 {
+            if index == 1 || index == 4 {
                 menu.addItem(NSMenuItem.separator())
             }
             let menuItem = NSMenuItem(title: item.0, action: item.1, keyEquivalent: item.2)
@@ -31,30 +34,55 @@ extension MainProjectListVC {
             menuItem.target = self
             menu.addItem(menuItem)
         }
-        
+
         return menu
     }
 
     // MARK: - Actions
 
-    @objc func menuItemAction(_ sender: NSMenuItem) {
-        switch sender.tag {
-        case 1: // Always on top
-            sender.state = sender.state == .on ? .off : .on
-            view.window?.level = sender.state == .on ? .floating : .normal
-        case 2: // Sort by Name
-            ProjectInfoManager.shared.sorted(by: .name)
-            projectListTableView.reloadData()
-        case 3: // Sort by Path
-            ProjectInfoManager.shared.sorted(by: .path)
-            projectListTableView.reloadData()
-        case 4: // Sort by Version
-            ProjectInfoManager.shared.sorted(by: .versionString)
-            projectListTableView.reloadData()
-        case 5: // Refresh
-            projectListTableView.reloadData()
-        default:
-            break
+    @objc func alwaysOnTopAction(_ sender: NSMenuItem) {
+        sender.state = sender.state == .on ? .off : .on
+        view.window?.level = sender.state == .on ? .floating : .normal
+    }
+
+    @objc func sortByNameAction(_ sender: NSMenuItem) {
+        ProjectInfoManager.shared.sorted(by: .name)
+    }
+
+    @objc func sortByPathAction(_ sender: NSMenuItem) {
+        ProjectInfoManager.shared.sorted(by: .path)
+    }
+
+    @objc func sortByVersionAction(_ sender: NSMenuItem) {
+        ProjectInfoManager.shared.sorted(by: .versionString)
+    }
+
+    @objc func settingsAction(_ sender: NSMenuItem) {
+        let allControllers = NSWindowController.getAllControllers()
+        if let foundController = allControllers.compactMap({ $0 as? MainSettingsWC }).first {
+            foundController.window?.makeKeyAndOrderFront(self)
+        } else {
+            let storyboard = NSStoryboard(name: "Main", bundle: nil)
+            guard let controller = storyboard.instantiateController(withIdentifier: "MainSettingsWC") as? MainSettingsWC else { return }
+            if let mainWindow = allControllers.first?.window {
+                controller.location = mainWindow.frame
+            }
+            controller.window?.makeKeyAndOrderFront(self)
         }
+        NSApp.activate(ignoringOtherApps: true)
+    }
+
+    @objc func githubAction(_ sender: NSMenuItem) {
+        let url = "https://github.com/gajjartejas/React-Native-GUI-Tool"
+        NSWorkspace.shared.open(URL(string: url)!)
+    }
+
+    @objc func sponsorAction(_ sender: NSMenuItem) {
+        let url = "https://github.com/sponsors/gajjartejas"
+        NSWorkspace.shared.open(URL(string: url)!)
+    }
+
+    @objc func quitUIAction(_ sender: NSMenuItem) {
+        NSApplication.shared.terminate(nil)
     }
 }
