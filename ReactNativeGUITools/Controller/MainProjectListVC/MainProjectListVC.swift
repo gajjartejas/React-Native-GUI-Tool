@@ -107,7 +107,9 @@ class MainProjectListVC: NSViewController {
         } else {
             dropView.isHidden = true
         }
-        projectListTableView.reloadData()
+        DispatchQueue.main.async {
+            self.projectListTableView.reloadData()
+        }
     }
 
     private func initializeProjectListTableView() {
