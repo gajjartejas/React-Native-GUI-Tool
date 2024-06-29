@@ -9,10 +9,11 @@ import Cocoa
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-    let projectListContexMenu = ProjectListStatusBarMenu()
+    var projectListContexMenu: ProjectListStatusBarMenu!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        projectListContexMenu.createMenu()
+        let projectInfos = ProjectInfoManager.shared.get(type: .menu)
+        projectListContexMenu = ProjectListStatusBarMenu(projectInfos: projectInfos)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

@@ -9,7 +9,7 @@ import Cocoa
 
 extension MainProjectListVC: ProjectListCellViewDelegate {
     func textEdited(text: String, atIndex row: Int) {
-        let projectInfo = ProjectInfoManager.shared.projectInfos[row]
+        let projectInfo = projectInfos[row]
         let newName = text.trimmingCharacters(in: .whitespacesAndNewlines)
         if !newName.isEmpty {
             projectInfo.name = newName
@@ -18,7 +18,7 @@ extension MainProjectListVC: ProjectListCellViewDelegate {
     }
 
     func showInFolder(atIndex index: Int) {
-        let projectInfo = ProjectInfoManager.shared.projectInfos[index]
+        let projectInfo = projectInfos[index]
         NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: projectInfo.path)
     }
 }

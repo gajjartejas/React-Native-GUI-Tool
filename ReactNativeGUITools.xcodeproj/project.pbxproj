@@ -445,8 +445,8 @@
 		96FCDF992C0AEFAD00A2AFBA /* ProjectInfo */ = {
 			isa = PBXGroup;
 			children = (
-				96FCDF9D2C0AF07400A2AFBA /* ProjectInfoManager.swift */,
 				9675F5BC2BCC49A1008FF0F4 /* ProjectInfo.swift */,
+				96FCDF9D2C0AF07400A2AFBA /* ProjectInfoManager.swift */,
 			);
 			path = ProjectInfo;
 			sourceTree = "<group>";

@@ -18,7 +18,7 @@ extension MainProjectListVC: NSTableViewDelegate {
             return nil
         }
 
-        cellView.configureUI(withNode: ProjectInfoManager.shared.projectInfos[row], atRow: row)
+        cellView.configureUI(withNode: projectInfos[row], atRow: row)
         cellView.delegate = self
         return cellView
     }
@@ -30,7 +30,7 @@ extension MainProjectListVC: NSTableViewDelegate {
     func tableView(
         _ tableView: NSTableView,
         pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-        return ProjectListPasteboardWriter(project: ProjectInfoManager.shared.projectInfos[row].name ?? "-", at: row)
+        return ProjectListPasteboardWriter(project: projectInfos[row].name ?? "-", at: row)
     }
 
     func tableView(
@@ -68,7 +68,7 @@ extension MainProjectListVC: NSTableViewDelegate {
         }
 
         for newProject in newProjects {
-            if ProjectInfoManager.shared.findByPath(project: newProject) {
+            if ProjectInfoManager.shared.findByPath(project: newProject, type: .list) {
                 showConfirmAlert(
                     message: "Duplicate Project",
                     informativeText: "A project \(newProject.name ?? "") with the same path already exists. Do you want to add it again?",
@@ -93,7 +93,7 @@ extension MainProjectListVC: NSTableViewDelegate {
         if operation == .delete, let items = session.draggingPasteboard.pasteboardItems {
             let indexes = items.compactMap { $0.integer(forType: .tableViewIndex) }
             for index in indexes.reversed() {
-                ProjectInfoManager.shared.remove(at: index)
+                ProjectInfoManager.shared.remove(at: index, type: .list)
             }
         }
     }

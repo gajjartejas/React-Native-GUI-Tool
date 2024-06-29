@@ -16,6 +16,7 @@ protocol ProjectListMenuDelegate: AnyObject {
 
 class ProjectListMenu: NSObject {
     var clickedRow: Int?
+    var projectInfos: [ProjectInfo]!
     let mainSettingsManager = MainSettingsManager.shared
     weak var delegate: ProjectListMenuDelegate?
 
@@ -28,7 +29,7 @@ class ProjectListMenu: NSObject {
         menu.removeItem(at: 11)
         let scriptMenuItem = NSMenuItem()
         scriptMenuItem.title = "Script"
-        let scripts = ProjectInfoManager.shared.projectInfos[row].scripts?.sorted(by: customSort)
+        let scripts = projectInfos[row].scripts?.sorted(by: customSort)
         if let scripts = scripts {
             let scriptMenu = NSMenu()
             for script in scripts {
@@ -44,7 +45,8 @@ class ProjectListMenu: NSObject {
         menu.insertItem(scriptMenuItem, at: 11)
     }
 
-    func createMenuFrom(row: Int?) -> NSMenu {
+    func createMenuFrom(projectInfos: [ProjectInfo], row: Int?) -> NSMenu {
+        self.projectInfos = projectInfos
         clickedRow = row
 
         let menu = NSMenu()
@@ -67,7 +69,8 @@ class ProjectListMenu: NSObject {
         let scriptMenuItem = NSMenuItem()
         scriptMenuItem.title = "Script"
         if let row = row {
-            let scripts = ProjectInfoManager.shared.projectInfos[row].scripts?.sorted(by: customSort)
+            scriptMenuItem.isEnabled = true
+            let scripts = projectInfos[row].scripts?.sorted(by: customSort)
 
             if let scripts = scripts {
                 let scriptMenu = NSMenu()
@@ -76,21 +79,14 @@ class ProjectListMenu: NSObject {
                     scriptMenuSubItem.title = script.name
                     scriptMenuSubItem.action = #selector(runScript(_:))
                     scriptMenuSubItem.target = self
-
                     scriptMenu.addItem(scriptMenuSubItem)
                 }
                 scriptMenuItem.submenu = scriptMenu
                 menu.addItem(scriptMenuItem)
             }
         } else {
-            let scriptMenu = NSMenu()
-            let scriptMenuSubItem = NSMenuItem()
-            scriptMenuSubItem.title = "N/A"
-            scriptMenuSubItem.action = #selector(runScript(_:))
-            scriptMenuSubItem.isEnabled = false
-            scriptMenu.addItem(scriptMenuSubItem)
-            scriptMenuItem.submenu = scriptMenu
             menu.addItem(scriptMenuItem)
+            scriptMenuItem.isEnabled = false
         }
 
         // Clean submenu
