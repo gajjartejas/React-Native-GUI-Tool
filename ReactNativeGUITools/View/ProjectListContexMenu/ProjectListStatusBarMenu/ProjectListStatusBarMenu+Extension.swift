@@ -24,11 +24,12 @@ extension ProjectListStatusBarMenu: NSMenuDelegate {
 extension ProjectListStatusBarMenu: ProjectListMenuDelegate {
     func projectListMenuNeedsUpdate(_ menu: NSMenu) {}
     func projectListMenu(didSelectRemoveMenuItem menuItem: NSMenuItem, at row: Int) {
-        ProjectInfoManager.shared.remove(at: row)
+        ProjectInfoManager.shared.remove(at: row, type: .menu)
     }
 
     func projectListMenu(didSelectOpenMenuItem menuItem: NSMenuItem, at row: Int) {
-        let projectInfo = ProjectInfoManager.shared.projectInfos[row]
+        let projectInfo = projectInfos[row]
+        
         guard FileManager.default.fileExists(atPath: projectInfo.path) else { return }
 
         let allControllers = NSWindowController.getAllControllers()
@@ -48,7 +49,7 @@ extension ProjectListStatusBarMenu: ProjectListMenuDelegate {
     }
 
     func projectListMenu(didSelectRenameMenuItem menuItem: NSMenuItem, at row: Int) {
-        let projectInfo = ProjectInfoManager.shared.projectInfos[row]
+        let projectInfo = projectInfos[row]
         let projectName = (projectInfo.name ?? "")
 
         promptForReply(projectName, "Rename?", "Rename \(projectName)", completion: { (newName: String, bResponse: Bool) in

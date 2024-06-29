@@ -17,6 +17,9 @@ class MainProjectListVC: NSViewController {
 
     let projectListMenu = ProjectListMenu()
 
+    var projectInfos = ProjectInfoManager.shared.get(type: .list)
+    var projectInfosAll = ProjectInfoManager.shared.get(type: .all)
+
     var searching: Bool {
         let searchString = projectSearchTextField.stringValue
         let pureString = searchString.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -30,7 +33,7 @@ class MainProjectListVC: NSViewController {
 
         initializeProjectListTableView()
 
-        projectListTableView.menu = projectListMenu.createMenuFrom(row: nil)
+        projectListTableView.menu = projectListMenu.createMenuFrom(projectInfos: projectInfos, row: nil)
         projectListMenu.delegate = self
 
         // more contex menu
@@ -40,13 +43,13 @@ class MainProjectListVC: NSViewController {
 
         projectSearchTextField.delegate = self
 
-        checkForEmptyData()
+        refreshTableAndMenu()
         NotificationCenter.default.addObserver(self, selector: #selector(viewDidBecomeActive), name: NSApplication.didBecomeActiveNotification, object: nil)
 
         setupRightClickMonitor()
 
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(checkForEmptyData),
+                                               selector: #selector(refreshTableAndMenu),
                                                name: ProjectInfoManager.NotificationNames.projectInfoDidChange,
                                                object: nil)
     }
@@ -101,13 +104,21 @@ class MainProjectListVC: NSViewController {
 
     // MARK: - Helpers
 
-    @objc func checkForEmptyData() {
-        if ProjectInfoManager.shared.projectInfosAll.isEmpty && !searching {
-            dropView.isHidden = false
-        } else {
-            dropView.isHidden = true
-        }
-        DispatchQueue.main.async {
+    @objc func refreshTableAndMenu() {
+        // Update objects
+        projectInfos = ProjectInfoManager.shared.get(type: .list)
+        projectInfosAll = ProjectInfoManager.shared.get(type: .all)
+
+        // Update menu
+        projectListTableView.menu = projectListMenu.createMenuFrom(projectInfos: projectInfos, row: nil)
+
+        // Update table
+        DispatchQueue.main.async { [self] in
+            if self.projectInfosAll.isEmpty && !self.searching {
+                self.dropView.isHidden = false
+            } else {
+                self.dropView.isHidden = true
+            }
             self.projectListTableView.reloadData()
         }
     }
@@ -131,7 +142,7 @@ class MainProjectListVC: NSViewController {
             return
         }
         let row = projectListTableView.clickedRow
-        let projectInfo = ProjectInfoManager.shared.projectInfos[row]
+        let projectInfo = projectInfos[row]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return

@@ -10,19 +10,19 @@ import Cocoa
 extension MainProjectListVC: NSSearchFieldDelegate {
     func searchFieldDidStartSearching(_ sender: NSSearchField) {
         let searchString = sender.stringValue
-        ProjectInfoManager.shared.searchBy(searchString)
+        ProjectInfoManager.shared.searchBy(searchString, type: .list)
         projectListTableView.reloadData()
     }
 
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
-        ProjectInfoManager.shared.clearSearch()
+        ProjectInfoManager.shared.clearSearch(type: .list)
         projectListTableView.reloadData()
     }
 
     func controlTextDidChange(_ obj: Notification) {
         guard let searchField = obj.object as? NSSearchField else { return }
         let searchString = searchField.stringValue
-        ProjectInfoManager.shared.searchBy(searchString)
+        ProjectInfoManager.shared.searchBy(searchString, type: .list)
         projectListTableView.reloadData()
     }
 }

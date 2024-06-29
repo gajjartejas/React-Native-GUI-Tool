@@ -38,7 +38,7 @@ extension ProjectListMenu {
 
     @objc func showInFinderAction(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -48,7 +48,7 @@ extension ProjectListMenu {
 
     @objc func openInTerminalAction(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -58,7 +58,7 @@ extension ProjectListMenu {
 
     @objc func copyPathAction(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let pasteboard = NSPasteboard.general
         pasteboard.declareTypes([.string], owner: nil)
         pasteboard.setString(projectInfo.path, forType: .string)
@@ -76,7 +76,7 @@ extension ProjectListMenu {
 
     @objc func runScript(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -87,7 +87,7 @@ extension ProjectListMenu {
 
     @objc func openInCodeEditorAction(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -98,7 +98,7 @@ extension ProjectListMenu {
 
     @objc func openInAndroidStudioAction(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -109,7 +109,7 @@ extension ProjectListMenu {
 
     @objc func openInXcodeAction(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -123,7 +123,7 @@ extension ProjectListMenu {
     @objc func cleaniOSAllFolders(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
         let foldersToRemove = ["/ios/build", "/ios/Pods"]
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -136,7 +136,7 @@ extension ProjectListMenu {
     @objc func cleaniOSBuildFolder(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
         let foldersToRemove = ["/ios/build"]
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -149,7 +149,7 @@ extension ProjectListMenu {
     @objc func cleaniOSPodsFolder(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
         let foldersToRemove = ["/ios/Pods"]
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -162,7 +162,7 @@ extension ProjectListMenu {
     @objc func cleanAndroidAllFolders(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
         let foldersToRemove = ["/android/build", "/android/app/build", "/android/app/release"]
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -175,7 +175,7 @@ extension ProjectListMenu {
     @objc func cleanAndroidBuildFolder(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
         let foldersToRemove = ["/android/build"]
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -188,7 +188,7 @@ extension ProjectListMenu {
     @objc func cleaniAndroidAppBuildFolder(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
         let foldersToRemove = ["/android/app/build"]
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -201,7 +201,7 @@ extension ProjectListMenu {
     @objc func cleanAndroidAppReleaseFolder(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
         let foldersToRemove = ["/android/app/release"]
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -214,7 +214,7 @@ extension ProjectListMenu {
     @objc func cleanAlliOSAllAndroid(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
         let foldersToRemove = ["/ios/build", "/ios/Pods", "/android/build", "/android/app/build", "/android/app/release"]
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -227,7 +227,7 @@ extension ProjectListMenu {
     @objc func cleanNodeModules(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
         let foldersToRemove = ["/node_modules"]
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -239,7 +239,7 @@ extension ProjectListMenu {
 
     @objc func npmStart(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -250,7 +250,7 @@ extension ProjectListMenu {
 
     @objc func npmInstall(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -261,7 +261,7 @@ extension ProjectListMenu {
 
     @objc func npmStartResetCache(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -272,7 +272,7 @@ extension ProjectListMenu {
 
     @objc func npmRestart(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -283,7 +283,7 @@ extension ProjectListMenu {
 
     @objc func npmStop(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -294,7 +294,7 @@ extension ProjectListMenu {
 
     @objc func npmCacheClean(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -305,7 +305,7 @@ extension ProjectListMenu {
 
     @objc func npmCacheVerify(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -316,7 +316,7 @@ extension ProjectListMenu {
 
     @objc func watchmanWatchDelAll(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -327,7 +327,7 @@ extension ProjectListMenu {
 
     @objc func watchmanShutdownServer(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -338,7 +338,7 @@ extension ProjectListMenu {
 
     @objc func watchmanWatch(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -404,7 +404,7 @@ extension ProjectListMenu {
 
     @objc func podInstall(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -415,7 +415,7 @@ extension ProjectListMenu {
 
     @objc func podUpdate(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -426,7 +426,7 @@ extension ProjectListMenu {
 
     @objc func podOutdated(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -437,7 +437,7 @@ extension ProjectListMenu {
 
     @objc func podDeintegrate(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -448,7 +448,7 @@ extension ProjectListMenu {
 
     @objc func podEnv(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -459,7 +459,7 @@ extension ProjectListMenu {
 
     @objc func podCacheList(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return
@@ -470,7 +470,7 @@ extension ProjectListMenu {
 
     @objc func podCacheCleanAll(_ sender: NSMenuItem) {
         guard let clickedRow = clickedRow else { return }
-        let projectInfo = ProjectInfoManager.shared.projectInfos[clickedRow]
+        let projectInfo = projectInfos[clickedRow]
         let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
         if !fileExists {
             return

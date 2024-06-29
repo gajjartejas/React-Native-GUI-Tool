@@ -11,8 +11,19 @@ class ProjectListStatusBarMenu: NSObject {
     var statusBarItem: NSStatusItem!
     let statusBarMenu = NSMenu()
     let projectListMenu = ProjectListMenu()
+    var projectInfos: [ProjectInfo]!
 
-    func createMenu() {
+    override private init() {
+        super.init()
+    }
+
+    convenience init(projectInfos: [ProjectInfo]) {
+        self.init()
+        self.projectInfos = projectInfos
+        createProjectListMenu()
+    }
+
+    private func createProjectListMenu() {
         let statusBar = NSStatusBar.system
         statusBarItem = statusBar.statusItem(withLength: NSStatusItem.squareLength)
         statusBarItem.button?.image = .init(named: "status-bar-icon")?.tint(color: .red)
@@ -26,9 +37,9 @@ class ProjectListStatusBarMenu: NSObject {
         statusBarMenu.addItem(NSMenuItem.separator())
 
         // Project List
-        for (row, info) in ProjectInfoManager.shared.projectInfos.enumerated() {
+        for (row, info) in projectInfos.enumerated() {
             let menuItem = NSMenuItem(title: info.name ?? "-", action: nil, keyEquivalent: "")
-            menuItem.submenu = projectListMenu.createMenuFrom(row: row)
+            menuItem.submenu = projectListMenu.createMenuFrom(projectInfos: projectInfos, row: row)
             menuItem.tag = row
             statusBarMenu.addItem(menuItem)
         }
@@ -75,6 +86,9 @@ class ProjectListStatusBarMenu: NSObject {
     @objc func reloadMenu() {
         statusBarMenu.removeAllItems()
 
+        // get latest
+        projectInfos = ProjectInfoManager.shared.get(type: .menu)
+
         // Open
         let openMenuItem = NSMenuItem(title: "Show Main Window", action: #selector(showUIAction(_:)), keyEquivalent: "")
         openMenuItem.tag = -1
@@ -82,9 +96,9 @@ class ProjectListStatusBarMenu: NSObject {
 
         statusBarMenu.addItem(NSMenuItem.separator())
 
-        for (row, info) in ProjectInfoManager.shared.projectInfos.enumerated() {
+        for (row, info) in projectInfos.enumerated() {
             let menuItem = NSMenuItem(title: info.name ?? "-", action: nil, keyEquivalent: "")
-            menuItem.submenu = projectListMenu.createMenuFrom(row: row)
+            menuItem.submenu = projectListMenu.createMenuFrom(projectInfos: projectInfos, row: row)
             menuItem.tag = row
             statusBarMenu.addItem(menuItem)
         }
