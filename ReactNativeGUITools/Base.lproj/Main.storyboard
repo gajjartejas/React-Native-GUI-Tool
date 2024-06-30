@@ -1244,6 +1244,7 @@
                         <tabViewItem id="VqQ-iX-azK"/>
                         <tabViewItem id="c7y-bG-MOb"/>
                         <tabViewItem id="IOq-hY-QFw"/>
+                        <tabViewItem id="wWb-as-148"/>
                     </tabViewItems>
                     <tabView key="tabView" type="noTabsNoBorder" id="rDh-hF-Uws">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
@@ -1267,6 +1268,7 @@
                         <segue destination="JNa-Ow-4cp" kind="relationship" relationship="tabItems" id="bJd-MM-uU2"/>
                         <segue destination="fhB-JN-gBw" kind="relationship" relationship="tabItems" id="u54-Za-OYd"/>
                         <segue destination="Xzr-H3-j67" kind="relationship" relationship="tabItems" id="ri0-Ey-MXw"/>
+                        <segue destination="kF2-GP-QPk" kind="relationship" relationship="tabItems" id="DMV-S1-Brf"/>
                     </connections>
                 </tabViewController>
                 <customObject id="zMn-wy-tjZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1644,8 +1646,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H8w-QS-18H">
-                                <rect key="frame" x="188" y="142" width="75" height="16"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="lAP Tool VC" id="kY7-Pg-vk0">
+                                <rect key="frame" x="199" y="142" width="53" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="lAP Tool" id="kY7-Pg-vk0">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1661,6 +1663,33 @@
                 <customObject id="4Ih-Us-kft" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1447" y="3228"/>
+        </scene>
+        <!--Project SettingsVC-->
+        <scene sceneID="Yl8-Z5-QL3">
+            <objects>
+                <viewController storyboardIdentifier="ProjectSettingsVC" id="kF2-GP-QPk" customClass="ProjectSettingsVC" customModule="ReactNativeGUITools" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="dEt-bj-mmA">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GrL-lb-oTN">
+                                <rect key="frame" x="175" y="142" width="101" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Project Settings" id="EV3-to-OoF">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="GrL-lb-oTN" firstAttribute="centerX" secondItem="dEt-bj-mmA" secondAttribute="centerX" id="ZBd-5v-LUV"/>
+                            <constraint firstItem="GrL-lb-oTN" firstAttribute="centerY" secondItem="dEt-bj-mmA" secondAttribute="centerY" id="skd-jU-gLy"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="3d3-Qi-nWA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1958" y="3228"/>
         </scene>
     </scenes>
     <resources>
