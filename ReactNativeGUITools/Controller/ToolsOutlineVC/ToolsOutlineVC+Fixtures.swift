@@ -28,6 +28,9 @@ extension ToolsOutlineVC {
                 .init(index: 10, title: "FCM Notification", iconName: "fcm-notification", children: [], nodeType: .parent),
                 .init(index: 11, title: "Decrypt IAP Receipt", iconName: "receipt", children: [], nodeType: .parent),
             ], nodeType: .group),
+            .init(index: 3, title: "Project Settings", iconName: nil, children: [
+                .init(index: 12, title: "Custom Actions", iconName: "custom-actions", children: [], nodeType: .parent),
+            ], nodeType: .group),
         ]
     }
 

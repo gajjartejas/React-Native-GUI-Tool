@@ -178,7 +178,7 @@ class ProjectListMenu: NSObject {
         let customSubMenu = NSMenu()
         customSubMenu.addItem(withTitle: "Edit...", action: #selector(customActionsEdit(_:)), keyEquivalent: "")
         let customActionMenuItem = NSMenuItem()
-        customActionMenuItem.title = "Custom Action"
+        customActionMenuItem.title = "Custom Actions"
         customActionMenuItem.submenu = customSubMenu
         menu.addItem(customActionMenuItem)
         menu.setTargetToSelfRecursively(target: self)
