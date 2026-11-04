@@ -7,6 +7,25 @@
 
 import Cocoa
 
+final class CustomActionPasteboardWriter: NSObject, NSPasteboardWriting {
+    let index: Int
+
+    init(index: Int) {
+        self.index = index
+    }
+
+    func writableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
+        return [.tableViewIndex]
+    }
+
+    func pasteboardPropertyList(forType type: NSPasteboard.PasteboardType) -> Any? {
+        if type == .tableViewIndex {
+            return index
+        }
+        return nil
+    }
+}
+
 extension CustomActionsVC: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard
@@ -18,15 +37,30 @@ extension CustomActionsVC: NSTableViewDelegate {
             return nil
         }
 
-        guard let customMenuScripts = self.projectInfo?.customMenuScripts else {
+        guard let customMenuScripts = self.projectInfo?.customMenuScripts, row < customMenuScripts.count else {
             return nil
         }
-        cellView.configureUI(with: customMenuScripts[row], atRow: row)
+
+        let item = customMenuScripts[row]
+        if tableColumn?.identifier.rawValue == "scriptColumn" {
+            cellView.configureUI(with: item.script)
+        } else {
+            cellView.configureUI(with: item.name)
+        }
+
         return cellView
     }
 
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return 20
+        return 22
+    }
+
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        updateButtonStates()
+    }
+
+    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
+        return CustomActionPasteboardWriter(index: row)
     }
 
     func tableView(
@@ -35,13 +69,7 @@ extension CustomActionsVC: NSTableViewDelegate {
         proposedRow row: Int,
         proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
         guard dropOperation == .above else { return [] }
-
-        // If dragging to reorder, use the gap feedback style. Otherwise, draw insertion marker.
-        if let source = info.draggingSource as? NSTableView, source === tableView {
-            tableView.draggingDestinationFeedbackStyle = .regular
-        } else {
-            tableView.draggingDestinationFeedbackStyle = .regular
-        }
+        tableView.draggingDestinationFeedbackStyle = .regular
         return .move
     }
 
@@ -53,11 +81,23 @@ extension CustomActionsVC: NSTableViewDelegate {
         guard let items = info.draggingPasteboard.pasteboardItems else { return false }
 
         let oldIndexes = items.compactMap { $0.integer(forType: .tableViewIndex) }
-        if !oldIndexes.isEmpty {
-            ProjectInfoManager.shared.move(fromOffsets: IndexSet(oldIndexes), toOffset: row)
-            return true
-        }
+        guard let sourceIndex = oldIndexes.first, var scripts = projectInfo?.customMenuScripts else { return false }
 
+        var destination = row
+        if destination > sourceIndex {
+            destination -= 1
+        }
+        guard destination >= 0 && destination < scripts.count else { return false }
+
+        let movedItem = scripts.remove(at: sourceIndex)
+        scripts.insert(movedItem, at: destination)
+        projectInfo?.customMenuScripts = scripts
+        if let projectInfo = projectInfo {
+            ProjectInfoManager.shared.update(with: projectInfo)
+        }
+        tableView.reloadData()
+        tableView.selectRowIndexes(IndexSet(integer: destination), byExtendingSelection: false)
+        updateButtonStates()
         return true
     }
 }

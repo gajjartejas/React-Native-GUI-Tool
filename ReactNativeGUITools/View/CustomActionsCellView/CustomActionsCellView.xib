@@ -36,6 +36,7 @@
             <constraints>
                 <constraint firstItem="bEe-X1-mTh" firstAttribute="leading" secondItem="SPX-3K-BPk" secondAttribute="leading" id="aLp-z2-ieq"/>
                 <constraint firstItem="bEe-X1-mTh" firstAttribute="centerY" secondItem="SPX-3K-BPk" secondAttribute="centerY" id="tbM-3o-fn8"/>
+                <constraint firstAttribute="trailing" secondItem="bEe-X1-mTh" secondAttribute="trailing" id="T2d-stack-trailing"/>
             </constraints>
             <connections>
                 <outlet property="titleLabel" destination="Bcr-ij-ndd" id="WD0-Ya-fJD"/>

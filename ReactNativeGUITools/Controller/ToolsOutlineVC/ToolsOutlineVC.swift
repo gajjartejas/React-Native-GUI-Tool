@@ -64,4 +64,14 @@ class ToolsOutlineVC: NSViewController {
         let indexSet = IndexSet(integer: 1)
         outlineView.selectRowIndexes(indexSet, byExtendingSelection: false)
     }
+
+    func selectNode(withIndex targetIndex: Int) {
+        for row in 0..<outlineView.numberOfRows {
+            if let node = outlineView.item(atRow: row) as? MenuNode, node.index == targetIndex {
+                outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+                outlineView.scrollRowToVisible(row)
+                break
+            }
+        }
+    }
 }

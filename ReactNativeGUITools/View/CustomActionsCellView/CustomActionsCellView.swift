@@ -1,5 +1,5 @@
 //
-//  ProjectListCellView.swift
+//  CustomActionsCellView.swift
 //  ReactNativeGUITools
 //
 //  Created by Tejas on 14/04/24.
@@ -20,11 +20,9 @@ class CustomActionsCellView: NSTableCellView, NibInstantiatable {
         super.draw(dirtyRect)
     }
 
-    // MARK: - Actions
-
     // MARK: - Helpers
 
-    func configureUI(with customMenuScript: ProjectInfo.CustomMenuScript, atRow row: Int) {
-        titleLabel.stringValue = "node.title"
+    func configureUI(with text: String) {
+        titleLabel.stringValue = text
     }
 }

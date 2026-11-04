@@ -26,23 +26,46 @@ class ProjectListMenu: NSObject {
 
     func refreshMenu(_ menu: NSMenu) {
         guard let row = clickedRow else { return }
-        menu.removeItem(at: 11)
-        let scriptMenuItem = NSMenuItem()
-        scriptMenuItem.title = "Script"
-        let scripts = projectInfos[row].packageJsonScripts?.sorted(by: customSort)
-        if let scripts = scripts {
-            let scriptMenu = NSMenu()
-            for script in scripts {
-                let scriptMenuSubItem = NSMenuItem()
-                scriptMenuSubItem.title = script.name
-                scriptMenuSubItem.action = #selector(runScript(_:))
-                scriptMenuSubItem.target = self
+        if let scriptIndex = menu.items.firstIndex(where: { $0.title == "Script" }) {
+            menu.removeItem(at: scriptIndex)
+            let scriptMenuItem = NSMenuItem()
+            scriptMenuItem.title = "Script"
+            let scripts = projectInfos[row].packageJsonScripts?.sorted(by: customSort)
+            if let scripts = scripts {
+                let scriptMenu = NSMenu()
+                for script in scripts {
+                    let scriptMenuSubItem = NSMenuItem()
+                    scriptMenuSubItem.title = script.name
+                    scriptMenuSubItem.action = #selector(runScript(_:))
+                    scriptMenuSubItem.target = self
 
-                scriptMenu.addItem(scriptMenuSubItem)
+                    scriptMenu.addItem(scriptMenuSubItem)
+                }
+                scriptMenuItem.submenu = scriptMenu
             }
-            scriptMenuItem.submenu = scriptMenu
+            menu.insertItem(scriptMenuItem, at: scriptIndex)
         }
-        menu.insertItem(scriptMenuItem, at: 11)
+
+        if let customActionIndex = menu.items.firstIndex(where: { $0.title == "Custom Actions" }) {
+            menu.removeItem(at: customActionIndex)
+            let customSubMenu = NSMenu()
+            if let customScripts = projectInfos[row].customMenuScripts, !customScripts.isEmpty {
+                for customScript in customScripts {
+                    let item = NSMenuItem(title: customScript.name, action: #selector(runCustomActionScript(_:)), keyEquivalent: "")
+                    item.representedObject = customScript
+                    item.target = self
+                    customSubMenu.addItem(item)
+                }
+                customSubMenu.addItem(NSMenuItem.separator())
+            }
+            let editItem = NSMenuItem(title: "Edit...", action: #selector(customActionsEdit(_:)), keyEquivalent: "")
+            editItem.target = self
+            customSubMenu.addItem(editItem)
+            let customActionMenuItem = NSMenuItem()
+            customActionMenuItem.title = "Custom Actions"
+            customActionMenuItem.submenu = customSubMenu
+            menu.insertItem(customActionMenuItem, at: customActionIndex)
+        }
     }
 
     func createMenuFrom(projectInfos: [ProjectInfo], row: Int?) -> NSMenu {
@@ -176,7 +199,18 @@ class ProjectListMenu: NSObject {
 
         // Custom Options
         let customSubMenu = NSMenu()
-        customSubMenu.addItem(withTitle: "Edit...", action: #selector(customActionsEdit(_:)), keyEquivalent: "")
+        if let row = row, let customScripts = projectInfos[row].customMenuScripts, !customScripts.isEmpty {
+            for customScript in customScripts {
+                let item = NSMenuItem(title: customScript.name, action: #selector(runCustomActionScript(_:)), keyEquivalent: "")
+                item.representedObject = customScript
+                item.target = self
+                customSubMenu.addItem(item)
+            }
+            customSubMenu.addItem(NSMenuItem.separator())
+        }
+        let editItem = NSMenuItem(title: "Edit...", action: #selector(customActionsEdit(_:)), keyEquivalent: "")
+        editItem.target = self
+        customSubMenu.addItem(editItem)
         let customActionMenuItem = NSMenuItem()
         customActionMenuItem.title = "Custom Actions"
         customActionMenuItem.submenu = customSubMenu

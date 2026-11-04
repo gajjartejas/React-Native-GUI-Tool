@@ -34,6 +34,18 @@ class ToolsOutlineWC: NSWindowController {
         track()
     }
 
+    func selectTab(at index: Int) {
+        if let splitVC = window?.contentViewController as? NSSplitViewController {
+            if let toolsOutlineVC = splitVC.children.first as? ToolsOutlineVC {
+                toolsOutlineVC.selectNode(withIndex: index)
+            }
+            if splitVC.children.indices.contains(1),
+               let projectTabVC = splitVC.children[1] as? ProjectTabViewController {
+                projectTabVC.selectedTabViewItemIndex = index
+            }
+        }
+    }
+
     deinit {
         self.remove()
     }

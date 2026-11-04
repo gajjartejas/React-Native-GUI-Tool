@@ -479,5 +479,50 @@ extension ProjectListMenu {
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
-    @objc func customActionsEdit(_ sender: NSMenuItem) {}
+    @objc func runCustomActionScript(_ sender: NSMenuItem) {
+        guard let clickedRow = clickedRow else { return }
+        let projectInfo = projectInfos[clickedRow]
+        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
+        if !fileExists {
+            return
+        }
+
+        let scriptCommand: String
+        if let customScript = sender.representedObject as? ProjectInfo.CustomMenuScript {
+            scriptCommand = customScript.script
+        } else if let found = projectInfo.customMenuScripts?.first(where: { $0.name == sender.title }) {
+            scriptCommand = found.script
+        } else {
+            return
+        }
+
+        let resolvedCommand = scriptCommand.replacingOccurrences(of: "$PROJECT_ROOT", with: projectInfo.path)
+        let terminalScript = "cd \(projectInfo.path) && \(resolvedCommand)"
+        openInTerminal(atPath: projectInfo.path, terminalScript: terminalScript)
+    }
+
+    @objc func customActionsEdit(_ sender: NSMenuItem) {
+        guard let row = clickedRow else { return }
+        let projectInfo = projectInfos[row]
+        guard FileManager.default.fileExists(atPath: projectInfo.path) else { return }
+
+        let allControllers = NSWindowController.getAllControllers()
+        let controller: ToolsOutlineWC
+        if let foundController = allControllers.compactMap({ $0 as? ToolsOutlineWC }).first(where: { $0.fromRow == row }) {
+            controller = foundController
+        } else {
+            let storyboard = NSStoryboard(name: "Main", bundle: nil)
+            guard let newController = storyboard.instantiateController(withIdentifier: "ToolsOutlineWC") as? ToolsOutlineWC else { return }
+            newController.fromRow = row
+            newController.projectInfo = projectInfo
+            if let mainWindow = allControllers.first?.window {
+                newController.location = mainWindow.frame
+            }
+            controller = newController
+        }
+        controller.window?.makeKeyAndOrderFront(self)
+        NSApp.activate(ignoringOtherApps: true)
+
+        controller.selectTab(at: 12)
+    }
 }

@@ -1483,6 +1483,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="onPressBrowseScript:" target="qjh-aU-4yO" id="Act-browse-script"/>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XGZ-mR-ImZ">
                                 <rect key="frame" x="114" y="218" width="311" height="15"/>
@@ -1569,6 +1572,10 @@ CA
                             <constraint firstItem="vlt-fD-Dbs" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Xbc-GW-rPJ" secondAttribute="bottom" constant="16" id="zPq-7L-p67"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="menuNameTextField" destination="jQO-eb-pZF" id="Wnm-menu-name"/>
+                        <outlet property="scriptTextField" destination="JAj-d6-6kU" id="Wnm-script-text"/>
+                    </connections>
                 </viewController>
                 <customObject id="LgF-wK-kK6" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1833,6 +1840,9 @@ CA
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="onPressEditCustomAction:" target="kF2-GP-QPk" id="Act-edit-action"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fLE-gq-PSk">
                                 <rect key="frame" x="130" y="19" width="83" height="32"/>
@@ -1840,6 +1850,9 @@ CA
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="onPressRemoveCustomAction:" target="kF2-GP-QPk" id="Act-remove-action"/>
+                                </connections>
                             </button>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="clF-ag-5sB">
                                 <rect key="frame" x="220" y="25" width="73" height="24"/>
@@ -1850,6 +1863,9 @@ CA
                                         <segment label="▼" width="32" selected="YES" tag="1"/>
                                     </segments>
                                 </segmentedCell>
+                                <connections>
+                                    <action selector="onPressMoveUpDown:" target="kF2-GP-QPk" id="Act-move-action"/>
+                                </connections>
                             </segmentedControl>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r97-Kp-aMl">
                                 <rect key="frame" x="16" y="58" width="418" height="254"/>
@@ -1864,7 +1880,7 @@ CA
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="AutomaticTableColumnIdentifier.0" width="116" minWidth="40" maxWidth="1000" id="XaA-PT-VTw">
+                                                <tableColumn identifier="menuNameColumn" width="150" minWidth="40" maxWidth="1000" id="XaA-PT-VTw">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Menu Name">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1876,7 +1892,7 @@ CA
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                 </tableColumn>
-                                                <tableColumn identifier="AutomaticTableColumnIdentifier.1" width="92" minWidth="40" maxWidth="1000" id="s2x-No-308">
+                                                <tableColumn identifier="scriptColumn" width="240" minWidth="40" maxWidth="1000" id="s2x-No-308">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Script">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1887,24 +1903,6 @@ CA
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                </tableColumn>
-                                                <tableColumn identifier="AutomaticTableColumnIdentifier.2" width="189" minWidth="10" maxWidth="3.4028234663852886e+38" id="b8V-rt-0pI">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Parameters">
-                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="kpu-qr-qRm">
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                    <prototypeCellViews>
-                                                        <tableCellView id="g6Z-Oh-qEh">
-                                                            <rect key="frame" x="248" y="0.0" width="186" height="17"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        </tableCellView>
-                                                    </prototypeCellViews>
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
@@ -1948,6 +1946,9 @@ CA
                     </view>
                     <connections>
                         <outlet property="customActionsTableView" destination="QQI-xr-8km" id="pm8-ia-UZZ"/>
+                        <outlet property="editButton" destination="q3m-Qf-L7p" id="Out-edit-btn"/>
+                        <outlet property="moveSegmentedControl" destination="clF-ag-5sB" id="Out-move-seg"/>
+                        <outlet property="removeButton" destination="fLE-gq-PSk" id="Out-remove-btn"/>
                         <segue destination="qjh-aU-4yO" kind="sheet" id="3KK-K7-JHM"/>
                     </connections>
                 </viewController>
