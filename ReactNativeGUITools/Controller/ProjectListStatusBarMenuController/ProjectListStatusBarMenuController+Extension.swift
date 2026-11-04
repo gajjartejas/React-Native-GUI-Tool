@@ -1,5 +1,5 @@
 //
-//  ProjectListStatusBarMenu+Extension.swift
+//  ProjectListStatusBarMenuController+Extension.swift
 //  ReactNativeGUITools
 //
 //  Created by Tejas on 01/06/24.
@@ -7,7 +7,7 @@
 
 import Cocoa
 
-extension ProjectListStatusBarMenu {
+extension ProjectListStatusBarMenuController {
     func promptForReply(_ inputValue: String, _ message: String, _ informativeText: String, completion: @escaping PromptAlertView.promptResponseClosure) {
         let promptView = PromptAlertView(inputValue: inputValue, message: message, informativeText: informativeText)
         let (responseText, userResponse) = promptView.displayAlert()
@@ -15,13 +15,13 @@ extension ProjectListStatusBarMenu {
     }
 }
 
-extension ProjectListStatusBarMenu: NSMenuDelegate {
+extension ProjectListStatusBarMenuController: NSMenuDelegate {
     func menu(_ menu: NSMenu, willHighlight item: NSMenuItem?) {
         projectListMenu.setClickedRow(item?.tag)
     }
 }
 
-extension ProjectListStatusBarMenu: ProjectListMenuDelegate {
+extension ProjectListStatusBarMenuController: ProjectListMenuDelegate {
     func projectListMenuNeedsUpdate(_ menu: NSMenu) {}
     func projectListMenu(didSelectRemoveMenuItem menuItem: NSMenuItem, at row: Int) {
         ProjectInfoManager.shared.remove(at: row, type: .menu)
@@ -53,12 +53,8 @@ extension ProjectListStatusBarMenu: ProjectListMenuDelegate {
         let projectName = (projectInfo.name ?? "")
 
         promptForReply(projectName, "Rename?", "Rename \(projectName)", completion: { (newName: String, bResponse: Bool) in
-            if bResponse {
-                let newName = newName.trimmingCharacters(in: .whitespacesAndNewlines)
-                if !newName.isEmpty {
-                    projectInfo.name = newName
-                    ProjectInfoManager.shared.update(with: projectInfo)
-                }
+            if bResponse, projectInfo.rename(to: newName) {
+                ProjectInfoManager.shared.update(with: projectInfo)
             }
         })
     }

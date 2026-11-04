@@ -5,7 +5,7 @@
 //  Created by Tejas on 14/04/24.
 //
 
-import Cocoa
+import Foundation
 
 enum MenuType {
     case group

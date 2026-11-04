@@ -15,7 +15,7 @@ class MainProjectListVC: NSViewController {
     @IBOutlet var projectSearchTextField: NSSearchField!
     @IBOutlet var moreButton: NSButton!
 
-    let projectListMenu = ProjectListMenu()
+    let projectListMenu = ProjectListMenuController()
 
     var projectInfos = ProjectInfoManager.shared.get(type: .list)
     var projectInfosAll = ProjectInfoManager.shared.get(type: .all)
@@ -166,13 +166,14 @@ class MainProjectListVC: NSViewController {
     }
 
     private func initializeDropHandler() {
-        dropView.dragging { folderPath in
+        dropView.validatePath = ProjectInfo.isDirectory(atPath:)
+        dropView.dragging { [weak self] folderPath in
             let newProject = ProjectInfo(id: UUID().uuidString, path: folderPath)
             ProjectInfoManager.shared.append(newProject)
-            self.projectListTableView.reloadData()
+            self?.projectListTableView.reloadData()
         }
 
-        dropView.leftClick {
+        dropView.leftClick { [weak self] in
             let openPanel = NSOpenPanel()
             openPanel.title = "Select Project(s)"
             openPanel.message = "Select react native project folder(s)"
@@ -181,7 +182,7 @@ class MainProjectListVC: NSViewController {
             openPanel.canChooseFiles = false
             openPanel.allowsMultipleSelection = true
             openPanel.canCreateDirectories = true
-            openPanel.begin { [self] result in
+            openPanel.begin { [weak self] result in
                 if result.rawValue == NSApplication.ModalResponse.OK.rawValue {
                     let newProjects = openPanel.urls.map { item in
                         let folderPath = item.path
@@ -189,7 +190,7 @@ class MainProjectListVC: NSViewController {
                         return newProject
                     }
                     ProjectInfoManager.shared.append(contentsOf: newProjects)
-                    self.projectListTableView.reloadData()
+                    self?.projectListTableView.reloadData()
                 }
             }
         }

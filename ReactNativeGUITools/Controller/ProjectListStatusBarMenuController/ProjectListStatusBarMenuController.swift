@@ -7,10 +7,10 @@
 
 import Cocoa
 
-class ProjectListStatusBarMenu: NSObject {
+class ProjectListStatusBarMenuController: NSObject {
     var statusBarItem: NSStatusItem!
     let statusBarMenu = NSMenu()
-    let projectListMenu = ProjectListMenu()
+    let projectListMenu = ProjectListMenuController()
     var projectInfos: [ProjectInfo]!
 
     override private init() {
@@ -20,10 +20,10 @@ class ProjectListStatusBarMenu: NSObject {
     convenience init(projectInfos: [ProjectInfo]) {
         self.init()
         self.projectInfos = projectInfos
-        createProjectListMenu()
+        createProjectListMenuController()
     }
 
-    private func createProjectListMenu() {
+    private func createProjectListMenuController() {
         let statusBar = NSStatusBar.system
         statusBarItem = statusBar.statusItem(withLength: NSStatusItem.squareLength)
         statusBarItem.button?.image = .init(named: "status-bar-icon")?.tint(color: .red)

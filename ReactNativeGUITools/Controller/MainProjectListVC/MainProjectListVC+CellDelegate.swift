@@ -10,9 +10,7 @@ import Cocoa
 extension MainProjectListVC: ProjectListCellViewDelegate {
     func textEdited(text: String, atIndex row: Int) {
         let projectInfo = projectInfos[row]
-        let newName = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !newName.isEmpty {
-            projectInfo.name = newName
+        if projectInfo.rename(to: text) {
             ProjectInfoManager.shared.update(with: projectInfo)
         }
     }

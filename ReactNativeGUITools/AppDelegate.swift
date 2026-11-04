@@ -9,15 +9,14 @@ import Cocoa
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-    var projectListContexMenu: ProjectListStatusBarMenu!
+    var projectListContexMenu: ProjectListStatusBarMenuController!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let projectInfos = ProjectInfoManager.shared.get(type: .menu)
-        projectListContexMenu = ProjectListStatusBarMenu(projectInfos: projectInfos)
+        projectListContexMenu = ProjectListStatusBarMenuController(projectInfos: projectInfos)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
         print("applicationWillTerminate")
     }
 
@@ -28,12 +27,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidBecomeActive(_ notification: Notification) {
         print("applicationDidBecomeActive")
-        // NSApplication.shared.unhide(self)
     }
 
     func applicationDidHide(_ notification: Notification) {
         print("applicationDidHide")
-        // NSApp.setActivationPolicy(.accessory)
     }
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
