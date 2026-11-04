@@ -1,5 +1,5 @@
 //
-//  ProjectListMenu+Extension.swift
+//  ProjectListMenuController+Actions.swift
 //  ReactNativeGUITools
 //
 //  Created by Tejas on 01/06/24.
@@ -7,28 +7,13 @@
 
 import Cocoa
 
-extension ProjectListMenu {
-    func customSort(_ lhs: ProjectInfo.PackageJsonScript, _ rhs: ProjectInfo.PackageJsonScript) -> Bool {
-        let customOrder = ["start", "test", "lint", "android", "ios"]
-
-        let lhsIndex = customOrder.firstIndex(of: lhs.name) ?? Int.max
-        let rhsIndex = customOrder.firstIndex(of: rhs.name) ?? Int.max
-
-        if lhsIndex != rhsIndex {
-            return lhsIndex < rhsIndex
-        } else {
-            return lhs.name > rhs.name
-        }
-    }
-}
-
-extension ProjectListMenu: NSMenuDelegate {
+extension ProjectListMenuController: NSMenuDelegate {
     func menuNeedsUpdate(_ menu: NSMenu) {
         delegate?.projectListMenuNeedsUpdate(menu)
     }
 }
 
-extension ProjectListMenu {
+extension ProjectListMenuController {
     // MARK: - Actions
 
     @objc func openAction(_ sender: NSMenuItem) {
@@ -81,7 +66,7 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        let script = "cd \(projectInfo.path) && npm run \(sender.title)"
+        let script = projectInfo.terminalCommand(.runScript(sender.title))
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
@@ -121,120 +106,46 @@ extension ProjectListMenu {
     }
 
     @objc func cleaniOSAllFolders(_ sender: NSMenuItem) {
-        guard let clickedRow = clickedRow else { return }
-        let foldersToRemove = ["/ios/build", "/ios/Pods"]
-        let projectInfo = projectInfos[clickedRow]
-        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
-        if !fileExists {
-            return
-        }
-        foldersToRemove.forEach { item in
-            moveFolderToTrash(atPath: projectInfo.path + item)
-        }
+        trashFolders(.cleaniOSAllFolders)
     }
 
     @objc func cleaniOSBuildFolder(_ sender: NSMenuItem) {
-        guard let clickedRow = clickedRow else { return }
-        let foldersToRemove = ["/ios/build"]
-        let projectInfo = projectInfos[clickedRow]
-        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
-        if !fileExists {
-            return
-        }
-        foldersToRemove.forEach { item in
-            moveFolderToTrash(atPath: projectInfo.path + item)
-        }
+        trashFolders(.cleaniOSBuildFolder)
     }
 
     @objc func cleaniOSPodsFolder(_ sender: NSMenuItem) {
-        guard let clickedRow = clickedRow else { return }
-        let foldersToRemove = ["/ios/Pods"]
-        let projectInfo = projectInfos[clickedRow]
-        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
-        if !fileExists {
-            return
-        }
-        foldersToRemove.forEach { item in
-            moveFolderToTrash(atPath: projectInfo.path + item)
-        }
+        trashFolders(.cleaniOSPodsFolder)
     }
 
     @objc func cleanAndroidAllFolders(_ sender: NSMenuItem) {
-        guard let clickedRow = clickedRow else { return }
-        let foldersToRemove = ["/android/build", "/android/app/build", "/android/app/release"]
-        let projectInfo = projectInfos[clickedRow]
-        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
-        if !fileExists {
-            return
-        }
-        foldersToRemove.forEach { item in
-            moveFolderToTrash(atPath: projectInfo.path + item)
-        }
+        trashFolders(.cleanAndroidAllFolders)
     }
 
     @objc func cleanAndroidBuildFolder(_ sender: NSMenuItem) {
-        guard let clickedRow = clickedRow else { return }
-        let foldersToRemove = ["/android/build"]
-        let projectInfo = projectInfos[clickedRow]
-        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
-        if !fileExists {
-            return
-        }
-        foldersToRemove.forEach { item in
-            moveFolderToTrash(atPath: projectInfo.path + item)
-        }
+        trashFolders(.cleanAndroidBuildFolder)
     }
 
     @objc func cleaniAndroidAppBuildFolder(_ sender: NSMenuItem) {
-        guard let clickedRow = clickedRow else { return }
-        let foldersToRemove = ["/android/app/build"]
-        let projectInfo = projectInfos[clickedRow]
-        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
-        if !fileExists {
-            return
-        }
-        foldersToRemove.forEach { item in
-            moveFolderToTrash(atPath: projectInfo.path + item)
-        }
+        trashFolders(.cleaniAndroidAppBuildFolder)
     }
 
     @objc func cleanAndroidAppReleaseFolder(_ sender: NSMenuItem) {
-        guard let clickedRow = clickedRow else { return }
-        let foldersToRemove = ["/android/app/release"]
-        let projectInfo = projectInfos[clickedRow]
-        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
-        if !fileExists {
-            return
-        }
-        foldersToRemove.forEach { item in
-            moveFolderToTrash(atPath: projectInfo.path + item)
-        }
+        trashFolders(.cleanAndroidAppReleaseFolder)
     }
 
     @objc func cleanAlliOSAllAndroid(_ sender: NSMenuItem) {
-        guard let clickedRow = clickedRow else { return }
-        let foldersToRemove = ["/ios/build", "/ios/Pods", "/android/build", "/android/app/build", "/android/app/release"]
-        let projectInfo = projectInfos[clickedRow]
-        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
-        if !fileExists {
-            return
-        }
-        foldersToRemove.forEach { item in
-            moveFolderToTrash(atPath: projectInfo.path + item)
-        }
+        trashFolders(.cleanAlliOSAllAndroid)
     }
 
     @objc func cleanNodeModules(_ sender: NSMenuItem) {
+        trashFolders(.cleanNodeModules)
+    }
+
+    private func trashFolders(_ target: ProjectInfo.CleanupTarget) {
         guard let clickedRow = clickedRow else { return }
-        let foldersToRemove = ["/node_modules"]
         let projectInfo = projectInfos[clickedRow]
-        let fileExists = FileManager.default.fileExists(atPath: projectInfo.path)
-        if !fileExists {
-            return
-        }
-        foldersToRemove.forEach { item in
-            moveFolderToTrash(atPath: projectInfo.path + item)
-        }
+        guard FileManager.default.fileExists(atPath: projectInfo.path) else { return }
+        projectInfo.cleanupPaths(for: target).forEach { moveFolderToTrash(atPath: $0) }
     }
 
     @objc func npmStart(_ sender: NSMenuItem) {
@@ -244,7 +155,7 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        let script = "cd \(projectInfo.path) && npm start"
+        let script = projectInfo.terminalCommand(.npmStart)
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
@@ -255,7 +166,7 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        let script = "cd \(projectInfo.path) && npm install"
+        let script = projectInfo.terminalCommand(.npmInstall)
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
@@ -266,7 +177,7 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        let script = "cd \(projectInfo.path) && start -- --reset-cache"
+        let script = projectInfo.terminalCommand(.npmStartResetCache)
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
@@ -277,7 +188,7 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        let script = "cd \(projectInfo.path) && npm restart"
+        let script = projectInfo.terminalCommand(.npmRestart)
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
@@ -288,7 +199,7 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        let script = "cd \(projectInfo.path) && npm stop"
+        let script = projectInfo.terminalCommand(.npmStop)
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
@@ -299,7 +210,7 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        let script = "cd \(projectInfo.path) && npm cache clean"
+        let script = projectInfo.terminalCommand(.npmCacheClean)
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
@@ -310,7 +221,7 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        let script = "cd \(projectInfo.path) && npm cache verify"
+        let script = projectInfo.terminalCommand(.npmCacheVerify)
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
@@ -321,7 +232,7 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        let script = "cd \(projectInfo.path) && watchman watch-del-all"
+        let script = projectInfo.terminalCommand(.watchmanWatchDelAll)
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
@@ -332,7 +243,7 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        let script = "cd \(projectInfo.path) && watchman shutdown-server"
+        let script = projectInfo.terminalCommand(.watchmanShutdownServer)
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
@@ -343,7 +254,7 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        let script = "cd \(projectInfo.path) && watchman watch ."
+        let script = projectInfo.terminalCommand(.watchmanWatch)
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
@@ -409,7 +320,7 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        let script = "cd \(projectInfo.path)/ios && pod install"
+        let script = projectInfo.terminalCommand(.podInstall)
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
@@ -420,7 +331,7 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        let script = "cd \(projectInfo.path)/ios && pod update"
+        let script = projectInfo.terminalCommand(.podUpdate)
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
@@ -431,7 +342,7 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        let script = "cd \(projectInfo.path)/ios && pod outdated"
+        let script = projectInfo.terminalCommand(.podOutdated)
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
@@ -442,7 +353,7 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        let script = "cd \(projectInfo.path)/ios && pod deintegrate"
+        let script = projectInfo.terminalCommand(.podDeintegrate)
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
@@ -453,7 +364,7 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        let script = "cd \(projectInfo.path)/ios && pod env"
+        let script = projectInfo.terminalCommand(.podEnv)
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
@@ -464,7 +375,7 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        let script = "cd \(projectInfo.path)/ios && pod cache list"
+        let script = projectInfo.terminalCommand(.podCacheList)
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
@@ -475,7 +386,7 @@ extension ProjectListMenu {
         if !fileExists {
             return
         }
-        let script = "cd \(projectInfo.path)/ios && pod cache clean --all"
+        let script = projectInfo.terminalCommand(.podCacheCleanAll)
         openInTerminal(atPath: projectInfo.path, terminalScript: script)
     }
 
@@ -496,8 +407,7 @@ extension ProjectListMenu {
             return
         }
 
-        let resolvedCommand = scriptCommand.replacingOccurrences(of: "$PROJECT_ROOT", with: projectInfo.path)
-        let terminalScript = "cd \(projectInfo.path) && \(resolvedCommand)"
+        let terminalScript = projectInfo.terminalCommand(.custom(scriptCommand))
         openInTerminal(atPath: projectInfo.path, terminalScript: terminalScript)
     }
 

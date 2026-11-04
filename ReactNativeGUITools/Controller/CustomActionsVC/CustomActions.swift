@@ -73,10 +73,7 @@ class CustomActionsVC: NSViewController, ProjectInfoAssignable {
         vc.projectInfo = projectInfo
         vc.onSave = { [weak self] newScript in
             guard let self = self, let projectInfo = self.projectInfo else { return }
-            if projectInfo.customMenuScripts == nil {
-                projectInfo.customMenuScripts = []
-            }
-            projectInfo.customMenuScripts?.append(newScript)
+            projectInfo.appendCustomScript(newScript)
             ProjectInfoManager.shared.update(with: projectInfo)
             self.customActionsTableView.reloadData()
             let newIndex = (projectInfo.customMenuScripts?.count ?? 1) - 1
@@ -100,7 +97,7 @@ class CustomActionsVC: NSViewController, ProjectInfoAssignable {
         vc.customScriptToEdit = scriptToEdit
         vc.onSave = { [weak self] updatedScript in
             guard let self = self, let projectInfo = self.projectInfo else { return }
-            projectInfo.customMenuScripts?[selectedRow] = updatedScript
+            guard projectInfo.replaceCustomScript(updatedScript) else { return }
             ProjectInfoManager.shared.update(with: projectInfo)
             self.customActionsTableView.reloadData()
             self.customActionsTableView.selectRowIndexes(IndexSet(integer: selectedRow), byExtendingSelection: false)
@@ -114,7 +111,7 @@ class CustomActionsVC: NSViewController, ProjectInfoAssignable {
         guard selectedRow >= 0, let count = projectInfo?.customMenuScripts?.count, selectedRow < count else {
             return
         }
-        projectInfo?.customMenuScripts?.remove(at: selectedRow)
+        projectInfo?.removeCustomScript(at: selectedRow)
         if let projectInfo = projectInfo {
             ProjectInfoManager.shared.update(with: projectInfo)
         }
@@ -128,16 +125,11 @@ class CustomActionsVC: NSViewController, ProjectInfoAssignable {
 
     @IBAction func onPressMoveUpDown(_ sender: NSSegmentedControl) {
         let selectedRow = customActionsTableView.selectedRow
-        guard selectedRow >= 0, var scripts = projectInfo?.customMenuScripts else { return }
+        guard selectedRow >= 0, let projectInfo = projectInfo else { return }
 
         let destinationRow = sender.selectedSegment == 0 ? selectedRow - 1 : selectedRow + 1
-        guard destinationRow >= 0 && destinationRow < scripts.count else { return }
-
-        scripts.swapAt(selectedRow, destinationRow)
-        projectInfo?.customMenuScripts = scripts
-        if let projectInfo = projectInfo {
-            ProjectInfoManager.shared.update(with: projectInfo)
-        }
+        guard projectInfo.swapCustomScripts(at: selectedRow, and: destinationRow) else { return }
+        ProjectInfoManager.shared.update(with: projectInfo)
         customActionsTableView.reloadData()
         customActionsTableView.selectRowIndexes(IndexSet(integer: destinationRow), byExtendingSelection: false)
         updateButtonStates()

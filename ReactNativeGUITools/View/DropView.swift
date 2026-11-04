@@ -13,6 +13,7 @@ class DropView: NSView {
     var filePath: String?
     var draggingHandler: ((String)->Void)?
     var clickingHandler: (()->Void)?
+    var validatePath: ((String) -> Bool)?
     
     func dragging(ended: ((String)->Void)?) {
         draggingHandler = ended
@@ -62,16 +63,7 @@ class DropView: NSView {
             let path = board[0] as? String
             else { return false }
         
-        if directoryExistsAtPath(path) {
-            return true
-        }
-        return false
-    }
-    
-    fileprivate func directoryExistsAtPath(_ path: String) -> Bool {
-        var isDirectory = ObjCBool(true)
-        let exists = FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory)
-        return exists && isDirectory.boolValue
+        return validatePath?(path) ?? false
     }
     
     override func draggingExited(_ sender: NSDraggingInfo?) {

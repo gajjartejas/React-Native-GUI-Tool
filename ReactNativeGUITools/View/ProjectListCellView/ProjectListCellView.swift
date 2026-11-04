@@ -44,7 +44,7 @@ class ProjectListCellView: NSTableCellView, NibInstantiatable {
 
     // MARK: - Helpers
 
-    func configureUI(withNode project: ProjectInfo, atRow row: Int) {
+    func configureUI(withNode project: ProjectInfo, atRow row: Int, isProjectAvailable: Bool) {
         projectNameLable.stringValue = project.name ?? "-"
         projectPathLable.stringValue = convertToRelativePaths(from: project.path) ?? "-"
         projectVersion.stringValue = project.packageVersionString ?? "-"
@@ -52,7 +52,7 @@ class ProjectListCellView: NSTableCellView, NibInstantiatable {
         projectVersionLable.backgroundColor = .init(named: "control-1")
         projectLogoView.cornerRadius = 26.0
 
-        if !FileManager.default.fileExists(atPath: project.path) {
+        if !isProjectAvailable {
             projectLogoView.backgroundColor = .red
             projectLogoLable.stringValue = "?"
         } else {
@@ -60,13 +60,13 @@ class ProjectListCellView: NSTableCellView, NibInstantiatable {
             projectLogoLable.stringValue = getShortenedString(from: project.name).uppercased()
         }
 
-        if !FileManager.default.fileExists(atPath: project.path) {
+        if !isProjectAvailable {
             projectNameLable.textColor = .red
         } else {
             projectNameLable.textColor = .labelColor
         }
 
-        if !FileManager.default.fileExists(atPath: project.path) {
+        if !isProjectAvailable {
             projectPathLable.textColor = .red
         } else {
             projectPathLable.textColor = .disabledControlTextColor

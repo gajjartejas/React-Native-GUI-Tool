@@ -127,9 +127,9 @@ class ProjectInfoManager {
     }
 
     func move(fromOffsets source: IndexSet, toOffset destination: Int) {
-        projectInfos.move(fromOffsets: source, toOffset: destination)
-        projectInfosMenu.move(fromOffsets: source, toOffset: destination)
-        projectInfosAll.move(fromOffsets: source, toOffset: destination)
+        projectInfos = ProjectOrdering.moving(projectInfos, fromOffsets: source, toOffset: destination)
+        projectInfosMenu = ProjectOrdering.moving(projectInfosMenu, fromOffsets: source, toOffset: destination)
+        projectInfosAll = ProjectOrdering.moving(projectInfosAll, fromOffsets: source, toOffset: destination)
         _ = ProjectInfo.writeArrayToStorage(projectInfosAll)
     }
 

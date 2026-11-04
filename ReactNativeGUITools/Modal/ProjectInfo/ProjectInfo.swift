@@ -5,7 +5,6 @@
 //  Created by Tejas on 14/04/24.
 //
 
-import AppKit
 import Foundation
 
 class ProjectInfo: Codable, PlistStorable {
@@ -32,6 +31,14 @@ class ProjectInfo: Codable, PlistStorable {
 
     private enum CodingKeys: String, CodingKey {
         case id, path, name, packageVersionString, packageScripts, customMenuScripts
+    }
+
+    @discardableResult
+    func rename(to proposedName: String) -> Bool {
+        let name = proposedName.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !name.isEmpty else { return false }
+        self.name = name
+        return true
     }
 
     static func == (lhs: ProjectInfo, rhs: ProjectInfo) -> Bool {

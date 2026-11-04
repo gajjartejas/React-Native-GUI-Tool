@@ -18,7 +18,9 @@ extension MainProjectListVC: NSTableViewDelegate {
             return nil
         }
 
-        cellView.configureUI(withNode: projectInfos[row], atRow: row)
+        let project = projectInfos[row]
+        let isProjectAvailable = FileManager.default.fileExists(atPath: project.path)
+        cellView.configureUI(withNode: project, atRow: row, isProjectAvailable: isProjectAvailable)
         cellView.delegate = self
         return cellView
     }

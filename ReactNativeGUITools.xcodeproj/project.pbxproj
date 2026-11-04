@@ -34,7 +34,7 @@
 		96A93FC82BE3FBBF0033DFD1 /* MainProjectListWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A93FC72BE3FBBF0033DFD1 /* MainProjectListWC.swift */; };
 		96A93FCB2BE3FD610033DFD1 /* ToolsOutlineWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A93FC92BE3FD610033DFD1 /* ToolsOutlineWC.swift */; };
 		96AB0B422BE296DF006613F7 /* MainProjectListVC+SearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AB0B412BE296DE006613F7 /* MainProjectListVC+SearchDelegate.swift */; };
-		96AFFF1A2BFA08A9002D3828 /* ProjectListStatusBarMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AFFF192BFA08A9002D3828 /* ProjectListStatusBarMenu.swift */; };
+		96AFFF1A2BFA08A9002D3828 /* ProjectListStatusBarMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AFFF192BFA08A9002D3828 /* ProjectListStatusBarMenuController.swift */; };
 		96BC50B62BEA83B8001002EB /* NSAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BC50B52BEA83B8001002EB /* NSAlert.swift */; };
 		96C0A4932BC441B50069FB7F /* PasteboardWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0A4922BC441B50069FB7F /* PasteboardWriter.swift */; };
 		96D181442BADEC7200380905 /* MenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D181432BADEC7200380905 /* MenuNode.swift */; };
@@ -70,13 +70,18 @@
 		96F9445E2C01E19A0053B5DC /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9445D2C01E19A0053B5DC /* AppUtils.swift */; };
 		96FCDF9E2C0AF07400A2AFBA /* ProjectInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCDF9D2C0AF07400A2AFBA /* ProjectInfoManager.swift */; };
 		96FCDFA02C0AF49700A2AFBA /* PromptAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCDF9F2C0AF49700A2AFBA /* PromptAlertView.swift */; };
-		96FCDFA32C0B3CC700A2AFBA /* ProjectListMenu+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCDFA22C0B3CC700A2AFBA /* ProjectListMenu+Extension.swift */; };
-		96FCDFA62C0B3EB200A2AFBA /* ProjectListStatusBarMenu+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCDFA52C0B3EB200A2AFBA /* ProjectListStatusBarMenu+Extension.swift */; };
+		96FCDFA32C0B3CC700A2AFBA /* ProjectListMenuController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCDFA22C0B3CC700A2AFBA /* ProjectListMenuController+Actions.swift */; };
+		96FCDFA62C0B3EB200A2AFBA /* ProjectListStatusBarMenuController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCDFA52C0B3EB200A2AFBA /* ProjectListStatusBarMenuController+Extension.swift */; };
 		96FCDFA82C0B5F3200A2AFBA /* MainSettingsWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCDFA72C0B5F3200A2AFBA /* MainSettingsWC.swift */; };
 		96FF28CD2C35A6D800F262CF /* CustomActions+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF28CC2C35A6D800F262CF /* CustomActions+Delegate.swift */; };
 		96FF28CF2C35A6EE00F262CF /* CustomActions+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF28CE2C35A6EE00F262CF /* CustomActions+DataSource.swift */; };
 		96FF28D32C35AE9200F262CF /* CustomActionsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96FF28D22C35ADDD00F262CF /* CustomActionsCellView.xib */; };
 		96FF28D42C35AE9500F262CF /* CustomActionsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF28D12C35ADDC00F262CF /* CustomActionsCellView.swift */; };
+		6435618B9D0DE230415C1619 /* ProjectListMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A649358BA8BA6BEFDA522D8E /* ProjectListMenuController.swift */; };
+		CCAF887BB76542ED382BB75E /* PackageManifestReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1F634C6C4FD5421BD97CA1 /* PackageManifestReader.swift */; };
+		4758A65EDBFC556DF8D0087D /* ProjectInfo+Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608EBB17A1159DB4E1E205AB /* ProjectInfo+Commands.swift */; };
+		9FC14EBC8196B8910ED1487C /* ProjectInfo+CustomActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8857A501BD76F5F9AF87EF0D /* ProjectInfo+CustomActions.swift */; };
+		9AC2E0ADD5B8826FF9B54158 /* ProjectOrdering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866D5F905B21E53991B7F80A /* ProjectOrdering.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,7 +114,7 @@
 		96A93FC72BE3FBBF0033DFD1 /* MainProjectListWC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProjectListWC.swift; sourceTree = "<group>"; };
 		96A93FC92BE3FD610033DFD1 /* ToolsOutlineWC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsOutlineWC.swift; sourceTree = "<group>"; };
 		96AB0B412BE296DE006613F7 /* MainProjectListVC+SearchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainProjectListVC+SearchDelegate.swift"; sourceTree = "<group>"; };
-		96AFFF192BFA08A9002D3828 /* ProjectListStatusBarMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListStatusBarMenu.swift; sourceTree = "<group>"; };
+		96AFFF192BFA08A9002D3828 /* ProjectListStatusBarMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListStatusBarMenuController.swift; sourceTree = "<group>"; };
 		96BC50B52BEA83B8001002EB /* NSAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAlert.swift; sourceTree = "<group>"; };
 		96C02A362BF0F6C6004F170E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		96C0A4922BC441B50069FB7F /* PasteboardWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardWriter.swift; sourceTree = "<group>"; };
@@ -146,13 +151,18 @@
 		96F9445D2C01E19A0053B5DC /* AppUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
 		96FCDF9D2C0AF07400A2AFBA /* ProjectInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoManager.swift; sourceTree = "<group>"; };
 		96FCDF9F2C0AF49700A2AFBA /* PromptAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptAlertView.swift; sourceTree = "<group>"; };
-		96FCDFA22C0B3CC700A2AFBA /* ProjectListMenu+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectListMenu+Extension.swift"; sourceTree = "<group>"; };
-		96FCDFA52C0B3EB200A2AFBA /* ProjectListStatusBarMenu+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectListStatusBarMenu+Extension.swift"; sourceTree = "<group>"; };
+		96FCDFA22C0B3CC700A2AFBA /* ProjectListMenuController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectListMenuController+Actions.swift"; sourceTree = "<group>"; };
+		96FCDFA52C0B3EB200A2AFBA /* ProjectListStatusBarMenuController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectListStatusBarMenuController+Extension.swift"; sourceTree = "<group>"; };
 		96FCDFA72C0B5F3200A2AFBA /* MainSettingsWC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsWC.swift; sourceTree = "<group>"; };
 		96FF28CC2C35A6D800F262CF /* CustomActions+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomActions+Delegate.swift"; sourceTree = "<group>"; };
 		96FF28CE2C35A6EE00F262CF /* CustomActions+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomActions+DataSource.swift"; sourceTree = "<group>"; };
 		96FF28D12C35ADDC00F262CF /* CustomActionsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionsCellView.swift; sourceTree = "<group>"; };
 		96FF28D22C35ADDD00F262CF /* CustomActionsCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomActionsCellView.xib; sourceTree = "<group>"; };
+		A649358BA8BA6BEFDA522D8E /* ProjectListMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectListMenuController.swift"; sourceTree = "<group>"; };
+		4E1F634C6C4FD5421BD97CA1 /* PackageManifestReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PackageManifestReader.swift"; sourceTree = "<group>"; };
+		608EBB17A1159DB4E1E205AB /* ProjectInfo+Commands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectInfo+Commands.swift"; sourceTree = "<group>"; };
+		8857A501BD76F5F9AF87EF0D /* ProjectInfo+CustomActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectInfo+CustomActions.swift"; sourceTree = "<group>"; };
+		866D5F905B21E53991B7F80A /* ProjectOrdering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectOrdering.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +252,8 @@
 		96633F6C2BA5B98F00B668FC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5016BBB6EDD8E2BE0A81FB0C /* ProjectListMenuController */,
+				96FCDFA42C0B3E9700A2AFBA /* ProjectListStatusBarMenuController */,
 				96E61B892CA07E090066AA21 /* AddCustomActionVC */,
 				96F71CF32BD2D6E50003D728 /* ProjectTabViewController */,
 				96F10FF32BD17CBF00ED5968 /* lAPToolVC */,
@@ -306,7 +318,6 @@
 		96AFFF182BFA088B002D3828 /* ProjectListContexMenu */ = {
 			isa = PBXGroup;
 			children = (
-				96FCDFA42C0B3E9700A2AFBA /* ProjectListStatusBarMenu */,
 				96FCDFA12C0B3CB500A2AFBA /* ProjectListMenu */,
 			);
 			path = ProjectListContexMenu;
@@ -482,6 +493,10 @@
 		96FCDF992C0AEFAD00A2AFBA /* ProjectInfo */ = {
 			isa = PBXGroup;
 			children = (
+				866D5F905B21E53991B7F80A /* ProjectOrdering.swift */,
+				8857A501BD76F5F9AF87EF0D /* ProjectInfo+CustomActions.swift */,
+				608EBB17A1159DB4E1E205AB /* ProjectInfo+Commands.swift */,
+				4E1F634C6C4FD5421BD97CA1 /* PackageManifestReader.swift */,
 				9675F5BC2BCC49A1008FF0F4 /* ProjectInfo.swift */,
 				96FCDF9D2C0AF07400A2AFBA /* ProjectInfoManager.swift */,
 				96E8CB552C36FA0A0027FAF1 /* CustomMenuScript.swift */,
@@ -494,18 +509,17 @@
 			isa = PBXGroup;
 			children = (
 				96F3972E2BFE62CE00AD7FC4 /* ProjectListMenu.swift */,
-				96FCDFA22C0B3CC700A2AFBA /* ProjectListMenu+Extension.swift */,
 			);
 			path = ProjectListMenu;
 			sourceTree = "<group>";
 		};
-		96FCDFA42C0B3E9700A2AFBA /* ProjectListStatusBarMenu */ = {
+		96FCDFA42C0B3E9700A2AFBA /* ProjectListStatusBarMenuController */ = {
 			isa = PBXGroup;
 			children = (
-				96AFFF192BFA08A9002D3828 /* ProjectListStatusBarMenu.swift */,
-				96FCDFA52C0B3EB200A2AFBA /* ProjectListStatusBarMenu+Extension.swift */,
+				96AFFF192BFA08A9002D3828 /* ProjectListStatusBarMenuController.swift */,
+				96FCDFA52C0B3EB200A2AFBA /* ProjectListStatusBarMenuController+Extension.swift */,
 			);
-			path = ProjectListStatusBarMenu;
+			path = ProjectListStatusBarMenuController;
 			sourceTree = "<group>";
 		};
 		96FF28D02C35A7D500F262CF /* CustomActionsCellView */ = {
@@ -515,6 +529,15 @@
 				96FF28D22C35ADDD00F262CF /* CustomActionsCellView.xib */,
 			);
 			path = CustomActionsCellView;
+			sourceTree = "<group>";
+		};
+		5016BBB6EDD8E2BE0A81FB0C /* ProjectListMenuController */ = {
+			isa = PBXGroup;
+			children = (
+				A649358BA8BA6BEFDA522D8E /* ProjectListMenuController.swift */,
+				96FCDFA22C0B3CC700A2AFBA /* ProjectListMenuController+Actions.swift */,
+			);
+			path = ProjectListMenuController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -590,6 +613,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AC2E0ADD5B8826FF9B54158 /* ProjectOrdering.swift in Sources */,
+				9FC14EBC8196B8910ED1487C /* ProjectInfo+CustomActions.swift in Sources */,
+				4758A65EDBFC556DF8D0087D /* ProjectInfo+Commands.swift in Sources */,
+				CCAF887BB76542ED382BB75E /* PackageManifestReader.swift in Sources */,
+				6435618B9D0DE230415C1619 /* ProjectListMenuController.swift in Sources */,
 				96EB35B42BD80A4E00BC04BF /* GenerateBuildVC.swift in Sources */,
 				963CAEEC2BFCF95C007F7572 /* NSMenu.swift in Sources */,
 				96E8CB582C370DF60027FAF1 /* PackageJsonScript.swift in Sources */,
@@ -614,7 +642,7 @@
 				96F10FDE2BD17A7400ED5968 /* ProjectInfoVC.swift in Sources */,
 				962075742C06404500AB61AB /* NSWindowController.swift in Sources */,
 				96E34ED22BE6A420000B56C0 /* MainProjectListVC+CellDelegate.swift in Sources */,
-				96FCDFA32C0B3CC700A2AFBA /* ProjectListMenu+Extension.swift in Sources */,
+				96FCDFA32C0B3CC700A2AFBA /* ProjectListMenuController+Actions.swift in Sources */,
 				96EB35AD2BD809C600BC04BF /* lAPToolVC.swift in Sources */,
 				96EB35BB2BD81B4200BC04BF /* ToolsOutlineVC+DataSource.swift in Sources */,
 				96FCDFA02C0AF49700A2AFBA /* PromptAlertView.swift in Sources */,
@@ -626,7 +654,7 @@
 				960F35F12C148A8D00989279 /* MainSettingsManager.swift in Sources */,
 				96EB35B52BD80A5200BC04BF /* YarnVC.swift in Sources */,
 				96FF28CD2C35A6D800F262CF /* CustomActions+Delegate.swift in Sources */,
-				96AFFF1A2BFA08A9002D3828 /* ProjectListStatusBarMenu.swift in Sources */,
+				96AFFF1A2BFA08A9002D3828 /* ProjectListStatusBarMenuController.swift in Sources */,
 				96D1814E2BADF4EE00380905 /* NibInstantiatable.swift in Sources */,
 				96EB35B92BD81AE600BC04BF /* ToolsOutlineVC+Delegate.swift in Sources */,
 				967450762BDCE8A70047D7C1 /* ProjectListDropLableView.swift in Sources */,
@@ -638,7 +666,7 @@
 				96139BCD2C1599710012A026 /* ConfirmAlertView.swift in Sources */,
 				96EB35B12BD809D500BC04BF /* ApktoolVC.swift in Sources */,
 				96F71CF52BD2D7490003D728 /* ProjectTabViewController.swift in Sources */,
-				96FCDFA62C0B3EB200A2AFBA /* ProjectListStatusBarMenu+Extension.swift in Sources */,
+				96FCDFA62C0B3EB200A2AFBA /* ProjectListStatusBarMenuController+Extension.swift in Sources */,
 				960B0A2B2BDCD04000494CA2 /* DropView.swift in Sources */,
 				960F35ED2C14469500989279 /* MainSettings.swift in Sources */,
 				96EB35B02BD809D100BC04BF /* BundletoolVC.swift in Sources */,

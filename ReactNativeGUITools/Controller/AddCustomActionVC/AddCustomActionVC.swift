@@ -39,13 +39,7 @@ class AddCustomActionVC: NSViewController {
             guard let self = self else { return }
             if response == .OK, let selectedURL = openPanel.url {
                 let selectedPath = selectedURL.path
-                if let projectPath = self.projectInfo?.path, selectedPath.hasPrefix(projectPath) {
-                    let relativePath = String(selectedPath.dropFirst(projectPath.count))
-                    let cleanPath = relativePath.hasPrefix("/") ? String(relativePath.dropFirst()) : relativePath
-                    self.scriptTextField.stringValue = "$PROJECT_ROOT/\(cleanPath)"
-                } else {
-                    self.scriptTextField.stringValue = selectedPath
-                }
+                self.scriptTextField.stringValue = self.projectInfo?.customScriptPath(for: selectedPath) ?? selectedPath
             }
         }
     }
@@ -55,25 +49,20 @@ class AddCustomActionVC: NSViewController {
     }
 
     @IBAction func onPressOkay(_ sender: NSButton) {
-        let name = menuNameTextField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
-        let script = scriptTextField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
-
-        guard !name.isEmpty else {
+        do {
+            let result = try ProjectInfo.CustomMenuScript.validated(
+                name: menuNameTextField.stringValue,
+                script: scriptTextField.stringValue,
+                id: customScriptToEdit?.id
+            )
+            onSave?(result)
+            self.dismiss(self)
+        } catch ProjectInfo.CustomMenuScript.ValidationError.emptyName {
             NSSound.beep()
             menuNameTextField.becomeFirstResponder()
-            return
-        }
-
-        guard !script.isEmpty else {
+        } catch {
             NSSound.beep()
             scriptTextField.becomeFirstResponder()
-            return
         }
-
-        let isFileScript = script.hasPrefix("/") || script.hasPrefix("$PROJECT_ROOT") || script.hasPrefix("./")
-        let id = customScriptToEdit?.id ?? UUID().uuidString
-        let result = ProjectInfo.CustomMenuScript(id: id, name: name, script: script, isFileScript: isFileScript)
-        onSave?(result)
-        self.dismiss(self)
     }
 }

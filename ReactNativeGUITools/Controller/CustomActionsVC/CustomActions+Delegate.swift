@@ -81,20 +81,14 @@ extension CustomActionsVC: NSTableViewDelegate {
         guard let items = info.draggingPasteboard.pasteboardItems else { return false }
 
         let oldIndexes = items.compactMap { $0.integer(forType: .tableViewIndex) }
-        guard let sourceIndex = oldIndexes.first, var scripts = projectInfo?.customMenuScripts else { return false }
+        guard let sourceIndex = oldIndexes.first, let projectInfo = projectInfo else { return false }
 
         var destination = row
         if destination > sourceIndex {
             destination -= 1
         }
-        guard destination >= 0 && destination < scripts.count else { return false }
-
-        let movedItem = scripts.remove(at: sourceIndex)
-        scripts.insert(movedItem, at: destination)
-        projectInfo?.customMenuScripts = scripts
-        if let projectInfo = projectInfo {
-            ProjectInfoManager.shared.update(with: projectInfo)
-        }
+        guard projectInfo.moveCustomScript(from: sourceIndex, to: destination) else { return false }
+        ProjectInfoManager.shared.update(with: projectInfo)
         tableView.reloadData()
         tableView.selectRowIndexes(IndexSet(integer: destination), byExtendingSelection: false)
         updateButtonStates()
