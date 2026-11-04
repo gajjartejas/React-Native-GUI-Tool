@@ -7,7 +7,21 @@
 
 import Cocoa
 
+protocol ProjectInfoAssignable {
+    var projectInfo: ProjectInfo? { get set }
+}
+
 class ProjectTabViewController: NSTabViewController {
+    var projectInfo: ProjectInfo? {
+        didSet {
+            for child in self.children {
+                if var assignable = child as? ProjectInfoAssignable {
+                    assignable.projectInfo = projectInfo
+                }
+            }
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

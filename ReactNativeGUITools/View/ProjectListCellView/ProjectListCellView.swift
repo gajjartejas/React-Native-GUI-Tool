@@ -47,7 +47,7 @@ class ProjectListCellView: NSTableCellView, NibInstantiatable {
     func configureUI(withNode project: ProjectInfo, atRow row: Int) {
         projectNameLable.stringValue = project.name ?? "-"
         projectPathLable.stringValue = convertToRelativePaths(from: project.path) ?? "-"
-        projectVersion.stringValue = project.versionString ?? "-"
+        projectVersion.stringValue = project.packageVersionString ?? "-"
         projectVersionLable.cornerRadius = 4.0
         projectVersionLable.backgroundColor = .init(named: "control-1")
         projectLogoView.cornerRadius = 26.0

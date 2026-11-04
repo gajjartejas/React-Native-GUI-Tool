@@ -17,7 +17,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
         print("applicationWillTerminate")
     }
 
@@ -28,12 +27,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidBecomeActive(_ notification: Notification) {
         print("applicationDidBecomeActive")
-        // NSApplication.shared.unhide(self)
     }
 
     func applicationDidHide(_ notification: Notification) {
         print("applicationDidHide")
-        // NSApp.setActivationPolicy(.accessory)
     }
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {

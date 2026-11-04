@@ -12,6 +12,11 @@ class ToolsOutlineWC: NSWindowController {
     var projectInfo: ProjectInfo? {
         didSet {
             window?.title = projectInfo?.name ?? "-"
+            if let splitVC = window?.contentViewController as? NSSplitViewController,
+               splitVC.children.indices.contains(1),
+               let projectTabVC = splitVC.children[1] as? ProjectTabViewController {
+                projectTabVC.projectInfo = projectInfo
+            }
         }
     }
 

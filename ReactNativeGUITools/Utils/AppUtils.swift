@@ -101,13 +101,13 @@ func moveFolderToTrash(atPath folderPath: String) {
     }
 }
 
-func readPackageJSON(atPath path: String) -> (name: String?, version: String?, scriptsArray: [(name: String, value: String)]?) {
+func readPackageJSON(atPath path: String) -> (name: String?, version: String?, scriptsArray: [ProjectInfo.PackageJsonScript]?) {
     let packageJSONPath = URL(fileURLWithPath: path).appendingPathComponent("package.json")
 
     do {
         var name: String?
         var reactNativeVersion: String?
-        var scriptsArray: [(name: String, value: String)]?
+        var scriptsArray: [ProjectInfo.PackageJsonScript]?
 
         let data = try Data(contentsOf: packageJSONPath)
         let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
@@ -125,7 +125,7 @@ func readPackageJSON(atPath path: String) -> (name: String?, version: String?, s
 
         // Read script
         if let scriptsDict = jsonDict["scripts"] as? [String: String] {
-            scriptsArray = scriptsDict.map { (name: $0.key, value: $0.value) }
+            scriptsArray = scriptsDict.map { ProjectInfo.PackageJsonScript(id: UUID().uuidString, name: $0.key, script: $0.value) }
         }
 
         return (name, reactNativeVersion, scriptsArray)

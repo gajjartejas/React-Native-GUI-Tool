@@ -56,16 +56,16 @@ class ProjectInfoManager {
     }
 
     func sorted(by key: SortKey) {
-        projectInfos = projectInfos.sorted { proj1, proj2 -> Bool in
+        projectInfos = projectInfos.sorted { (proj1: ProjectInfo, proj2: ProjectInfo) -> Bool in
             switch key {
             case .name:
                 return (proj1.name ?? "") < (proj2.name ?? "")
             case .path:
                 return proj1.path < proj2.path
             case .versionString:
-                return (proj1.versionString ?? "")
+                return (proj1.packageVersionString ?? "")
                     .replacingOccurrences(of: "^", with: "")
-                    .compare((proj2.versionString ?? "")
+                    .compare((proj2.packageVersionString ?? "")
                         .replacingOccurrences(of: "^", with: ""), options: .numeric) == .orderedDescending
             }
         }
@@ -174,8 +174,8 @@ class ProjectInfoManager {
     }
 
     func searchBy(array: [ProjectInfo], searchString: String) -> [ProjectInfo] {
-        return array.filter { project in
-            let versionString = project.versionString ?? ""
+        return array.filter { (project: ProjectInfo) in
+            let versionString = project.packageVersionString ?? ""
             let name = project.name ?? ""
             let pureString = searchString.trimmingCharacters(in: .whitespacesAndNewlines)
             if pureString.count < 1 {

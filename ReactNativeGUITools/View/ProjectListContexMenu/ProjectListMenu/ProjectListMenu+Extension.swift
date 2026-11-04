@@ -8,7 +8,7 @@
 import Cocoa
 
 extension ProjectListMenu {
-    func customSort(_ lhs: (name: String, value: String), _ rhs: (name: String, value: String)) -> Bool {
+    func customSort(_ lhs: ProjectInfo.PackageJsonScript, _ rhs: ProjectInfo.PackageJsonScript) -> Bool {
         let customOrder = ["start", "test", "lint", "android", "ios"]
 
         let lhsIndex = customOrder.firstIndex(of: lhs.name) ?? Int.max

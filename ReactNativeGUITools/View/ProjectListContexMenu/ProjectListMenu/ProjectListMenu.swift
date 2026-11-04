@@ -29,7 +29,7 @@ class ProjectListMenu: NSObject {
         menu.removeItem(at: 11)
         let scriptMenuItem = NSMenuItem()
         scriptMenuItem.title = "Script"
-        let scripts = projectInfos[row].scripts?.sorted(by: customSort)
+        let scripts = projectInfos[row].packageJsonScripts?.sorted(by: customSort)
         if let scripts = scripts {
             let scriptMenu = NSMenu()
             for script in scripts {
@@ -70,7 +70,7 @@ class ProjectListMenu: NSObject {
         scriptMenuItem.title = "Script"
         if let row = row {
             scriptMenuItem.isEnabled = true
-            let scripts = projectInfos[row].scripts?.sorted(by: customSort)
+            let scripts = projectInfos[row].packageJsonScripts?.sorted(by: customSort)
 
             if let scripts = scripts {
                 let scriptMenu = NSMenu()
