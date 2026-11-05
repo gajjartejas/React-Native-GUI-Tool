@@ -95,6 +95,7 @@
 		EE222BDC390FFB605BE88F0E /* LoginItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF1D756D0D73C1A34FC1F61 /* LoginItemService.swift */; };
 		634137C2C7338262A77F3E74 /* LoginSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B443D6A0B3F62F71143D309B /* LoginSettingsView.swift */; };
 		AE499C8732406D4053A15445 /* AdbToolPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A02B1ADEC1806E24CF296E6 /* AdbToolPolicy.swift */; };
+		090D7F13026E42E7DB2F720C /* BuildToolPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6DD495DF907728C1EDA812 /* BuildToolPolicy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -189,6 +190,7 @@
 		FFF1D756D0D73C1A34FC1F61 /* LoginItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginItemService.swift"; sourceTree = "<group>"; };
 		B443D6A0B3F62F71143D309B /* LoginSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginSettingsView.swift"; sourceTree = "<group>"; };
 		2A02B1ADEC1806E24CF296E6 /* AdbToolPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdbToolPolicy.swift"; sourceTree = "<group>"; };
+		AC6DD495DF907728C1EDA812 /* BuildToolPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BuildToolPolicy.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,6 +359,7 @@
 		96B7C45D2BA71ED100197448 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
+				AC6DD495DF907728C1EDA812 /* BuildToolPolicy.swift */,
 				2A02B1ADEC1806E24CF296E6 /* AdbToolPolicy.swift */,
 				5A599EB9E57D1663903F195F /* PackageToolPolicy.swift */,
 				E58E6994622BFEC3A7A81095 /* ToolCommand.swift */,
@@ -652,6 +655,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				090D7F13026E42E7DB2F720C /* BuildToolPolicy.swift in Sources */,
 				AE499C8732406D4053A15445 /* AdbToolPolicy.swift in Sources */,
 				634137C2C7338262A77F3E74 /* LoginSettingsView.swift in Sources */,
 				EE222BDC390FFB605BE88F0E /* LoginItemService.swift in Sources */,

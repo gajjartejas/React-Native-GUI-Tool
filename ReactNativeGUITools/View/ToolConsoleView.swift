@@ -4,6 +4,7 @@ final class ToolConsoleView: NSView {
     let operations = NSPopUpButton()
     let runButton = NSButton(title: "Run", target: nil, action: nil)
     let cancelButton = NSButton(title: "Cancel", target: nil, action: nil)
+    private let progress = NSProgressIndicator()
     let console = NSTextView()
     let resultTable = NSTableView()
     private let resultScroll = NSScrollView()
@@ -22,7 +23,9 @@ final class ToolConsoleView: NSView {
         runButton.target = self; runButton.action = #selector(run)
         cancelButton.target = self; cancelButton.action = #selector(cancel)
         runButton.bezelStyle = .rounded; cancelButton.bezelStyle = .rounded
-        let actions = NSStackView(views: [runButton, cancelButton]); actions.spacing = 8
+        progress.style = .bar; progress.isIndeterminate = true; progress.isDisplayedWhenStopped = false
+        progress.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        let actions = NSStackView(views: [runButton, cancelButton, progress]); actions.spacing = 8
         form.orientation = .vertical; form.alignment = .leading; form.spacing = 6
         console.frame = NSRect(x: 0, y: 0, width: 600, height: 300)
         console.isEditable = false; console.isRichText = false; console.isVerticallyResizable = true
@@ -93,6 +96,7 @@ final class ToolConsoleView: NSView {
         }
     }
     func running(_ running: Bool) {
+        if running { progress.startAnimation(nil) } else { progress.stopAnimation(nil) }
         runButton.isEnabled = !running && operation != nil; cancelButton.isEnabled = running
         operations.isEnabled = !running
         for control in controls.values { control.isEnabled = !running }

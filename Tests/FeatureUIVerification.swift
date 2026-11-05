@@ -110,6 +110,25 @@ enum FeatureUIVerification {
             runner.finish(); let window = NSWindow(contentViewController: vc); window.setContentSize(NSSize(width: 800, height: 700)); window.makeKeyAndOrderFront(nil)
             try UIVerification.snapshot(vc.view, to: output)
             print("PASS: device parsing/table, online selection, reverse, dev menu and package-PID Logcat")
+        } else if issue == "93" {
+            let folder = URL(fileURLWithPath: project.path)
+            try FileManager.default.createDirectory(at: folder.appendingPathComponent("ios/Fixture.xcworkspace"), withIntermediateDirectories: true)
+            let android = try BuildToolPolicy.plan(operation: "android-debug", values: ["flavor":"demo"], project: project)
+            precondition(android.commands[0].arguments == ["assembleDemoDebug"] && android.commands[0].directory.hasSuffix("/android"))
+            let simulator = try BuildToolPolicy.plan(operation: "ios-simulator", values: ["container":folder.path + "/ios/Fixture.xcworkspace", "scheme":"Fixture", "output":folder.path + "/build/ios"], project: project)
+            precondition(simulator.commands[0].arguments.contains("CODE_SIGNING_ALLOWED=NO") && simulator.commands[0].arguments.contains("generic/platform=iOS Simulator"))
+            let export = try BuildToolPolicy.plan(operation: "ios-export", values: ["archive":folder.path + "/Archive.xcarchive", "plist":folder.path + "/Export.plist", "output":folder.path + "/ipa"], project: project)
+            precondition(export.commands[0].arguments.contains("-exportOptionsPlist"))
+            let vc = storyboard.instantiateController(withIdentifier: "GenerateBuildVC") as! GenerateBuildVC
+            vc.projectInfo = project; let runner = RecordingToolRunner(); vc.makeRunner = { runner }
+            var revealed = ""; vc.openOutputDirectory = { revealed = $0; return true }
+            _ = vc.view; wait { vc.panel.runButton.isEnabled }
+            vc.selectOperation("android-release"); vc.panel.setValue("true", for: "reveal"); vc.runOperation()
+            precondition(runner.plans.last?.commands[0].arguments == ["assembleRelease"]); runner.finish(output: "BUILD SUCCESSFUL")
+            precondition(revealed.hasSuffix("/android/app/build/outputs/apk"))
+            let window = NSWindow(contentViewController: vc); window.setContentSize(NSSize(width: 800, height: 650)); window.makeKeyAndOrderFront(nil)
+            try UIVerification.snapshot(vc.view, to: output)
+            print("PASS: Android flavors, iOS simulator/export arguments, build console and output-folder route")
         } else { fatalError("Unsupported feature issue") }
     }
 }
