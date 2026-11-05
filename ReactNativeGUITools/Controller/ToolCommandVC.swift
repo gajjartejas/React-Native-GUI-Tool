@@ -2,11 +2,13 @@ import Cocoa
 
 class ToolCommandVC: NSViewController, ProjectInfoAssignable {
     var projectInfo: ProjectInfo? { didSet {
-        if oldValue?.id != projectInfo?.id || oldValue?.path != projectInfo?.path { runner?.cancel(); runner = nil; if isViewLoaded { reloadOperations() } }
+        if oldValue?.id != projectInfo?.id || oldValue?.path != projectInfo?.path { runner?.cancel(); runner = nil; projectDidChange(); if isViewLoaded { reloadOperations() } }
     } }
     var makeRunner: () -> ToolRunning = { StreamingToolRunner() }
     var operationProvider: (ProjectInfo) throws -> [ToolOperation] { fatalError("Override") }
     var planBuilder: (String, [String: String], ProjectInfo) throws -> ToolPlan { fatalError("Override") }
+    var readyStatus: String { "Ready. Commands run in the selected project." }
+    func projectDidChange() {}
     var panel: ToolConsoleView { view as! ToolConsoleView }
     private var options: [ToolOperation] = []
     private var runner: ToolRunning?
@@ -41,7 +43,7 @@ class ToolCommandVC: NSViewController, ProjectInfoAssignable {
                     let previous = self.panel.operation
                     self.options = options; self.panel.configure(options, selected: previous)
                     self.selectOperation(self.panel.operation ?? "")
-                    self.panel.status.stringValue = "Ready. Commands run in the selected project."
+                    self.panel.status.stringValue = self.readyStatus
                 case .failure(let error): self.panel.status.stringValue = error.localizedDescription
                 }
                 self.panel.running(false)

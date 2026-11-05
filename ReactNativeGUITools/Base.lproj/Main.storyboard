@@ -1305,23 +1305,9 @@
         <scene sceneID="Oi7-et-Lbz">
             <objects>
                 <viewController storyboardIdentifier="YarnVC" id="le3-Db-vTO" customClass="YarnVC" customModule="ReactNativeGUITools" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="c74-0Z-yNL">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                    <view key="view" id="c74-0Z-yNL" customClass="ToolConsoleView" customModule="ReactNativeGUITools" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="700" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nRZ-fd-9cl">
-                                <rect key="frame" x="206" y="142" width="39" height="16"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="YARN" id="ppQ-Rj-l61">
-                                    <font key="font" usesAppearanceFont="YES"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="nRZ-fd-9cl" firstAttribute="centerY" secondItem="c74-0Z-yNL" secondAttribute="centerY" id="Mf0-qQ-H7c"/>
-                            <constraint firstItem="nRZ-fd-9cl" firstAttribute="centerX" secondItem="c74-0Z-yNL" secondAttribute="centerX" id="YN0-GX-muA"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="kOe-TS-5El" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
