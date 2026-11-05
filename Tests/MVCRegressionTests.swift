@@ -21,6 +21,11 @@ private final class MenuDelegateSpy: ProjectListMenuDelegate {
 private struct MVCRegressionTests {
     static func main() throws {
         _ = NSApplication.shared
+        if let issue = ProcessInfo.processInfo.environment["RNGUI_UI_ISSUE"],
+           let output = ProcessInfo.processInfo.environment["RNGUI_UI_SCREENSHOT"] {
+            try UIVerification.run(issue: issue, output: URL(fileURLWithPath: output))
+            return
+        }
         let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: directory) }
@@ -74,6 +79,26 @@ private struct MVCRegressionTests {
         try expect(project.rename(to: " Renamed ") && project.name == "Renamed", "Rename normalization failed")
         print("PASS: project ordering and rename policy")
 
+        let manager = ProjectInfoManager.shared
+        project.name = "Beta"
+        other.name = "Alpha"
+        project.packageVersionString = "0.75.0"
+        other.packageVersionString = "0.76.0"
+        manager.append(contentsOf: [project, other])
+        manager.searchBy("Beta", type: .list)
+        manager.searchBy("Alpha", type: .menu)
+        for key: ProjectInfoManager.SortKey in [.name, .path, .versionString] {
+            manager.sorted(by: key)
+            try expect(manager.get(type: .all).count == 2, "Sorting discarded hidden projects")
+            try expect(ProjectInfo.readArrayFromStorage()?.count == 2, "Sorting persisted a filtered subset")
+            try expect(manager.get(type: .list).map(\.id) == [project.id], "Sort lost list filter")
+            try expect(manager.get(type: .menu).map(\.id) == [other.id], "Sort lost menu filter")
+        }
+        manager.clearSearch(type: .list)
+        manager.clearSearch(type: .menu)
+        try expect(manager.get(type: .list).count == 2 && manager.get(type: .menu).count == 2, "Clearing search lost registrations")
+        print("PASS: filtered sorting preserves storage and independent projections")
+
         let encoder = PropertyListEncoder()
         let decoder = PropertyListDecoder()
         let data = try encoder.encode(project)
@@ -122,7 +147,7 @@ private struct MVCRegressionTests {
         cell.configureUI(withNode: project, atRow: 0, isProjectAvailable: true)
         try expect(cell.projectLogoLable.stringValue != "?" && cell.projectNameLable.textColor == .labelColor, "Cell did not render supplied available state")
         print("PASS: cell renders controller-supplied availability")
-        print("All 7 MVC regression groups passed.")
+        print("All MVC regression groups passed.")
     }
 
     private static func verifyActions(in menu: NSMenu, target: ProjectListMenuController) throws {
