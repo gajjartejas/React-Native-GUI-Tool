@@ -87,7 +87,7 @@ extension ProjectInfo {
         case cleaniOSPodsFolder
         case cleanAndroidAllFolders
         case cleanAndroidBuildFolder
-        case cleaniAndroidAppBuildFolder
+        case cleanAndroidAppBuildFolder
         case cleanAndroidAppReleaseFolder
         case cleanAlliOSAllAndroid
         case cleanNodeModules
@@ -106,7 +106,7 @@ extension ProjectInfo {
             relativePaths = ["/android/build", "/android/app/build", "/android/app/release"]
         case .cleanAndroidBuildFolder:
             relativePaths = ["/android/build"]
-        case .cleaniAndroidAppBuildFolder:
+        case .cleanAndroidAppBuildFolder:
             relativePaths = ["/android/app/build"]
         case .cleanAndroidAppReleaseFolder:
             relativePaths = ["/android/app/release"]

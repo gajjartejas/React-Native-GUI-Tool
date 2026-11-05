@@ -11,6 +11,13 @@ final class ProjectListMenuController: NSObject {
     var clickedRow: Int?
     private(set) var projectInfos: [ProjectInfo] = []
     weak var delegate: ProjectListMenuDelegate?
+    let trashFolder: (String) -> Void
+
+    init(trashFolder: @escaping (String) -> Void = moveFolderToTrash) {
+        self.trashFolder = trashFolder
+        super.init()
+    }
+
     private let menuView = ProjectListMenu()
 
     func setClickedRow(_ row: Int?) {
