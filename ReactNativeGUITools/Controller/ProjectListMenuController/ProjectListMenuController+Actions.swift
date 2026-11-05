@@ -67,7 +67,7 @@ extension ProjectListMenuController {
             return
         }
         let script = projectInfo.terminalCommand(.runScript(sender.title))
-        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+        runTerminal(projectInfo.path, script)
     }
 
     @objc func openInCodeEditorAction(_ sender: NSMenuItem) {
@@ -156,7 +156,7 @@ extension ProjectListMenuController {
             return
         }
         let script = projectInfo.terminalCommand(.npmStart)
-        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+        runTerminal(projectInfo.path, script)
     }
 
     @objc func npmInstall(_ sender: NSMenuItem) {
@@ -167,7 +167,7 @@ extension ProjectListMenuController {
             return
         }
         let script = projectInfo.terminalCommand(.npmInstall)
-        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+        runTerminal(projectInfo.path, script)
     }
 
     @objc func npmStartResetCache(_ sender: NSMenuItem) {
@@ -178,7 +178,7 @@ extension ProjectListMenuController {
             return
         }
         let script = projectInfo.terminalCommand(.npmStartResetCache)
-        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+        runTerminal(projectInfo.path, script)
     }
 
     @objc func npmRestart(_ sender: NSMenuItem) {
@@ -189,7 +189,7 @@ extension ProjectListMenuController {
             return
         }
         let script = projectInfo.terminalCommand(.npmRestart)
-        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+        runTerminal(projectInfo.path, script)
     }
 
     @objc func npmStop(_ sender: NSMenuItem) {
@@ -200,7 +200,7 @@ extension ProjectListMenuController {
             return
         }
         let script = projectInfo.terminalCommand(.npmStop)
-        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+        runTerminal(projectInfo.path, script)
     }
 
     @objc func npmCacheClean(_ sender: NSMenuItem) {
@@ -211,7 +211,7 @@ extension ProjectListMenuController {
             return
         }
         let script = projectInfo.terminalCommand(.npmCacheClean)
-        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+        runTerminal(projectInfo.path, script)
     }
 
     @objc func npmCacheVerify(_ sender: NSMenuItem) {
@@ -222,7 +222,7 @@ extension ProjectListMenuController {
             return
         }
         let script = projectInfo.terminalCommand(.npmCacheVerify)
-        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+        runTerminal(projectInfo.path, script)
     }
 
     @objc func watchmanWatchDelAll(_ sender: NSMenuItem) {
@@ -233,7 +233,7 @@ extension ProjectListMenuController {
             return
         }
         let script = projectInfo.terminalCommand(.watchmanWatchDelAll)
-        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+        runTerminal(projectInfo.path, script)
     }
 
     @objc func watchmanShutdownServer(_ sender: NSMenuItem) {
@@ -244,7 +244,7 @@ extension ProjectListMenuController {
             return
         }
         let script = projectInfo.terminalCommand(.watchmanShutdownServer)
-        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+        runTerminal(projectInfo.path, script)
     }
 
     @objc func watchmanWatch(_ sender: NSMenuItem) {
@@ -255,7 +255,7 @@ extension ProjectListMenuController {
             return
         }
         let script = projectInfo.terminalCommand(.watchmanWatch)
-        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+        runTerminal(projectInfo.path, script)
     }
 
     @objc func metroReload(_ sender: NSMenuItem) {
@@ -321,7 +321,7 @@ extension ProjectListMenuController {
             return
         }
         let script = projectInfo.terminalCommand(.podInstall)
-        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+        runTerminal(projectInfo.path, script)
     }
 
     @objc func podUpdate(_ sender: NSMenuItem) {
@@ -332,7 +332,7 @@ extension ProjectListMenuController {
             return
         }
         let script = projectInfo.terminalCommand(.podUpdate)
-        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+        runTerminal(projectInfo.path, script)
     }
 
     @objc func podOutdated(_ sender: NSMenuItem) {
@@ -343,7 +343,7 @@ extension ProjectListMenuController {
             return
         }
         let script = projectInfo.terminalCommand(.podOutdated)
-        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+        runTerminal(projectInfo.path, script)
     }
 
     @objc func podDeintegrate(_ sender: NSMenuItem) {
@@ -354,7 +354,7 @@ extension ProjectListMenuController {
             return
         }
         let script = projectInfo.terminalCommand(.podDeintegrate)
-        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+        runTerminal(projectInfo.path, script)
     }
 
     @objc func podEnv(_ sender: NSMenuItem) {
@@ -365,7 +365,7 @@ extension ProjectListMenuController {
             return
         }
         let script = projectInfo.terminalCommand(.podEnv)
-        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+        runTerminal(projectInfo.path, script)
     }
 
     @objc func podCacheList(_ sender: NSMenuItem) {
@@ -376,7 +376,7 @@ extension ProjectListMenuController {
             return
         }
         let script = projectInfo.terminalCommand(.podCacheList)
-        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+        runTerminal(projectInfo.path, script)
     }
 
     @objc func podCacheCleanAll(_ sender: NSMenuItem) {
@@ -387,7 +387,7 @@ extension ProjectListMenuController {
             return
         }
         let script = projectInfo.terminalCommand(.podCacheCleanAll)
-        openInTerminal(atPath: projectInfo.path, terminalScript: script)
+        runTerminal(projectInfo.path, script)
     }
 
     @objc func runCustomActionScript(_ sender: NSMenuItem) {
@@ -408,7 +408,7 @@ extension ProjectListMenuController {
         }
 
         let terminalScript = projectInfo.terminalCommand(selectedScript.isFileScript ? .customFile(selectedScript.script) : .custom(selectedScript.script))
-        openInTerminal(atPath: projectInfo.path, terminalScript: terminalScript)
+        runTerminal(projectInfo.path, terminalScript)
     }
 
     @objc func customActionsEdit(_ sender: NSMenuItem) {
