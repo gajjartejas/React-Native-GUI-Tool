@@ -310,6 +310,7 @@ enum UIVerification {
     }
 
     static func snapshot(_ view: NSView, to output: URL) throws {
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.15))
         view.layoutSubtreeIfNeeded()
         view.displayIfNeeded()
         guard let bitmap = view.bitmapImageRepForCachingDisplay(in: view.bounds) else {

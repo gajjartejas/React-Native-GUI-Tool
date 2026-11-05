@@ -12,6 +12,9 @@ final class ProjectInfoPanel: NSView {
     override init(frame: NSRect) { super.init(frame: frame); setup() }
 
     private func setup() {
+        summary.frame = NSRect(x: 0, y: 0, width: 600, height: 200)
+        summary.isVerticallyResizable = true
+        summary.isHorizontallyResizable = false
         summary.isEditable = false
         summary.isRichText = false
         summary.font = .monospacedSystemFont(ofSize: 12, weight: .regular)
@@ -30,6 +33,8 @@ final class ProjectInfoPanel: NSView {
             let column = NSTableColumn(identifier: .init(id)); column.title = title; column.width = id == "name" ? 220 : 150
             table.addTableColumn(column)
         }
+        table.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
+        table.usesAlternatingRowBackgroundColors = true
         let scroll = NSScrollView(); scroll.hasVerticalScroller = true; scroll.documentView = table
         let buttons = ProjectShortcut.allCases.map { shortcut -> NSButton in
             let button = NSButton(title: shortcut.rawValue, target: self, action: #selector(shortcutPressed(_:)))
