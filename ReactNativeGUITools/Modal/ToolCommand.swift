@@ -12,12 +12,16 @@ struct ToolOperation {
     let title: String
     var fields: [ToolField] = []
 }
+struct ToolSecret {
+    let prefix: String
+    let value: String
+}
 struct ToolCommand {
     let executable: String
     let arguments: [String]
     let directory: String
     var environment: [String: String] = [:]
-    var secretFiles: [String: String] = [:]
+    var secretFiles: [Int: ToolSecret] = [:]
     var newFiles: [String] = []
     var display: String { executable + " " + arguments.map(shellQuoted).joined(separator: " ") }
 }

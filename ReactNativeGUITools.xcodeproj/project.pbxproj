@@ -99,6 +99,7 @@
 		D1A92C39DA13F1CEEEE7371D /* ScrcpyToolPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7DDF074DB82227C1FE4715 /* ScrcpyToolPolicy.swift */; };
 		1B10637A2F35C151BD21B0D8 /* KeytoolPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B47FD0E9476A7278EC4056 /* KeytoolPolicy.swift */; };
 		EA9E2D6E648F82A8B0DAFABA /* CertificateFingerprints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75615F102FB2867A98287CEE /* CertificateFingerprints.swift */; };
+		F15F2B682DBF6529295FB06F /* BundletoolPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50710B57A5656212B9250C3D /* BundletoolPolicy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -197,6 +198,7 @@
 		3B7DDF074DB82227C1FE4715 /* ScrcpyToolPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrcpyToolPolicy.swift"; sourceTree = "<group>"; };
 		00B47FD0E9476A7278EC4056 /* KeytoolPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeytoolPolicy.swift"; sourceTree = "<group>"; };
 		75615F102FB2867A98287CEE /* CertificateFingerprints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateFingerprints.swift"; sourceTree = "<group>"; };
+		50710B57A5656212B9250C3D /* BundletoolPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BundletoolPolicy.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -365,6 +367,7 @@
 		96B7C45D2BA71ED100197448 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
+				50710B57A5656212B9250C3D /* BundletoolPolicy.swift */,
 				00B47FD0E9476A7278EC4056 /* KeytoolPolicy.swift */,
 				3B7DDF074DB82227C1FE4715 /* ScrcpyToolPolicy.swift */,
 				AC6DD495DF907728C1EDA812 /* BuildToolPolicy.swift */,
@@ -664,6 +667,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F15F2B682DBF6529295FB06F /* BundletoolPolicy.swift in Sources */,
 				EA9E2D6E648F82A8B0DAFABA /* CertificateFingerprints.swift in Sources */,
 				1B10637A2F35C151BD21B0D8 /* KeytoolPolicy.swift in Sources */,
 				D1A92C39DA13F1CEEEE7371D /* ScrcpyToolPolicy.swift in Sources */,

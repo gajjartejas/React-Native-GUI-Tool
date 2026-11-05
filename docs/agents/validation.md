@@ -54,3 +54,18 @@ the selected UI scenario in separate temporary homes. `--ui-issue 90
 --live-diagnostics` additionally runs installed tools' read-only diagnostic/version
 commands, with bounded execution and no package scripts, service starts, or installs.
 The live report stays in command output; the committed screenshot uses fixtures.
+
+The additional feature scenarios are 67, 89, 91, 92, 66, 94, 93, 95, 98 and 97.
+Run them in one compilation with:
+
+```sh
+python3 scripts/test_mvc.py --ui-issues 67 89 91 92 66 94 93 95 98 97
+```
+
+Each scenario uses a separate temporary home. Keytool verification conditionally
+uses Android Studio's local JDK to generate/inspect/convert disposable keystores.
+Bundletool verification uses fixture archives and verifies protected password-file
+permissions, cleanup and output preservation; it does not build/install real app
+bundles. Device actions and build plans use recording adapters. Signed-app login
+registration, physical-device workflows and interactive gestures remain separate
+manual checks; do not claim those passed from these screenshots.

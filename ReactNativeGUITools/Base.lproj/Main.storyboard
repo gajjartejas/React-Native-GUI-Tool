@@ -1607,23 +1607,9 @@ CA
         <scene sceneID="KgY-Gr-hxY">
             <objects>
                 <viewController storyboardIdentifier="BundletoolVC" id="eUr-2I-HNM" customClass="BundletoolVC" customModule="ReactNativeGUITools" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="tTf-2g-GMA">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                    <view key="view" id="tTf-2g-GMA" customClass="ToolConsoleView" customModule="ReactNativeGUITools" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="700" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eqo-DG-OtE">
-                                <rect key="frame" x="188" y="142" width="75" height="16"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Bundle Tool" id="iBn-1c-Jvw">
-                                    <font key="font" usesAppearanceFont="YES"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="eqo-DG-OtE" firstAttribute="centerY" secondItem="tTf-2g-GMA" secondAttribute="centerY" id="6KA-OB-FcN"/>
-                            <constraint firstItem="eqo-DG-OtE" firstAttribute="centerX" secondItem="tTf-2g-GMA" secondAttribute="centerX" id="pur-TD-Qxg"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="Y8K-es-lXD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
