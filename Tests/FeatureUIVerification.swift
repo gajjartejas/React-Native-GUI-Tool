@@ -72,6 +72,34 @@ enum FeatureUIVerification {
             let window = NSWindow(contentViewController: vc); window.setContentSize(NSSize(width: 800, height: 650)); window.makeKeyAndOrderFront(nil)
             try UIVerification.snapshot(vc.view, to: output)
             print("PASS: Yarn version detection, Classic/Modern lock flags, upgrade and cancellation")
+        } else if issue == "66" {
+            let service = FixtureLoginService()
+            let vc = storyboard.instantiateController(withIdentifier: "MainSettingsVC") as! MainSettingsVC
+            vc.loginService = service
+            _ = vc.view; wait { vc.loginView.toggle.isEnabled }
+            precondition(vc.loginView.toggle.state == .off)
+            vc.loginView.onChange?(true); wait { vc.loginView.toggle.isEnabled }
+            precondition(service.changes == [true] && vc.loginView.toggle.state == .on)
+            service.state = .approvalRequired; vc.updateLogin(enabled: nil); wait { vc.loginView.toggle.isEnabled }
+            precondition(vc.loginView.toggle.state == .mixed && vc.loginView.message.stringValue.contains("Approval"))
+            service.failure = true; vc.loginView.onChange?(false); wait { vc.loginView.toggle.isEnabled }
+            precondition(vc.loginView.message.stringValue.contains("Unable to change"))
+            service.failure = false; vc.loginView.onChange?(false); wait { vc.loginView.toggle.isEnabled }
+            precondition(vc.loginView.toggle.state == .off)
+            vc.tabView.selectTabViewItem(withIdentifier: "General")
+            let window = NSWindow(contentViewController: vc); window.makeKeyAndOrderFront(nil)
+            try UIVerification.snapshot(vc.view, to: output)
+            print("PASS: login-item enable/disable, approval-required and error states; no real registration changed")
         } else { fatalError("Unsupported feature issue") }
+    }
+}
+
+private final class FixtureLoginService: LoginItemManaging {
+    var state: LoginItemState = .disabled
+    var changes: [Bool] = []
+    var failure = false
+    func setEnabled(_ enabled: Bool) throws {
+        if failure { throw ToolInputError(message: "fixture registration failure") }
+        changes.append(enabled); state = enabled ? .enabled : .disabled
     }
 }

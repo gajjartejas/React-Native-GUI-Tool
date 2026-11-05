@@ -92,6 +92,8 @@
 		AC378B07FDACE0CCD7819906 /* StreamingToolRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0D0A7D0F14C3E248015CA5 /* StreamingToolRunner.swift */; };
 		32605A34485644594C9FA45E /* ToolConsoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF02495E7EB4039FB976E2B /* ToolConsoleView.swift */; };
 		58FC780692C64FD319593E0D /* ToolCommandVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE14CAD394514685559329B /* ToolCommandVC.swift */; };
+		EE222BDC390FFB605BE88F0E /* LoginItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF1D756D0D73C1A34FC1F61 /* LoginItemService.swift */; };
+		634137C2C7338262A77F3E74 /* LoginSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B443D6A0B3F62F71143D309B /* LoginSettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -183,6 +185,8 @@
 		FD0D0A7D0F14C3E248015CA5 /* StreamingToolRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StreamingToolRunner.swift"; sourceTree = "<group>"; };
 		7EF02495E7EB4039FB976E2B /* ToolConsoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolConsoleView.swift"; sourceTree = "<group>"; };
 		CAE14CAD394514685559329B /* ToolCommandVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolCommandVC.swift"; sourceTree = "<group>"; };
+		FFF1D756D0D73C1A34FC1F61 /* LoginItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginItemService.swift"; sourceTree = "<group>"; };
+		B443D6A0B3F62F71143D309B /* LoginSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginSettingsView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +262,7 @@
 		96633F692BA59F9D00B668FC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B443D6A0B3F62F71143D309B /* LoginSettingsView.swift */,
 				7EF02495E7EB4039FB976E2B /* ToolConsoleView.swift */,
 				362855CE0B4670160C83FEB5 /* ProjectInfoPanel.swift */,
 				18C6815D0E0AED6EB1E2E404 /* SystemInfoView.swift */,
@@ -373,6 +378,7 @@
 		96D1814C2BADF4C700380905 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				FFF1D756D0D73C1A34FC1F61 /* LoginItemService.swift */,
 				FD0D0A7D0F14C3E248015CA5 /* StreamingToolRunner.swift */,
 				51040E53DF82F0AF6D9306E3 /* SystemDiagnosticsScanner.swift */,
 				96D1814D2BADF4EE00380905 /* NibInstantiatable.swift */,
@@ -643,6 +649,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				634137C2C7338262A77F3E74 /* LoginSettingsView.swift in Sources */,
+				EE222BDC390FFB605BE88F0E /* LoginItemService.swift in Sources */,
 				58FC780692C64FD319593E0D /* ToolCommandVC.swift in Sources */,
 				32605A34485644594C9FA45E /* ToolConsoleView.swift in Sources */,
 				AC378B07FDACE0CCD7819906 /* StreamingToolRunner.swift in Sources */,

@@ -10,6 +10,10 @@ class MainSettingsVC: NSViewController {
     // MARK: - Properties
 
     @IBOutlet var tabView: NSTabView!
+    @IBOutlet var loginView: LoginSettingsView!
+    var loginService: LoginItemManaging = LoginItemService()
+    var openLoginSettings: () -> Void = LoginItemService.openSettings
+    private var loginRequest = UUID()
 
     @IBOutlet var codeEditorPathPopupMenu: NSPopUpButton!
     @IBOutlet var codeEditorPathLabel: NSTextField!
@@ -28,6 +32,26 @@ class MainSettingsVC: NSViewController {
         super.viewDidLoad()
         setupPopupMenuItems()
         selectDefaultItems()
+        loginView.onChange = { [weak self] in self?.updateLogin(enabled: $0) }
+        loginView.onOpenSettings = { [weak self] in self?.openLoginSettings() }
+        updateLogin(enabled: nil)
+    }
+
+    func updateLogin(enabled: Bool?) {
+        let token = UUID(); loginRequest = token
+        let service = loginService
+        loginView.toggle.isEnabled = false
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            var failure: String?
+            do { if let enabled = enabled { try service.setEnabled(enabled) } }
+            catch { failure = error.localizedDescription }
+            let state = service.state
+            DispatchQueue.main.async {
+                guard let self = self, self.loginRequest == token else { return }
+                let value: NSControl.StateValue = state == .enabled ? .on : state == .approvalRequired ? .mixed : .off
+                self.loginView.render(state: value, message: failure.map { "Unable to change login item: " + $0 } ?? state.message, busy: false)
+            }
+        }
     }
 
     // MARK: - Setup

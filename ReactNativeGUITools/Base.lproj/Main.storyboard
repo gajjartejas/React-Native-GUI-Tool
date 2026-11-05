@@ -768,7 +768,7 @@
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="General" identifier="General" id="RnG-TW-QW0" userLabel="General">
-                                        <view key="view" id="rPg-zh-Hhb">
+                                        <view key="view" id="rPg-zh-Hhb" customClass="LoginSettingsView" customModule="ReactNativeGUITools" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="684" height="344"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
@@ -974,6 +974,7 @@
                         <outlet property="codeEditorPathLabel" destination="c2C-RC-OdV" id="GNg-r5-q4y"/>
                         <outlet property="codeEditorPathPopupMenu" destination="W3F-va-xlW" id="3Rl-7B-A7Z"/>
                         <outlet property="tabView" destination="EL1-0e-1pY" id="569-VZ-qiQ"/>
+                        <outlet property="loginView" destination="rPg-zh-Hhb" id="login-general-view"/>
                         <outlet property="xcodePathLabel" destination="SRy-GL-Mjy" id="9ug-Ci-RAB"/>
                         <outlet property="xcodePathPopupMenu" destination="5q8-rI-FgG" id="BXG-72-zVE"/>
                     </connections>
