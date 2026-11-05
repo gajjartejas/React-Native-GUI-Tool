@@ -47,3 +47,10 @@ temporary app, loads real controllers, exercises the scenario, and saves
 `docs/verification/issue-101.png`. It redirects Application Support through
 `CFFIXED_USER_HOME` to a temporary directory. Screenshots are rendered AppKit
 views; this is automated controller verification, not interactive gesture testing.
+
+For any implemented scenario, pass its issue number via `--ui-issue` (101, 104,
+87, 88, 102, 103, 105, 106, 108, or 90). The command runs the MVC checks and then
+the selected UI scenario in separate temporary homes. `--ui-issue 90
+--live-diagnostics` additionally runs installed tools' read-only diagnostic/version
+commands, with bounded execution and no package scripts, service starts, or installs.
+The live report stays in command output; the committed screenshot uses fixtures.
