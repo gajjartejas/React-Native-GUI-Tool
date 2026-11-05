@@ -4,6 +4,7 @@ class ToolCommandVC: NSViewController, ProjectInfoAssignable, NSTableViewDataSou
     var projectInfo: ProjectInfo? { didSet {
         if oldValue?.id != projectInfo?.id || oldValue?.path != projectInfo?.path { runner?.cancel(); runner = nil; projectDidChange(); if isViewLoaded { reloadOperations() } }
     } }
+    var openOutputDirectory: (String) -> Bool = { NSWorkspace.shared.open(URL(fileURLWithPath: $0)) }
     var makeRunner: () -> ToolRunning = { StreamingToolRunner() }
     var operationProvider: (ProjectInfo) throws -> [ToolOperation] { fatalError("Override") }
     var planBuilder: (String, [String: String], ProjectInfo) throws -> ToolPlan { fatalError("Override") }
@@ -75,7 +76,9 @@ class ToolCommandVC: NSViewController, ProjectInfoAssignable, NSTableViewDataSou
                 self.runner = nil; self.panel.running(false)
                 self.panel.status.stringValue = result.cancelled ? "Cancelled" : result.exitCode == 0 ? "Completed successfully" : "Command failed (exit \(result.exitCode)). See output."
                 self.didComplete(operation: operation, result: result)
-                if result.exitCode == 0 && !result.cancelled, let output = plan.outputDirectory { NSWorkspace.shared.open(URL(fileURLWithPath: output)) }
+                if result.exitCode == 0 && !result.cancelled, let output = plan.outputDirectory {
+                    if !self.openOutputDirectory(output) { self.panel.status.stringValue = "Build completed; unable to open the output directory." }
+                }
             })
         } catch { panel.status.stringValue = error.localizedDescription }
     }

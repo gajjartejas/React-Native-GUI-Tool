@@ -22,7 +22,7 @@ enum UIVerification {
         window.showWindow(nil)
         let controller = window.contentViewController as! MainProjectListVC
         _ = controller.view
-        if ["89", "91", "92", "66", "94"].contains(issue) {
+        if ["89", "91", "92", "66", "94", "93"].contains(issue) {
             try FeatureUIVerification.run(issue: issue, project: projects[0], root: root, storyboard: storyboard, output: output)
             return
         }
