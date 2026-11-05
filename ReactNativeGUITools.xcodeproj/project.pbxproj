@@ -85,6 +85,8 @@
 		C8682DD523BB432E8CC17524 /* SystemDiagnostics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059D746A86E0C25DE711AA8F /* SystemDiagnostics.swift */; };
 		69A91F1F779A3ACC5C5BE044 /* SystemDiagnosticsScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51040E53DF82F0AF6D9306E3 /* SystemDiagnosticsScanner.swift */; };
 		7C9C5D3A8E1A2FF6BC4604C2 /* SystemInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C6815D0E0AED6EB1E2E404 /* SystemInfoView.swift */; };
+		60693DB8DB3FEA919994F4FE /* ProjectMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1233699F2CED215D5878278 /* ProjectMetadata.swift */; };
+		AC6B91B0EB6EBA7FCFC816B3 /* ProjectInfoPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362855CE0B4670160C83FEB5 /* ProjectInfoPanel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -169,6 +171,8 @@
 		059D746A86E0C25DE711AA8F /* SystemDiagnostics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SystemDiagnostics.swift"; sourceTree = "<group>"; };
 		51040E53DF82F0AF6D9306E3 /* SystemDiagnosticsScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SystemDiagnosticsScanner.swift"; sourceTree = "<group>"; };
 		18C6815D0E0AED6EB1E2E404 /* SystemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SystemInfoView/SystemInfoView.swift"; sourceTree = "<group>"; };
+		A1233699F2CED215D5878278 /* ProjectMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectMetadata.swift"; sourceTree = "<group>"; };
+		362855CE0B4670160C83FEB5 /* ProjectInfoPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectInfoPanel.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +248,7 @@
 		96633F692BA59F9D00B668FC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				362855CE0B4670160C83FEB5 /* ProjectInfoPanel.swift */,
 				18C6815D0E0AED6EB1E2E404 /* SystemInfoView.swift */,
 				96FF28D02C35A7D500F262CF /* CustomActionsCellView */,
 				96139BCE2C159A090012A026 /* AlertView */,
@@ -333,6 +338,7 @@
 		96B7C45D2BA71ED100197448 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
+				A1233699F2CED215D5878278 /* ProjectMetadata.swift */,
 				059D746A86E0C25DE711AA8F /* SystemDiagnostics.swift */,
 				960F35EB2C14468000989279 /* MainSettings */,
 				96FCDF992C0AEFAD00A2AFBA /* ProjectInfo */,
@@ -622,6 +628,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC6B91B0EB6EBA7FCFC816B3 /* ProjectInfoPanel.swift in Sources */,
+				60693DB8DB3FEA919994F4FE /* ProjectMetadata.swift in Sources */,
 				7C9C5D3A8E1A2FF6BC4604C2 /* SystemInfoView.swift in Sources */,
 				69A91F1F779A3ACC5C5BE044 /* SystemDiagnosticsScanner.swift in Sources */,
 				C8682DD523BB432E8CC17524 /* SystemDiagnostics.swift in Sources */,
