@@ -42,11 +42,11 @@ extension ProjectInfo {
     }
 
     func customScriptPath(for selectedPath: String) -> String {
-        // Preserve existing path conversion behavior; sibling-path handling is tracked in #106.
-        guard selectedPath.hasPrefix(path) else { return selectedPath }
-        let relativePath = String(selectedPath.dropFirst(path.count))
-        let cleanPath = relativePath.hasPrefix("/") ? String(relativePath.dropFirst()) : relativePath
-        return "$PROJECT_ROOT/\(cleanPath)"
+        let projectComponents = URL(fileURLWithPath: path).standardizedFileURL.pathComponents
+        let selectedComponents = URL(fileURLWithPath: selectedPath).standardizedFileURL.pathComponents
+        guard selectedComponents.starts(with: projectComponents) else { return selectedPath }
+        let relative = selectedComponents.dropFirst(projectComponents.count).joined(separator: "/")
+        return relative.isEmpty ? "$PROJECT_ROOT" : "$PROJECT_ROOT/\(relative)"
     }
 
     static func isDirectory(atPath path: String) -> Bool {
