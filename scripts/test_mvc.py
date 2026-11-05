@@ -38,8 +38,10 @@ with tempfile.TemporaryDirectory(prefix="rngui-mvc-tests-") as directory:
         "-module-name", "ReactNativeGUITools",
         *sources, *map(str, sorted((ROOT / "Tests").glob("*.swift"))), "-o", executable,
     ], cwd=ROOT, check=True)
-    environment = {**os.environ, "CFFIXED_USER_HOME": directory}
+    environment = {**os.environ, "CFFIXED_USER_HOME": str(Path(directory) / "model-home")}
+    subprocess.run([executable], cwd=ROOT, check=True, env=environment)
     if args.ui_issue:
+        environment["CFFIXED_USER_HOME"] = str(Path(directory) / "ui-home")
         environment.update(RNGUI_UI_ISSUE=args.ui_issue,
                            RNGUI_UI_SCREENSHOT=str(ROOT / f"docs/verification/issue-{args.ui_issue}.png"))
-    subprocess.run([executable], cwd=ROOT, check=True, env=environment)
+        subprocess.run([executable], cwd=ROOT, check=True, env=environment)

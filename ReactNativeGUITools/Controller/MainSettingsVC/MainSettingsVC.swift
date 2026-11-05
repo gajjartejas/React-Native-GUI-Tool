@@ -20,10 +20,6 @@ class MainSettingsVC: NSViewController {
     @IBOutlet var androidStudioPopupMenu: NSPopUpButton!
     @IBOutlet var androidStudioPathLabel: NSTextField!
 
-    private var codeEditorPaths: [PathVersion] = []
-    private var xcodePaths: [PathVersion] = []
-    private var androidStudioPaths: [PathVersion] = []
-
     private let mainSettingsMainager = MainSettingsManager.shared
 
     // MARK: - Lifecycle
@@ -37,14 +33,18 @@ class MainSettingsVC: NSViewController {
     // MARK: - Setup
 
     private func setupPopupMenuItems() {
-        codeEditorPaths = mainSettingsMainager.mainSettings.getCodeEditorsaths()
-        codeEditorPathPopupMenu.addItems(withTitles: codeEditorPaths.map { $0.description })
+        configurePopup(codeEditorPathPopupMenu, items: mainSettingsMainager.mainSettings.getCodeEditorsaths())
+        configurePopup(xcodePathPopupMenu, items: mainSettingsMainager.mainSettings.getXcodesPaths())
+        configurePopup(androidStudioPopupMenu, items: mainSettingsMainager.mainSettings.getAndroidStudioPaths())
+    }
 
-        xcodePaths = mainSettingsMainager.mainSettings.getXcodesPaths()
-        xcodePathPopupMenu.addItems(withTitles: xcodePaths.map { $0.description })
-
-        androidStudioPaths = mainSettingsMainager.mainSettings.getAndroidStudioPaths()
-        androidStudioPopupMenu.addItems(withTitles: androidStudioPaths.map { $0.description })
+    private func configurePopup(_ popup: NSPopUpButton, items: [PathVersion]) {
+        popup.removeAllItems()
+        for item in items {
+            popup.addItem(withTitle: item.description)
+            popup.lastItem?.representedObject = item
+        }
+        popup.isEnabled = !items.isEmpty
     }
 
     private func selectDefaultItems() {
@@ -65,21 +65,21 @@ class MainSettingsVC: NSViewController {
     // MARK: - Actions
 
     @IBAction func codeEditorPopUpButtonSelectionChanged(_ sender: NSPopUpButton) {
-        let index = sender.indexOfSelectedItem
-        mainSettingsMainager.setDefaultCodeEditor(item: codeEditorPaths[index])
-        codeEditorPathLabel.stringValue = codeEditorPaths[index].path
+        guard let item = sender.selectedItem?.representedObject as? PathVersion else { return }
+        mainSettingsMainager.setDefaultCodeEditor(item: item)
+        codeEditorPathLabel.stringValue = item.path
     }
 
     @IBAction func xcodePopUpButtonSelectionChanged(_ sender: NSPopUpButton) {
-        let index = sender.indexOfSelectedItem
-        mainSettingsMainager.setDefaultXcodePath(item: codeEditorPaths[index])
-        xcodePathLabel.stringValue = codeEditorPaths[index].path
+        guard let item = sender.selectedItem?.representedObject as? PathVersion else { return }
+        mainSettingsMainager.setDefaultXcodePath(item: item)
+        xcodePathLabel.stringValue = item.path
     }
 
     @IBAction func androidStudioPopUpButtonSelectionChanged(_ sender: NSPopUpButton) {
-        let index = sender.indexOfSelectedItem
-        mainSettingsMainager.setDefaultAndroidStudio(item: codeEditorPaths[index])
-        androidStudioPathLabel.stringValue = codeEditorPaths[index].path
+        guard let item = sender.selectedItem?.representedObject as? PathVersion else { return }
+        mainSettingsMainager.setDefaultAndroidStudio(item: item)
+        androidStudioPathLabel.stringValue = item.path
     }
 
     @IBAction func codeEditorShowInFinder(_ sender: Any) {

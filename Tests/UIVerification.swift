@@ -47,6 +47,38 @@ enum UIVerification {
             try snapshot(editor.view, to: output)
             print("PASS: custom command executed and Terminal AppleScript compiled; screenshot \(output.path)")
             return
+        } else if issue == "87" {
+            let settings = storyboard.instantiateController(withIdentifier: "MainSettingsVC") as! MainSettingsVC
+            _ = settings.view
+            let editor = PathVersion(path: "/Fixture/Editor.app", version: "1", bundleId: .vscode)
+            let xcode = PathVersion(path: "/Fixture/Xcode.app", version: "16", bundleId: .xcode)
+            let android = PathVersion(path: "/Fixture/Android Studio.app", version: "2025", bundleId: .androidStudio)
+            func select(_ popup: NSPopUpButton, _ item: PathVersion) {
+                popup.removeAllItems()
+                popup.addItem(withTitle: item.description)
+                popup.lastItem?.representedObject = item
+            }
+            select(settings.codeEditorPathPopupMenu, editor)
+            settings.codeEditorPopUpButtonSelectionChanged(settings.codeEditorPathPopupMenu)
+            settings.codeEditorPathPopupMenu.removeAllItems()
+            select(settings.xcodePathPopupMenu, xcode)
+            settings.xcodePopUpButtonSelectionChanged(settings.xcodePathPopupMenu)
+            select(settings.androidStudioPopupMenu, android)
+            settings.androidStudioPopUpButtonSelectionChanged(settings.androidStudioPopupMenu)
+            let saved = MainSettings.readFromStorage()!
+            precondition(saved.defaultCodeEditor?.path == editor.path)
+            precondition(saved.defaultXcodePath?.path == xcode.path && settings.xcodePathLabel.stringValue == xcode.path)
+            precondition(saved.defaultAndroidStudio?.path == android.path && settings.androidStudioPathLabel.stringValue == android.path)
+            settings.xcodePathPopupMenu.removeAllItems()
+            settings.xcodePopUpButtonSelectionChanged(settings.xcodePathPopupMenu)
+            precondition(MainSettings.readFromStorage()?.defaultXcodePath?.path == xcode.path)
+            select(settings.xcodePathPopupMenu, xcode)
+            settings.tabView.selectTabViewItem(withIdentifier: "Locations")
+            let settingsWindow = NSWindow(contentViewController: settings)
+            settingsWindow.makeKeyAndOrderFront(nil)
+            try snapshot(settings.view, to: output)
+            print("PASS: settings select and persist each tool independently; empty selection is safe; screenshot \(output.path)")
+            return
         } else {
             fatalError("Unsupported UI verification issue \(issue)")
         }
