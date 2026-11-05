@@ -19,16 +19,23 @@ final class StreamingToolRunner: ToolRunning {
             var collected = Data()
             var exitCode: Int32 = 0
             do {
-                for command in plan.commands {
-                    if isCancelled { break }
-                    let heading = Data(("\n$ " + command.display + "\n").utf8)
-                    DispatchQueue.main.async { onOutput(heading) }
-                    exitCode = try execute(command) { data in
-                        collected.append(data)
-                        if collected.count > 1_000_000 { collected.removeFirst(collected.count - 1_000_000) }
-                        DispatchQueue.main.async { onOutput(data) }
+                var pending: ToolPlan? = plan
+                while let step = pending, !isCancelled {
+                    var stepOutput = Data()
+                    for command in step.commands {
+                        if isCancelled { break }
+                        let heading = Data(("\n$ " + command.display + "\n").utf8)
+                        DispatchQueue.main.async { onOutput(heading) }
+                        exitCode = try execute(command) { data in
+                            collected.append(data); stepOutput.append(data)
+                            if collected.count > 1_000_000 { collected.removeFirst(collected.count - 1_000_000) }
+                            if stepOutput.count > 1_000_000 { stepOutput.removeFirst(stepOutput.count - 1_000_000) }
+                            DispatchQueue.main.async { onOutput(data) }
+                        }
+                        if exitCode != 0 { break }
                     }
-                    if exitCode != 0 { break }
+                    if exitCode != 0 || isCancelled { break }
+                    pending = try step.next?(String(decoding: stepOutput, as: UTF8.self))
                 }
             } catch {
                 exitCode = -1

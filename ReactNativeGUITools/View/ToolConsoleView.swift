@@ -5,6 +5,8 @@ final class ToolConsoleView: NSView {
     let runButton = NSButton(title: "Run", target: nil, action: nil)
     let cancelButton = NSButton(title: "Cancel", target: nil, action: nil)
     let console = NSTextView()
+    let resultTable = NSTableView()
+    private let resultScroll = NSScrollView()
     let status = NSTextField(wrappingLabelWithString: "Select a project.")
     private let form = NSStackView()
     private var controls: [String: NSControl] = [:]
@@ -29,11 +31,22 @@ final class ToolConsoleView: NSView {
         console.font = .monospacedSystemFont(ofSize: 12, weight: .regular)
         console.textContainerInset = NSSize(width: 8, height: 8)
         let scroll = NSScrollView(); scroll.hasVerticalScroller = true; scroll.documentView = console
-        let stack = NSStackView(views: [operations, form, actions, status, scroll])
+        resultScroll.documentView = resultTable; resultScroll.hasVerticalScroller = true; resultScroll.isHidden = true
+        resultScroll.heightAnchor.constraint(equalToConstant: 140).isActive = true
+        let stack = NSStackView(views: [resultScroll, operations, form, actions, status, scroll])
         stack.orientation = .vertical; stack.alignment = .leading; stack.spacing = 10
         stack.translatesAutoresizingMaskIntoConstraints = false; addSubview(stack)
         NSLayoutConstraint.activate([stack.topAnchor.constraint(equalTo: topAnchor, constant: 12), stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12), stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12), stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12), scroll.heightAnchor.constraint(greaterThanOrEqualToConstant: 100)])
-        for view in [operations, form, status, scroll] { view.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true }
+        for view in [resultScroll, operations, form, status, scroll] { view.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true }
+    }
+    func showTable(headers: [String]) {
+        for column in resultTable.tableColumns { resultTable.removeTableColumn(column) }
+        for (index, title) in headers.enumerated() {
+            let column = NSTableColumn(identifier: .init(String(index))); column.title = title; column.width = 180; resultTable.addTableColumn(column)
+        }
+        resultTable.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
+        resultTable.usesAlternatingRowBackgroundColors = true
+        resultScroll.isHidden = false
     }
     func configure(_ options: [ToolOperation], selected: String?) {
         operations.removeAllItems()
@@ -49,7 +62,7 @@ final class ToolConsoleView: NSView {
         }
     }
     func setValue(_ value: String, for id: String) {
-        if let popup = controls[id] as? NSPopUpButton { popup.selectItem(withTitle: value) }
+        if let popup = controls[id] as? NSPopUpButton { if let item = popup.item(withTitle: value) { popup.select(item) } }
         else if let button = controls[id] as? NSButton { button.state = value == "true" ? .on : .off }
         else { controls[id]?.stringValue = value }
     }

@@ -90,6 +90,26 @@ enum FeatureUIVerification {
             let window = NSWindow(contentViewController: vc); window.makeKeyAndOrderFront(nil)
             try UIVerification.snapshot(vc.view, to: output)
             print("PASS: login-item enable/disable, approval-required and error states; no real registration changed")
+        } else if issue == "94" {
+            try ToolRunnerTests.run(root: root)
+            let listing = "List of devices attached\nserial1 device model:Pixel_8 transport_id:1\nserial2 unauthorized model:Other\n"
+            let devices = AdbToolPolicy.devices(listing); precondition(devices.count == 2 && devices[0].model == "Pixel 8")
+            let values = ["device":devices[0].label, "port":"8081", "package":"com.fixture.app", "level":"I", "tag":"ReactNative"]
+            let reverse = try AdbToolPolicy.plan(operation: "reverse", values: values, project: project, devices: devices)
+            precondition(reverse.commands[0].arguments == ["-s", "serial1", "reverse", "tcp:8081", "tcp:8081"])
+            let logs = try AdbToolPolicy.plan(operation: "logcat", values: values, project: project, devices: devices)
+            let stream = try logs.next!("1234\n")
+            precondition(stream.commands[0].arguments.contains("--pid") && stream.commands[0].arguments.contains("1234"))
+            do { _ = try AdbToolPolicy.selected(["device":devices[1].label], devices: devices); preconditionFailure("Unauthorized device accepted") } catch {}
+            let vc = storyboard.instantiateController(withIdentifier: "AdbVC") as! AdbVC
+            vc.projectInfo = project; let runner = RecordingToolRunner(); vc.makeRunner = { runner }; _ = vc.view
+            wait { vc.panel.runButton.isEnabled }; vc.runOperation(); runner.finish(output: listing)
+            wait { vc.panel.resultTable.numberOfRows == 2 && vc.panel.runButton.isEnabled }
+            vc.selectOperation("dev-menu"); vc.runOperation()
+            precondition(runner.plans.last?.commands[0].arguments == ["-s", "serial1", "shell", "input", "keyevent", "82"])
+            runner.finish(); let window = NSWindow(contentViewController: vc); window.setContentSize(NSSize(width: 800, height: 700)); window.makeKeyAndOrderFront(nil)
+            try UIVerification.snapshot(vc.view, to: output)
+            print("PASS: device parsing/table, online selection, reverse, dev menu and package-PID Logcat")
         } else { fatalError("Unsupported feature issue") }
     }
 }
