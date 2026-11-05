@@ -87,6 +87,11 @@
 		7C9C5D3A8E1A2FF6BC4604C2 /* SystemInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C6815D0E0AED6EB1E2E404 /* SystemInfoView.swift */; };
 		60693DB8DB3FEA919994F4FE /* ProjectMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1233699F2CED215D5878278 /* ProjectMetadata.swift */; };
 		AC6B91B0EB6EBA7FCFC816B3 /* ProjectInfoPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362855CE0B4670160C83FEB5 /* ProjectInfoPanel.swift */; };
+		89815DE0BAE52B18F871322C /* ToolCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58E6994622BFEC3A7A81095 /* ToolCommand.swift */; };
+		237EEA52CA31FCA808E7F529 /* PackageToolPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A599EB9E57D1663903F195F /* PackageToolPolicy.swift */; };
+		AC378B07FDACE0CCD7819906 /* StreamingToolRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0D0A7D0F14C3E248015CA5 /* StreamingToolRunner.swift */; };
+		32605A34485644594C9FA45E /* ToolConsoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF02495E7EB4039FB976E2B /* ToolConsoleView.swift */; };
+		58FC780692C64FD319593E0D /* ToolCommandVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE14CAD394514685559329B /* ToolCommandVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -173,6 +178,11 @@
 		18C6815D0E0AED6EB1E2E404 /* SystemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SystemInfoView/SystemInfoView.swift"; sourceTree = "<group>"; };
 		A1233699F2CED215D5878278 /* ProjectMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectMetadata.swift"; sourceTree = "<group>"; };
 		362855CE0B4670160C83FEB5 /* ProjectInfoPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectInfoPanel.swift"; sourceTree = "<group>"; };
+		E58E6994622BFEC3A7A81095 /* ToolCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolCommand.swift"; sourceTree = "<group>"; };
+		5A599EB9E57D1663903F195F /* PackageToolPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PackageToolPolicy.swift"; sourceTree = "<group>"; };
+		FD0D0A7D0F14C3E248015CA5 /* StreamingToolRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StreamingToolRunner.swift"; sourceTree = "<group>"; };
+		7EF02495E7EB4039FB976E2B /* ToolConsoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolConsoleView.swift"; sourceTree = "<group>"; };
+		CAE14CAD394514685559329B /* ToolCommandVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolCommandVC.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +258,7 @@
 		96633F692BA59F9D00B668FC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7EF02495E7EB4039FB976E2B /* ToolConsoleView.swift */,
 				362855CE0B4670160C83FEB5 /* ProjectInfoPanel.swift */,
 				18C6815D0E0AED6EB1E2E404 /* SystemInfoView.swift */,
 				96FF28D02C35A7D500F262CF /* CustomActionsCellView */,
@@ -264,6 +275,7 @@
 		96633F6C2BA5B98F00B668FC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CAE14CAD394514685559329B /* ToolCommandVC.swift */,
 				5016BBB6EDD8E2BE0A81FB0C /* ProjectListMenuController */,
 				96FCDFA42C0B3E9700A2AFBA /* ProjectListStatusBarMenuController */,
 				96E61B892CA07E090066AA21 /* AddCustomActionVC */,
@@ -338,6 +350,8 @@
 		96B7C45D2BA71ED100197448 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
+				5A599EB9E57D1663903F195F /* PackageToolPolicy.swift */,
+				E58E6994622BFEC3A7A81095 /* ToolCommand.swift */,
 				A1233699F2CED215D5878278 /* ProjectMetadata.swift */,
 				059D746A86E0C25DE711AA8F /* SystemDiagnostics.swift */,
 				960F35EB2C14468000989279 /* MainSettings */,
@@ -359,6 +373,7 @@
 		96D1814C2BADF4C700380905 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				FD0D0A7D0F14C3E248015CA5 /* StreamingToolRunner.swift */,
 				51040E53DF82F0AF6D9306E3 /* SystemDiagnosticsScanner.swift */,
 				96D1814D2BADF4EE00380905 /* NibInstantiatable.swift */,
 				96F9445D2C01E19A0053B5DC /* AppUtils.swift */,
@@ -628,6 +643,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58FC780692C64FD319593E0D /* ToolCommandVC.swift in Sources */,
+				32605A34485644594C9FA45E /* ToolConsoleView.swift in Sources */,
+				AC378B07FDACE0CCD7819906 /* StreamingToolRunner.swift in Sources */,
+				237EEA52CA31FCA808E7F529 /* PackageToolPolicy.swift in Sources */,
+				89815DE0BAE52B18F871322C /* ToolCommand.swift in Sources */,
 				AC6B91B0EB6EBA7FCFC816B3 /* ProjectInfoPanel.swift in Sources */,
 				60693DB8DB3FEA919994F4FE /* ProjectMetadata.swift in Sources */,
 				7C9C5D3A8E1A2FF6BC4604C2 /* SystemInfoView.swift in Sources */,
