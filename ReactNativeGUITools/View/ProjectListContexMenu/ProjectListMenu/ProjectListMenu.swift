@@ -202,3 +202,22 @@ final class ProjectListMenu {
         return menu
     }
 }
+
+final class StatusMenuSearchView: NSView {
+    let searchField = NSSearchField(frame: NSRect(x: 10, y: 6, width: 280, height: 24))
+    var onSearch: ((String) -> Void)?
+
+    init() {
+        super.init(frame: NSRect(x: 0, y: 0, width: 300, height: 36))
+        searchField.placeholderString = "Search projects or React Native version"
+        searchField.sendsSearchStringImmediately = true
+        searchField.sendsWholeSearchString = false
+        searchField.target = self
+        searchField.action = #selector(search)
+        searchField.setAccessibilityLabel("Search status menu projects")
+        addSubview(searchField)
+    }
+
+    required init?(coder: NSCoder) { fatalError("Use init()") }
+    @objc private func search() { onSearch?(searchField.stringValue) }
+}

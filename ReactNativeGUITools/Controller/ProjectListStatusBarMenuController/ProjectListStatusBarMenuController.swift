@@ -11,6 +11,7 @@ class ProjectListStatusBarMenuController: NSObject {
     var statusBarItem: NSStatusItem!
     let statusBarMenu = NSMenu()
     let projectListMenu = ProjectListMenuController()
+    let searchView = StatusMenuSearchView()
     var projectInfos: [ProjectInfo]!
 
     override private init() {
@@ -29,20 +30,16 @@ class ProjectListStatusBarMenuController: NSObject {
         statusBarItem.button?.image = .init(named: "status-bar-icon")?.tint(color: .red)
         statusBarItem.button?.image?.isTemplate = true
 
-        // Open
+        let search = NSMenuItem()
+        search.view = searchView
+        search.tag = -20
+        statusBarMenu.addItem(search)
+        searchView.onSearch = { query in ProjectInfoManager.shared.searchBy(query, type: .menu) }
         let openMenuItem = NSMenuItem(title: "Show Main Window", action: #selector(showUIAction(_:)), keyEquivalent: "")
         openMenuItem.tag = -1
         statusBarMenu.addItem(openMenuItem)
-
         statusBarMenu.addItem(NSMenuItem.separator())
-
-        // Project List
-        for (row, info) in projectInfos.enumerated() {
-            let menuItem = NSMenuItem(title: info.name ?? "-", action: nil, keyEquivalent: "")
-            menuItem.submenu = projectListMenu.createMenuFrom(projectInfos: projectInfos, row: row)
-            menuItem.tag = row
-            statusBarMenu.addItem(menuItem)
-        }
+        insertProjectItems()
 
         statusBarMenu.addItem(NSMenuItem.separator())
 
@@ -83,58 +80,34 @@ class ProjectListStatusBarMenuController: NSObject {
                                                object: nil)
     }
 
-    @objc func reloadMenu() {
-        statusBarMenu.removeAllItems()
-
-        // get latest
-        projectInfos = ProjectInfoManager.shared.get(type: .menu)
-
-        // Open
-        let openMenuItem = NSMenuItem(title: "Show Main Window", action: #selector(showUIAction(_:)), keyEquivalent: "")
-        openMenuItem.tag = -1
-        statusBarMenu.addItem(openMenuItem)
-
-        statusBarMenu.addItem(NSMenuItem.separator())
-
-        for (row, info) in projectInfos.enumerated() {
-            let menuItem = NSMenuItem(title: info.name ?? "-", action: nil, keyEquivalent: "")
-            menuItem.submenu = projectListMenu.createMenuFrom(projectInfos: projectInfos, row: row)
-            menuItem.tag = row
-            statusBarMenu.addItem(menuItem)
+    func menuWillOpen(_ menu: NSMenu) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.searchView.window?.makeFirstResponder(self.searchView.searchField)
         }
+    }
 
-        statusBarMenu.addItem(NSMenuItem.separator())
+    @objc func reloadMenu() {
+        projectInfos = ProjectInfoManager.shared.get(type: .menu)
+        // Keep the search view attached while the menu is tracking keyboard input.
+        for item in statusBarMenu.items where item.tag >= 0 && !item.isSeparatorItem || item.tag == -10 {
+            statusBarMenu.removeItem(item)
+        }
+        insertProjectItems()
+    }
 
-        // Settings
-        let settingsItem = NSMenuItem(title: "Settings...", action: #selector(settingsAction(_:)), keyEquivalent: "")
-        settingsItem.tag = -5
-        statusBarMenu.addItem(settingsItem)
-
-        // Github
-        let githubItem = NSMenuItem(title: "Github", action: #selector(githubAction(_:)), keyEquivalent: "")
-        githubItem.tag = -4
-        statusBarMenu.addItem(githubItem)
-
-        // Sponsor
-        let sponsorItem = NSMenuItem(title: "Sponsor", action: #selector(sponsorAction(_:)), keyEquivalent: "")
-        sponsorItem.tag = -3
-        statusBarMenu.addItem(sponsorItem)
-
-        // Quit
-        let quitItem = NSMenuItem(title: "Quit", action: #selector(quitUIAction(_:)), keyEquivalent: "")
-        quitItem.tag = -2
-        statusBarMenu.addItem(quitItem)
-
-        statusBarMenu.delegate = self
-        statusBarMenu.setTargetToSelfRecursively(target: projectListMenu)
-
-        settingsItem.target = self
-        openMenuItem.target = self
-        githubItem.target = self
-        sponsorItem.target = self
-        quitItem.target = self
-
-        statusBarItem.menu = statusBarMenu
+    private func insertProjectItems() {
+        if projectInfos.isEmpty {
+            let empty = NSMenuItem(title: "No matching projects", action: nil, keyEquivalent: "")
+            empty.tag = -10
+            statusBarMenu.insertItem(empty, at: 3)
+        }
+        for (row, info) in projectInfos.enumerated() {
+            let item = NSMenuItem(title: info.name ?? "-", action: nil, keyEquivalent: "")
+            item.submenu = projectListMenu.createMenuFrom(projectInfos: projectInfos, row: row)
+            item.tag = row
+            statusBarMenu.insertItem(item, at: 3 + row)
+        }
     }
 
     @objc func showUIAction(_ sender: NSMenuItem) {

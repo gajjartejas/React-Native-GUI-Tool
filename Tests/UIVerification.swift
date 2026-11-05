@@ -22,7 +22,22 @@ enum UIVerification {
         window.showWindow(nil)
         let controller = window.contentViewController as! MainProjectListVC
         _ = controller.view
-        if issue == "101" {
+        if issue == "67" {
+            let status = ProjectListStatusBarMenuController(projectInfos: projects)
+            status.searchView.onSearch?("Alpha")
+            precondition(status.projectInfos.map(\.id) == ["alpha"])
+            precondition(manager.get(type: .list).count == 2)
+            precondition(status.statusBarMenu.items.filter { $0.submenu != nil }.map(\.title) == ["Alpha"])
+            status.searchView.onSearch?("no matches")
+            precondition(status.statusBarMenu.items.contains { $0.title == "No matching projects" })
+            status.searchView.onSearch?("")
+            precondition(status.projectInfos.count == 2 && ProjectInfo.readArrayFromStorage()?.count == 2)
+            status.searchView.searchField.stringValue = "Alpha"
+            status.searchView.onSearch?("Alpha")
+            try snapshotReport(title: "Status menu search — #67", lines: ["Query: Alpha", "Visible project: " + status.projectInfos[0].name!, "PASS: main list and saved registrations remain unchanged", "PASS: no-match message and clearing search"], to: output)
+            NSStatusBar.system.removeStatusItem(status.statusBarItem)
+            return
+        } else if issue == "101" {
             controller.projectSearchTextField.stringValue = "Alpha"
             manager.searchBy("Alpha", type: .list)
             controller.sortByNameAction(NSMenuItem())
