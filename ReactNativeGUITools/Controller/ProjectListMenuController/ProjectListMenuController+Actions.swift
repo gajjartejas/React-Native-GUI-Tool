@@ -125,8 +125,8 @@ extension ProjectListMenuController {
         trashFolders(.cleanAndroidBuildFolder)
     }
 
-    @objc func cleaniAndroidAppBuildFolder(_ sender: NSMenuItem) {
-        trashFolders(.cleaniAndroidAppBuildFolder)
+    @objc func cleanAndroidAppBuildFolder(_ sender: NSMenuItem) {
+        trashFolders(.cleanAndroidAppBuildFolder)
     }
 
     @objc func cleanAndroidAppReleaseFolder(_ sender: NSMenuItem) {
@@ -145,7 +145,7 @@ extension ProjectListMenuController {
         guard let clickedRow = clickedRow else { return }
         let projectInfo = projectInfos[clickedRow]
         guard FileManager.default.fileExists(atPath: projectInfo.path) else { return }
-        projectInfo.cleanupPaths(for: target).forEach { moveFolderToTrash(atPath: $0) }
+        projectInfo.cleanupPaths(for: target).forEach(trashFolder)
     }
 
     @objc func npmStart(_ sender: NSMenuItem) {

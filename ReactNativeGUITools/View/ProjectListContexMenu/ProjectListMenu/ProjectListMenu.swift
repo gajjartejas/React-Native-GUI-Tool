@@ -116,7 +116,7 @@ final class ProjectListMenu {
         let cleanAndroidMenuItem = NSMenuItem()
         cleanAndroidMenu.addItem(NSMenuItem(title: "All", action: #selector(ProjectListMenuController.cleanAndroidAllFolders(_:)), keyEquivalent: ""))
         cleanAndroidMenu.addItem(NSMenuItem(title: "build", action: #selector(ProjectListMenuController.cleanAndroidBuildFolder(_:)), keyEquivalent: ""))
-        cleanAndroidMenu.addItem(NSMenuItem(title: "app/build", action: #selector(ProjectListMenuController.cleanAndroidBuildFolder(_:)), keyEquivalent: ""))
+        cleanAndroidMenu.addItem(NSMenuItem(title: "app/build", action: #selector(ProjectListMenuController.cleanAndroidAppBuildFolder(_:)), keyEquivalent: ""))
         cleanAndroidMenu.addItem(NSMenuItem(title: "app/release", action: #selector(ProjectListMenuController.cleanAndroidAppReleaseFolder(_:)), keyEquivalent: ""))
         cleanAndroidMenuItem.submenu = cleanAndroidMenu
         cleanAndroidMenuItem.title = "Clean Android"
@@ -159,7 +159,7 @@ final class ProjectListMenu {
         metroSubMenu.addItem(withTitle: "Launch Devtools", action: #selector(ProjectListMenuController.metroLaunchDevtools(_:)), keyEquivalent: "")
         metroSubMenu.addItem(withTitle: "Debug", action: #selector(ProjectListMenuController.metroDebug(_:)), keyEquivalent: "")
         metroSubMenu.addItem(withTitle: "View iOS Source", action: #selector(ProjectListMenuController.metroViewiOSSource(_:)), keyEquivalent: "")
-        metroSubMenu.addItem(withTitle: "View Anddroid Source", action: #selector(ProjectListMenuController.metroViewAndroidSource(_:)), keyEquivalent: "")
+        metroSubMenu.addItem(withTitle: "View Android Source", action: #selector(ProjectListMenuController.metroViewAndroidSource(_:)), keyEquivalent: "")
         let metroMenuItem = NSMenuItem()
         metroMenuItem.title = "Metro"
         metroMenuItem.submenu = metroSubMenu

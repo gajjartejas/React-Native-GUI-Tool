@@ -79,6 +79,27 @@ enum UIVerification {
             try snapshot(settings.view, to: output)
             print("PASS: settings select and persist each tool independently; empty selection is safe; screenshot \(output.path)")
             return
+        } else if issue == "88" {
+            var paths: [String] = []
+            let menuController = ProjectListMenuController(trashFolder: { paths.append($0) })
+            let menu = menuController.createMenuFrom(projectInfos: projects, row: 0)
+            let android = menu.items.first { $0.title == "Clean" }!.submenu!.items.first { $0.title == "Clean Android" }!.submenu!
+            let appBuild = android.items.first { $0.title == "app/build" }!
+            precondition(appBuild.action == #selector(ProjectListMenuController.cleanAndroidAppBuildFolder(_:)))
+            precondition((appBuild.target as? ProjectListMenuController) === menuController)
+            _ = menuController.perform(appBuild.action!, with: appBuild)
+            precondition(paths == [projects[0].path + "/android/app/build"])
+            menuController.cleanAndroidBuildFolder(NSMenuItem())
+            precondition(paths.last == projects[0].path + "/android/build")
+            try snapshotReport(title: "Android cleanup routing — #88", lines: [
+                "PASS: app/build menu -> cleanAndroidAppBuildFolder",
+                "Target: " + paths[0],
+                "PASS: build menu remains distinct",
+                "Target: " + paths[1],
+                "Trash adapter replaced by a recording spy. No folders deleted."
+            ], to: output)
+            print("PASS: actual menu selectors dispatch distinct Android cleanup targets; screenshot \(output.path)")
+            return
         } else {
             fatalError("Unsupported UI verification issue \(issue)")
         }
@@ -86,6 +107,19 @@ enum UIVerification {
         try snapshot(controller.view, to: output)
         print("PASS: storyboard UI verification #\(issue); screenshot \(output.path)")
         window.close()
+    }
+
+    static func snapshotReport(title: String, lines: [String], to output: URL) throws {
+        let text = NSTextView(frame: NSRect(x: 0, y: 0, width: 1000, height: 320))
+        text.font = .monospacedSystemFont(ofSize: 14, weight: .regular)
+        text.textContainerInset = NSSize(width: 20, height: 20)
+        text.string = title + "\n\n" + lines.joined(separator: "\n\n")
+        text.textColor = .labelColor
+        text.backgroundColor = .textBackgroundColor
+        let reportWindow = NSWindow(contentRect: text.frame, styleMask: [.titled], backing: .buffered, defer: false)
+        reportWindow.contentView = text
+        reportWindow.makeKeyAndOrderFront(nil)
+        try snapshot(text, to: output)
     }
 
     static func snapshot(_ view: NSView, to output: URL) throws {
