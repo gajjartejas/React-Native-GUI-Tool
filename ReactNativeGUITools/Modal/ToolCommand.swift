@@ -23,6 +23,7 @@ struct ToolCommand {
 struct ToolPlan {
     var commands: [ToolCommand]
     var outputDirectory: String? = nil
+    var next: ((String) throws -> ToolPlan)? = nil
 }
 struct ToolRunResult {
     let exitCode: Int32
@@ -49,6 +50,11 @@ enum ToolInput {
             throw ToolInputError(message: "Arguments must be a JSON array of strings, for example [\"--watch\"].")
         }
         return args
+    }
+    static func file(_ values: [String: String], _ key: String, extensions: [String]) throws -> String {
+        let path = try required(values, key)
+        guard path.hasPrefix("/"), extensions.contains(URL(fileURLWithPath: path).pathExtension.lowercased()) else { throw ToolInputError(message: "Choose an absolute \(extensions.joined(separator: "/")) file path for \(key).") }
+        return path
     }
     static func package(_ values: [String: String]) throws -> String {
         let value = try required(values, "package")

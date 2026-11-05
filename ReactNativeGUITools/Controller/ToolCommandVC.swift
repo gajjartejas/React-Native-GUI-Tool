@@ -1,6 +1,6 @@
 import Cocoa
 
-class ToolCommandVC: NSViewController, ProjectInfoAssignable {
+class ToolCommandVC: NSViewController, ProjectInfoAssignable, NSTableViewDataSource, NSTableViewDelegate {
     var projectInfo: ProjectInfo? { didSet {
         if oldValue?.id != projectInfo?.id || oldValue?.path != projectInfo?.path { runner?.cancel(); runner = nil; projectDidChange(); if isViewLoaded { reloadOperations() } }
     } }
@@ -10,6 +10,7 @@ class ToolCommandVC: NSViewController, ProjectInfoAssignable {
     var readyStatus: String { "Ready. Commands run in the selected project." }
     func projectDidChange() {}
     var panel: ToolConsoleView { view as! ToolConsoleView }
+    private var resultRows: [[String]] = []
     private var options: [ToolOperation] = []
     private var runner: ToolRunning?
     private var token = UUID()
@@ -18,6 +19,7 @@ class ToolCommandVC: NSViewController, ProjectInfoAssignable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        panel.resultTable.dataSource = self; panel.resultTable.delegate = self
         panel.onOperation = { [weak self] id in self?.selectOperation(id) }
         panel.onRun = { [weak self] in self?.runOperation() }
         panel.onCancel = { [weak self] in self?.runner?.cancel() }
@@ -76,6 +78,14 @@ class ToolCommandVC: NSViewController, ProjectInfoAssignable {
                 if result.exitCode == 0 && !result.cancelled, let output = plan.outputDirectory { NSWorkspace.shared.open(URL(fileURLWithPath: output)) }
             })
         } catch { panel.status.stringValue = error.localizedDescription }
+    }
+    func showRows(headers: [String], rows: [[String]]) {
+        resultRows = rows; panel.showTable(headers: headers); panel.resultTable.reloadData()
+    }
+    func numberOfRows(in tableView: NSTableView) -> Int { resultRows.count }
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        guard resultRows.indices.contains(row), let column = Int(tableColumn?.identifier.rawValue ?? ""), resultRows[row].indices.contains(column) else { return nil }
+        return NSTextField(labelWithString: resultRows[row][column])
     }
     func didComplete(operation: String, result: ToolRunResult) {}
     private func browse(id: String, save: Bool) {

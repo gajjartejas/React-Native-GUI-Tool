@@ -94,6 +94,7 @@
 		58FC780692C64FD319593E0D /* ToolCommandVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE14CAD394514685559329B /* ToolCommandVC.swift */; };
 		EE222BDC390FFB605BE88F0E /* LoginItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF1D756D0D73C1A34FC1F61 /* LoginItemService.swift */; };
 		634137C2C7338262A77F3E74 /* LoginSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B443D6A0B3F62F71143D309B /* LoginSettingsView.swift */; };
+		AE499C8732406D4053A15445 /* AdbToolPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A02B1ADEC1806E24CF296E6 /* AdbToolPolicy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -187,6 +188,7 @@
 		CAE14CAD394514685559329B /* ToolCommandVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolCommandVC.swift"; sourceTree = "<group>"; };
 		FFF1D756D0D73C1A34FC1F61 /* LoginItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginItemService.swift"; sourceTree = "<group>"; };
 		B443D6A0B3F62F71143D309B /* LoginSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginSettingsView.swift"; sourceTree = "<group>"; };
+		2A02B1ADEC1806E24CF296E6 /* AdbToolPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdbToolPolicy.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -355,6 +357,7 @@
 		96B7C45D2BA71ED100197448 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
+				2A02B1ADEC1806E24CF296E6 /* AdbToolPolicy.swift */,
 				5A599EB9E57D1663903F195F /* PackageToolPolicy.swift */,
 				E58E6994622BFEC3A7A81095 /* ToolCommand.swift */,
 				A1233699F2CED215D5878278 /* ProjectMetadata.swift */,
@@ -649,6 +652,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE499C8732406D4053A15445 /* AdbToolPolicy.swift in Sources */,
 				634137C2C7338262A77F3E74 /* LoginSettingsView.swift in Sources */,
 				EE222BDC390FFB605BE88F0E /* LoginItemService.swift in Sources */,
 				58FC780692C64FD319593E0D /* ToolCommandVC.swift in Sources */,

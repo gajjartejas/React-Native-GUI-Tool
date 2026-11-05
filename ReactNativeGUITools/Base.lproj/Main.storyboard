@@ -1346,23 +1346,9 @@
         <scene sceneID="au0-Cs-nFV">
             <objects>
                 <viewController storyboardIdentifier="AdbVC" id="xVk-qU-C0l" customClass="AdbVC" customModule="ReactNativeGUITools" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="cm3-IL-UmN">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                    <view key="view" id="cm3-IL-UmN" customClass="ToolConsoleView" customModule="ReactNativeGUITools" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="700" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5ye-dg-47o">
-                                <rect key="frame" x="210" y="142" width="31" height="16"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="ADB" id="486-1Y-TOR">
-                                    <font key="font" usesAppearanceFont="YES"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="5ye-dg-47o" firstAttribute="centerX" secondItem="cm3-IL-UmN" secondAttribute="centerX" id="cdv-ma-ABc"/>
-                            <constraint firstItem="5ye-dg-47o" firstAttribute="centerY" secondItem="cm3-IL-UmN" secondAttribute="centerY" id="wwA-3T-YCo"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="SOb-34-g10" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
