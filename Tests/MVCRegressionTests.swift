@@ -39,6 +39,12 @@ private struct MVCRegressionTests {
         try expect(project.orderedPackageJsonScripts?.map(\.name) == ["start", "test", "ios", "z-extra"], "Package scripts lost their presentation order")
         let missingManifest = readPackageJSON(atPath: directory.appendingPathComponent("missing").path)
         try expect(missingManifest.name == nil && missingManifest.scriptsArray == nil, "Missing manifest should return no metadata")
+        let noDependencies = directory.appendingPathComponent("no-dependencies")
+        try FileManager.default.createDirectory(at: noDependencies, withIntermediateDirectories: true)
+        try Data("{\"name\":\"Plain package\",\"scripts\":{\"test\":\"printf fixture\"}}".utf8)
+            .write(to: noDependencies.appendingPathComponent("package.json"))
+        let plain = readPackageJSON(atPath: noDependencies.path)
+        try expect(plain.name == "Plain package" && plain.version == nil && plain.scriptsArray?.count == 1, "Optional dependencies should not prevent metadata parsing")
         print("PASS: manifest parsing and package-script ordering")
 
         do {

@@ -18,7 +18,6 @@ func readPackageJSON(atPath path: String) -> (name: String?, version: String?, s
         name = jsonDict["name"] as? String
 
         if let dependencies = jsonDict["dependencies"] as? [String: String] {
-            print("Error: Could not find dependencies in package.json")
             reactNativeVersion = dependencies["react-native"]
         }
 
