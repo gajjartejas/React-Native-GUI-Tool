@@ -169,7 +169,7 @@ class MainProjectListVC: NSViewController {
         dropView.validatePath = ProjectInfo.isDirectory(atPath:)
         dropView.dragging { [weak self] folderPath in
             let newProject = ProjectInfo(id: UUID().uuidString, path: folderPath)
-            ProjectInfoManager.shared.append(newProject)
+            self?.importProjects([newProject], at: ProjectInfoManager.shared.get(type: .list).count)
             self?.projectListTableView.reloadData()
         }
 
@@ -189,7 +189,7 @@ class MainProjectListVC: NSViewController {
                         let newProject = ProjectInfo(id: UUID().uuidString, path: folderPath)
                         return newProject
                     }
-                    ProjectInfoManager.shared.append(contentsOf: newProjects)
+                    self?.importProjects(newProjects, at: ProjectInfoManager.shared.get(type: .list).count)
                     self?.projectListTableView.reloadData()
                 }
             }

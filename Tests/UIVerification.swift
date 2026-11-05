@@ -100,6 +100,32 @@ enum UIVerification {
             ], to: output)
             print("PASS: actual menu selectors dispatch distinct Android cleanup targets; screenshot \(output.path)")
             return
+        } else if issue == "102" {
+            for name in ["Gamma", "Delta", "Epsilon"] {
+                try FileManager.default.createDirectory(at: root.appendingPathComponent(name), withIntermediateDirectories: true)
+                try Data("{\"name\":\"\(name)\",\"dependencies\":{\"react-native\":\"0.75.0\"}}".utf8)
+                    .write(to: root.appendingPathComponent(name).appendingPathComponent("package.json"))
+            }
+            let gamma = ProjectInfo(id: "gamma", path: root.appendingPathComponent("Gamma").path)
+            gamma.name = "Gamma"
+            let delta = ProjectInfo(id: "delta", path: root.appendingPathComponent("Delta").path)
+            delta.name = "Delta"
+            var prompts = 0
+            precondition(controller.importProjects([gamma, delta, gamma], at: 0, confirmDuplicate: { _ in prompts += 1; return false }))
+            precondition(prompts == 0 && manager.get(type: .all).map(\.id) == ["gamma", "delta", "beta", "alpha"])
+            let duplicate = ProjectInfo(id: "duplicate", path: projects[0].path)
+            let epsilon = ProjectInfo(id: "epsilon", path: root.appendingPathComponent("Epsilon").path)
+            epsilon.name = "Epsilon"
+            precondition(controller.importProjects([duplicate, epsilon], at: 0, confirmDuplicate: { _ in
+                prompts += 1
+                precondition(manager.get(type: .all).count == 4, "Mutated before duplicate validation finished")
+                return false
+            }))
+            precondition(prompts == 1 && manager.get(type: .all).first?.id == "epsilon")
+            precondition(controller.importProjects([duplicate], at: 0, confirmDuplicate: { _ in true }))
+            precondition(manager.get(type: .all).filter { $0.path == duplicate.path }.count == 2)
+            precondition(ProjectInfo.readArrayFromStorage()?.count == 6)
+            print("PASS: fresh batch, repeated input, cancel/accept existing duplicate, and atomic persistence")
         } else {
             fatalError("Unsupported UI verification issue \(issue)")
         }
