@@ -53,6 +53,25 @@ enum FeatureUIVerification {
             let window = NSWindow(contentViewController: vc); window.setContentSize(NSSize(width: 800, height: 650)); window.makeKeyAndOrderFront(nil)
             try UIVerification.snapshot(vc.view, to: output)
             print("PASS: NPM add/dev, script arguments, cancellation, console and all operation plans")
+        } else if issue == "92" {
+            let classic = try PackageToolPolicy.yarnPlan(operation: "install", values: ["frozen":"true"], project: project, major: 1)
+            let modern = try PackageToolPolicy.yarnPlan(operation: "install", values: ["frozen":"true"], project: project, major: 4)
+            precondition(classic.commands[0].arguments == ["install", "--frozen-lockfile"] && modern.commands[0].arguments == ["install", "--immutable"])
+            precondition(PackageToolPolicy.yarnMajor("4.6.0\n") == 4 && PackageToolPolicy.yarnMajor("not installed") == nil)
+            let vc = storyboard.instantiateController(withIdentifier: "YarnVC") as! YarnVC
+            vc.projectInfo = project; let runner = RecordingToolRunner(); vc.makeRunner = { runner }
+            _ = vc.view; wait { vc.panel.runButton.isEnabled }
+            vc.runOperation(); precondition(runner.plans.last?.commands[0].arguments == ["--version"])
+            runner.finish(output: "4.6.0"); wait { vc.panel.status.stringValue.contains("Modern") }
+            vc.selectOperation("upgrade"); vc.panel.setValue("react-native@latest", for: "package"); vc.runOperation()
+            precondition(runner.plans.last?.commands[0].arguments == ["up", "react-native@latest"])
+            vc.panel.cancelButton.performClick(nil); precondition(runner.cancelled)
+            vc.selectOperation("install"); vc.panel.setValue("true", for: "frozen"); vc.runOperation()
+            precondition(runner.plans.last?.commands[0].arguments == ["install", "--immutable"]); runner.finish()
+            wait { vc.panel.runButton.isEnabled }
+            let window = NSWindow(contentViewController: vc); window.setContentSize(NSSize(width: 800, height: 650)); window.makeKeyAndOrderFront(nil)
+            try UIVerification.snapshot(vc.view, to: output)
+            print("PASS: Yarn version detection, Classic/Modern lock flags, upgrade and cancellation")
         } else { fatalError("Unsupported feature issue") }
     }
 }
