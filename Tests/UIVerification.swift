@@ -22,6 +22,10 @@ enum UIVerification {
         window.showWindow(nil)
         let controller = window.contentViewController as! MainProjectListVC
         _ = controller.view
+        if ["89"].contains(issue) {
+            try FeatureUIVerification.run(issue: issue, project: projects[0], root: root, storyboard: storyboard, output: output)
+            return
+        }
         if issue == "67" {
             let status = ProjectListStatusBarMenuController(projectInfos: projects)
             status.searchView.onSearch?("Alpha")
