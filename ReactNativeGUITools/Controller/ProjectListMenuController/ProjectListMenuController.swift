@@ -11,9 +11,12 @@ final class ProjectListMenuController: NSObject {
     var clickedRow: Int?
     private(set) var projectInfos: [ProjectInfo] = []
     weak var delegate: ProjectListMenuDelegate?
+    let runTerminal: (String, String) -> Void
     let trashFolder: (String) -> Void
 
-    init(trashFolder: @escaping (String) -> Void = moveFolderToTrash) {
+    init(trashFolder: @escaping (String) -> Void = moveFolderToTrash,
+         runTerminal: @escaping (String, String) -> Void = openInTerminal) {
+        self.runTerminal = runTerminal
         self.trashFolder = trashFolder
         super.init()
     }

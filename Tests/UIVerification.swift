@@ -157,6 +157,27 @@ enum UIVerification {
             try snapshot(split.view, to: output)
             print("PASS: filtered row collision creates distinct windows; status/menu/sort reuse stable IDs; screenshot \(output.path)")
             return
+        } else if issue == "105" {
+            var commands: [String] = []
+            let menuController = ProjectListMenuController(runTerminal: { path, command in
+                precondition(path == projects[0].path)
+                commands.append(command)
+            })
+            let menu = menuController.createMenuFrom(projectInfos: projects, row: 0)
+            let npm = menu.items.first { $0.title == "NPM" }!.submenu!
+            let reset = npm.items.first { $0.action == #selector(ProjectListMenuController.npmStartResetCache(_:)) }!
+            _ = menuController.perform(reset.action!, with: reset)
+            precondition(commands.count == 1)
+            let result = try fixtureShell("npm() { printf '%s\\n' \"$@\"; }; " + commands[0])
+            precondition(result == "start\n--\n--reset-cache\n")
+            try snapshotReport(title: "NPM reset-cache menu — #105", lines: [
+                "PASS: NPM / " + reset.title,
+                "Command: " + commands[0],
+                "Captured npm arguments: " + result.replacingOccurrences(of: "\n", with: " | "),
+                "Terminal adapter recorded the action. Metro was not started."
+            ], to: output)
+            print("PASS: actual reset-cache menu invokes npm with start -- --reset-cache; screenshot \(output.path)")
+            return
         } else {
             fatalError("Unsupported UI verification issue \(issue)")
         }

@@ -42,7 +42,7 @@ extension ProjectInfo {
         case .npmInstall:
             return "cd \(shellQuoted(path)) && npm install"
         case .npmStartResetCache:
-            return "cd \(shellQuoted(path)) && start -- --reset-cache"
+            return "cd \(shellQuoted(path)) && npm start -- --reset-cache"
         case .npmRestart:
             return "cd \(shellQuoted(path)) && npm restart"
         case .npmStop:
