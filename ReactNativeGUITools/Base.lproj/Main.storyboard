@@ -1634,23 +1634,9 @@ CA
         <scene sceneID="olP-3S-5N1">
             <objects>
                 <viewController storyboardIdentifier="KeytoolVC" id="JNa-Ow-4cp" customClass="KeytoolVC" customModule="ReactNativeGUITools" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="n74-bv-5gU">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                    <view key="view" id="n74-bv-5gU" customClass="ToolConsoleView" customModule="ReactNativeGUITools" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="700" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IIs-5d-Afr">
-                                <rect key="frame" x="200" y="142" width="50" height="16"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Keytool" id="qgy-D1-fII">
-                                    <font key="font" usesAppearanceFont="YES"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="IIs-5d-Afr" firstAttribute="centerY" secondItem="n74-bv-5gU" secondAttribute="centerY" id="Wqd-5p-2IV"/>
-                            <constraint firstItem="IIs-5d-Afr" firstAttribute="centerX" secondItem="n74-bv-5gU" secondAttribute="centerX" id="qxj-Rf-j7h"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="JLK-ae-UMz" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

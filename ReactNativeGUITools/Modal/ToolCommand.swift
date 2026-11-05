@@ -18,6 +18,7 @@ struct ToolCommand {
     let directory: String
     var environment: [String: String] = [:]
     var secretFiles: [String: String] = [:]
+    var newFiles: [String] = []
     var display: String { executable + " " + arguments.map(shellQuoted).joined(separator: " ") }
 }
 struct ToolPlan {

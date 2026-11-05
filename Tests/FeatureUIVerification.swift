@@ -2,8 +2,8 @@ import Cocoa
 
 @MainActor
 enum FeatureUIVerification {
-    static func wait(_ predicate: () -> Bool) {
-        let end = Date(timeIntervalSinceNow: 5)
+    static func wait(_ timeout: TimeInterval = 5, _ predicate: () -> Bool) {
+        let end = Date(timeIntervalSinceNow: timeout)
         while !predicate() && Date() < end { RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.02)) }
         precondition(predicate(), "UI operation did not complete")
     }
@@ -144,6 +144,18 @@ enum FeatureUIVerification {
             window.setContentSize(NSSize(width: 500, height: 500)); vc.view.layoutSubtreeIfNeeded()
             precondition(!vc.view.hasAmbiguousLayout)
             print("PASS: Scrcpy device selection, supported launch flags, recording, stop and compact form layout")
+        } else if issue == "98" {
+            try KeytoolVerification.run(project: project, root: root)
+            let vc = storyboard.instantiateController(withIdentifier: "KeytoolVC") as! KeytoolVC
+            vc.projectInfo = project; let runner = RecordingToolRunner(); vc.makeRunner = { runner }; _ = vc.view
+            wait { vc.panel.runButton.isEnabled }; vc.selectOperation("fingerprints")
+            vc.panel.setValue(root.path + "/fixture.jks", for: "keystore"); vc.panel.setValue("fixture-only", for: "storepass"); vc.panel.setValue("fixture", for: "alias")
+            vc.runOperation(); precondition(!runner.plans.last!.commands[0].display.contains("fixture-only"))
+            runner.finish(output: "-----BEGIN CERTIFICATE-----\nYWJj\n-----END CERTIFICATE-----")
+            precondition(vc.panel.console.string.contains("MD5:") && vc.panel.console.string.contains("SHA-256:"))
+            let window = NSWindow(contentViewController: vc); window.setContentSize(NSSize(width: 800, height: 650)); window.makeKeyAndOrderFront(nil)
+            try UIVerification.snapshot(vc.view, to: output)
+            print("PASS: Keytool secure fields, certificate parsing and all fingerprint formats")
         } else { fatalError("Unsupported feature issue") }
     }
 }

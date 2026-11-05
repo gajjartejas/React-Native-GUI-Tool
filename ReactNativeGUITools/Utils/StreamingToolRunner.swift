@@ -51,8 +51,11 @@ final class StreamingToolRunner: ToolRunning {
         var paths = SystemDiagnosticsReport.searchPaths(environment: environment, home: home)
         paths.insert(SystemDiagnosticsReport.androidSDKPath(environment: environment, home: home) + "/platform-tools", at: 0)
         if ["java", "keytool"].contains(name) {
-            let java = environment["JAVA_HOME"] ?? SystemDiagnosticsScanner(environment: environment).run(.init(title: "JDK", executable: "/usr/libexec/java_home", arguments: [])).detail
-            if FileManager.default.isExecutableFile(atPath: java + "/bin/" + name) { return java + "/bin/" + name }
+            var homes = environment["JAVA_HOME"].map { [$0] } ?? []
+            let detected = SystemDiagnosticsScanner(environment: environment).run(.init(title: "JDK", executable: "/usr/libexec/java_home", arguments: []))
+            if detected.status == .available { homes.append(detected.detail) }
+            homes.append("/Applications/Android Studio.app/Contents/jbr/Contents/Home")
+            if let java = homes.first(where: { FileManager.default.isExecutableFile(atPath: $0 + "/bin/" + name) }) { return java + "/bin/" + name }
             throw ToolInputError(message: "No JDK found. Install a JDK and set JAVA_HOME, then retry.")
         }
         let candidates = name.hasPrefix("/") ? [name] : paths.map { $0 + "/" + name }
@@ -62,6 +65,9 @@ final class StreamingToolRunner: ToolRunning {
         return path
     }
     private func execute(_ command: ToolCommand, output: (Data) -> Void) throws -> Int32 {
+        for path in command.newFiles where FileManager.default.fileExists(atPath: path) {
+            throw ToolInputError(message: "Destination already exists. Choose a new file: " + path)
+        }
         var environment = baseEnvironment.merging(command.environment) { _, new in new }
         environment["PATH"] = SystemDiagnosticsReport.searchPaths(environment: environment, home: NSHomeDirectory()).joined(separator: ":")
         let executable = try executable(command.executable, environment: environment)
