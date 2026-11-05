@@ -10,6 +10,7 @@ import tempfile
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--ui-issue")
+parser.add_argument("--live-diagnostics", action="store_true")
 args = parser.parse_args()
 ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "ReactNativeGUITools"
@@ -50,6 +51,8 @@ with tempfile.TemporaryDirectory(prefix="rngui-mvc-tests-") as directory:
     ], cwd=ROOT, check=True)
     environment = {**os.environ, "CFFIXED_USER_HOME": str(Path(directory) / "model-home")}
     run_checks(executable, environment)
+    if args.live_diagnostics:
+        environment["RNGUI_LIVE_DIAGNOSTICS_HOME"] = str(Path.home())
     if args.ui_issue:
         environment["CFFIXED_USER_HOME"] = str(Path(directory) / "ui-home")
         environment.update(RNGUI_UI_ISSUE=args.ui_issue,

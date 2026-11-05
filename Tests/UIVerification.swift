@@ -212,6 +212,62 @@ enum UIVerification {
             ], to: output)
             print("PASS: valid manifest metadata rendered; stdout/stderr captured by runner; screenshot \(output.path)")
             return
+        } else if issue == "90" {
+            let system = storyboard.instantiateController(withIdentifier: "SystemInfoVC") as! SystemInfoVC
+            let first = ControlledDiagnosticsScanner()
+            let second = ControlledDiagnosticsScanner()
+            var scanners: [SystemDiagnosticsScanning] = [first, second]
+            system.makeScanner = { scanners.removeFirst() }
+            var copied = ""
+            system.writeReportToPasteboard = { copied = $0 }
+            let systemView = system.view as! SystemInfoView
+            precondition(!systemView.copyButton.isEnabled)
+            systemView.refreshButton.performClick(nil)
+            precondition(!systemView.refreshButton.isEnabled && !systemView.copyButton.isEnabled)
+            system.refreshDiagnostics()
+            precondition(first.cancellations == 1)
+            let fixture = SystemDiagnosticsReport(results: [
+                .init(title: "macOS", status: .available, detail: "macOS fixture"),
+                .init(title: "CPU architecture", status: .available, detail: "Apple Silicon (arm64)"),
+                .init(title: "Node.js", status: .available, detail: "v22.11.0"),
+                .init(title: "npm", status: .available, detail: "10.9.0"),
+                .init(title: "Yarn", status: .missing, detail: "yarn not found. Install it or add its directory to PATH, then refresh."),
+                .init(title: "Watchman", status: .available, detail: "2026.11.01"),
+                .init(title: "Watchman service", status: .failed, detail: "Service is not running. Diagnostics does not start it."),
+                .init(title: "Command-line tools", status: .available, detail: "/Applications/Xcode.app/Contents/Developer"),
+                .init(title: "Xcode", status: .available, detail: "Xcode fixture"),
+                .init(title: "iOS / platform SDKs", status: .available, detail: "iOS fixture SDK"),
+                .init(title: "CocoaPods", status: .available, detail: "1.16.2"),
+                .init(title: "Java / JDK", status: .available, detail: "OpenJDK 17 fixture"),
+                .init(title: "Android SDK / ANDROID_HOME", status: .available, detail: "~/Library/Android/sdk\nPlatforms: android-35\nBuild tools: 35.0.0")
+            ])
+            first.finish(SystemDiagnosticsReport(results: []))
+            precondition(!systemView.refreshButton.isEnabled, "Stale completion replaced active scan")
+            second.finish(fixture)
+            precondition(systemView.reportTextView.string == fixture.text && systemView.copyButton.isEnabled && systemView.refreshButton.isEnabled)
+            systemView.copyButton.performClick(nil)
+            precondition(copied == fixture.text)
+            let systemWindow = NSWindow(contentViewController: system)
+            systemWindow.setContentSize(NSSize(width: 760, height: 900))
+            systemWindow.makeKeyAndOrderFront(nil)
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
+            precondition(!systemView.hasAmbiguousLayout)
+            try snapshot(systemView, to: output)
+            systemWindow.setContentSize(NSSize(width: 450, height: 500))
+            systemView.layoutSubtreeIfNeeded()
+            precondition(!systemView.hasAmbiguousLayout)
+            let third = ControlledDiagnosticsScanner()
+            system.makeScanner = { third }
+            systemView.refreshButton.performClick(nil)
+            system.viewDidDisappear()
+            precondition(third.cancellations == 1 && systemView.refreshButton.isEnabled)
+            third.finish(SystemDiagnosticsReport(results: []))
+            precondition(systemView.reportTextView.string == fixture.text, "Hidden screen accepted cancelled output")
+            if let home = ProcessInfo.processInfo.environment["RNGUI_LIVE_DIAGNOSTICS_HOME"] {
+                _ = try SystemDiagnosticsTests.liveScan(home: home)
+            }
+            print("PASS: System Info storyboard, Refresh/Copy actions, scan state, stale callback, and resizing; screenshot \(output.path)")
+            return
         } else {
             fatalError("Unsupported UI verification issue \(issue)")
         }

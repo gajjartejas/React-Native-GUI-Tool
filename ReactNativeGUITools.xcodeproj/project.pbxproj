@@ -82,6 +82,9 @@
 		4758A65EDBFC556DF8D0087D /* ProjectInfo+Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608EBB17A1159DB4E1E205AB /* ProjectInfo+Commands.swift */; };
 		9FC14EBC8196B8910ED1487C /* ProjectInfo+CustomActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8857A501BD76F5F9AF87EF0D /* ProjectInfo+CustomActions.swift */; };
 		9AC2E0ADD5B8826FF9B54158 /* ProjectOrdering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866D5F905B21E53991B7F80A /* ProjectOrdering.swift */; };
+		C8682DD523BB432E8CC17524 /* SystemDiagnostics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059D746A86E0C25DE711AA8F /* SystemDiagnostics.swift */; };
+		69A91F1F779A3ACC5C5BE044 /* SystemDiagnosticsScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51040E53DF82F0AF6D9306E3 /* SystemDiagnosticsScanner.swift */; };
+		7C9C5D3A8E1A2FF6BC4604C2 /* SystemInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C6815D0E0AED6EB1E2E404 /* SystemInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -163,6 +166,9 @@
 		608EBB17A1159DB4E1E205AB /* ProjectInfo+Commands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectInfo+Commands.swift"; sourceTree = "<group>"; };
 		8857A501BD76F5F9AF87EF0D /* ProjectInfo+CustomActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectInfo+CustomActions.swift"; sourceTree = "<group>"; };
 		866D5F905B21E53991B7F80A /* ProjectOrdering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectOrdering.swift"; sourceTree = "<group>"; };
+		059D746A86E0C25DE711AA8F /* SystemDiagnostics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SystemDiagnostics.swift"; sourceTree = "<group>"; };
+		51040E53DF82F0AF6D9306E3 /* SystemDiagnosticsScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SystemDiagnosticsScanner.swift"; sourceTree = "<group>"; };
+		18C6815D0E0AED6EB1E2E404 /* SystemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SystemInfoView/SystemInfoView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +244,7 @@
 		96633F692BA59F9D00B668FC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				18C6815D0E0AED6EB1E2E404 /* SystemInfoView.swift */,
 				96FF28D02C35A7D500F262CF /* CustomActionsCellView */,
 				96139BCE2C159A090012A026 /* AlertView */,
 				96AFFF182BFA088B002D3828 /* ProjectListContexMenu */,
@@ -326,6 +333,7 @@
 		96B7C45D2BA71ED100197448 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
+				059D746A86E0C25DE711AA8F /* SystemDiagnostics.swift */,
 				960F35EB2C14468000989279 /* MainSettings */,
 				96FCDF992C0AEFAD00A2AFBA /* ProjectInfo */,
 				96D181432BADEC7200380905 /* MenuNode.swift */,
@@ -345,6 +353,7 @@
 		96D1814C2BADF4C700380905 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				51040E53DF82F0AF6D9306E3 /* SystemDiagnosticsScanner.swift */,
 				96D1814D2BADF4EE00380905 /* NibInstantiatable.swift */,
 				96F9445D2C01E19A0053B5DC /* AppUtils.swift */,
 			);
@@ -613,6 +622,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C9C5D3A8E1A2FF6BC4604C2 /* SystemInfoView.swift in Sources */,
+				69A91F1F779A3ACC5C5BE044 /* SystemDiagnosticsScanner.swift in Sources */,
+				C8682DD523BB432E8CC17524 /* SystemDiagnostics.swift in Sources */,
 				9AC2E0ADD5B8826FF9B54158 /* ProjectOrdering.swift in Sources */,
 				9FC14EBC8196B8910ED1487C /* ProjectInfo+CustomActions.swift in Sources */,
 				4758A65EDBFC556DF8D0087D /* ProjectInfo+Commands.swift in Sources */,

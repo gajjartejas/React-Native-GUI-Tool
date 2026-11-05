@@ -182,6 +182,7 @@ private struct MVCRegressionTests {
         cell.configureUI(withNode: project, atRow: 0, isProjectAvailable: true)
         try expect(cell.projectLogoLable.stringValue != "?" && cell.projectNameLable.textColor == .labelColor, "Cell did not render supplied available state")
         print("PASS: cell renders controller-supplied availability")
+        try SystemDiagnosticsTests.run(directory: directory)
         print("All MVC regression groups passed.")
     }
 

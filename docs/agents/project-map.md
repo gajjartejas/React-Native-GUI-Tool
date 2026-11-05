@@ -13,6 +13,7 @@ before editing; update affected entries when moving ownership or files.
 | Project metadata/order | `Modal/ProjectInfo/` | `PackageManifestReader.swift`, `ProjectOrdering.swift`, `ProjectInfo.swift`, project manager |
 | Settings/tool discovery | `Controller/MainSettingsVC/` | `Modal/MainSettings/`, `Controller/MainSettingsWC.swift` |
 | Project windows/navigation | `Controller/ToolsOutlineWC.swift`, `Controller/ToolsOutlineVC/` | `Controller/ProjectTabViewController/`, `Modal/MenuNode.swift` |
+| System diagnostics | `Controller/SystemInfoVC/`, `View/SystemInfoView/` | `Modal/SystemDiagnostics.swift`, `Utils/SystemDiagnosticsScanner.swift` |
 | Individual tools | Matching feature folder in `Controller/` | Many modules are placeholders; inspect the implementation before claiming support |
 | UI resources | `Base.lproj/Main.storyboard`, `View/**/*.xib`, `Assets.xcassets/` | Search identifiers/connections before reading large resource files |
 | Persistence | `Extensions/PlistStorable.swift` | `Modal/ProjectInfo/`, `Modal/MainSettings/`; preserve existing coding keys |
