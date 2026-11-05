@@ -99,6 +99,25 @@ private struct MVCRegressionTests {
         try expect(manager.get(type: .list).count == 2 && manager.get(type: .menu).count == 2, "Clearing search lost registrations")
         print("PASS: filtered sorting preserves storage and independent projections")
 
+        let quotedFolder = directory.appendingPathComponent("App's space Ω $(printf unsafe)")
+        try FileManager.default.createDirectory(at: quotedFolder, withIntermediateDirectories: true)
+        let quotedProject = ProjectInfo(id: "quoted", path: quotedFolder.path)
+        let quotedCommand = quotedProject.terminalCommand(.custom("printf '%s\\n' \"$PWD\" \"$PROJECT_ROOT\""))
+        let shellOutput = try fixtureShell(quotedCommand)
+        try expect(shellOutput == quotedFolder.path + "\n" + quotedFolder.path + "\n", "Shell changed project path data")
+        let argumentOutput = try fixtureShell("npm() { printf '%s\\n' \"$@\"; }; " + quotedProject.terminalCommand(.runScript("a; printf unsafe")))
+        try expect(argumentOutput == "run\na; printf unsafe\n", "Package script name became shell code")
+        let fileCommand = quotedProject.terminalCommand(.customFile("$PROJECT_ROOT/task's file.sh"))
+        try expect(fileCommand.hasSuffix(shellQuoted(quotedFolder.path + "/task's file.sh")), "File script path was not quoted")
+        let appleValue = quotedCommand + "\n" + "printf \"hello\\n\""
+        var appleError: NSDictionary?
+        let echoScript = NSAppleScript(source: "return \"\(appleScriptStringContents(appleValue))\"")!
+        let echoed = echoScript.executeAndReturnError(&appleError).stringValue
+        try expect(appleError == nil && echoed == appleValue, "AppleScript changed command quotes or newlines")
+        let terminalScript = NSAppleScript(source: terminalAppleScriptSource(command: appleValue))!
+        try expect(terminalScript.compileAndReturnError(&appleError), "Terminal AppleScript did not compile")
+        print("PASS: shell paths, script arguments, and AppleScript quoting")
+
         let encoder = PropertyListEncoder()
         let decoder = PropertyListDecoder()
         let data = try encoder.encode(project)

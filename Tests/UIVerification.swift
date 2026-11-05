@@ -31,6 +31,22 @@ enum UIVerification {
             controller.projectSearchTextField.stringValue = ""
             manager.clearSearch(type: .list)
             precondition(controller.projectInfos.map(\.id) == ["alpha", "beta"])
+        } else if issue == "104" {
+            let editor = storyboard.instantiateController(withIdentifier: "AddCustomActionVC") as! AddCustomActionVC
+            editor.projectInfo = projects[0]
+            _ = editor.view
+            editor.menuNameTextField.stringValue = "Quoted command"
+            editor.scriptTextField.stringValue = "printf \"hello\\n\""
+            let command = projects[0].terminalCommand(.custom(editor.scriptTextField.stringValue))
+            let result = try fixtureShell(command)
+            precondition(result == "hello\n")
+            var error: NSDictionary?
+            precondition(NSAppleScript(source: terminalAppleScriptSource(command: command))!.compileAndReturnError(&error))
+            let editorWindow = NSWindow(contentViewController: editor)
+            editorWindow.makeKeyAndOrderFront(nil)
+            try snapshot(editor.view, to: output)
+            print("PASS: custom command executed and Terminal AppleScript compiled; screenshot \(output.path)")
+            return
         } else {
             fatalError("Unsupported UI verification issue \(issue)")
         }
@@ -53,4 +69,19 @@ enum UIVerification {
         try FileManager.default.createDirectory(at: output.deletingLastPathComponent(), withIntermediateDirectories: true)
         try data.write(to: output)
     }
+}
+
+/// Executes only explicit, test-owned shell snippets in temporary fixtures.
+func fixtureShell(_ command: String) throws -> String {
+    let process = Process()
+    let pipe = Pipe()
+    process.executableURL = URL(fileURLWithPath: "/bin/sh")
+    process.arguments = ["-c", command]
+    process.standardOutput = pipe
+    process.standardError = pipe
+    try process.run()
+    let output = pipe.fileHandleForReading.readDataToEndOfFile()
+    process.waitUntilExit()
+    guard process.terminationStatus == 0 else { throw CocoaError(.executableRuntimeMismatch) }
+    return String(decoding: output, as: UTF8.self)
 }

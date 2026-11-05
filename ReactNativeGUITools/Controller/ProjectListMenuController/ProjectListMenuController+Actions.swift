@@ -398,16 +398,16 @@ extension ProjectListMenuController {
             return
         }
 
-        let scriptCommand: String
+        let selectedScript: ProjectInfo.CustomMenuScript
         if let customScript = sender.representedObject as? ProjectInfo.CustomMenuScript {
-            scriptCommand = customScript.script
+            selectedScript = customScript
         } else if let found = projectInfo.customMenuScripts?.first(where: { $0.name == sender.title }) {
-            scriptCommand = found.script
+            selectedScript = found
         } else {
             return
         }
 
-        let terminalScript = projectInfo.terminalCommand(.custom(scriptCommand))
+        let terminalScript = projectInfo.terminalCommand(selectedScript.isFileScript ? .customFile(selectedScript.script) : .custom(selectedScript.script))
         openInTerminal(atPath: projectInfo.path, terminalScript: terminalScript)
     }
 
