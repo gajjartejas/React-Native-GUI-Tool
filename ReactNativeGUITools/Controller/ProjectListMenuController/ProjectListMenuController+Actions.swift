@@ -412,27 +412,10 @@ extension ProjectListMenuController {
     }
 
     @objc func customActionsEdit(_ sender: NSMenuItem) {
-        guard let row = clickedRow else { return }
+        guard let row = clickedRow, projectInfos.indices.contains(row) else { return }
         let projectInfo = projectInfos[row]
         guard FileManager.default.fileExists(atPath: projectInfo.path) else { return }
 
-        let allControllers = NSWindowController.getAllControllers()
-        let controller: ToolsOutlineWC
-        if let foundController = allControllers.compactMap({ $0 as? ToolsOutlineWC }).first(where: { $0.fromRow == row }) {
-            controller = foundController
-        } else {
-            let storyboard = NSStoryboard(name: "Main", bundle: nil)
-            guard let newController = storyboard.instantiateController(withIdentifier: "ToolsOutlineWC") as? ToolsOutlineWC else { return }
-            newController.fromRow = row
-            newController.projectInfo = projectInfo
-            if let mainWindow = allControllers.first?.window {
-                newController.location = mainWindow.frame
-            }
-            controller = newController
-        }
-        controller.window?.makeKeyAndOrderFront(self)
-        NSApp.activate(ignoringOtherApps: true)
-
-        controller.selectTab(at: 12)
+        ToolsOutlineWC.show(project: projectInfo, selectingTab: 12)
     }
 }

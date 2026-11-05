@@ -8,7 +8,6 @@
 import Cocoa
 
 class ToolsOutlineWC: NSWindowController {
-    var fromRow: Int?
     var projectInfo: ProjectInfo? {
         didSet {
             window?.title = projectInfo?.name ?? "-"
@@ -18,6 +17,26 @@ class ToolsOutlineWC: NSWindowController {
                 projectTabVC.projectInfo = projectInfo
             }
         }
+    }
+
+    /// A row is a transient projection; a window belongs to a stable project ID.
+    @discardableResult
+    static func show(project: ProjectInfo, selectingTab tab: Int? = nil) -> ToolsOutlineWC? {
+        let controllers = NSWindowController.getAllControllers()
+        let controller: ToolsOutlineWC
+        if let existing = controllers.compactMap({ $0 as? ToolsOutlineWC }).first(where: { $0.projectInfo?.id == project.id }) {
+            controller = existing
+        } else {
+            let storyboard = NSStoryboard(name: "Main", bundle: nil)
+            guard let created = storyboard.instantiateController(withIdentifier: "ToolsOutlineWC") as? ToolsOutlineWC else { return nil }
+            if let frame = controllers.first?.window?.frame { created.location = frame }
+            controller = created
+        }
+        controller.projectInfo = project
+        controller.window?.makeKeyAndOrderFront(nil)
+        if let tab = tab { controller.selectTab(at: tab) }
+        NSApp.activate(ignoringOtherApps: true)
+        return controller
     }
 
     var location: NSRect? {

@@ -126,6 +126,37 @@ enum UIVerification {
             precondition(manager.get(type: .all).filter { $0.path == duplicate.path }.count == 2)
             precondition(ProjectInfo.readArrayFromStorage()?.count == 6)
             print("PASS: fresh batch, repeated input, cancel/accept existing duplicate, and atomic persistence")
+        } else if issue == "103" {
+            projects[0].appendCustomScript(try .validated(name: "Beta action", script: "printf beta"))
+            projects[1].appendCustomScript(try .validated(name: "Alpha action", script: "printf alpha"))
+            controller.projectListMenu(didSelectOpenMenuItem: NSMenuItem(), at: 0)
+            let beta = NSWindowController.getAllControllers().compactMap { $0 as? ToolsOutlineWC }.first!
+            precondition(beta.projectInfo?.id == "beta")
+            controller.projectSearchTextField.stringValue = "Alpha"
+            manager.searchBy("Alpha", type: .list)
+            controller.projectListMenu(didSelectOpenMenuItem: NSMenuItem(), at: 0)
+            let windows = NSWindowController.getAllControllers().compactMap { $0 as? ToolsOutlineWC }
+            precondition(windows.count == 2)
+            let alpha = windows.first { $0.projectInfo?.id == "alpha" }!
+            controller.projectListMenu.setClickedRow(0)
+            controller.projectListMenu.customActionsEdit(NSMenuItem())
+            let split = alpha.contentViewController as! NSSplitViewController
+            let tabs = split.children[1] as! ProjectTabViewController
+            precondition(tabs.projectInfo?.id == "alpha" && tabs.selectedTabViewItemIndex == 12)
+            let actions = tabs.children[12] as! CustomActionsVC
+            precondition(actions.projectInfo?.customMenuScripts?.first?.name == "Alpha action")
+            let status = ProjectListStatusBarMenuController(projectInfos: manager.get(type: .menu))
+            status.projectListMenu(didSelectOpenMenuItem: NSMenuItem(), at: 0)
+            precondition(NSWindowController.getAllControllers().compactMap { $0 as? ToolsOutlineWC }.count == 2)
+            NSStatusBar.system.removeStatusItem(status.statusBarItem)
+            manager.clearSearch(type: .list)
+            manager.sorted(by: .name)
+            controller.projectListMenu(didSelectOpenMenuItem: NSMenuItem(), at: 1)
+            precondition(ToolsOutlineWC.show(project: projects[0]) === beta)
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
+            try snapshot(split.view, to: output)
+            print("PASS: filtered row collision creates distinct windows; status/menu/sort reuse stable IDs; screenshot \(output.path)")
+            return
         } else {
             fatalError("Unsupported UI verification issue \(issue)")
         }
