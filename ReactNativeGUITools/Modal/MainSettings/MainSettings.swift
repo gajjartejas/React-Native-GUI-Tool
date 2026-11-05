@@ -128,3 +128,19 @@ class MainSettings: Codable, PlistStorable {
         return nil
     }
 }
+
+enum LoginItemState {
+    case disabled, enabled, approvalRequired, unavailable
+    var message: String {
+        switch self {
+        case .disabled: return "Launch at login is off."
+        case .enabled: return "RnGuiTools will open when you log in."
+        case .approvalRequired: return "Approval required in System Settings → General → Login Items."
+        case .unavailable: return "Login item unavailable. Run the installed application from Applications."
+        }
+    }
+}
+protocol LoginItemManaging: AnyObject {
+    var state: LoginItemState { get }
+    func setEnabled(_ enabled: Bool) throws
+}
