@@ -33,6 +33,26 @@ enum FeatureUIVerification {
             let window = NSWindow(contentViewController: vc); window.setContentSize(NSSize(width: 800, height: 650)); window.makeKeyAndOrderFront(nil)
             try UIVerification.snapshot(panel, to: output)
             print("PASS: Project Info metadata, native identifiers, search and five shortcuts")
+        } else if issue == "91" {
+            try ToolRunnerTests.run(root: root)
+            let vc = storyboard.instantiateController(withIdentifier: "NpmVC") as! NpmVC
+            vc.projectInfo = project
+            let runner = RecordingToolRunner(); vc.makeRunner = { runner }
+            _ = vc.view; wait { vc.panel.runButton.isEnabled }
+            vc.selectOperation("add"); vc.panel.setValue("@fixture/pkg@^1", for: "package"); vc.panel.setValue("true", for: "dev")
+            vc.panel.runButton.performClick(nil)
+            precondition(runner.plans.last?.commands[0].arguments == ["install", "@fixture/pkg@^1", "--save-dev"])
+            precondition(runner.plans.last?.commands[0].directory == project.path && vc.panel.console.string.contains("fixture output"))
+            vc.panel.cancelButton.performClick(nil); precondition(runner.cancelled && vc.panel.status.stringValue == "Cancelled")
+            vc.selectOperation("run"); vc.panel.setValue("start", for: "script"); vc.panel.setValue(#"["--port","9000"]"#, for: "arguments")
+            vc.runOperation(); precondition(runner.plans.last?.commands[0].arguments == ["run", "start", "--", "--port", "9000"]); runner.finish()
+            for op in ["install", "outdated", "audit", "audit-fix", "cache-clean", "cache-verify"] {
+                let plan = try PackageToolPolicy.plan(operation: op, values: ["ci":"true","legacy":"true"], project: project)
+                precondition(plan.commands[0].executable == "npm")
+            }
+            let window = NSWindow(contentViewController: vc); window.setContentSize(NSSize(width: 800, height: 650)); window.makeKeyAndOrderFront(nil)
+            try UIVerification.snapshot(vc.view, to: output)
+            print("PASS: NPM add/dev, script arguments, cancellation, console and all operation plans")
         } else { fatalError("Unsupported feature issue") }
     }
 }

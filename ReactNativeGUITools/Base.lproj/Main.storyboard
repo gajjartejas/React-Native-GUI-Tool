@@ -1292,23 +1292,9 @@
         <scene sceneID="hc8-Vx-eu9">
             <objects>
                 <viewController storyboardIdentifier="NpmVC" id="Eel-9c-ma3" customClass="NpmVC" customModule="ReactNativeGUITools" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="AJc-xV-4h6">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                    <view key="view" id="AJc-xV-4h6" customClass="ToolConsoleView" customModule="ReactNativeGUITools" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="700" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VkD-z8-bhw">
-                                <rect key="frame" x="208" y="142" width="34" height="16"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="NPM" id="lXF-5o-QeQ">
-                                    <font key="font" usesAppearanceFont="YES"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="VkD-z8-bhw" firstAttribute="centerY" secondItem="AJc-xV-4h6" secondAttribute="centerY" id="AbA-H3-bz8"/>
-                            <constraint firstItem="VkD-z8-bhw" firstAttribute="centerX" secondItem="AJc-xV-4h6" secondAttribute="centerX" id="Kw5-z7-nxw"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="8lv-NM-Ktv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
