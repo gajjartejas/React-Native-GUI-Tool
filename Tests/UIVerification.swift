@@ -200,6 +200,18 @@ enum UIVerification {
             try snapshot(editor.view, to: output)
             print("PASS: sibling script retains its absolute path through editor, persistence, and command construction; screenshot \(output.path)")
             return
+        } else if issue == "108" {
+            let parsed = readPackageJSON(atPath: projects[0].path)
+            precondition(parsed.name == "Beta" && parsed.version == "0.75.0" && parsed.scriptsArray?.count == 1)
+            try snapshotReport(title: "Package manifest verification — #108", lines: [
+                "PASS: valid package.json parsed successfully",
+                "Name: " + (parsed.name ?? "missing"),
+                "React Native: " + (parsed.version ?? "missing"),
+                "Scripts: " + (parsed.scriptsArray?.map(\.name).joined(separator: ", ") ?? "missing"),
+                "Runner checks captured stdout/stderr for the legacy false diagnostic."
+            ], to: output)
+            print("PASS: valid manifest metadata rendered; stdout/stderr captured by runner; screenshot \(output.path)")
+            return
         } else {
             fatalError("Unsupported UI verification issue \(issue)")
         }
