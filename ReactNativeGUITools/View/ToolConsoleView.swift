@@ -12,6 +12,7 @@ final class ToolConsoleView: NSView {
     private let form = NSStackView()
     private let formScroll = NSScrollView()
     private var formHeight: NSLayoutConstraint!
+    private var documentHeight: NSLayoutConstraint!
     private var controls: [String: NSControl] = [:]
     var onOperation: ((String) -> Void)?
     var onRun: (() -> Void)?
@@ -29,8 +30,10 @@ final class ToolConsoleView: NSView {
         progress.widthAnchor.constraint(equalToConstant: 100).isActive = true
         let actions = NSStackView(views: [runButton, cancelButton, progress]); actions.spacing = 8
         form.orientation = .vertical; form.alignment = .leading; form.spacing = 6
-        form.frame = NSRect(x: 0, y: 0, width: 600, height: 40); form.autoresizingMask = [.width]
+        form.translatesAutoresizingMaskIntoConstraints = false
         formScroll.documentView = form; formScroll.hasVerticalScroller = true; formScroll.drawsBackground = false
+        documentHeight = form.heightAnchor.constraint(equalToConstant: 40); documentHeight.isActive = true
+        NSLayoutConstraint.activate([form.widthAnchor.constraint(equalTo: formScroll.contentView.widthAnchor), form.leadingAnchor.constraint(equalTo: formScroll.contentView.leadingAnchor), form.topAnchor.constraint(equalTo: formScroll.contentView.topAnchor)])
         formHeight = formScroll.heightAnchor.constraint(equalToConstant: 40); formHeight.priority = .defaultHigh; formHeight.isActive = true
         formScroll.heightAnchor.constraint(greaterThanOrEqualToConstant: 32).isActive = true
         console.frame = NSRect(x: 0, y: 0, width: 600, height: 300)
@@ -105,8 +108,9 @@ final class ToolConsoleView: NSView {
             }
             form.addArrangedSubview(row); row.widthAnchor.constraint(equalTo: form.widthAnchor).isActive = true
         }
-        let height = max(32, form.fittingSize.height)
-        form.setFrameSize(NSSize(width: form.frame.width, height: height))
+        let rows = form.arrangedSubviews
+        let height = max(32, rows.reduce(CGFloat(0)) { $0 + $1.fittingSize.height } + CGFloat(max(0, rows.count - 1)) * form.spacing)
+        documentHeight.constant = height
         formHeight.constant = min(240, height)
         formScroll.contentView.scroll(to: NSPoint(x: 0, y: form.isFlipped ? 0 : max(0, height - formScroll.contentSize.height)))
         formScroll.reflectScrolledClipView(formScroll.contentView)

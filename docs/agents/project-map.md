@@ -14,6 +14,9 @@ before editing; update affected entries when moving ownership or files.
 | Settings/tool discovery | `Controller/MainSettingsVC/` | `Modal/MainSettings/`, `Controller/MainSettingsWC.swift` |
 | Project windows/navigation | `Controller/ToolsOutlineWC.swift`, `Controller/ToolsOutlineVC/` | `Controller/ProjectTabViewController/`, `Modal/MenuNode.swift` |
 | System diagnostics | `Controller/SystemInfoVC/`, `View/SystemInfoView/` | `Modal/SystemDiagnostics.swift`, `Utils/SystemDiagnosticsScanner.swift` |
+| Project inspector | `Controller/ProjectInfoVC/`, `View/ProjectInfoPanel.swift` | `Modal/ProjectMetadata.swift` |
+| Command tools | `Controller/ToolCommandVC.swift`, matching NPM/Yarn/ADB/build/Scrcpy/Keytool/Bundletool controllers | `Modal/*ToolPolicy.swift`, `Modal/KeytoolPolicy.swift`, `Modal/BundletoolPolicy.swift`, `Utils/StreamingToolRunner.swift`, `View/ToolConsoleView.swift` |
+| Launch at login | `Controller/MainSettingsVC/`, `View/LoginSettingsView.swift` | `Utils/LoginItemService.swift`, login-state types in `Modal/MainSettings/MainSettings.swift` |
 | Individual tools | Matching feature folder in `Controller/` | Many modules are placeholders; inspect the implementation before claiming support |
 | UI resources | `Base.lproj/Main.storyboard`, `View/**/*.xib`, `Assets.xcassets/` | Search identifiers/connections before reading large resource files |
 | Persistence | `Extensions/PlistStorable.swift` | `Modal/ProjectInfo/`, `Modal/MainSettings/`; preserve existing coding keys |

@@ -155,7 +155,31 @@ enum FeatureUIVerification {
             precondition(vc.panel.console.string.contains("MD5:") && vc.panel.console.string.contains("SHA-256:"))
             let window = NSWindow(contentViewController: vc); window.setContentSize(NSSize(width: 800, height: 650)); window.makeKeyAndOrderFront(nil)
             try UIVerification.snapshot(vc.view, to: output)
-            print("PASS: Keytool secure fields, certificate parsing and all fingerprint formats")
+            vc.selectOperation("generate"); vc.view.layoutSubtreeIfNeeded()
+            func descendants(_ view: NSView) -> [NSView] { view.subviews + view.subviews.flatMap(descendants) }
+            let forms = descendants(vc.view).compactMap { $0 as? NSScrollView }.filter { $0.documentView is NSStackView }
+            precondition(forms.count == 1)
+            let form = forms[0]
+            precondition(form.documentView!.bounds.height > form.contentSize.height, "Long key-generation form is not scrollable")
+            let before = form.contentView.bounds.origin.y
+            form.contentView.scroll(to: NSPoint(x: 0, y: before == 0 ? 40 : 0))
+            precondition(form.contentView.bounds.origin.y != before)
+            print("PASS: Keytool secure fields, certificate parsing, fingerprints and long-form scrolling")
+        } else if issue == "97" {
+            try BundletoolVerification.run(project: project, root: root)
+            let vc = storyboard.instantiateController(withIdentifier: "BundletoolVC") as! BundletoolVC
+            vc.projectInfo = project; let runner = RecordingToolRunner(); vc.makeRunner = { runner }; _ = vc.view
+            wait { vc.panel.runButton.isEnabled }; vc.selectOperation("build")
+            vc.panel.setValue(root.path + "/fixture.aab", for: "bundle"); vc.panel.setValue(root.path + "/result.apks", for: "output"); vc.panel.setValue("Universal", for: "mode")
+            vc.runOperation(); precondition(runner.plans.last?.commands[0].arguments.contains("--mode=universal") == true); runner.finish()
+            let window = NSWindow(contentViewController: vc); window.setContentSize(NSSize(width: 800, height: 700)); window.makeKeyAndOrderFront(nil)
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2)); vc.view.layoutSubtreeIfNeeded()
+            func descendants(_ view: NSView) -> [NSView] { view.subviews + view.subviews.flatMap(descendants) }
+            for button in descendants(vc.view).compactMap({ $0 as? NSButton }) where button.title == "Browse…" {
+                precondition(button.convert(button.bounds, to: vc.view).maxX <= vc.view.bounds.maxX + 1, "Browse button is clipped")
+            }
+            try UIVerification.snapshot(vc.view, to: output)
+            print("PASS: Bundletool build/install models, Universal APKS extraction, protected passwords and controller flow")
         } else { fatalError("Unsupported feature issue") }
     }
 }

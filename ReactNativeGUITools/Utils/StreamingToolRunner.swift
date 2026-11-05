@@ -65,7 +65,7 @@ final class StreamingToolRunner: ToolRunning {
         return path
     }
     private func execute(_ command: ToolCommand, output: (Data) -> Void) throws -> Int32 {
-        for path in command.newFiles where FileManager.default.fileExists(atPath: path) {
+        for path in command.newFiles where FileManager.default.fileExists(atPath: path) || (try? FileManager.default.destinationOfSymbolicLink(atPath: path)) != nil {
             throw ToolInputError(message: "Destination already exists. Choose a new file: " + path)
         }
         var environment = baseEnvironment.merging(command.environment) { _, new in new }
@@ -75,10 +75,11 @@ final class StreamingToolRunner: ToolRunning {
         try FileManager.default.createDirectory(at: temp, withIntermediateDirectories: true, attributes: [.posixPermissions: 0o700])
         defer { try? FileManager.default.removeItem(at: temp) }
         var arguments = command.arguments
-        for (token, secret) in command.secretFiles {
+        for (index, secret) in command.secretFiles {
+            guard arguments.indices.contains(index) else { throw ToolInputError(message: "Invalid protected argument index.") }
             let url = temp.appendingPathComponent(UUID().uuidString)
-            FileManager.default.createFile(atPath: url.path, contents: Data(secret.utf8), attributes: [.posixPermissions: 0o600])
-            arguments = arguments.map { $0.replacingOccurrences(of: token, with: url.path) }
+            guard FileManager.default.createFile(atPath: url.path, contents: Data(secret.value.utf8), attributes: [.posixPermissions: 0o600]) else { throw ToolInputError(message: "Cannot prepare a protected password file.") }
+            arguments[index] = secret.prefix + url.path
         }
         let log = temp.appendingPathComponent("output")
         var actions: posix_spawn_file_actions_t?
