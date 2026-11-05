@@ -129,6 +129,21 @@ enum FeatureUIVerification {
             let window = NSWindow(contentViewController: vc); window.setContentSize(NSSize(width: 800, height: 650)); window.makeKeyAndOrderFront(nil)
             try UIVerification.snapshot(vc.view, to: output)
             print("PASS: Android flavors, iOS simulator/export arguments, build console and output-folder route")
+        } else if issue == "95" {
+            let vc = storyboard.instantiateController(withIdentifier: "ScrcpyVC") as! ScrcpyVC
+            vc.projectInfo = project; let runner = RecordingToolRunner(); vc.makeRunner = { runner }; _ = vc.view
+            wait { vc.panel.runButton.isEnabled }; vc.selectOperation("devices"); vc.runOperation()
+            runner.finish(output: "List of devices attached\nserial1 device model:Pixel_8\n"); wait { vc.panel.resultTable.numberOfRows == 1 && vc.panel.runButton.isEnabled }
+            vc.selectOperation("start"); vc.panel.setValue("true", for: "awake"); vc.panel.setValue(root.path + "/recording.mp4", for: "record")
+            vc.panel.runButton.performClick(nil)
+            let args = runner.plans.last!.commands[0].arguments
+            precondition(args.contains("--serial") && args.contains("--stay-awake") && args.contains("--video-bit-rate") && args.contains(root.path + "/recording.mp4"))
+            vc.panel.cancelButton.performClick(nil); precondition(runner.cancelled)
+            let window = NSWindow(contentViewController: vc); window.setContentSize(NSSize(width: 800, height: 800)); window.makeKeyAndOrderFront(nil)
+            try UIVerification.snapshot(vc.view, to: output)
+            window.setContentSize(NSSize(width: 500, height: 500)); vc.view.layoutSubtreeIfNeeded()
+            precondition(!vc.view.hasAmbiguousLayout)
+            print("PASS: Scrcpy device selection, supported launch flags, recording, stop and compact form layout")
         } else { fatalError("Unsupported feature issue") }
     }
 }
