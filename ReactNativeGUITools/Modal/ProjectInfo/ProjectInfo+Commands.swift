@@ -30,49 +30,52 @@ extension ProjectInfo {
         case podCacheList
         case podCacheCleanAll
         case custom(String)
+        case customFile(String)
     }
 
     func terminalCommand(_ command: TerminalCommand) -> String {
         switch command {
         case .runScript(let scriptName):
-            return "cd \(path) && npm run \(scriptName)"
+            return "cd \(shellQuoted(path)) && npm run \(shellQuoted(scriptName))"
         case .npmStart:
-            return "cd \(path) && npm start"
+            return "cd \(shellQuoted(path)) && npm start"
         case .npmInstall:
-            return "cd \(path) && npm install"
+            return "cd \(shellQuoted(path)) && npm install"
         case .npmStartResetCache:
-            return "cd \(path) && start -- --reset-cache"
+            return "cd \(shellQuoted(path)) && start -- --reset-cache"
         case .npmRestart:
-            return "cd \(path) && npm restart"
+            return "cd \(shellQuoted(path)) && npm restart"
         case .npmStop:
-            return "cd \(path) && npm stop"
+            return "cd \(shellQuoted(path)) && npm stop"
         case .npmCacheClean:
-            return "cd \(path) && npm cache clean"
+            return "cd \(shellQuoted(path)) && npm cache clean"
         case .npmCacheVerify:
-            return "cd \(path) && npm cache verify"
+            return "cd \(shellQuoted(path)) && npm cache verify"
         case .watchmanWatchDelAll:
-            return "cd \(path) && watchman watch-del-all"
+            return "cd \(shellQuoted(path)) && watchman watch-del-all"
         case .watchmanShutdownServer:
-            return "cd \(path) && watchman shutdown-server"
+            return "cd \(shellQuoted(path)) && watchman shutdown-server"
         case .watchmanWatch:
-            return "cd \(path) && watchman watch ."
+            return "cd \(shellQuoted(path)) && watchman watch ."
         case .podInstall:
-            return "cd \(path)/ios && pod install"
+            return "cd \(shellQuoted(URL(fileURLWithPath: path).appendingPathComponent("ios").path)) && pod install"
         case .podUpdate:
-            return "cd \(path)/ios && pod update"
+            return "cd \(shellQuoted(URL(fileURLWithPath: path).appendingPathComponent("ios").path)) && pod update"
         case .podOutdated:
-            return "cd \(path)/ios && pod outdated"
+            return "cd \(shellQuoted(URL(fileURLWithPath: path).appendingPathComponent("ios").path)) && pod outdated"
         case .podDeintegrate:
-            return "cd \(path)/ios && pod deintegrate"
+            return "cd \(shellQuoted(URL(fileURLWithPath: path).appendingPathComponent("ios").path)) && pod deintegrate"
         case .podEnv:
-            return "cd \(path)/ios && pod env"
+            return "cd \(shellQuoted(URL(fileURLWithPath: path).appendingPathComponent("ios").path)) && pod env"
         case .podCacheList:
-            return "cd \(path)/ios && pod cache list"
+            return "cd \(shellQuoted(URL(fileURLWithPath: path).appendingPathComponent("ios").path)) && pod cache list"
         case .podCacheCleanAll:
-            return "cd \(path)/ios && pod cache clean --all"
+            return "cd \(shellQuoted(URL(fileURLWithPath: path).appendingPathComponent("ios").path)) && pod cache clean --all"
         case .custom(let script):
+            return "export PROJECT_ROOT=\(shellQuoted(path)); cd \(shellQuoted(path)) && \(script)"
+        case .customFile(let script):
             let resolved = script.replacingOccurrences(of: "$PROJECT_ROOT", with: path)
-            return "cd \(path) && \(resolved)"
+            return "cd \(shellQuoted(path)) && \(shellQuoted(resolved))"
         }
     }
 }
@@ -114,4 +117,9 @@ extension ProjectInfo {
         }
         return relativePaths.map { path + $0 }
     }
+}
+
+/// Quote shell data while leaving deliberately authored commands intact.
+func shellQuoted(_ value: String) -> String {
+    "'" + value.replacingOccurrences(of: "'", with: "'\\''") + "'"
 }

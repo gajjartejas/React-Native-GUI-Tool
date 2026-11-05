@@ -51,8 +51,9 @@ func launchApplication(at filePath: String, using defaultApp: PathVersion) {
     }
 }
 
-func openInTerminal(atPath path: String, terminalScript: String) {
-    let AppleScriptSrc = """
+func terminalAppleScriptSource(command: String) -> String {
+    let escaped = appleScriptStringContents(command)
+    return """
     tell application "Terminal"
         activate
         if (count of windows) > 0 then
@@ -60,22 +61,32 @@ func openInTerminal(atPath path: String, terminalScript: String) {
             if busy of front window's selected tab then
                 -- Open a new tab and run the command
                 tell front window
-                    set newTab to do script "\(terminalScript)"
+                    set newTab to do script "\(escaped)"
                     set selected tab to newTab
                 end tell
             else
                 -- Run the command in the existing tab
-                do script "\(terminalScript)" in front window's selected tab
+                do script "\(escaped)" in front window's selected tab
             end if
         else
             -- Open a new window and run the command
-            do script "\(terminalScript)"
+            do script "\(escaped)"
         end if
     end tell
 
     """
 
-    if let AppleScript = NSAppleScript(source: AppleScriptSrc) {
+}
+
+func appleScriptStringContents(_ value: String) -> String {
+    value.replacingOccurrences(of: "\\", with: "\\\\")
+        .replacingOccurrences(of: "\"", with: "\\\"")
+        .replacingOccurrences(of: "\r", with: "\\r")
+        .replacingOccurrences(of: "\n", with: "\\n")
+}
+
+func openInTerminal(atPath path: String, terminalScript: String) {
+    if let AppleScript = NSAppleScript(source: terminalAppleScriptSource(command: terminalScript)) {
         var error: NSDictionary?
         AppleScript.executeAndReturnError(&error)
         if error != nil {
