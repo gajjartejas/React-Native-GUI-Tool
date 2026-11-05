@@ -113,6 +113,22 @@ class ProjectInfoManager {
         publishChanges()
     }
 
+    /// Validate the whole batch before publishing a single insertion.
+    @discardableResult
+    func importProjects(_ candidates: [ProjectInfo], at index: Int,
+                        confirmDuplicate: (ProjectInfo) -> Bool) -> Bool {
+        guard (0...projectInfos.count).contains(index) else { return false }
+        let existing = Set(projectInfosAll.map { URL(fileURLWithPath: $0.path).standardizedFileURL.path })
+        var seen = Set<String>()
+        let approved = candidates.filter { project in
+            let path = URL(fileURLWithPath: project.path).standardizedFileURL.path
+            guard seen.insert(path).inserted else { return false }
+            return !existing.contains(path) || confirmDuplicate(project)
+        }
+        if !approved.isEmpty { insert(contentsOf: approved, at: index) }
+        return true
+    }
+
     func append(contentsOf newElements: [ProjectInfo]) {
         projectInfosAll.append(contentsOf: newElements)
         publishChanges()

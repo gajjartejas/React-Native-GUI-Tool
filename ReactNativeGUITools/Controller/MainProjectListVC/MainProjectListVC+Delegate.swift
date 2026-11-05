@@ -65,26 +65,12 @@ extension MainProjectListVC: NSTableViewDelegate {
             return true
         }
 
-        let newProjects = items.compactMap { item in
-            ProjectInfo(id: UUID().uuidString, path: item.url(forType: .fileURL)!)
+        let newProjects = items.compactMap { item -> ProjectInfo? in
+            guard let path = item.url(forType: .fileURL), ProjectInfo.isDirectory(atPath: path) else { return nil }
+            return ProjectInfo(id: UUID().uuidString, path: path)
         }
-
-        for newProject in newProjects {
-            if ProjectInfoManager.shared.findByPath(project: newProject, type: .list) {
-                showConfirmAlert(
-                    message: "Duplicate Project",
-                    informativeText: "A project \(newProject.name ?? "") with the same path already exists. Do you want to add it again?",
-                    confirmAction: {
-                        ProjectInfoManager.shared.insert(contentsOf: [newProject], at: row)
-                    },
-                    cancelAction: {}
-                )
-                return true
-            } else {
-                ProjectInfoManager.shared.insert(contentsOf: newProjects, at: row)
-            }
-        }
-        return true
+        guard !newProjects.isEmpty else { return false }
+        return importProjects(newProjects, at: row)
     }
 
     func tableView(
@@ -102,6 +88,20 @@ extension MainProjectListVC: NSTableViewDelegate {
 }
 
 extension MainProjectListVC {
+    @discardableResult
+    func importProjects(_ projects: [ProjectInfo], at row: Int,
+                        confirmDuplicate: ((ProjectInfo) -> Bool)? = nil) -> Bool {
+        ProjectInfoManager.shared.importProjects(projects, at: row) { [weak self] project in
+            if let confirmDuplicate = confirmDuplicate { return confirmDuplicate(project) }
+            var approved = false
+            self?.showConfirmAlert(
+                message: "Duplicate Project",
+                informativeText: "A project \(project.name ?? "") with the same path already exists. Do you want to add it again?",
+                confirmAction: { approved = true }, cancelAction: {})
+            return approved
+        }
+    }
+
     func showConfirmAlert(message: String, informativeText: String, confirmAction: @escaping () -> Void, cancelAction: @escaping () -> Void) {
         _ = ConfirmAlertView(
             message: message,
