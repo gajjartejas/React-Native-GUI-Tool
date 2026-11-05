@@ -26,22 +26,21 @@ class ProjectInfoManager {
 
     static let shared = ProjectInfoManager()
 
-    private var projectInfosAll: [ProjectInfo] {
-        didSet {
-            NotificationCenter.default.post(name: NotificationNames.projectInfoDidChange, object: nil)
-        }
-    }
+    private var projectInfosAll: [ProjectInfo]
+    private var listSearch = ""
+    private var menuSearch = ""
 
     private var projectInfos: [ProjectInfo] {
-        didSet {
-            NotificationCenter.default.post(name: NotificationNames.projectInfoDidChange, object: nil)
-        }
+        searchBy(array: projectInfosAll, searchString: listSearch)
     }
 
     private var projectInfosMenu: [ProjectInfo] {
-        didSet {
-            NotificationCenter.default.post(name: NotificationNames.projectInfoDidChange, object: nil)
-        }
+        searchBy(array: projectInfosAll, searchString: menuSearch)
+    }
+
+    private func publishChanges(persist: Bool = true) {
+        if persist { _ = ProjectInfo.writeArrayToStorage(projectInfosAll) }
+        NotificationCenter.default.post(name: NotificationNames.projectInfoDidChange, object: nil)
     }
 
     func get(type: UIType) -> [ProjectInfo] {
@@ -56,7 +55,7 @@ class ProjectInfoManager {
     }
 
     func sorted(by key: SortKey) {
-        projectInfos = projectInfos.sorted { (proj1: ProjectInfo, proj2: ProjectInfo) -> Bool in
+        projectInfosAll = projectInfosAll.sorted { (proj1: ProjectInfo, proj2: ProjectInfo) -> Bool in
             switch key {
             case .name:
                 return (proj1.name ?? "") < (proj2.name ?? "")
@@ -69,108 +68,64 @@ class ProjectInfoManager {
                         .replacingOccurrences(of: "^", with: ""), options: .numeric) == .orderedDescending
             }
         }
-        _ = ProjectInfo.writeArrayToStorage(projectInfos)
+        publishChanges()
     }
 
     private init() {
-        projectInfos = ProjectInfo.readArrayFromStorage() ?? []
         projectInfosAll = ProjectInfo.readArrayFromStorage() ?? []
-        projectInfosMenu = ProjectInfo.readArrayFromStorage() ?? []
     }
 
     func remove(at index: Int, type: UIType) {
-        if type == .list {
-            let removedItem = projectInfos.remove(at: index)
-            projectInfosMenu = projectInfosMenu.filter({ item in
-                item.id != removedItem.id
-            })
-            projectInfosAll = projectInfosAll.filter({ item in
-                item.id != removedItem.id
-            })
-        } else if type == .menu {
-            let removedItem = projectInfosMenu.remove(at: index)
-            projectInfos = projectInfos.filter({ item in
-                item.id != removedItem.id
-            })
-            projectInfosAll = projectInfosAll.filter({ item in
-                item.id != removedItem.id
-            })
-        }
-
-        _ = ProjectInfo.writeArrayToStorage(projectInfosAll)
+        let visible = get(type: type)
+        guard visible.indices.contains(index) else { return }
+        projectInfosAll.removeAll { $0.id == visible[index].id }
+        publishChanges()
     }
 
     func append(_ projectInfo: ProjectInfo) {
-        projectInfosAll.append(projectInfo)
-        projectInfos.append(projectInfo)
-        projectInfosMenu.append(projectInfo)
-        _ = ProjectInfo.writeArrayToStorage(projectInfosAll)
+        append(contentsOf: [projectInfo])
     }
 
     func searchBy(_ searchString: String, type: UIType) {
-        if type == .list {
-            projectInfos = searchBy(array: projectInfosAll, searchString: searchString)
-        } else if type == .menu {
-            projectInfosMenu = searchBy(array: projectInfosAll, searchString: searchString)
-        }
-        print(projectInfos)
+        if type == .list { listSearch = searchString }
+        if type == .menu { menuSearch = searchString }
+        publishChanges(persist: false)
     }
 
     func clearSearch(type: UIType) {
-        if type == .list {
-            projectInfos = ProjectInfo.readArrayFromStorage() ?? []
-        } else if type == .menu {
-            projectInfosMenu = ProjectInfo.readArrayFromStorage() ?? []
-        }
-
-        projectInfosAll = ProjectInfo.readArrayFromStorage() ?? []
+        searchBy("", type: type)
     }
 
     func move(fromOffsets source: IndexSet, toOffset destination: Int) {
-        projectInfos = ProjectOrdering.moving(projectInfos, fromOffsets: source, toOffset: destination)
-        projectInfosMenu = ProjectOrdering.moving(projectInfosMenu, fromOffsets: source, toOffset: destination)
+        // The table disables reordering while filtered.
+        guard listSearch.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
         projectInfosAll = ProjectOrdering.moving(projectInfosAll, fromOffsets: source, toOffset: destination)
-        _ = ProjectInfo.writeArrayToStorage(projectInfosAll)
+        publishChanges()
     }
 
     func insert(contentsOf newElements: [ProjectInfo], at i: Int) {
-        projectInfos.insert(contentsOf: newElements, at: i)
-        projectInfosMenu.insert(contentsOf: newElements, at: i)
-        projectInfosAll.insert(contentsOf: newElements, at: i)
-        _ = ProjectInfo.writeArrayToStorage(projectInfosAll)
+        let visible = projectInfos
+        guard (0...visible.count).contains(i) else { return }
+        let target = i < visible.count
+            ? projectInfosAll.firstIndex(where: { $0.id == visible[i].id }) ?? projectInfosAll.count
+            : projectInfosAll.count
+        projectInfosAll.insert(contentsOf: newElements, at: target)
+        publishChanges()
     }
 
     func append(contentsOf newElements: [ProjectInfo]) {
-        projectInfos.append(contentsOf: newElements)
-        projectInfosMenu.append(contentsOf: newElements)
         projectInfosAll.append(contentsOf: newElements)
-        _ = ProjectInfo.writeArrayToStorage(projectInfosAll)
+        publishChanges()
     }
 
     func update(with projectInfo: ProjectInfo) {
-        if let index = projectInfosAll.firstIndex(where: { $0.id == projectInfo.id }) {
-            projectInfosAll[index] = projectInfo
-            if let indexInFiltered = projectInfos.firstIndex(where: { $0.id == projectInfo.id }) {
-                projectInfos[indexInFiltered] = projectInfo
-            }
-            if let indexInFiltered = projectInfosMenu.firstIndex(where: { $0.id == projectInfo.id }) {
-                projectInfosMenu[indexInFiltered] = projectInfo
-            }
-            _ = ProjectInfo.writeArrayToStorage(projectInfosAll)
-        }
+        guard let index = projectInfosAll.firstIndex(where: { $0.id == projectInfo.id }) else { return }
+        projectInfosAll[index] = projectInfo
+        publishChanges()
     }
 
     func findByPath(project: ProjectInfo, type: UIType) -> Bool {
-        if type == .list {
-            return projectInfos.contains { item in
-                item.path == project.path
-            }
-        } else if type == .menu {
-            return projectInfosMenu.contains { item in
-                item.path == project.path
-            }
-        }
-        return false
+        get(type: type).contains { $0.path == project.path }
     }
 
     func searchBy(array: [ProjectInfo], searchString: String) -> [ProjectInfo] {

@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 """Compile/run isolated Swift regression checks and enforce MVC dependencies."""
 from pathlib import Path
+import argparse
+import shutil
+import os
 import re
 import subprocess
 import tempfile
 
+parser = argparse.ArgumentParser()
+parser.add_argument("--ui-issue")
+args = parser.parse_args()
 ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "ReactNativeGUITools"
 
@@ -20,9 +26,20 @@ print("PASS: View/Model dependency boundaries", flush=True)
 # Exclude the application entry point; this runner never starts the app lifecycle.
 sources = sorted(str(source) for source in APP.rglob("*.swift") if source.name != "AppDelegate.swift")
 with tempfile.TemporaryDirectory(prefix="rngui-mvc-tests-") as directory:
-    executable = str(Path(directory) / "MVCRegressionTests")
+    app = Path(directory) / "Verification.app"
+    if args.ui_issue:
+        built = Path("/tmp/ReactNativeGUITools-DerivedData/Build/Products/Debug/ReactNativeGUITools.app")
+        shutil.copytree(built, app)
+        executable = str(app / "Contents/MacOS/ReactNativeGUITools")
+    else:
+        executable = str(Path(directory) / "MVCRegressionTests")
     subprocess.run([
         "xcrun", "swiftc", "-swift-version", "5", "-parse-as-library", "-whole-module-optimization",
-        *sources, str(ROOT / "Tests/MVCRegressionTests.swift"), "-o", executable,
+        "-module-name", "ReactNativeGUITools",
+        *sources, *map(str, sorted((ROOT / "Tests").glob("*.swift"))), "-o", executable,
     ], cwd=ROOT, check=True)
-    subprocess.run([executable], cwd=ROOT, check=True)
+    environment = {**os.environ, "CFFIXED_USER_HOME": directory}
+    if args.ui_issue:
+        environment.update(RNGUI_UI_ISSUE=args.ui_issue,
+                           RNGUI_UI_SCREENSHOT=str(ROOT / f"docs/verification/issue-{args.ui_issue}.png"))
+    subprocess.run([executable], cwd=ROOT, check=True, env=environment)

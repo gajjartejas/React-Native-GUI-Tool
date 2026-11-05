@@ -38,3 +38,12 @@ python3 scripts/test_mvc.py
   and interactive UI testing. Do not claim checks that were not run.
 - Before finishing, inspect the diff for MVC boundaries, unrelated edits, deployment
   compatibility, resource membership, and accidental generated/user-specific files.
+
+## Automated AppKit screenshots
+
+After building, run `python3 scripts/test_mvc.py --ui-issue 101` for the
+filtered-sort scenario. The runner copies built storyboard/nib resources to a
+temporary app, loads real controllers, exercises the scenario, and saves
+`docs/verification/issue-101.png`. It redirects Application Support through
+`CFFIXED_USER_HOME` to a temporary directory. Screenshots are rendered AppKit
+views; this is automated controller verification, not interactive gesture testing.
