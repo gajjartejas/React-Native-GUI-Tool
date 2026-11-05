@@ -90,6 +90,8 @@ final class ToolConsoleView: NSView {
             case .choice(let choices): let popup = NSPopUpButton(); popup.addItems(withTitles: choices); control = popup
             default: control = NSTextField()
             }
+            control.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+            control.setContentHuggingPriority(.defaultLow, for: .horizontal)
             control.setAccessibilityLabel(field.label)
             controls[field.id] = control
             setValue(previous[field.id] ?? field.initial, for: field.id)
@@ -98,6 +100,7 @@ final class ToolConsoleView: NSView {
             switch field.kind { case .openFile: save = false; case .saveFile: save = true; default: save = nil }
             if let save = save {
                 let button = NSButton(title: "Browse…", target: self, action: #selector(browse(_:)))
+                button.setContentCompressionResistancePriority(.required, for: .horizontal)
                 button.identifier = .init(field.id); button.tag = save ? 1 : 0; button.bezelStyle = .rounded; row.addArrangedSubview(button)
             }
             form.addArrangedSubview(row); row.widthAnchor.constraint(equalTo: form.widthAnchor).isActive = true

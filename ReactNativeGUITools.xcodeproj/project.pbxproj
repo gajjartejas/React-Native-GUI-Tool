@@ -97,6 +97,8 @@
 		AE499C8732406D4053A15445 /* AdbToolPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A02B1ADEC1806E24CF296E6 /* AdbToolPolicy.swift */; };
 		090D7F13026E42E7DB2F720C /* BuildToolPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6DD495DF907728C1EDA812 /* BuildToolPolicy.swift */; };
 		D1A92C39DA13F1CEEEE7371D /* ScrcpyToolPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7DDF074DB82227C1FE4715 /* ScrcpyToolPolicy.swift */; };
+		1B10637A2F35C151BD21B0D8 /* KeytoolPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B47FD0E9476A7278EC4056 /* KeytoolPolicy.swift */; };
+		EA9E2D6E648F82A8B0DAFABA /* CertificateFingerprints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75615F102FB2867A98287CEE /* CertificateFingerprints.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -193,6 +195,8 @@
 		2A02B1ADEC1806E24CF296E6 /* AdbToolPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdbToolPolicy.swift"; sourceTree = "<group>"; };
 		AC6DD495DF907728C1EDA812 /* BuildToolPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BuildToolPolicy.swift"; sourceTree = "<group>"; };
 		3B7DDF074DB82227C1FE4715 /* ScrcpyToolPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrcpyToolPolicy.swift"; sourceTree = "<group>"; };
+		00B47FD0E9476A7278EC4056 /* KeytoolPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeytoolPolicy.swift"; sourceTree = "<group>"; };
+		75615F102FB2867A98287CEE /* CertificateFingerprints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateFingerprints.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -361,6 +365,7 @@
 		96B7C45D2BA71ED100197448 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
+				00B47FD0E9476A7278EC4056 /* KeytoolPolicy.swift */,
 				3B7DDF074DB82227C1FE4715 /* ScrcpyToolPolicy.swift */,
 				AC6DD495DF907728C1EDA812 /* BuildToolPolicy.swift */,
 				2A02B1ADEC1806E24CF296E6 /* AdbToolPolicy.swift */,
@@ -387,6 +392,7 @@
 		96D1814C2BADF4C700380905 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				75615F102FB2867A98287CEE /* CertificateFingerprints.swift */,
 				FFF1D756D0D73C1A34FC1F61 /* LoginItemService.swift */,
 				FD0D0A7D0F14C3E248015CA5 /* StreamingToolRunner.swift */,
 				51040E53DF82F0AF6D9306E3 /* SystemDiagnosticsScanner.swift */,
@@ -658,6 +664,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA9E2D6E648F82A8B0DAFABA /* CertificateFingerprints.swift in Sources */,
+				1B10637A2F35C151BD21B0D8 /* KeytoolPolicy.swift in Sources */,
 				D1A92C39DA13F1CEEEE7371D /* ScrcpyToolPolicy.swift in Sources */,
 				090D7F13026E42E7DB2F720C /* BuildToolPolicy.swift in Sources */,
 				AE499C8732406D4053A15445 /* AdbToolPolicy.swift in Sources */,

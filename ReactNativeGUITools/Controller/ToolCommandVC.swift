@@ -90,6 +90,10 @@ class ToolCommandVC: NSViewController, ProjectInfoAssignable, NSTableViewDataSou
         guard resultRows.indices.contains(row), let column = Int(tableColumn?.identifier.rawValue ?? ""), resultRows[row].indices.contains(column) else { return nil }
         return NSTextField(labelWithString: resultRows[row][column])
     }
+    func appendConsole(_ text: String) {
+        log.append(Data(text.utf8)); panel.console.string = String(decoding: log, as: UTF8.self)
+        panel.console.scrollToEndOfDocument(nil)
+    }
     func didComplete(operation: String, result: ToolRunResult) {}
     private func browse(id: String, save: Bool) {
         guard let window = view.window else { return }
