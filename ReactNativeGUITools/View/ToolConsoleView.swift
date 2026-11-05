@@ -10,6 +10,8 @@ final class ToolConsoleView: NSView {
     private let resultScroll = NSScrollView()
     let status = NSTextField(wrappingLabelWithString: "Select a project.")
     private let form = NSStackView()
+    private let formScroll = NSScrollView()
+    private var formHeight: NSLayoutConstraint!
     private var controls: [String: NSControl] = [:]
     var onOperation: ((String) -> Void)?
     var onRun: (() -> Void)?
@@ -27,6 +29,10 @@ final class ToolConsoleView: NSView {
         progress.widthAnchor.constraint(equalToConstant: 100).isActive = true
         let actions = NSStackView(views: [runButton, cancelButton, progress]); actions.spacing = 8
         form.orientation = .vertical; form.alignment = .leading; form.spacing = 6
+        form.frame = NSRect(x: 0, y: 0, width: 600, height: 40); form.autoresizingMask = [.width]
+        formScroll.documentView = form; formScroll.hasVerticalScroller = true; formScroll.drawsBackground = false
+        formHeight = formScroll.heightAnchor.constraint(equalToConstant: 40); formHeight.priority = .defaultHigh; formHeight.isActive = true
+        formScroll.heightAnchor.constraint(greaterThanOrEqualToConstant: 32).isActive = true
         console.frame = NSRect(x: 0, y: 0, width: 600, height: 300)
         console.isEditable = false; console.isRichText = false; console.isVerticallyResizable = true
         console.isHorizontallyResizable = false; console.autoresizingMask = [.width]
@@ -35,12 +41,13 @@ final class ToolConsoleView: NSView {
         console.textContainerInset = NSSize(width: 8, height: 8)
         let scroll = NSScrollView(); scroll.hasVerticalScroller = true; scroll.documentView = console
         resultScroll.documentView = resultTable; resultScroll.hasVerticalScroller = true; resultScroll.isHidden = true
-        resultScroll.heightAnchor.constraint(equalToConstant: 140).isActive = true
-        let stack = NSStackView(views: [resultScroll, operations, form, actions, status, scroll])
+        let tableHeight = resultScroll.heightAnchor.constraint(equalToConstant: 140); tableHeight.priority = .defaultHigh; tableHeight.isActive = true
+        resultScroll.heightAnchor.constraint(greaterThanOrEqualToConstant: 60).isActive = true
+        let stack = NSStackView(views: [resultScroll, operations, formScroll, actions, status, scroll])
         stack.orientation = .vertical; stack.alignment = .leading; stack.spacing = 10
         stack.translatesAutoresizingMaskIntoConstraints = false; addSubview(stack)
         NSLayoutConstraint.activate([stack.topAnchor.constraint(equalTo: topAnchor, constant: 12), stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12), stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12), stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12), scroll.heightAnchor.constraint(greaterThanOrEqualToConstant: 100)])
-        for view in [resultScroll, operations, form, status, scroll] { view.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true }
+        for view in [resultScroll, operations, formScroll, status, scroll] { view.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true }
     }
     func showTable(headers: [String]) {
         for column in resultTable.tableColumns { resultTable.removeTableColumn(column) }
@@ -74,7 +81,8 @@ final class ToolConsoleView: NSView {
         for view in form.arrangedSubviews { form.removeArrangedSubview(view); view.removeFromSuperview() }
         controls = [:]
         for field in fields {
-            let label = NSTextField(labelWithString: field.label); label.widthAnchor.constraint(equalToConstant: 160).isActive = true
+            let label = NSTextField(wrappingLabelWithString: field.label); label.preferredMaxLayoutWidth = 160
+            label.widthAnchor.constraint(equalToConstant: 160).isActive = true
             let control: NSControl
             switch field.kind {
             case .toggle: control = NSButton(checkboxWithTitle: "", target: nil, action: nil)
@@ -94,6 +102,11 @@ final class ToolConsoleView: NSView {
             }
             form.addArrangedSubview(row); row.widthAnchor.constraint(equalTo: form.widthAnchor).isActive = true
         }
+        let height = max(32, form.fittingSize.height)
+        form.setFrameSize(NSSize(width: form.frame.width, height: height))
+        formHeight.constant = min(240, height)
+        formScroll.contentView.scroll(to: NSPoint(x: 0, y: form.isFlipped ? 0 : max(0, height - formScroll.contentSize.height)))
+        formScroll.reflectScrolledClipView(formScroll.contentView)
     }
     func running(_ running: Bool) {
         if running { progress.startAnimation(nil) } else { progress.stopAnimation(nil) }

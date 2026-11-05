@@ -1345,23 +1345,9 @@
         <scene sceneID="XoN-Z5-2Ow">
             <objects>
                 <viewController storyboardIdentifier="ScrcpyVC" id="NJU-v3-Wxw" customClass="ScrcpyVC" customModule="ReactNativeGUITools" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="4FP-dM-8Tt">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                    <view key="view" id="4FP-dM-8Tt" customClass="ToolConsoleView" customModule="ReactNativeGUITools" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="700" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bTS-dT-ynu">
-                                <rect key="frame" x="202" y="142" width="46" height="16"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Scrcpy" id="Gq3-Us-CKc">
-                                    <font key="font" usesAppearanceFont="YES"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="bTS-dT-ynu" firstAttribute="centerX" secondItem="4FP-dM-8Tt" secondAttribute="centerX" id="B8x-dz-SuO"/>
-                            <constraint firstItem="bTS-dT-ynu" firstAttribute="centerY" secondItem="4FP-dM-8Tt" secondAttribute="centerY" id="MBg-L4-rBI"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="cdc-aV-Rf0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
