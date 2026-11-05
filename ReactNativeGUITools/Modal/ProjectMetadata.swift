@@ -55,7 +55,10 @@ struct ProjectMetadata {
         let full = root.standardizedFileURL.path
         let components = root.standardizedFileURL.pathComponents
         let homeComponents = URL(fileURLWithPath: home).standardizedFileURL.pathComponents
-        let relative = components.starts(with: homeComponents) ? "~/" + components.dropFirst(homeComponents.count).joined(separator: "/") : "Outside home directory"
+        let common = zip(components, homeComponents).prefix { $0 == $1 }.count
+        let relative = components.starts(with: homeComponents)
+            ? "~/" + components.dropFirst(homeComponents.count).joined(separator: "/")
+            : (Array(repeating: "..", count: homeComponents.count - common) + components.dropFirst(common)).joined(separator: "/")
         let summary = """
         Name: \(package["name"] as? String ?? "Not declared")
         Version: \(package["version"] as? String ?? "Not declared")
