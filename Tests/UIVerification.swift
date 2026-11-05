@@ -178,6 +178,28 @@ enum UIVerification {
             ], to: output)
             print("PASS: actual reset-cache menu invokes npm with start -- --reset-cache; screenshot \(output.path)")
             return
+        } else if issue == "106" {
+            let external = root.appendingPathComponent("Beta-other/task's script.sh")
+            try FileManager.default.createDirectory(at: external.deletingLastPathComponent(), withIntermediateDirectories: true)
+            try Data("#!/bin/sh\nprintf external".utf8).write(to: external)
+            let editor = storyboard.instantiateController(withIdentifier: "AddCustomActionVC") as! AddCustomActionVC
+            editor.projectInfo = projects[0]
+            _ = editor.view
+            editor.menuNameTextField.stringValue = "External sibling script"
+            editor.scriptTextField.stringValue = projects[0].customScriptPath(for: external.path)
+            precondition(editor.scriptTextField.stringValue == external.path)
+            let action = try ProjectInfo.CustomMenuScript.validated(name: editor.menuNameTextField.stringValue, script: editor.scriptTextField.stringValue)
+            precondition(action.isFileScript)
+            projects[0].appendCustomScript(action)
+            manager.update(with: projects[0])
+            precondition(ProjectInfo.readArrayFromStorage()?.first?.customMenuScripts?.first?.script == external.path)
+            let command = projects[0].terminalCommand(.customFile(action.script))
+            precondition(command.hasSuffix(shellQuoted(external.path)))
+            let editorWindow = NSWindow(contentViewController: editor)
+            editorWindow.makeKeyAndOrderFront(nil)
+            try snapshot(editor.view, to: output)
+            print("PASS: sibling script retains its absolute path through editor, persistence, and command construction; screenshot \(output.path)")
+            return
         } else {
             fatalError("Unsupported UI verification issue \(issue)")
         }

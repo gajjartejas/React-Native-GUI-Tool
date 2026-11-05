@@ -118,6 +118,16 @@ private struct MVCRegressionTests {
         try expect(terminalScript.compileAndReturnError(&appleError), "Terminal AppleScript did not compile")
         print("PASS: shell paths, script arguments, and AppleScript quoting")
 
+        let pathProject = ProjectInfo(id: "path-policy", path: directory.path + "/App/")
+        try expect(pathProject.customScriptPath(for: directory.path + "/App/scripts/task.sh") == "$PROJECT_ROOT/scripts/task.sh", "Descendant script lost its project-relative path")
+        let siblingPath = directory.path + "/App-other/task.sh"
+        try expect(pathProject.customScriptPath(for: siblingPath) == siblingPath, "Sibling folder was treated as a project child")
+        let parentPath = directory.path + "/App/../task.sh"
+        try expect(pathProject.customScriptPath(for: parentPath) == parentPath, "Parent traversal was treated as a project child")
+        try expect(pathProject.customScriptPath(for: directory.path + "/App") == "$PROJECT_ROOT", "Project root/trailing slash normalization failed")
+        try expect(pathProject.customScriptPath(for: directory.path + "/App/scripts/../Ω task.sh") == "$PROJECT_ROOT/Ω task.sh", "Normalized Unicode child path changed")
+        print("PASS: component-aware script containment and normalized paths")
+
         let encoder = PropertyListEncoder()
         let decoder = PropertyListDecoder()
         let data = try encoder.encode(project)
